@@ -1,4 +1,8 @@
-# app.exploreapollo.org [![Build Status](https://travis-ci.org/UTD-CRSS/app.exploreapollo.org.svg?branch=master)](https://travis-ci.org/UTD-CRSS/app.exploreapollo.org)
+# app.exploreapollo.org
+
+[![Build Status](https://travis-ci.org/UTD-CRSS/app.exploreapollo.org.svg?branch=master)](https://travis-ci.org/UTD-CRSS/app.exploreapollo.org)
+[![Dependency Status](https://david-dm.org/UTD-CRSS/app.exploreapollo.org.svg)](https://david-dm.org/UTD-CRSS/app.exploreapollo.org)
+[![devDependency Status](https://david-dm.org/UTD-CRSS/app.exploreapollo.org/dev-status.svg)](https://david-dm.org/UTD-CRSS/app.exploreapollo.org#info=devDependencies)
 
 Apollo Project Single Page App (repo name still up in the air)
 
