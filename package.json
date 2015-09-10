@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "dev": "node dev-server.js",
-    "lint": "eslint --ext .jsx src/"
+    "lint": "eslint --ext .js,.jsx webpack.config.js dev-server.js src/"
   },
   "repository": {
     "type": "git",

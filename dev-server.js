@@ -1,15 +1,16 @@
+/*eslint-env node*/
 /**
  * Require Browsersync along with webpack and middleware for it
  */
-var browserSync = require('browser-sync');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
+var browserSync = require("browser-sync");
+var webpack = require("webpack");
+var webpackDevMiddleware = require("webpack-dev-middleware");
+var webpackHotMiddleware = require("webpack-hot-middleware");
 
 /**
  * Require ./webpack.config.js and make a bundler from it
  */
-var webpackConfig = require('./webpack.config');
+var webpackConfig = require("./webpack.config");
 var bundler = webpack(webpackConfig);
 
 /**
@@ -19,10 +20,10 @@ browserSync({
   https: true,
   notify: false,
   server: {
-    baseDir: 'app',
+    baseDir: "app",
     middleware: [
       webpackDevMiddleware(bundler, {
-        // IMPORTANT: dev middleware can't access config, so we should
+        // IMPORTANT: dev middleware can’t access config, so we should
         // provide publicPath by ourselves
         publicPath: webpackConfig.output.publicPath,
 
@@ -36,5 +37,5 @@ browserSync({
       // bundler should be the same as above
       webpackHotMiddleware(bundler)
     ]
-  },
+  }
 });

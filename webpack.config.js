@@ -1,22 +1,23 @@
-var webpack = require('webpack');
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+/*eslint-env node*/
+var webpack = require("webpack");
+var path = require("path");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   debug: true,
-  devtool: '#eval-source-map',
-  context: path.join(__dirname, 'src'),
+  devtool: "#eval-source-map",
+  context: path.join(__dirname, "src"),
 
   entry: [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client',
-    './index.jsx'
+    "webpack/hot/dev-server",
+    "webpack-hot-middleware/client",
+    "./index.jsx"
   ],
 
   output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: path.join(__dirname, "dist"),
+    publicPath: "/",
+    filename: "bundle.js"
   },
 
   plugins: [
@@ -28,7 +29,7 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['react-hot', 'babel'] }
+      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ["react-hot", "babel"] }
     ]
   }
 };
