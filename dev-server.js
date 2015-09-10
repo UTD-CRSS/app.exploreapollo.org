@@ -16,24 +16,25 @@ var bundler = webpack(webpackConfig);
  * Run Browsersync and use middleware for Hot Module Replacement
  */
 browserSync({
-    server: {
-      baseDir: 'app',
+  https: true,
+  notify: false,
+  server: {
+    baseDir: 'app',
+    middleware: [
+      webpackDevMiddleware(bundler, {
+        // IMPORTANT: dev middleware can't access config, so we should
+        // provide publicPath by ourselves
+        publicPath: webpackConfig.output.publicPath,
 
-      middleware: [
-        webpackDevMiddleware(bundler, {
-          // IMPORTANT: dev middleware can't access config, so we should
-          // provide publicPath by ourselves
-          publicPath: webpackConfig.output.publicPath,
+        // pretty colored output
+        stats: { colors: true }
 
-          // pretty colored output
-          stats: { colors: true }
+        // for other settings see
+        // http://webpack.github.io/docs/webpack-dev-middleware.html
+      }),
 
-          // for other settings see
-          // http://webpack.github.io/docs/webpack-dev-middleware.html
-        }),
-
-        // bundler should be the same as above
-        webpackHotMiddleware(bundler)
-      ]
-    },
+      // bundler should be the same as above
+      webpackHotMiddleware(bundler)
+    ]
+  },
 });
