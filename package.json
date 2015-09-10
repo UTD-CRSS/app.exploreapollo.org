@@ -8,7 +8,7 @@
     "test": "karma start test/karma.config.js --single-run",
     "tdd": "karma start test/karma.config.js",
     "dev": "node dev-server.js",
-    "lint": "eslint --ext .js,.jsx *.js src/"
+    "lint": "eslint --ext .js,.jsx *.js src/ test/"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,13 @@
     "eslint-plugin-react": "^3.3.2",
     "karma": "^0.13.9",
     "karma-chrome-launcher": "^0.2.0",
+    "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
+    "karma-sauce-launcher": "^0.2.14",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
+    "lodash": "^3.10.1",
     "mocha": "^2.3.2",
     "react-test-tree": "^0.3.1"
   },
