@@ -16,6 +16,7 @@ To start hacking:
 Other useful commands:
 
 * `npm test` to run the tests
+* `npm run tdd` to continuously run tests as you code
 * `npm run lint` to check your changes against the linting guidelines
 
 **Note about HTTPS and the development server:** the development server uses a
