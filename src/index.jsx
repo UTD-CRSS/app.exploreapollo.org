@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import Router, {RouteHandler, Route, DefaultRoute} from 'react-router';
+import React, {Component} from "react";
+import Router, {RouteHandler, Route, DefaultRoute} from "react-router";
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class Dashboard extends Component {
       <div>
         Hello!
       </div>
-    )
+    );
   }
 }
 
