@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Router, {RouteHandler, Route, DefaultRoute} from "react-router";
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div>
@@ -12,7 +12,7 @@ class App extends Component {
   }
 }
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
   render() {
     return (
       <div>
