@@ -11,6 +11,9 @@ rules:
   semi:
     - 2
     - always
+  no-unused-vars:
+    - 2
+    - varsIgnorePattern: "^React$"
 env:
   es6: true
   browser: true
