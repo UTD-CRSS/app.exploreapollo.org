@@ -10,10 +10,10 @@ Apollo Project Single Page App (repo name still up in the air)
 
 ## Development
 
-This project requires Node `^4.0.0`. You should be install
+This project requires Node `^4.0.0`. You should be installing
 node using [nvm][].
 
-To start hacking:
+### Start Hacking
 
 1. `npm install` to grab all the goodies
 2. `npm run dev` to start a hot-reloading development server
@@ -29,6 +29,22 @@ Other useful commands:
 self-signed SSL certificate. When you open the development server for the first
 time it will squawk about the certificate being invalid. The certificate is not
 invalid or insecure, it is just self-signed.
+
+### Branches and Versioning
+
+The `master` is considered "hot" and is continuously deployed to a staging
+server. Every tagged version is automatically deployed to production.
+
+Day-to-day development is done on the `develop` branch. The `develop` branch is continuously deployed to a development server for evaluation.
+
+The development promotion workflow is as such:
+
+1. Work on a feature branch
+2. Pull request the `develop` branch
+3. `develop` branch is merged into master when ready
+
+This project is semantically versioned. Changes that break compatibility with
+the remote API are considered breaking changes.
 
 [nvm]: https://github.com/creationix/nvm
 [jest]: https://facebook.github.io/jest/
