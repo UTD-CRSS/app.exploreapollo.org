@@ -8,8 +8,7 @@
 
 ## Development
 
-This project requires Node `^4.0.0`. You should be installing
-node using [nvm][].
+This project requires Node `^4.0.0`. You should install node using [nvm][].
 
 ### Start Hacking
 
