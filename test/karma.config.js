@@ -45,12 +45,6 @@ function sauceLabs() {
       deviceName: "iPhone 6 Plus",
       deviceOrientation: "portrait"
     },
-    sl_ie_10: {
-      base: "SauceLabs",
-      browserName: "internet explorer",
-      platform: "Windows 7",
-      version: "10"
-    },
     sl_ie_11: {
       base: "SauceLabs",
       browserName: "internet explorer",
