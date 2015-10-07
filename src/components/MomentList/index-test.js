@@ -1,6 +1,6 @@
 /*eslint-env mocha*/
 import {assert} from "chai";
-import React, {Component} from "react";
+import React from "react";
 import MomentList, {MomentListItem} from "./index";
 import testTree from "react-test-tree";
 

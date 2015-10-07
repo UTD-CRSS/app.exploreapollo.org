@@ -1,2 +1,2 @@
-export MomentList from './MomentList';
-export MomentPlayer from './MomentPlayer';
+export MomentList from "./MomentList";
+export MomentPlayer from "./MomentPlayer";

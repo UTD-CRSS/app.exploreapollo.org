@@ -1,6 +1,5 @@
-import React, {Component} from "react";
+import React from "react";
 import {
-  DefaultRoute,
   IndexRoute,
   Route,
   Router
@@ -12,7 +11,7 @@ import {
   Moments,
   MomentViewer,
   App
-} from './containers';
+} from "./containers";
 
 React.render((
   <Router>
