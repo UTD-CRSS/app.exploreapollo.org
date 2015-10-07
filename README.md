@@ -8,7 +8,7 @@
 
 ## Development
 
-This project requires Node `^4.0.0`. You should install node using [nvm][].
+This project requires Node 4.X and npm 3.X You should install node using [nvm][].
 
 ### Start Hacking
 
@@ -43,5 +43,15 @@ The development promotion workflow is as such:
 This project is semantically versioned. Changes that break compatibility with
 the remote API are considered breaking changes.
 
+### Project Structure
+
+Source lives in `src/`. Compiled output goes in `dist/`.
+
+#### Source Files
+
+- `containers/`: [Stateful][dumb-comp] react components. These are usually top-level route handlers.
+- `components/`: [Stateless/Dumb][dumb-comp] react components. These guys determininstically render based on props.
+
 [nvm]: https://github.com/creationix/nvm
 [jest]: https://facebook.github.io/jest/
+[dumb-comp]: https://github.com/uberVU/react-guide/blob/master/props-vs-state.md#component-types
