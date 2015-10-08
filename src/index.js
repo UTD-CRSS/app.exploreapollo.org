@@ -13,6 +13,8 @@ import {
   App
 } from "./containers";
 
+import './scss/main.scss';
+
 React.render((
   <Router>
     <Route name="app" path="/" component={App}>
