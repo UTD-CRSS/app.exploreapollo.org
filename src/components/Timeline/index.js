@@ -3,16 +3,16 @@ import classNames from "classnames";
 
 export class TimelineMessage extends Component {
   render() {
-    const {id, name, text} = this.props;
+    const {name, text} = this.props;
     return (
       <div>
         <p>
-        	<strong>
-        		{name}:
-        	</strong>
+          <strong>
+            {name}:
+          </strong>
           <span>
-          	{text}
-        	</span>
+            {text}
+          </span>
         </p>
       </div>
     );
@@ -40,9 +40,9 @@ export default class Timeline extends Component {
   }
 
   render() {
-  	let classes = classNames('col-md-6');
+    let classes = classNames("col-md-6", "timeline-container");
     return (
-    	<div refCollection="timelineContainer" className={classes}>
+      <div refCollection="timelineContainer" className={classes}>
         {this.renderList()}
       </div>
     );

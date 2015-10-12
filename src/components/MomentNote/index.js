@@ -3,12 +3,15 @@ import classNames from "classnames";
 
 export class MomentNoteItem extends Component {
   render() {
-    const {id, title, text} = this.props;
+    const {title, text, image} = this.props;
     return (
       <div>
         <h1>
           {title}
         </h1>
+        {!!image &&
+          <img src={image} />
+        }
         <p>
           {text}
         </p>
@@ -32,13 +35,14 @@ export default class MomentNote extends Component {
           key={note.id}
           id={note.id}
           title={note.title}
+          image={note.image}
           text={note.text} />
       );
     });
   }
 
   render() {
-    let classes = classNames('col-md-6');
+    const classes = classNames("col-md-6", "moment-note-container");
     return (
       <div refCollection="momentNoteContainer" className={classes}>
         {this.renderList()}

@@ -13,7 +13,7 @@ import {
   App
 } from "./containers";
 
-import './scss/main.scss';
+import "./scss/main.scss";
 
 React.render((
   <Router>
