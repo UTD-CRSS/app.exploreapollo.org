@@ -10,6 +10,19 @@ export class AppHeader extends Component {
               Explore Apollo
             </a>
           </div>
+            
+          <ul className="nav navbar-nav">
+            <li>
+              <a href="#/stories">
+                Stories
+              </a>
+            </li>
+            <li>
+              <a href="#/moments">
+                Moments
+              </a>
+            </li>
+          </ul>
         </div>
       </nav>
     );

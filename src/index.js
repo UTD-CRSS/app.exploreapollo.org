@@ -10,6 +10,8 @@ import {
   NoMatch,
   Moments,
   MomentViewer,
+  Stories,
+  StoryViewer,
   App
 } from "./containers";
 
@@ -21,6 +23,9 @@ React.render((
       <IndexRoute component={Dashboard} />
       <Route path="moments/moment/:id" component={MomentViewer}/>
       <Route path="moments" component={Moments}>
+      </Route>
+      <Route path="stories/story/:id" component={StoryViewer}/>
+      <Route path="stories" component={Stories}>
       </Route>
       <Route path="*" component={NoMatch}/>
     </Route>
