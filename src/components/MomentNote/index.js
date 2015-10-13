@@ -6,13 +6,13 @@ export class MomentNoteItem extends Component {
     const {title, text, image} = this.props;
     return (
       <div>
-        <h1>
+        <h1 ref="momentNoteTitle">
           {title}
         </h1>
         {!!image &&
-          <img src={image} />
+          <img ref="momentNoteImage" src={image} />
         }
-        <p>
+        <p ref="momentNoteText">
           {text}
         </p>
       </div>

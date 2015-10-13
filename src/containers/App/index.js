@@ -6,7 +6,7 @@ export class AppHeader extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">
+            <a ref="appRouteTitle" className="navbar-brand" href="#">
               Explore Apollo
             </a>
           </div>
