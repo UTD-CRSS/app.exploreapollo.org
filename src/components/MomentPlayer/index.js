@@ -5,7 +5,7 @@ export default class MomentPlayer extends Component {
     return (
 			<div>
 				<h1>
-					Now Playing: [moment title]
+					Now Playing: [ moment title ]
 				</h1>
 				<audio
 					controls
