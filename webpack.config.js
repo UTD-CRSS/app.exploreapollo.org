@@ -33,7 +33,15 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ["react-hot", "babel"]
-      }
+      },
+      {
+        test: /\.scss?$/, 
+        loaders: ["style", "css", "sass"]
+      },
+      { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf$/,    loader: "file-loader" },
+      { test: /\.eot$/,    loader: "file-loader" },
+      { test: /\.svg$/,    loader: "file-loader" }
     ]
   }
 };

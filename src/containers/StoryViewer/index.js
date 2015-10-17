@@ -4,7 +4,7 @@ import classNames from "classnames";
 import {MomentPlayer, Timeline, MomentNote} from "../../components";
 
 
-export default class MomentViewer extends Component {
+export default class StoryViewer extends Component {
   render() {
     const timeline = [
       {id: 1, name: "Niel", text: "One small step for man."},
