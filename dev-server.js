@@ -11,6 +11,24 @@ var webpackHotMiddleware = require("webpack-hot-middleware");
  * Require ./webpack.config.js and make a bundler from it
  */
 var webpackConfig = require("./webpack.config");
+
+/**
+ * dev-specific modifications
+ */
+webpackConfig.entry = [].concat([
+  "webpack/hot/dev-server",
+  "webpack-hot-middleware/client"
+], webpackConfig.entry);
+
+webpackConfig.debug = true;
+webpackConfig.devtool = "#eval-source-map";
+
+webpackConfig.plugins = [].concat(webpackConfig.plugins, [
+  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoErrorsPlugin()
+]);
+
 var bundler = webpack(webpackConfig);
 
 /**
