@@ -1,0 +1,18 @@
+site: dist
+s3_id: <%= ENV['EXP_S3_ACCESS_KEY'] %>
+s3_secret: <%= ENV['EXP_S3_SECRET'] %>
+<% if ENV['TRAVIS_BRANCH'] === 'master' %>
+s3_bucket: app.exploreapollo.org
+cloudfront_distribution_id: <%= ENV['EXP_CF_DIST'] %>
+cloudfront_distribution_config:
+  default_cache_behavior:
+    min_TTL: <%= 60 * 60 * 24 %>
+  aliases:
+    quantity: 1
+    items:
+      CNAME: app.exploreapollo.org
+<% else %>
+s3_bucket: app-staging.exploreapollo.org
+<% end %>
+max_age: 120
+gzip: true
