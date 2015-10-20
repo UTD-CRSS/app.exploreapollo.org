@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-NODE_ENV=production
+export NODE_ENV=production
 NPM_BIN=$(npm bin)
 
 echo "cleaning up"
