@@ -17,8 +17,11 @@ import {
 
 import "./scss/main.scss";
 
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+const history = createBrowserHistory()
+
 React.render((
-  <Router>
+  <Router history={history}>
     <Route name="app" path="/" component={App}>
       <IndexRoute component={Dashboard} />
       <Route path="moments/moment/:id" component={MomentViewer}/>

@@ -2326,6 +2326,11 @@
       "from": "iconv-lite@>=0.4.5 <0.5.0",
       "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.13.tgz"
     },
+    "icss-replace-symbols": {
+      "version": "1.0.2",
+      "from": "icss-replace-symbols@>=1.0.2 <2.0.0",
+      "resolved": "https://registry.npmjs.org/icss-replace-symbols/-/icss-replace-symbols-1.0.2.tgz"
+    },
     "ieee754": {
       "version": "1.1.6",
       "from": "ieee754@>=1.1.4 <2.0.0",
@@ -2787,6 +2792,11 @@
       "from": "lodash._createcache@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/lodash._createcache/-/lodash._createcache-3.1.2.tgz"
     },
+    "lodash._createcompounder": {
+      "version": "3.0.0",
+      "from": "lodash._createcompounder@>=3.0.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash._createcompounder/-/lodash._createcompounder-3.0.0.tgz"
+    },
     "lodash._createpadding": {
       "version": "3.6.1",
       "from": "lodash._createpadding@>=3.0.0 <4.0.0",
@@ -2817,10 +2827,20 @@
       "from": "lodash.assign@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/lodash.assign/-/lodash.assign-3.2.0.tgz"
     },
+    "lodash.camelcase": {
+      "version": "3.0.1",
+      "from": "lodash.camelcase@>=3.0.1 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-3.0.1.tgz"
+    },
     "lodash.clonedeep": {
       "version": "3.0.2",
       "from": "lodash.clonedeep@>=3.0.1 <4.0.0",
       "resolved": "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-3.0.2.tgz"
+    },
+    "lodash.deburr": {
+      "version": "3.0.2",
+      "from": "lodash.deburr@>=3.0.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.deburr/-/lodash.deburr-3.0.2.tgz"
     },
     "lodash.flatten": {
       "version": "3.0.2",
@@ -2901,6 +2921,11 @@
       "version": "3.0.0",
       "from": "lodash.toplainobject@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/lodash.toplainobject/-/lodash.toplainobject-3.0.0.tgz"
+    },
+    "lodash.words": {
+      "version": "3.0.2",
+      "from": "lodash.words@>=3.0.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.words/-/lodash.words-3.0.2.tgz"
     },
     "log4js": {
       "version": "0.6.27",
@@ -3442,15 +3467,15 @@
       "from": "postcss-modules-extract-imports@1.0.0-beta2",
       "resolved": "https://registry.npmjs.org/postcss-modules-extract-imports/-/postcss-modules-extract-imports-1.0.0-beta2.tgz"
     },
-    "postcss-modules-local-by-default": {
-      "version": "1.0.0-beta1",
-      "from": "postcss-modules-local-by-default@1.0.0-beta1",
-      "resolved": "https://registry.npmjs.org/postcss-modules-local-by-default/-/postcss-modules-local-by-default-1.0.0-beta1.tgz"
-    },
     "postcss-modules-scope": {
       "version": "1.0.0-beta2",
       "from": "postcss-modules-scope@1.0.0-beta2",
       "resolved": "https://registry.npmjs.org/postcss-modules-scope/-/postcss-modules-scope-1.0.0-beta2.tgz"
+    },
+    "postcss-modules-values": {
+      "version": "1.1.0",
+      "from": "postcss-modules-values@>=1.1.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/postcss-modules-values/-/postcss-modules-values-1.1.0.tgz"
     },
     "postcss-normalize-charset": {
       "version": "1.1.0",
@@ -3642,7 +3667,7 @@
     },
     "react-router": {
       "version": "1.0.0-rc3",
-      "from": "react-router@>=1.0.0-rc1 <2.0.0",
+      "from": "react-router@1.0.0-rc3",
       "resolved": "https://registry.npmjs.org/react-router/-/react-router-1.0.0-rc3.tgz"
     },
     "read-json-sync": {
@@ -3726,7 +3751,14 @@
     "redux-devtools": {
       "version": "2.1.5",
       "from": "redux-devtools@>=2.1.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/redux-devtools/-/redux-devtools-2.1.5.tgz"
+      "resolved": "https://registry.npmjs.org/redux-devtools/-/redux-devtools-2.1.5.tgz",
+      "dependencies": {
+        "react-redux": {
+          "version": "3.1.0",
+          "from": "react-redux@>=3.0.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-3.1.0.tgz"
+        }
+      }
     },
     "regenerate": {
       "version": "1.2.1",
