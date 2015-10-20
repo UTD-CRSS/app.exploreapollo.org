@@ -17,8 +17,10 @@ import {
 
 import "./scss/main.scss";
 
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-const history = createBrowserHistory()
+import createHistory from "history/lib/createHashHistory";
+const history = createHistory({
+  queryKey: false
+});
 
 React.render((
   <Router history={history}>
