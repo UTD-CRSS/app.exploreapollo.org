@@ -17,8 +17,8 @@ import {
 
 import "./scss/main.scss";
 
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-const history = createBrowserHistory()
+import createBrowserHistory from "history/lib/createBrowserHistory";
+const history = createBrowserHistory();
 
 React.render((
   <Router history={history}>
