@@ -46,7 +46,11 @@ browserSync({
         publicPath: webpackConfig.output.publicPath,
 
         // pretty colored output
-        stats: { colors: true }
+        stats: {
+          colors: true,
+          chunkModules: false,
+          modules: false
+        }
 
         // for other settings see
         // http://webpack.github.io/docs/webpack-dev-middleware.html
