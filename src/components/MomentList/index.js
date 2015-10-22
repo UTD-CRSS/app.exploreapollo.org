@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router";
 
 export class MomentListItem extends Component {
   render() {
@@ -7,11 +8,11 @@ export class MomentListItem extends Component {
       <div>
         <h2 ref="momentTitle">{title}</h2>
         <p>
-          <a
+          <Link
             ref="momentLink"
-            href={`#/moments/moment/${id}`}>
+            to={`/moments/moment/${id}`}>
             Launch
-          </a>
+          </Link>
         </p>
       </div>
     );

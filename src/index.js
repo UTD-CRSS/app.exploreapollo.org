@@ -1,38 +1,21 @@
-import React from "react";
-import {
-  IndexRoute,
-  Route,
-  Router
-} from "react-router";
-
-import {
-  Dashboard,
-  NoMatch,
-  Moments,
-  MomentViewer,
-  Stories,
-  StoryViewer,
-  App
-} from "./containers";
-
+import "babel-core/polyfill";
 import "./scss/main.scss";
+import React from "react";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { ReduxRouter } from "redux-router";
+import configureStore from "./store/configureStore";
 
-import createHistory from "history/lib/createHashHistory";
-const history = createHistory({
-  queryKey: false
-});
+if (location.href.indexOf("#") != -1) {
+  history.replaceState({} , "", `${location.hash.substring(1)}`);
+}
 
-React.render((
-  <Router history={history}>
-    <Route name="app" path="/" component={App}>
-      <IndexRoute component={Dashboard} />
-      <Route path="moments/moment/:id" component={MomentViewer}/>
-      <Route path="moments" component={Moments}>
-      </Route>
-      <Route path="stories/story/:id" component={StoryViewer}/>
-      <Route path="stories" component={Stories}>
-      </Route>
-      <Route path="*" component={NoMatch}/>
-    </Route>
-  </Router>
+const store = configureStore();
+
+render((
+  <Provider store={store}>
+    {() =>
+      <ReduxRouter />
+    }
+  </Provider>
 ), document.body);
