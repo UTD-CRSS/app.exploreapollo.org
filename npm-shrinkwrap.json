@@ -3484,6 +3484,11 @@
       "from": "postcss-modules-extract-imports@1.0.0-beta2",
       "resolved": "https://registry.npmjs.org/postcss-modules-extract-imports/-/postcss-modules-extract-imports-1.0.0-beta2.tgz"
     },
+    "postcss-modules-local-by-default": {
+      "version": "1.0.0",
+      "from": "postcss-modules-local-by-default@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/postcss-modules-local-by-default/-/postcss-modules-local-by-default-1.0.0.tgz"
+    },
     "postcss-modules-scope": {
       "version": "1.0.0-beta2",
       "from": "postcss-modules-scope@1.0.0-beta2",
@@ -3778,9 +3783,9 @@
       }
     },
     "redux": {
-      "version": "3.0.2",
-      "from": "redux@>=3.0.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/redux/-/redux-3.0.2.tgz"
+      "version": "3.0.3",
+      "from": "redux@3.0.3",
+      "resolved": "https://registry.npmjs.org/redux/-/redux-3.0.3.tgz"
     },
     "redux-devtools": {
       "version": "2.1.5",
@@ -4628,7 +4633,8 @@
         },
         "esprima": {
           "version": "2.6.0",
-          "from": "esprima@>=2.5.0 <3.0.0"
+          "from": "esprima@2.6.0",
+          "resolved": "https://registry.npmjs.org/esprima/-/esprima-2.6.0.tgz"
         },
         "supports-color": {
           "version": "3.1.2",
