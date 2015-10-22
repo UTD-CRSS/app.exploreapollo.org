@@ -26,7 +26,4 @@ describe("MomentListItem Component", function () {
   it("should display a title", function() {
     assert.equal(item.momentTitle.innerText, "Woo");
   });
-  it("should have a link to the moment", function () {
-    assert.equal(item.momentLink.getAttribute("href"), "#/moments/moment/1");
-  });
 });

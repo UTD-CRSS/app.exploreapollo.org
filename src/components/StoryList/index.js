@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router";
 
 export class StoryListItem extends Component {
   render() {
@@ -7,11 +8,11 @@ export class StoryListItem extends Component {
       <div>
         <h2 ref="storyTitle">{title}</h2>
         <p>
-          <a
+          <Link
             ref="storyLink"
-            href={`#/stories/story/${id}`}>
+            to={`/stories/story/${id}`}>
             Launch
-          </a>
+          </Link>
         </p>
       </div>
     );

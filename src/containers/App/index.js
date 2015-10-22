@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router";
 
 export class AppHeader extends Component {
   render() {
@@ -6,21 +7,21 @@ export class AppHeader extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a ref="appRouteTitle" className="navbar-brand" href="#">
+            <Link ref="appRouteTitle" className="navbar-brand" to="/">
               Explore Apollo
-            </a>
+            </Link>
           </div>
-            
+
           <ul className="nav navbar-nav">
             <li>
-              <a href="#/stories">
+              <Link to="/stories">
                 Stories
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#/moments">
+              <Link to="/moments">
                 Moments
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
