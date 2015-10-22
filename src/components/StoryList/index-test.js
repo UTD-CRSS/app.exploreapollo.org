@@ -26,7 +26,4 @@ describe("StoryListItem Component", function () {
   it("should display a title", function() {
     assert.equal(item.storyTitle.innerText, "Woo");
   });
-  it("should have a link to the story", function () {
-    assert.equal(item.storyLink.getAttribute("href"), "#/stories/story/1");
-  });
 });
