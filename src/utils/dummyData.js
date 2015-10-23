@@ -28,7 +28,7 @@ const momentTemplate = {
     {id: 18, name: "Buzz", text: "Good work, men. Two blocks down and only nineteen more to go."}
   ],
   body: "Testing!"
-}
+};
 
 export const dummyMoments = {
   1: {

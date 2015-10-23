@@ -20,7 +20,7 @@ export class PlayButton extends Component {
 export default class MomentPlayer extends Component {
   componentWillMount() {
     const {url} = this.props;
-    const audio = new Audio(url)
+    const audio = new Audio(url);
     audio.addEventListener("timeupdate", () => {
       this.setState({
         time: audio.currentTime
@@ -28,7 +28,7 @@ export default class MomentPlayer extends Component {
     }, true);
     this.setState({
       audio,
-      playing: false,
+      playing: false
     });
   }
 
@@ -58,8 +58,7 @@ export default class MomentPlayer extends Component {
     return ((start + time) / missionLength) * 100;
   }
 
-	render() {
-
+  render() {
     return (
       <div>
         <h4 className="text-center">
@@ -71,27 +70,27 @@ export default class MomentPlayer extends Component {
             play={this.playAudio.bind(this)}
             pause={this.pauseAudio.bind(this)} />
           <div style={{
-            position: 'relative'
+            position: "relative"
           }} className="progress">
           <div
             key={this.getCurrentTimeLeftOffset()}
             style={{
-            position: 'absolute',
-            left: `${this.getCurrentTimeLeftOffset()}%`,
-            background: 'red',
-            height: '100%',
-            width: '2px'
-          }} />
-            <div
-              className="progress-bar"
-              style={{
-                marginLeft: `${this.getSliceLeftOffset()}%`,
-                width: `${this.getSliceWidth()}%`
-              }}
-              role="progressbar" />
-          </div>
+              position: "absolute",
+              left: `${this.getCurrentTimeLeftOffset()}%`,
+              background: "red",
+              height: "100%",
+              width: "2px"
+            }} />
+          <div
+            className="progress-bar"
+            style={{
+              marginLeft: `${this.getSliceLeftOffset()}%`,
+              width: `${this.getSliceWidth()}%`
+            }}
+            role="progressbar" />
         </div>
       </div>
+    </div>
     );
   }
 }

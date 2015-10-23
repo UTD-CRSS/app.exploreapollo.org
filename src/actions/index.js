@@ -24,7 +24,7 @@ export function loadMoments(args) {
   const {momentId} = args;
   return dispatch => {
     dispatch(fetchMoments());
-    const moments = dummyMoments[momentId]
+    const moments = dummyMoments[momentId];
     // simulate async request
     delay(() => {
       if (moments) {

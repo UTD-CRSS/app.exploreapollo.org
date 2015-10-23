@@ -20,18 +20,17 @@ class MomentViewer extends Component {
   }
 
   render() {
-    console.log(this.props);
     const {currentMoment, currentMission, loading} = this.props;
     if (loading) {
       return <div>
         Loading Moment.
-      </div>
+      </div>;
     }
 
     if (!currentMoment) {
       return <div>
         Error fetching moment.
-      </div>
+      </div>;
     }
 
     const {
@@ -61,7 +60,6 @@ class MomentViewer extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   const { id } = state.router.params;
   const { loading, entities } = state.moments;
   if (loading) {
@@ -70,7 +68,7 @@ function mapStateToProps(state) {
       loading
     };
   }
-  const { moments, transcripts, missions } = entities;
+  const { moments, missions } = entities;
   const moment = get(moments, id);
   const mission = get(missions, moment.mission);
   return {
