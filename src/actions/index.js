@@ -1,56 +1,37 @@
-export const RECEIVE_TIMELINE = "RECEIVE_TIMELINE";
-export const FETCH_TIMELINE = "FETCH_TIMELINE";
-export const RECEIVE_NOTES = "RECEIVE_NOTES";
-export const FETCH_NOTES = "FETCH_NOTES";
+export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
+export const FETCH_MOMENT = "FETCH_MOMENT";
 
-import {dummyTimeline, dummyNotes} from "../utils/dummyData";
+import {
+  dummyMoments
+} from "../utils/dummyData";
+import {delay, random} from "lodash";
 
-function receiveTimeline(args) {
-  // const {momentId, elements} = args;
-  const {elements} = args;
+function receiveMoments(args) {
+  const {moments} = args;
   return {
-    type: RECEIVE_TIMELINE,
-    timeline: elements
+    type: RECEIVE_MOMENT,
+    moments
   };
 }
 
-export function fetchTimeline() {
+function fetchMoments() {
   return {
-    type: FETCH_TIMELINE
+    type: FETCH_MOMENT
   };
 }
 
-export function loadTimeline(args) {
-  // const {momentId, met} = args;
+export function loadMoments(args) {
   const {momentId} = args;
   return dispatch => {
-    dispatch(fetchTimeline());
-    return dispatch(receiveTimeline({
-      momentId,
-      elements: dummyTimeline
-    }));
-  };
-}
-
-export function fetchNotes(args) {
-  // const {momentId, met} = args;
-  const {momentId} = args;
-  return (dispatch) => {
-    dispatch(receiveNotes({
-      momentId,
-      elements: dummyNotes
-    }));
-    return {
-      type: FETCH_NOTES
-    };
-  };
-}
-
-function receiveNotes(args) {
-  // const {momentId, elements} = args;
-  const {elements} = args;
-  return {
-    type: RECEIVE_NOTES,
-    notes: elements
+    dispatch(fetchMoments());
+    const moments = dummyMoments[momentId]
+    // simulate async request
+    delay(() => {
+      if (moments) {
+        dispatch(receiveMoments({
+          moments
+        }));
+      }
+    }, random(1, 5) * 200);
   };
 }

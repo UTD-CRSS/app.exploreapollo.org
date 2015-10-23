@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import classNames from "classnames";
 import { connect } from "react-redux";
+import {get} from "lodash";
 
 import {
-  loadTimeline,
-  fetchNotes
+  loadMoments
 } from "../../actions";
 
 import {
@@ -15,26 +14,46 @@ import {
 
 class MomentViewer extends Component {
   componentWillMount() {
-    this.props.loadTimeline({
-      momentId: this.props.momentId,
-      met: 1111
-    });
-    this.props.fetchNotes({
-      momentId: this.props.momentId,
-      met: 1111
+    this.props.loadMoments({
+      momentId: this.props.currentMomentId
     });
   }
 
   render() {
-    const classes = classNames("row");
-    const timeline = this.props.timeline.timeline;
-    const notes = this.props.notes.notes;
+    console.log(this.props);
+    const {currentMoment, currentMission, loading} = this.props;
+    if (loading) {
+      return <div>
+        Loading Moment.
+      </div>
+    }
+
+    if (!currentMoment) {
+      return <div>
+        Error fetching moment.
+      </div>
+    }
+
+    const {
+      title,
+      audioUrl,
+      startSlice,
+      endSlice
+    } = currentMoment;
+    const missionLength = currentMission.length;
+
     return (
       <div>
-        <MomentPlayer />
-        <div className={classes}>
-          <Timeline timeline={timeline} />
-          <MomentNote note={notes} />
+        <MomentPlayer
+          title={title}
+          url={audioUrl}
+          start={startSlice}
+          end={endSlice}
+          missionLength={missionLength}
+        />
+        <div className="row">
+          <Timeline />
+          <MomentNote note={[]} />
         </div>
       </div>
     );
@@ -42,17 +61,26 @@ class MomentViewer extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   const { id } = state.router.params;
-  const timeline = state.timeline;
-  const notes = state.notes;
+  const { loading, entities } = state.moments;
+  if (loading) {
+    return {
+      currentMomentId: id,
+      loading
+    };
+  }
+  const { moments, transcripts, missions } = entities;
+  const moment = get(moments, id);
+  const mission = get(missions, moment.mission);
   return {
-    momentId: id,
-    timeline,
-    notes
+    currentMomentId: id,
+    loading,
+    currentMission: mission,
+    currentMoment: moment
   };
 }
 
 export default connect(mapStateToProps, {
-  loadTimeline,
-  fetchNotes
+  loadMoments
 })(MomentViewer);
