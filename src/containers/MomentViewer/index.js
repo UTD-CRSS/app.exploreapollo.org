@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {get} from "lodash";
+import {get, filter} from "lodash";
 
 import {
-  loadMoments
+  loadMoments,
+  loadTranscripts
 } from "../../actions";
 
 import {
@@ -17,10 +18,13 @@ class MomentViewer extends Component {
     this.props.loadMoments({
       momentId: this.props.currentMomentId
     });
+    this.props.loadTranscripts({
+      transcripts: this.props.currentTranscripts
+    });
   }
 
   render() {
-    const {currentMoment, currentMission, loading} = this.props;
+    const {currentMoment, currentMission, loading, currentTranscripts} = this.props;
     if (loading) {
       return <div>
         Loading Moment.
@@ -33,6 +37,13 @@ class MomentViewer extends Component {
       </div>;
     }
 
+    const {time} = this.props.currentAudio;
+    const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
+    const visibleTranscript = filter(currentTranscripts.transcripts, function(i) {
+      //console.log(i.startTime <= currentMissionTime);
+      return i.startTime <= currentMissionTime;
+    });
+
     const {
       title,
       audioUrl,
@@ -40,7 +51,6 @@ class MomentViewer extends Component {
       endSlice
     } = currentMoment;
     const missionLength = currentMission.length;
-
     return (
       <div>
         <MomentPlayer
@@ -48,10 +58,9 @@ class MomentViewer extends Component {
           url={audioUrl}
           start={startSlice}
           end={endSlice}
-          missionLength={missionLength}
-        />
+          missionLength={missionLength} />
         <div className="row">
-          <Timeline />
+          <Timeline timeline={visibleTranscript}/>
           <MomentNote note={[]} />
         </div>
       </div>
@@ -60,6 +69,7 @@ class MomentViewer extends Component {
 }
 
 function mapStateToProps(state) {
+  const {audio} = state;
   const { id } = state.router.params;
   const { loading, entities } = state.moments;
   if (loading) {
@@ -68,6 +78,7 @@ function mapStateToProps(state) {
       loading
     };
   }
+  const transcripts = state.transcripts;
   const { moments, missions } = entities;
   const moment = get(moments, id);
   const mission = get(missions, moment.mission);
@@ -75,10 +86,13 @@ function mapStateToProps(state) {
     currentMomentId: id,
     loading,
     currentMission: mission,
-    currentMoment: moment
+    currentMoment: moment,
+    currentTranscripts: transcripts,
+    currentAudio: audio
   };
 }
 
 export default connect(mapStateToProps, {
-  loadMoments
+  loadMoments,
+  loadTranscripts
 })(MomentViewer);
