@@ -69,12 +69,12 @@ export function loadTranscripts() { //can pass args
 }
 
 export const RECEIVE_AUDIO = "RECEIVE_AUDIO";
-export const FETCH_AUDIO = "FETCH_AUDIO";
-function fetchAudio() {
-  return {
-    type: FETCH_AUDIO
-  };
-}
+// export const FETCH_AUDIO = "FETCH_AUDIO";
+// function fetchAudio() {
+//   return {
+//     type: FETCH_AUDIO
+//   };
+// }
 
 function receiveAudio({
   audio, time, playing

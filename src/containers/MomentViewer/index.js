@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {get, filter} from "lodash";
+import {get, findIndex, each} from "lodash";
 
 import {
   loadMoments,
@@ -46,9 +46,19 @@ class MomentViewer extends Component {
 
     const {time, playing, audio} = this.props.currentAudio;
     const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
-    const visibleTranscript = filter(currentTranscripts.transcripts, function(i) {
-      return i.startTime <= currentMissionTime;
+    let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
+      return i.startTime > currentMissionTime;
     });
+
+    //this is bad, but necessary until I can think of a clever solution
+    each(currentTranscripts.transcripts, function(i) {
+      i.active = false;
+    });
+    
+    activeIndex -= 1;
+    if(activeIndex >= 0) {
+      currentTranscripts.transcripts[activeIndex].active = true;
+    }
 
     const {
       title,
@@ -70,7 +80,7 @@ class MomentViewer extends Component {
           loadAudio={loadAudio}
           missionLength={missionLength} />
         <div className="row">
-          <Timeline timeline={visibleTranscript}/>
+          <Timeline timeline={currentTranscripts.transcripts}/>
           <MomentNote note={[]} />
         </div>
       </div>

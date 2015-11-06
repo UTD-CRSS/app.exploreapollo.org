@@ -3,15 +3,15 @@ import classNames from "classnames";
 
 export class TimelineMessage extends Component {
   render() {
-    const {name, text} = this.props;
+    const {name, text, active} = this.props;
     return (
       <div>
         <p>
           <strong>
             {name}:
           </strong>
-          <span>
-            {text}
+          <span className={classNames({"active-transcript": active})}>
+            {active} {text}
           </span>
         </p>
       </div>
@@ -34,6 +34,7 @@ export default class Timeline extends Component {
           key={item.id}
           id={item.id}
           name={item.name}
+          active={item.active}
           text={item.text} />
       );
     });

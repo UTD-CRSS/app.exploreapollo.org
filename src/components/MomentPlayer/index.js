@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { connect } from "react-redux";
 import classNames from "classnames";
 
 export class PlayButton extends Component {
@@ -55,10 +54,13 @@ export default class MomentPlayer extends Component {
   }
 
   playAudio() {
-    this.props.audio.play();
-    this.props.loadAudio({
-      playing: true,
-    });
+    const {start, end, audio} = this.props;
+    if (audio.currentTime * 1000 < (end - start)) {
+      this.props.audio.play();
+      this.props.loadAudio({
+        playing: true
+      });
+    }
   }
 
   progressBarClicked(e) {
