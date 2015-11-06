@@ -1,9 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
-import {
-  loadAudio
-} from "../../actions";
 
 export class PlayButton extends Component {
   render() {
@@ -25,21 +22,21 @@ export default class MomentPlayer extends Component {
   componentWillMount() {
     const {url, start, end} = this.props;
     const audio = new Audio(url);
-    
+
     //update
     audio.addEventListener("timeupdate", () => {
-      //end of moment
-      let isPlaying = true;
       if (audio.currentTime * 1000 > (end - start)) {
+        //end of moment
         audio.pause();
-        isPlaying = false;
+        return this.props.loadAudio({
+          time: this.props.audio.currentTime,
+          playing: false
+        });
       }
+
       this.props.loadAudio({
-        audio,
-        time: this.state.audio.currentTime,
-        playing: isPlaying
+        time: this.props.audio.currentTime
       });
-      this.setState({time: audio.currentTime, playing: isPlaying});
     }, true);
 
     //initial
@@ -48,26 +45,19 @@ export default class MomentPlayer extends Component {
       time: audio.currentTime,
       playing: false
     });
-    this.setState({time: audio.currentTime, audio});
   }
 
   pauseAudio() {
-    this.state.audio.pause();
-    this.setState({playing: false});
+    this.props.audio.pause();
     this.props.loadAudio({
-      audio: this.state.audio,
-      time: this.state.audio.currentTime,
       playing: false
     });
   }
 
   playAudio() {
-    this.state.audio.play();
-    this.setState({playing: true});
+    this.props.audio.play();
     this.props.loadAudio({
       playing: true,
-      audio: this.state.audio,
-      time: this.state.audio.currentTime
     });
   }
 
@@ -77,7 +67,7 @@ export default class MomentPlayer extends Component {
     //X from left, to full width
     const seekPercent = (e.clientX - e.target.getBoundingClientRect().left) / e.target.getBoundingClientRect().width;
     const seekTime = ((end - start) / 1000) * seekPercent;
-    this.state.audio.currentTime = seekTime;  
+    this.props.audio.currentTime = seekTime;
   }
 
   getSliceWidth() {
@@ -92,7 +82,7 @@ export default class MomentPlayer extends Component {
 
   getCurrentTimeLeftOffset() {
     const {start, end} = this.props;
-    const time = this.state.time ? this.state.time / 1000 : 0;
+    const time = this.props.time ? this.props.time / 1000 : 0;
     return ((time * 1000 / (end - start)) * 1e5);
   }
 
@@ -100,11 +90,11 @@ export default class MomentPlayer extends Component {
     return (
       <div>
         <h4 className="text-center">
-          Now Playing: {this.props.title} {this.state.time}
+          Now Playing: {this.props.title} {this.props.time}
         </h4>
         <div className="text-center">
           <PlayButton
-            isPlaying={this.state.playing}
+            isPlaying={this.props.playing}
             play={this.playAudio.bind(this)}
             pause={this.pauseAudio.bind(this)} />
           <div style={{
@@ -136,20 +126,3 @@ export default class MomentPlayer extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { audio } = state.audio;
-  const { loading } = state.moments;
-  if (loading) {
-    return {
-      loading
-    };
-  }
-  return {
-    currentAudio: audio
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadAudio
-})(MomentPlayer);

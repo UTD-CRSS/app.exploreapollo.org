@@ -2,6 +2,7 @@ import { routerStateReducer as router } from "redux-router";
 import { combineReducers } from "redux";
 import * as ActionTypes from "../actions";
 import { normalize, Schema } from "normalizr"; //arrayOf
+import _ from "lodash";
 
 const Moment = new Schema("moments");
 //const Transcript = new Schema("transcripts");
@@ -13,7 +14,7 @@ Moment.define({
 });
 
 //TODO: figure this out
-// Transcripts.define({ 
+// Transcripts.define({
 //   transcripts: arrayOf(Transcript)
 // });
 
@@ -48,12 +49,10 @@ function transcripts(state = initialTranscriptState, action = {}) {
     return Object.assign(
       {},
       state,
-      {loading: false},
-      {transcripts: action.transcripts}
-      // normalize(
-      //   action.transcripts,
-      //   Moment
-      // )
+      {
+        loading: false,
+        transcripts: action.transcripts
+      }
     );
   default:
     return state;
@@ -68,9 +67,12 @@ function audio(state = initialAudioState, action = {}) {
     return Object.assign(
       {},
       state,
-      {loading: false},
-      {audio: action.audio},
-      {time: action.time}
+      _.omit({
+        loading: false,
+        audio: action.audio,
+        playing: action.playing,
+        time: action.time
+      }, _.isUndefined)
     );
   default:
     return state;

@@ -76,25 +76,25 @@ function fetchAudio() {
   };
 }
 
-function receiveAudio(args) {
-  const {audio, time} = args;
+function receiveAudio({
+  audio, time, playing
+}) {
   return {
     type: RECEIVE_AUDIO,
+    playing,
     audio,
     time
   };
 }
 
-export function loadAudio(args) {
-  const {audio, time} = args;
+export function loadAudio({
+  audio, time, playing
+}) {
   return dispatch => {
-    dispatch(fetchAudio());
-    // simulate async request
-    delay(() => {
-      dispatch(receiveAudio({
-        audio,
-        time
-      }));
-    }, random(1, 5) * 200);
+    dispatch(receiveAudio({
+      playing,
+      audio,
+      time
+    }));
   };
 }

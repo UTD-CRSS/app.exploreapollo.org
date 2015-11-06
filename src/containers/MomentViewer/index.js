@@ -4,7 +4,8 @@ import {get, filter} from "lodash";
 
 import {
   loadMoments,
-  loadTranscripts
+  loadTranscripts,
+  loadAudio
 } from "../../actions";
 
 import {
@@ -24,7 +25,13 @@ class MomentViewer extends Component {
   }
 
   render() {
-    const {currentMoment, currentMission, loading, currentTranscripts} = this.props;
+    const {
+      currentMoment,
+      currentMission,
+      loading,
+      currentTranscripts,
+      loadAudio
+    } = this.props;
     if (loading) {
       return <div>
         Loading Moment.
@@ -37,10 +44,9 @@ class MomentViewer extends Component {
       </div>;
     }
 
-    const {time} = this.props.currentAudio;
+    const {time, playing, audio} = this.props.currentAudio;
     const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
     const visibleTranscript = filter(currentTranscripts.transcripts, function(i) {
-      //console.log(i.startTime <= currentMissionTime);
       return i.startTime <= currentMissionTime;
     });
 
@@ -58,6 +64,10 @@ class MomentViewer extends Component {
           url={audioUrl}
           start={startSlice}
           end={endSlice}
+          audio={audio}
+          time={time}
+          playing={playing}
+          loadAudio={loadAudio}
           missionLength={missionLength} />
         <div className="row">
           <Timeline timeline={visibleTranscript}/>
@@ -94,5 +104,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   loadMoments,
-  loadTranscripts
+  loadTranscripts,
+  loadAudio
 })(MomentViewer);
