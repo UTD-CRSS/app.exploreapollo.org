@@ -11,3 +11,49 @@
 .active-transcript {
   font-weight: bold;
 }
+
+.story-timeline-container {
+  height: 95vh;
+  .story-timeline {
+    height: 100%;
+    background-color: #45CC8E;
+    width: 6px;
+    left: 10px;
+    position: absolute;
+  }
+  .moment-container {
+    position: absolute;
+    left: 3px;
+    width: 100%;
+    &:hover {
+      cursor: pointer;
+
+      .moment-node {
+        background-color: #398C66;
+      }
+      .moment-title-container {
+        opacity: 1;
+      }
+    }
+    .moment-node {
+      width: 20px;
+      height: 20px;
+      background-color: #45CC8E;
+      border:  2px solid white;
+      border-radius: 10px;
+      margin-bottom: -5px;
+      display: inline-block;
+      position: absolute;
+      top: 4px;
+      transition: 0.3s background-color ease-in;
+    }
+    .moment-title-container {
+      display: inline-block;
+      font-weight: bold;
+      font-size: 0.9em;
+      margin-left: 25px;
+      opacity: 0;
+      transition: 0.3s opacity ease-in;
+    }
+  }
+}
