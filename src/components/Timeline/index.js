@@ -3,15 +3,15 @@ import classNames from "classnames";
 
 export class TimelineMessage extends Component {
   render() {
-    const {name, text} = this.props;
+    const {name, text, active} = this.props;
     return (
       <div>
         <p>
           <strong>
             {name}:
           </strong>
-          <span>
-            {text}
+          <span className={classNames({"active-transcript": active})}>
+            {active} {text}
           </span>
         </p>
       </div>
@@ -20,6 +20,7 @@ export class TimelineMessage extends Component {
 }
 
 export default class Timeline extends Component {
+
   renderList() {
     const {timeline} = this.props;
     if (!timeline || timeline.length < 1) {
@@ -27,14 +28,14 @@ export default class Timeline extends Component {
         <div ref="errorMessage" className="alert alert-info">No Messages</div>
       );
     }
-
-    return timeline.map((timeline) => {
+    return timeline.map((item) => {
       return (
         <TimelineMessage
-          key={timeline.id}
-          id={timeline.id}
-          name={timeline.name}
-          text={timeline.text} />
+          key={item.id}
+          id={item.id}
+          name={item.name}
+          active={item.active}
+          text={item.text} />
       );
     });
   }

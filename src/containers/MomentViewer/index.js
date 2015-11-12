@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-import classNames from "classnames";
 import { connect } from "react-redux";
+import {get, findIndex, each} from "lodash";
 
 import {
-  loadTimeline,
-  fetchNotes
+  loadMoments,
+  loadTranscripts,
+  loadAudio
 } from "../../actions";
 
 import {
@@ -15,26 +16,72 @@ import {
 
 class MomentViewer extends Component {
   componentWillMount() {
-    this.props.loadTimeline({
-      momentId: this.props.momentId,
-      met: 1111
+    this.props.loadMoments({
+      momentId: this.props.currentMomentId
     });
-    this.props.fetchNotes({
-      momentId: this.props.momentId,
-      met: 1111
+    this.props.loadTranscripts({
+      transcripts: this.props.currentTranscripts
     });
   }
 
   render() {
-    const classes = classNames("row");
-    const timeline = this.props.timeline.timeline;
-    const notes = this.props.notes.notes;
+    const {
+      currentMoment,
+      currentMission,
+      loading,
+      currentTranscripts,
+      loadAudio
+    } = this.props;
+    if (loading) {
+      return <div>
+        Loading Moment.
+      </div>;
+    }
+
+    if (!currentMoment) {
+      return <div>
+        Error fetching moment.
+      </div>;
+    }
+
+    const {time, playing, audio} = this.props.currentAudio;
+    const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
+    let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
+      return i.startTime > currentMissionTime;
+    });
+
+    //this is bad, but necessary until I can think of a clever solution
+    each(currentTranscripts.transcripts, function(i) {
+      i.active = false;
+    });
+    
+    activeIndex -= 1;
+    if(activeIndex >= 0) {
+      currentTranscripts.transcripts[activeIndex].active = true;
+    }
+
+    const {
+      title,
+      audioUrl,
+      startSlice,
+      endSlice
+    } = currentMoment;
+    const missionLength = currentMission.length;
     return (
       <div>
-        <MomentPlayer />
-        <div className={classes}>
-          <Timeline timeline={timeline} />
-          <MomentNote note={notes} />
+        <MomentPlayer
+          title={title}
+          url={audioUrl}
+          start={startSlice}
+          end={endSlice}
+          audio={audio}
+          time={time}
+          playing={playing}
+          loadAudio={loadAudio}
+          missionLength={missionLength} />
+        <div className="row">
+          <Timeline timeline={currentTranscripts.transcripts}/>
+          <MomentNote note={[]} />
         </div>
       </div>
     );
@@ -42,17 +89,31 @@ class MomentViewer extends Component {
 }
 
 function mapStateToProps(state) {
+  const {audio} = state;
   const { id } = state.router.params;
-  const timeline = state.timeline;
-  const notes = state.notes;
+  const { loading, entities } = state.moments;
+  if (loading) {
+    return {
+      currentMomentId: id,
+      loading
+    };
+  }
+  const transcripts = state.transcripts;
+  const { moments, missions } = entities;
+  const moment = get(moments, id);
+  const mission = get(missions, moment.mission);
   return {
-    momentId: id,
-    timeline,
-    notes
+    currentMomentId: id,
+    loading,
+    currentMission: mission,
+    currentMoment: moment,
+    currentTranscripts: transcripts,
+    currentAudio: audio
   };
 }
 
 export default connect(mapStateToProps, {
-  loadTimeline,
-  fetchNotes
+  loadMoments,
+  loadTranscripts,
+  loadAudio
 })(MomentViewer);
