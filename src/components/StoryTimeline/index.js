@@ -1,65 +1,84 @@
 import React, {Component} from "react";
 
-export class MomentNode extends Component {
-  renderMomentTitles() {
-    const {moments} = this.props;
-    return moments.map((moment) => {
-      return (
-        <div>
-         - {moment.name}
-        </div>
-      );
-    });
-  }
-
-  render() {
-    const {offset} = this.props;
-    return (
-      <div className="moment-container"
-        style={{"top": `${offset}px`}}>
-        <div className="moment-node"></div>
-        <div className="moment-title-container">
-          {this.renderMomentTitles()}
-        </div>
-      </div>
-    );
-  }
-}
-
-
 export default class StoryTimeline extends Component {
-  renderNodes() {
-    const nodes = [
-      {
-        "id": 1,
-        "moments": [{"name": "test moment 1"}, {"name": "test moment 2"}],
-        "offset": 10
-      },{
-        "id": 2,
-        "moments": [{"name": "test moment 3"}, {"name": "test moment 4"}],
-        "offset": 50
-      },{
-        "id": 3,
-        "moments": [{"name": "test moment 5"}, {"name": "test moment 6"}],
-        "offset": 90
-      }
-    ];
-    return nodes.map((node) => {
-      return (
-        <MomentNode
-          key={node.id}
-          moments={node.moments}
-          offset={node.offset}/>
-      );
-    });
-  }
 
   render() {
     return (
-      <div className="col-xs-3 story-timeline-container" ref="timelineContainer">
-        <div className="story-timeline">
+      <div className="col-xs-10 col-xs-offset-2">
+        
+        <div className="row story-timeline-container">
+          <div className="story-timeline-line"></div>
+          <div className="col-md-9">
+            <div className="story-timeline-item">
+              <div className="story-timeline-item-node"></div>
+              <div className="story-timeline-item-content">
+                <div>
+                  <div className="story-timeline-title">
+                    First Moment
+                  </div>
+                  <div className="story-timeline-time">
+                    20:00:00-24:00:00
+                  </div>
+                </div>
+                <div>
+                  <p className="story-timeline-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem sapien. Nunc dignissim auctor ligula, nec pretium est scelerisque id. Curabitur tincidunt porta risus a pellentesque.
+                  </p>
+                  <div className="story-timeline-play">
+                    <a href="#">Listen <i className="glyphicon glyphicon-play"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="story-timeline-item">
+              <div className="story-timeline-item-node"></div>
+              <div className="story-timeline-item-content">
+                <div>
+                  <div className="story-timeline-title">
+                    First Moment
+                  </div>
+                  <div className="story-timeline-time">
+                    20:00:00-24:00:00
+                  </div>
+                </div>
+                <div>
+                  <p className="story-timeline-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem sapien. Nunc dignissim auctor ligula, nec pretium est scelerisque id. Curabitur tincidunt porta risus a pellentesque.
+                  </p>
+                  <div className="story-timeline-play">
+                    <a href="#">Listen <i className="glyphicon glyphicon-play"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="story-timeline-item">
+              <div className="story-timeline-item-node"></div>
+              <div className="story-timeline-item-content">
+                <div>
+                  <div className="story-timeline-title">
+                    First Moment
+                  </div>
+                  <div className="story-timeline-time">
+                    20:00:00-24:00:00
+                  </div>
+                </div>
+                <div>
+                  <p className="story-timeline-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget lorem sapien. Nunc dignissim auctor ligula, nec pretium est scelerisque id. Curabitur tincidunt porta risus a pellentesque.
+                  </p>
+                  <div className="story-timeline-play">
+                    <a href="#">Listen <i className="glyphicon glyphicon-play"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-2 story-play-all">
+            <a href="#">Play All <i className="glyphicon glyphicon-play"></i></a>
+          </div>
+
         </div>
-        {this.renderNodes()}
+
       </div>
     );
   }
