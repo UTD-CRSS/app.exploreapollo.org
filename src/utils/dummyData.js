@@ -10,6 +10,21 @@ const momentTemplate = {
   body: "Testing!"
 };
 
+const storyTemplate = {
+  description: "This is a description about the story that is told in the moments.",
+  momentList: [{
+    id: 1,
+    title: "Moment 1",
+    description: "This is a description for the first moment",
+    time: "000:00:00"
+  },{
+    id: 2,
+    title: "Moment 2",
+    description: "This is a description for the second moment",
+    time: "000:10:00"
+  }]
+};
+
 export const dummyTranscripts = [
   {id: 1, name: "Niel", startTime: (7.031e8 / 2) + 1000, text: "One small step for man."},
   {id: 2, name: "Niel", startTime: (7.031e8 / 2) + 2000, text: "One giant step for mankind!"},
@@ -42,5 +57,18 @@ export const dummyMoments = {
     id: 2,
     title: "Blast Off",
     body: "Testing 2!"
+  }
+};
+
+export const dummyStories = {
+  1: {
+    ...storyTemplate,
+    id: 1,
+    title: "Blast Off!"
+  },
+  2: {
+    ...storyTemplate,
+    id: 2,
+    title: "Story 2"
   }
 };

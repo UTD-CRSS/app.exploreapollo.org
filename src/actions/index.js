@@ -3,7 +3,8 @@ export const FETCH_MOMENT = "FETCH_MOMENT";
 
 import {
   dummyMoments,
-  dummyTranscripts
+  dummyTranscripts,
+  dummyStories
 } from "../utils/dummyData";
 import {delay, random} from "lodash";
 
@@ -31,6 +32,38 @@ export function loadMoments(args) {
       if (moments) {
         dispatch(receiveMoments({
           moments
+        }));
+      }
+    }, random(1, 5) * 200);
+  };
+}
+
+export const RECEIVE_STORY = "RECEIVE_STORY";
+export const FETCH_STORY = "FETCH_STORY";
+function receiveStory(args) {
+  const {story} = args;
+  return {
+    type: RECEIVE_STORY,
+    story
+  };
+}
+
+function fetchStory() {
+  return {
+    type: FETCH_STORY
+  };
+}
+
+export function loadStory(args) {
+  const {storyId} = args;
+  return dispatch => {
+    dispatch(fetchStory());
+    const story = dummyStories[storyId];
+    // simulate async request
+    delay(() => {
+      if (story) {
+        dispatch(receiveStory({
+          story
         }));
       }
     }, random(1, 5) * 200);

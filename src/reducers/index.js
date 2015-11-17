@@ -21,6 +21,7 @@ Moment.define({
 const initialMomentState = {entities: {}, result: null, loading: true};
 const initialTranscriptState = {transcripts: [], loading: true};
 const initialAudioState = {audio: null, time: 0};
+const initialStoryState = {momentList: [], loading: true};
 
 function moments(state = initialMomentState, action = {}) {
   switch(action.type) {
@@ -35,6 +36,24 @@ function moments(state = initialMomentState, action = {}) {
         action.moments,
         Moment
       )
+    );
+  default:
+    return state;
+  }
+}
+
+function story(state = initialStoryState, action = {}) {
+  switch(action.type) {
+  case ActionTypes.FETCH_STORY:
+    return Object.assign({}, state, {loading: true});
+  case ActionTypes.RECEIVE_STORY:
+    return Object.assign(
+      {},
+      state,
+      {
+        loading: false
+      },
+      action.story
     );
   default:
     return state;
@@ -82,6 +101,7 @@ function audio(state = initialAudioState, action = {}) {
 const rootReducer = combineReducers({
   transcripts,
   moments,
+  story,
   audio,
   router
 });
