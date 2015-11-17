@@ -78,7 +78,6 @@ export default class StoryTimeline extends Component {
   render() {
     return (
       <div className="col-xs-10 col-xs-offset-2">
-        
         <div className="row story-timeline-container">
           <div className="story-timeline-line"></div>
           <div className="col-md-9">

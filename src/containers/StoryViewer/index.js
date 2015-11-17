@@ -19,6 +19,14 @@ export default class StoryViewer extends Component {
   }
   render() {
     const classes = classNames("row");
+    if (this.props.loading) {
+      return (
+        <div>
+          Loading Story.
+        </div>
+      );
+    }
+
     return (
       <div className={classes}>
         <StoryTimeline story={this.props.currentStory}/>
