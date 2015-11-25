@@ -24,7 +24,7 @@ const initialAudioState = {audio: null, time: 0};
 const initialStoryState = {momentList: [], loading: true};
 const initialStoriesState = {stories: [], loading: true};
 
-function moment(state = initialMomentState, action = {}) {
+function moments(state = initialMomentState, action = {}) {
   switch(action.type) {
   case ActionTypes.FETCH_MOMENT:
     return Object.assign({}, state, {loading: true});
