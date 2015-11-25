@@ -73,6 +73,8 @@ export const dummyStories = {
   }
 };
 
+export const dummyMomentsArray = Object.keys(dummyMoments).map(function(momentId) {return dummyMoments[momentId];});
+
 
 //negative ids to avoid collisions with moments
 export const dummyLandmarks = [

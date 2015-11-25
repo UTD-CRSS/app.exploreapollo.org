@@ -1,7 +1,8 @@
 import {
   dummyMoments,
   dummyTranscripts,
-  dummyStories
+  dummyStories,
+  dummyMomentsArray
 } from "../utils/dummyData";
 import {delay, random} from "lodash";
 
@@ -26,7 +27,8 @@ export function loadMoments(args) {
   const {momentId} = args;
   return dispatch => {
     dispatch(fetchMoments());
-    const moments = dummyMoments[momentId];
+    const moments = (momentId)? dummyMoments[momentId] : dummyMomentsArray;
+    
     // simulate async request
     delay(() => {
       if (moments) {

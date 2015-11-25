@@ -1,7 +1,7 @@
 import { routerStateReducer as router } from "redux-router";
 import { combineReducers } from "redux";
 import * as ActionTypes from "../actions";
-import { normalize, Schema } from "normalizr"; //arrayOf
+import { normalize, Schema, arrayOf } from "normalizr";
 import _ from "lodash";
 
 const Moment = new Schema("moments");
@@ -35,7 +35,7 @@ function moments(state = initialMomentState, action = {}) {
       {loading: false},
       normalize(
         action.moments,
-        Moment
+        _.isArray(action.moments) ? arrayOf(Moment) : Moment
       )
     );
   default:
