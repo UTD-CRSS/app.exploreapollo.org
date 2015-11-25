@@ -72,3 +72,23 @@ export const dummyStories = {
     title: "Story 2"
   }
 };
+
+
+//negative ids to avoid collisions with moments
+export const dummyLandmarks = [
+  {
+    time: "000:05:00",
+    id: -1,
+    title: "Blast Off!"
+  },
+  {
+    time: "000:12:00",
+    id: -2,
+    title: "Orbit!"
+  },
+  {
+    time: "000:30:00",
+    id: -3,
+    title: "Halfway!"
+  }
+];

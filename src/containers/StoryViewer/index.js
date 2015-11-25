@@ -10,6 +10,9 @@ import {
   StoryTimeline
 } from "../../components";
 
+import {
+  dummyLandmarks
+} from "../../utils/dummyData";
 
 export default class StoryViewer extends Component {
   componentWillMount() {
@@ -29,7 +32,7 @@ export default class StoryViewer extends Component {
 
     return (
       <div className={classes}>
-        <StoryTimeline story={this.props.currentStory}/>
+        <StoryTimeline story={this.props.currentStory} landmarks={dummyLandmarks}/>
       </div>
     );
   }
