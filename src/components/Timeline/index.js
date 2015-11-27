@@ -3,10 +3,10 @@ import classNames from "classnames";
 
 export class TimelineMessage extends Component {
   render() {
-    const {name, text, active} = this.props;
+    const {name, text, active, startTime} = this.props;
     return (
       <div>
-        <p>
+        <p className="cursor-pointer" onClick={this.props.clickEvent.bind(this, startTime)}>
           <strong>
             {name}:
           </strong>
@@ -22,7 +22,7 @@ export class TimelineMessage extends Component {
 export default class Timeline extends Component {
 
   renderList() {
-    const {timeline} = this.props;
+    const {timeline, clickEvent} = this.props;
     if (!timeline || timeline.length < 1) {
       return (
         <div ref="errorMessage" className="alert alert-info">No Messages</div>
@@ -35,6 +35,8 @@ export default class Timeline extends Component {
           id={item.id}
           name={item.name}
           active={item.active}
+          clickEvent={clickEvent}
+          startTime={item.startTime}
           text={item.text} />
       );
     });
