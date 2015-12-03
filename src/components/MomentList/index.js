@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
+import {keys} from "lodash";
 
 export class MomentListItem extends Component {
   render() {
@@ -28,12 +29,12 @@ export default class MomentList extends Component {
       );
     }
 
-    return moments.map((moment) => {
+    return keys(moments).map((index) => {
       return (
         <MomentListItem
-          key={moment.id}
-          id={moment.id}
-          title={moment.title} />
+          key={moments[index].id}
+          id={moments[index].id}
+          title={moments[index].title} />
       );
     });
   }
