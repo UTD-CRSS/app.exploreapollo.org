@@ -1,44 +1,60 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
 import classNames from "classnames";
+
+import {
+  loadStory
+} from "../../actions";
 
 import {
   StoryTimeline
 } from "../../components";
 
+import {
+  dummyLandmarks
+} from "../../utils/dummyData";
 
 export default class StoryViewer extends Component {
+  componentWillMount() {
+    this.props.loadStory({
+      storyId: this.props.currentStoryId
+    });
+  }
   render() {
     const classes = classNames("row");
+    if (this.props.loading) {
+      return (
+        <div>
+          Loading Story.
+        </div>
+      );
+    }
+
     return (
       <div className={classes}>
-        <StoryTimeline/>
-
-        <div className="col-xs-8">
-          <h1>Story Title</h1>
-          <h2>
-            First Moment <i className="glyphicon glyphicon-play"></i>
-            <div>
-              <small>
-                20:00:00-24:00:00
-              </small>
-            </div>
-          </h2>
-          <p>
-            info about the first moment
-          </p>
-          <h2>
-            Second Moment <i className="glyphicon glyphicon-play"></i>
-            <div>
-              <small>
-                20:00:00-24:00:00
-              </small>
-            </div>
-          </h2>
-          <p>
-            info about the second moment
-          </p>
-        </div>
+        <StoryTimeline story={this.props.currentStory} landmarks={dummyLandmarks}/>
       </div>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  const { id } = state.router.params;
+  const story = state.story;
+  if (story.loading) {
+    return {
+      currentStoryId: id,
+      loading: story.loading
+    };
+  }
+  return {
+    currentStoryId: id,
+    loading: story.loading,
+    currentStory: story
+  };
+}
+
+export default connect(mapStateToProps, {
+  loadStory
+})(StoryViewer);

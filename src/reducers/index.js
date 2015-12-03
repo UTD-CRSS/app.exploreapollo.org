@@ -1,7 +1,7 @@
 import { routerStateReducer as router } from "redux-router";
 import { combineReducers } from "redux";
 import * as ActionTypes from "../actions";
-import { normalize, Schema } from "normalizr"; //arrayOf
+import { normalize, Schema, arrayOf } from "normalizr";
 import _ from "lodash";
 
 const Moment = new Schema("moments");
@@ -21,6 +21,8 @@ Moment.define({
 const initialMomentState = {entities: {}, result: null, loading: true};
 const initialTranscriptState = {transcripts: [], loading: true};
 const initialAudioState = {audio: null, time: 0};
+const initialStoryState = {momentList: [], loading: true};
+const initialStoriesState = {stories: [], loading: true};
 
 function moments(state = initialMomentState, action = {}) {
   switch(action.type) {
@@ -33,8 +35,44 @@ function moments(state = initialMomentState, action = {}) {
       {loading: false},
       normalize(
         action.moments,
-        Moment
+        _.isArray(action.moments) ? arrayOf(Moment) : Moment
       )
+    );
+  default:
+    return state;
+  }
+}
+
+function story(state = initialStoryState, action = {}) {
+  switch(action.type) {
+  case ActionTypes.FETCH_STORY:
+    return Object.assign({}, state, {loading: true});
+  case ActionTypes.RECEIVE_STORY:
+    return Object.assign(
+      {},
+      state,
+      {
+        loading: false
+      },
+      action.story
+    );
+  default:
+    return state;
+  }
+}
+
+function stories(state = initialStoriesState, action = {}) {
+  switch(action.type) {
+  case ActionTypes.FETCH_STORIES:
+    return Object.assign({}, state, {loading: true});
+  case ActionTypes.RECEIVE_STORIES:
+    return Object.assign(
+      {},
+      state,
+      {
+        loading: false,
+        stories: action.stories
+      }
     );
   default:
     return state;
@@ -82,7 +120,9 @@ function audio(state = initialAudioState, action = {}) {
 const rootReducer = combineReducers({
   transcripts,
   moments,
+  story,
   audio,
+  stories,
   router
 });
 
