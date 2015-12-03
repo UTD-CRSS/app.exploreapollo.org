@@ -24,6 +24,8 @@ class MomentViewer extends Component {
     });
   }
 
+  startSlice = (this.props.currentMoment) ?  this.props.currentMoment.startSlice : 0;
+
   render() {
     const {
       currentMoment,
@@ -59,6 +61,13 @@ class MomentViewer extends Component {
     if(activeIndex >= 0) {
       currentTranscripts.transcripts[activeIndex].active = true;
     }
+    const timelineClickEvent = function(startTime) {
+      if(startSlice) {
+        loadAudio({
+          time: (startTime - startSlice) / 1000
+        });
+      }
+    };
 
     const {
       title,
@@ -80,7 +89,7 @@ class MomentViewer extends Component {
           loadAudio={loadAudio}
           missionLength={missionLength} />
         <div className="row">
-          <Timeline timeline={currentTranscripts.transcripts}/>
+          <Timeline timeline={currentTranscripts.transcripts} clickEvent={timelineClickEvent}/>
           <MomentNote note={[]} />
         </div>
       </div>
