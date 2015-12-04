@@ -1,10 +1,98 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
-.timeline-container, .moment-note-container {
-	height: 30em;
-	overflow-y: scroll;
-}
-
 .glyphicon.icon-large {
 	font-size: 3em;
+}
+
+.slideTransition {
+  transition: left 10s;
+}
+
+.active-transcript {
+  font-weight: bold;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.story-timeline-container {
+  min-height: 100%;
+  .story-play-all {
+    font-size: 1.5em;
+    font-weight: bold;
+    a {
+      color: #25799C;
+    }
+    a:hover {
+      text-decoration: none;
+      color: darken(#25799C, 30%);
+    }
+  }
+  .story-timeline-line {
+    z-index: 1;
+    position: absolute;
+    background-color: #11BFE6;
+    top: 0;
+    bottom: 0;
+    left: 35px;
+    height: 100%;
+    width: 4px;
+    border-radius: 5px;
+  }
+  .story-timeline-item.story-item {
+    z-index: 1;
+  }
+  .story-timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    .story-timeline-item-content {
+      z-index: 0;
+      padding: 10px 20px 10px 45px;
+      .story-timeline-title {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      .story-timeline-time {
+        font-size: 1.2em;
+        color: #777;
+      }
+      .story-timeline-content {
+        font-size: 1.2em;
+      }
+      .story-timeline-play {
+        font-size: 1.5em;
+        a {
+          color: #25799C;
+        }
+        a:hover {
+          text-decoration: none;
+          color: darken(#25799C, 30%);
+        }
+      }
+    }
+    &.story-item {
+      .story-timeline-item-content {
+        border: 1px solid #ddd;
+        background-color: #fafafa;
+        border-radius: 4px;
+      }
+    }
+    &.landmark-item {
+      .story-timeline-item-content {
+
+      }
+    }
+    .story-timeline-item-node {
+      background-color: #11BFE6;
+      border: 1px solid lighten(#11BFE6, 30%);
+      border-radius: 30px;
+      width: 15px;
+      height: 15px;
+      position: absolute;
+      left: 14px;
+      top: 16px;
+      z-index: 1000;
+    }
+  }
 }

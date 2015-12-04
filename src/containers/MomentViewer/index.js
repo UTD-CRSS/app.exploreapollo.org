@@ -1,50 +1,128 @@
 import React, {Component} from "react";
-import classNames from "classnames";
+import { connect } from "react-redux";
+import {get, findIndex, each} from "lodash";
 
-import {MomentPlayer, Timeline, MomentNote} from "../../components";
+import {
+  loadMoments,
+  loadTranscripts,
+  loadAudio
+} from "../../actions";
 
+import {
+  MomentPlayer,
+  Timeline,
+  MomentNote
+} from "../../components";
 
-export default class MomentViewer extends Component {
+class MomentViewer extends Component {
+  componentWillMount() {
+    this.props.loadMoments({
+      momentId: this.props.currentMomentId
+    });
+    this.props.loadTranscripts({
+      transcripts: this.props.currentTranscripts
+    });
+  }
+
+  startSlice = (this.props.currentMoment) ?  this.props.currentMoment.startSlice : 0;
+
   render() {
-    const timeline = [
-      {id: 1, name: "Niel", text: "One small step for man."},
-      {id: 2, name: "Niel", text: "One giant step for mankind!"},
-      {id: 3, name: "Buzz", text: "Don't worry, Woody. In just a few hours you'll be sitting around a campfire with Andy making delicious hot Schmoes."},
-      {id: 4, name: "Buzz 2", text: "Quick, help me prop up Vegetable man here or we're done for!"},
-      {id: 5, name: "Buzz", text: "Etch, Draw that man in a Chicken Suit."},
-      {id: 6, name: "Rex", text: "It's the chicken man!"},
-      {id: 7, name: "Buzz", text: "Woody once risked his life to save mine, and I couldn't call myself his friend if I wasn't willing to do the same. Now who's with me?"},
-      {id: 8, name: "Rex", text: "But look at my little arms! I can't press the \"fire\" button and jump at the same time!"},
-      {id: 9, name: "Buzz", text: "Good work, men. Two blocks down and only nineteen more to go."},
-      {id: 10, name: "Niel", text: "One small step for man."},
-      {id: 11, name: "Niel", text: "One giant step for mankind!"},
-      {id: 12, name: "Buzz", text: "Don't worry, Woody. In just a few hours you'll be sitting around a campfire with Andy making delicious hot Schmoes."},
-      {id: 13, name: "Buzz 2", text: "Quick, help me prop up Vegetable man here or we're done for!"},
-      {id: 14, name: "Buzz", text: "Etch, Draw that man in a Chicken Suit."},
-      {id: 15, name: "Rex", text: "It's the chicken man!"},
-      {id: 16, name: "Buzz", text: "Woody once risked his life to save mine, and I couldn't call myself his friend if I wasn't willing to do the same. Now who's with me?"},
-      {id: 17, name: "Rex", text: "But look at my little arms! I can't press the \"fire\" button and jump at the same time!"},
-      {id: 18, name: "Buzz", text: "Good work, men. Two blocks down and only nineteen more to go."}
-    ];
+    const {
+      currentMoment,
+      currentMission,
+      loading,
+      currentTranscripts,
+      loadAudio
+    } = this.props;
+    if (loading) {
+      return <div>
+        Loading Moment.
+      </div>;
+    }
 
-    const notes = [
-      {id: 1, title: "We landed on the moon!", text: "We did that!"},
-      {id: 2, title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", text: "We did that!", image: "http://placehold.it/400x300"},
-      {id: 3, title: "Pellentesque dictum at libero in vulputate.", text: "こんにちは！お元気ですか？"},
-      {id: 4, title: "Nulla lacinia lacinia dolor eu sagittis.", text: "バズ・ライトイヤー"},
-      {id: 5, title: "test text", text: "In eros ante, facilisis vitae augue vitae, aliquam suscipit arcu!"},
-      {id: 6, title: "Praesent id justo vitae nunc ultricies egestas.", text: "We did that!"}
-    ];
+    if (!currentMoment) {
+      return <div>
+        Error fetching moment.
+      </div>;
+    }
+
+    const {time, playing, audio} = this.props.currentAudio;
+    const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
+    let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
+      return i.startTime > currentMissionTime;
+    });
+
+    //this is bad, but necessary until I can think of a clever solution
+    each(currentTranscripts.transcripts, function(i) {
+      i.active = false;
+    });
     
-    const classes = classNames("row");
+    activeIndex -= 1;
+    if(activeIndex >= 0) {
+      currentTranscripts.transcripts[activeIndex].active = true;
+    }
+    const timelineClickEvent = function(startTime) {
+      if(startSlice) {
+        loadAudio({
+          time: (startTime - startSlice) / 1000
+        });
+      }
+    };
+
+    const {
+      title,
+      audioUrl,
+      startSlice,
+      endSlice
+    } = currentMoment;
+    const missionLength = currentMission.length;
     return (
       <div>
-        <MomentPlayer />
-        <div className={classes}>
-          <Timeline timeline={timeline} />
-          <MomentNote note={notes} />
+        <MomentPlayer
+          title={title}
+          url={audioUrl}
+          start={startSlice}
+          end={endSlice}
+          audio={audio}
+          time={time}
+          playing={playing}
+          loadAudio={loadAudio}
+          missionLength={missionLength} />
+        <div className="row">
+          <Timeline timeline={currentTranscripts.transcripts} clickEvent={timelineClickEvent}/>
+          <MomentNote note={[]} />
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const {audio} = state;
+  const { id } = state.router.params;
+  const { loading, entities } = state.moments;
+  if (loading) {
+    return {
+      currentMomentId: id,
+      loading
+    };
+  }
+  const transcripts = state.transcripts;
+  const { moments, missions } = entities;
+  const moment = get(moments, id);
+  const mission = get(missions, moment.mission);
+  return {
+    currentMomentId: id,
+    loading,
+    currentMission: mission,
+    currentMoment: moment,
+    currentTranscripts: transcripts,
+    currentAudio: audio
+  };
+}
+
+export default connect(mapStateToProps, {
+  loadMoments,
+  loadTranscripts,
+  loadAudio
+})(MomentViewer);

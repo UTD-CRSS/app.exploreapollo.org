@@ -10,8 +10,4 @@ describe("Dashboard Component", function() {
     var app = testTree(<Dashboard />);
     assert.ok(app.isMounted());
   });
-  it("should say hi", function () {
-    var app = testTree(<Dashboard />);
-    assert.equal(app.helloDiv.innerText, "Hello!");
-  });
 });

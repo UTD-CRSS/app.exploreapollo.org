@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import {Link} from "react-router";
+import {keys} from "lodash";
 
 export class StoryListItem extends Component {
   render() {
@@ -7,11 +9,11 @@ export class StoryListItem extends Component {
       <div>
         <h2 ref="storyTitle">{title}</h2>
         <p>
-          <a
+          <Link
             ref="storyLink"
-            href={`#/stories/story/${id}`}>
+            to={`/stories/story/${id}`}>
             Launch
-          </a>
+          </Link>
         </p>
       </div>
     );
@@ -26,13 +28,12 @@ export default class StoryList extends Component {
         <div ref="errorMessage" className="alert alert-info">No Stories</div>
       );
     }
-
-    return stories.map((story) => {
+    return keys(stories).map((index) => {
       return (
         <StoryListItem
-          key={story.id}
-          id={story.id}
-          title={story.title} />
+          key={stories[index].id}
+          id={stories[index].id}
+          title={stories[index].title} />
       );
     });
   }
