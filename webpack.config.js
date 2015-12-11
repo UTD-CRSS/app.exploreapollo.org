@@ -1,6 +1,7 @@
 /*eslint-env node*/
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var webpack = require("webpack");
 
 module.exports = {
   context: path.join(__dirname, "src"),
@@ -14,9 +15,17 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin(),
+    new webpack.ProvidePlugin({
+      fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+        APP_ENV: JSON.stringify(process.env.APP_ENV || "development")
+      }
+    })
   ],
-
   module: {
     loaders: [
       {

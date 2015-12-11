@@ -1,10 +1,11 @@
 import {
   dummyMoments,
   dummyTranscripts,
-  dummyStories,
   dummyMomentsArray
 } from "../utils/dummyData";
-import {delay, random} from "lodash";
+import {isArray, delay, random} from "lodash";
+
+import config from "../../config";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
@@ -28,7 +29,7 @@ export function loadMoments(args) {
   return dispatch => {
     dispatch(fetchMoments());
     const moments = (momentId)? dummyMoments[momentId] : dummyMomentsArray;
-    
+
     // simulate async request
     delay(() => {
       if (moments) {
@@ -60,15 +61,16 @@ export function loadStory(args) {
   const {storyId} = args;
   return dispatch => {
     dispatch(fetchStory());
-    const story = dummyStories[storyId];
-    // simulate async request
-    delay(() => {
-      if (story) {
+
+    fetch(`${config.apiEntry}/api/stories/${storyId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((story) => {
         dispatch(receiveStory({
           story
         }));
-      }
-    }, random(1, 5) * 200);
+      });
   };
 }
 
@@ -91,15 +93,18 @@ function fetchStories() {
 export function loadStories() { //could send args... but we're just getting all stories
   return dispatch => {
     dispatch(fetchStories());
-    const stories = dummyStories;
     // simulate async request
-    delay(() => {
-      if (stories) {
-        dispatch(receiveStories({
-          stories
-        }));
-      }
-    }, random(1, 5) * 200);
+    fetch(`${config.apiEntry}/api/stories`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((stories) => {
+        if(isArray(stories) && stories.length > 0) {
+          dispatch(receiveStories({
+            stories
+          }));
+        }
+      });
   };
 }
 
