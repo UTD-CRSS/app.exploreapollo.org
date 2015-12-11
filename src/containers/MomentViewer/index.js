@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import {get, findIndex, each} from "lodash";
 
+import Spinner from "react-spinner";
+
 import {
   loadMoments,
   loadTranscripts,
@@ -33,8 +35,9 @@ class MomentViewer extends Component {
       loadAudio
     } = this.props;
     if (loading) {
-      return <div>
-        Loading Moment.
+      return <div className="text-center lead">
+        <p>Loading moment...</p>
+        <Spinner />
       </div>;
     }
 

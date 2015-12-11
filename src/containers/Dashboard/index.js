@@ -4,7 +4,7 @@ import {Link} from "react-router";
 export default class Dashboard extends Component {
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div className="col-sm-12">
             <div className="jumbotron">
