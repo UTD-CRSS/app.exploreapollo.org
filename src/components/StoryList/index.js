@@ -8,12 +8,12 @@ export class StoryListItem extends Component {
     return (
       <div className="panel panel-default">
         <div className="panel-body">
-          <h2 ref="storyTitle">{title}</h2>
+          <h2 testRef="storyTitle">{title}</h2>
           <p className="lead">{description}</p>
           <p>
             <Link
               className="btn btn-primary btn-lg"
-              ref="storyLink"
+              testRef="storyLink"
               to={`/stories/story/${id}`}>
               Launch
             </Link>
@@ -29,7 +29,7 @@ export default class StoryList extends Component {
     const {stories} = this.props;
     if (!stories || stories.length < 1) {
       return (
-        <div ref="errorMessage" className="alert alert-info">No Stories</div>
+        <div testRef="errorMessage" className="alert alert-info">No Stories</div>
       );
     }
     return keys(stories).map((index) => {
@@ -43,7 +43,7 @@ export default class StoryList extends Component {
 
   render() {
     return (
-      <div refCollection="storyListContainer">
+      <div testRefCollection="storyListContainer">
         {this.renderList()}
       </div>
     );
