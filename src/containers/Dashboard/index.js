@@ -16,9 +16,9 @@ export default class Dashboard extends Component {
         </div>
         <div className="row">
           <div className="col-sm-12">
-            <h3>
+            <h2>
               Missions
-            </h3>
+            </h2>
             <div className="panel panel-default">
               <div className="panel-body">
                 <div className="row">
