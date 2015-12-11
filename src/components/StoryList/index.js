@@ -1,20 +1,25 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
 import {keys} from "lodash";
+import moment from "moment";
 
 export class StoryListItem extends Component {
   render() {
-    const {id, title} = this.props;
+    const {id, title, description, created} = this.props;
     return (
-      <div>
-        <h2 ref="storyTitle">{title}</h2>
-        <p>
-          <Link
-            ref="storyLink"
-            to={`/stories/story/${id}`}>
-            Launch
-          </Link>
-        </p>
+      <div className="panel panel-default">
+        <div className="panel-body">
+          <h2 ref="storyTitle">{title}</h2>
+          <p className="lead">{description}</p>
+          <p>
+            <Link
+              className="btn btn-primary btn-lg"
+              ref="storyLink"
+              to={`/stories/story/${id}`}>
+              Launch
+            </Link>
+          </p>
+        </div>
       </div>
     );
   }
@@ -32,8 +37,7 @@ export default class StoryList extends Component {
       return (
         <StoryListItem
           key={stories[index].id}
-          id={stories[index].id}
-          title={stories[index].title} />
+          {...stories[index]} />
       );
     });
   }

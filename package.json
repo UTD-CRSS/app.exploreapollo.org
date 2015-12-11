@@ -58,6 +58,7 @@
     "history": "^1.13.1",
     "html-webpack-plugin": "^1.7.0",
     "karma": "^0.13.15",
+    "moment": "^2.10.6",
     "normalizr": "^1.4.0",
     "qs": "^5.2.0",
     "react": "^0.14.3",

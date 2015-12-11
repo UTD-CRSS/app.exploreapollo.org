@@ -80,16 +80,19 @@ export const dummyMomentsArray = Object.keys(dummyMoments).map(function(momentId
 export const dummyLandmarks = [
   {
     time: "000:05:00",
+    metStart: (1000*60*5),
     id: -1,
     title: "Blast Off!"
   },
   {
     time: "000:12:00",
+    metStart: (1000*60*12),
     id: -2,
     title: "Orbit!"
   },
   {
     time: "000:30:00",
+    metStart: (1000*60*30),
     id: -3,
     title: "Halfway!"
   }
