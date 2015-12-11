@@ -18,11 +18,6 @@ export class AppHeader extends Component {
                 Stories
               </Link>
             </li>
-            <li>
-              <Link to="/moments">
-                Moments
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>

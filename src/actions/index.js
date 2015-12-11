@@ -28,16 +28,16 @@ export function loadMoments(args) {
   const {momentId} = args;
   return dispatch => {
     dispatch(fetchMoments());
-    const moments = (momentId)? dummyMoments[momentId] : dummyMomentsArray;
-
-    // simulate async request
-    delay(() => {
-      if (moments) {
+    fetch(`${config.apiEntry}/api/moments/${momentId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((moment) => {
+        console.log(moment);
         dispatch(receiveMoments({
-          moments
+          moments: moment
         }));
-      }
-    }, random(1, 5) * 200);
+      });
   };
 }
 

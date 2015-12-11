@@ -92,7 +92,7 @@ export default class MomentPlayer extends Component {
     return (
       <div>
         <h4 className="text-center">
-          Now Playing: {this.props.title} {this.props.time}
+          Now Playing: {this.props.title}
         </h4>
         <div className="text-center">
           <PlayButton

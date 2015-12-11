@@ -56,7 +56,7 @@ class MomentViewer extends Component {
     each(currentTranscripts.transcripts, function(i) {
       i.active = false;
     });
-    
+
     activeIndex -= 1;
     if(activeIndex >= 0) {
       currentTranscripts.transcripts[activeIndex].active = true;
@@ -72,8 +72,8 @@ class MomentViewer extends Component {
     const {
       title,
       audioUrl,
-      startSlice,
-      endSlice
+      metStart,
+      metEnd
     } = currentMoment;
     const missionLength = currentMission.length;
     return (
@@ -81,8 +81,8 @@ class MomentViewer extends Component {
         <MomentPlayer
           title={title}
           url={audioUrl}
-          start={startSlice}
-          end={endSlice}
+          start={metStart}
+          end={metEnd}
           audio={audio}
           time={time}
           playing={playing}
