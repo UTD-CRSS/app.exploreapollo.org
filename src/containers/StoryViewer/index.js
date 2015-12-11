@@ -28,7 +28,7 @@ export default class StoryViewer extends Component {
       return <div className="text-center lead">
         <p>Loading Story...</p>
         <Spinner />
-      </div>
+      </div>;
     }
 
     return (
