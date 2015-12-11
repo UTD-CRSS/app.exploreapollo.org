@@ -83,7 +83,7 @@ export default class StoryTimeline extends Component {
   renderCards() {
     const {landmarks} = this.props;
     const moments = this.props.story.momentList;
-    const cards = _.sortBy(moments.concat(landmarks), 'metStart');
+    const cards = _.sortBy(moments.concat(landmarks), "metStart");
     return cards.map((card) => {
       if(_.has(card, "description")){
         return (

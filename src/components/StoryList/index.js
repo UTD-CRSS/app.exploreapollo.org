@@ -1,11 +1,10 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
 import {keys} from "lodash";
-import moment from "moment";
 
 export class StoryListItem extends Component {
   render() {
-    const {id, title, description, created} = this.props;
+    const {id, title, description} = this.props;
     return (
       <div className="panel panel-default">
         <div className="panel-body">

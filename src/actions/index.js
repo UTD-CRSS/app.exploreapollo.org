@@ -1,7 +1,6 @@
 import {
   dummyMoments,
   dummyTranscripts,
-  dummyStories,
   dummyMomentsArray
 } from "../utils/dummyData";
 import {isArray, delay, random} from "lodash";
@@ -62,7 +61,6 @@ export function loadStory(args) {
   const {storyId} = args;
   return dispatch => {
     dispatch(fetchStory());
-    const story = dummyStories[storyId];
 
     fetch(`${config.apiEntry}/api/stories/${storyId}`)
       .then((response) => {
@@ -95,7 +93,6 @@ function fetchStories() {
 export function loadStories() { //could send args... but we're just getting all stories
   return dispatch => {
     dispatch(fetchStories());
-    const stories = dummyStories;
     // simulate async request
     fetch(`${config.apiEntry}/api/stories`)
       .then((response) => {

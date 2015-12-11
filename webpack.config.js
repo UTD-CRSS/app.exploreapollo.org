@@ -17,14 +17,14 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(),
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
     }),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-        APP_ENV: JSON.stringify(process.env.APP_ENV || 'development')
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+        APP_ENV: JSON.stringify(process.env.APP_ENV || "development")
       }
-    }),
+    })
   ],
   module: {
     loaders: [
