@@ -1,7 +1,5 @@
 import {
-  dummyMoments,
-  dummyTranscripts,
-  dummyMomentsArray
+  dummyTranscripts
 } from "../utils/dummyData";
 import {isArray, delay, random} from "lodash";
 
@@ -33,7 +31,6 @@ export function loadMoments(args) {
         return response.json();
       })
       .then((moment) => {
-        console.log(moment);
         dispatch(receiveMoments({
           moments: moment
         }));

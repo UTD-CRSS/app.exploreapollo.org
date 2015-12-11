@@ -24,8 +24,6 @@ class MomentViewer extends Component {
     });
   }
 
-  startSlice = (this.props.currentMoment) ?  this.props.currentMoment.startSlice : 0;
-
   render() {
     const {
       currentMoment,
@@ -47,7 +45,7 @@ class MomentViewer extends Component {
     }
 
     const {time, playing, audio} = this.props.currentAudio;
-    const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
+    const currentMissionTime = this.props.currentMoment.metStart + (time * 1000);
     let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
       return i.startTime > currentMissionTime;
     });
@@ -62,9 +60,9 @@ class MomentViewer extends Component {
       currentTranscripts.transcripts[activeIndex].active = true;
     }
     const timelineClickEvent = function(startTime) {
-      if(startSlice) {
+      if(metStart) {
         loadAudio({
-          time: (startTime - startSlice) / 1000
+          time: (startTime - metStart) / 1000
         });
       }
     };
