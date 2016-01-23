@@ -13,6 +13,14 @@ cloudfront_distribution_config:
       CNAME: app.exploreapollo.org
 <% else %>
 s3_bucket: app-staging.exploreapollo.org
+cloudfront_distribution_id: E3OM9VNI31JBU2
+cloudfront_distribution_config:
+  default_cache_behavior:
+    min_TTL: <%= 60 * 60 * 24 %>
+  aliases:
+    quantity: 1
+    items:
+      CNAME: app-staging.exploreapollo.org
 <% end %>
 max_age: 120
 gzip: true

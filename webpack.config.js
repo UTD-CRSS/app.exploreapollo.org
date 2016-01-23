@@ -15,7 +15,9 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      favicon: "src/favicon.ico"
+    }),
     new webpack.ProvidePlugin({
       fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
     }),
