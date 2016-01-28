@@ -22,7 +22,7 @@ class MomentViewer extends Component {
       momentId: this.props.currentMomentId
     });
     this.props.loadTranscripts({
-      transcripts: this.props.currentTranscripts
+      momentId: this.props.currentMomentId
     });
   }
 

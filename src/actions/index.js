@@ -121,18 +121,23 @@ function receiveTranscripts(args) {
   };
 }
 
-export function loadTranscripts() { //can pass args
-  //const {momentId} = args; // TODO: use this
+export function loadTranscripts(args) {
+  const {momentId} = args;
   return dispatch => {
     dispatch(fetchTranscripts());
-    // simulate async request
-    delay(() => {
-      if (dummyTranscripts) {
-        dispatch(receiveTranscripts({
-          transcripts: dummyTranscripts
-        }));
-      }
-    }, random(1, 5) * 200);
+
+
+    fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((transcripts) => {
+        if(isArray(transcripts) && transcripts.length > 0) {
+          dispatch(receiveTranscripts({
+            transcripts: transcripts
+          }));
+        }
+      });
   };
 }
 
