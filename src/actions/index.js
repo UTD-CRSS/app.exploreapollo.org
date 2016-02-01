@@ -112,19 +112,16 @@ function fetchTranscripts() {
   };
 }
 
-function receiveTranscripts(args) {
-  const {transcripts} = args;
+function receiveTranscripts({transcripts}) {
   return {
     type: RECEIVE_TRANSCRIPTS,
     transcripts
   };
 }
 
-export function loadTranscripts(args) {
-  const {momentId} = args;
+export function loadTranscripts({momentId}) {
   return dispatch => {
     dispatch(fetchTranscripts());
-
 
     fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
       .then((response) => {
