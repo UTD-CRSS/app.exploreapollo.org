@@ -1,7 +1,6 @@
 import {
-  dummyTranscripts
 } from "../utils/dummyData";
-import {isArray, delay, random} from "lodash";
+import {isArray} from "lodash";
 
 import config from "../../config";
 
