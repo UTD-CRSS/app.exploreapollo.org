@@ -14,7 +14,11 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      title: "Explore Apollo",
+      template: "./src/index.html", // Load a custom template
+      inject: "body" //scripts are injected to here
+    })
   ],
 
   module: {
