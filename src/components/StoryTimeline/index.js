@@ -18,7 +18,13 @@ function NoMomentsNotice() {
   </div>);
 }
 
-export function StoryCard({storyId, firstMomentId, title, description}) {
+export function StoryCard({
+  showPlayAll = false,
+  storyId,
+  firstMomentId,
+  title,
+  description
+}) {
   return (<div className="jumbotron text-center" style={{margin: 0}}>
     <div className="story-timeline-item-content">
       <h2 className="story-timeline-title">
@@ -27,7 +33,7 @@ export function StoryCard({storyId, firstMomentId, title, description}) {
       <p className="lead">
         {description}
       </p>
-      {firstMomentId
+      {showPlayAll && _.isNumber(firstMomentId)
         ? <PlayAllButton momentId={firstMomentId} storyId={storyId} />
         : <NoMomentsNotice />}
     </div>
@@ -107,15 +113,16 @@ export default class StoryTimeline extends Component {
     const {story} = this.props;
     const {momentList} = story;
 
-    const firstMomentId = (
-      momentList.length > 0
-        ? momentList[0].id
-        : false
-    );
+    const isMomentListEmpty = _.isEmpty(momentList);
+    const showPlayAll = !isMomentListEmpty;
+    const firstMomentId = (_.head(momentList) || {}).id
 
     return (
       <div>
-        <StoryCard {...story} storyId={story.id} firstMomentId={firstMomentId} />
+        <StoryCard showPlayAll={showPlayAll}
+                   storyId={story.id}
+                   firstMomentId={firstMomentId}
+                   {...story} />
         <div className="col-xs-10 col-xs-offset-2">
           <div className="row story-timeline-container">
             <div className="story-timeline-line"></div>
