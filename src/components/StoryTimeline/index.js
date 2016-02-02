@@ -115,7 +115,7 @@ export default class StoryTimeline extends Component {
 
     const isMomentListEmpty = _.isEmpty(momentList);
     const showPlayAll = !isMomentListEmpty;
-    const firstMomentId = (_.head(momentList) || {}).id
+    const firstMomentId = (_.head(momentList) || {}).id;
 
     return (
       <div>
