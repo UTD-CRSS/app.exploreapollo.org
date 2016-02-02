@@ -1,7 +1,6 @@
 import {
-  dummyTranscripts
 } from "../utils/dummyData";
-import {isArray, delay, random} from "lodash";
+import {isArray} from "lodash";
 
 import config from "../../config";
 
@@ -113,26 +112,28 @@ function fetchTranscripts() {
   };
 }
 
-function receiveTranscripts(args) {
-  const {transcripts} = args;
+function receiveTranscripts({transcripts}) {
   return {
     type: RECEIVE_TRANSCRIPTS,
     transcripts
   };
 }
 
-export function loadTranscripts() { //can pass args
-  //const {momentId} = args; // TODO: use this
+export function loadTranscripts({momentId}) {
   return dispatch => {
     dispatch(fetchTranscripts());
-    // simulate async request
-    delay(() => {
-      if (dummyTranscripts) {
-        dispatch(receiveTranscripts({
-          transcripts: dummyTranscripts
-        }));
-      }
-    }, random(1, 5) * 200);
+
+    fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((transcripts) => {
+        if(isArray(transcripts) && transcripts.length > 0) {
+          dispatch(receiveTranscripts({
+            transcripts: transcripts
+          }));
+        }
+      });
   };
 }
 
