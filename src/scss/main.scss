@@ -10,12 +10,24 @@
 
 .active-transcript {
   font-weight: bold;
+  color:#337ab7;
+  background-color: lighten(yellow,30);
+  border-radius: 8px;
+  padding:5px;
+  margin-left:5px;
+  box-shadow: 1px 1px 2px #888888
 }
 
 .cursor-pointer {
   cursor: pointer;
 }
-
+.timeline-container{
+  font-family: "Lucida Console", Monaco, monospace;
+  background-color:lightgray;
+  padding:25px;
+  border-radius: 50px;
+  box-shadow: 10px 10px 2px #888888
+}
 .story-timeline-container {
   min-height: 100%;
   .story-play-all {
@@ -95,4 +107,40 @@
       z-index: 1000;
     }
   }
+}
+
+.react-spinner {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  left: 50%;
+}
+
+.react-spinner_bar {
+  -webkit-animation: react-spinner_spin 1.2s linear infinite;
+  -moz-animation: react-spinner_spin 1.2s linear infinite;
+  animation: react-spinner_spin 1.2s linear infinite;
+  border-radius: 5px;
+  background-color: #1d1d1d;
+  position: absolute;
+  width: 20%;
+  height: 7.8%;
+  top: -3.9%;
+  left: -10%;
+}
+
+@keyframes react-spinner_spin {
+ 0% { opacity: 1; }
+ 100% { opacity: 0.15; }
+}
+
+@-moz-keyframes react-spinner_spin {
+ 0% { opacity: 1; }
+ 100% { opacity: 0.15; }
+}
+
+@-webkit-keyframes react-spinner_spin {
+ 0% { opacity: 1; }
+ 100% { opacity: 0.15; }
 }

@@ -1,6 +1,7 @@
 /*eslint-env node*/
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var webpack = require("webpack");
 
 module.exports = {
   context: path.join(__dirname, "src"),
@@ -14,9 +15,22 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      title: "Explore Apollo",
+      template: "./src/index.html", // Load a custom template
+      inject: "body", //scripts are injected to here
+      favicon: "src/favicon.ico"
+    }),
+    new webpack.ProvidePlugin({
+      fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
+        APP_ENV: JSON.stringify(process.env.APP_ENV || "development")
+      }
+    })
   ],
-
   module: {
     loaders: [
       {
@@ -30,8 +44,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss?$/,
+        test: /\.scss$/,
         loaders: ["style", "css", "sass"]
+      },
+      {
+        test: /\.css$/,
+        loaders: ["style", "css"]
       },
       { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf$/,    loader: "file-loader" },

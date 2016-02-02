@@ -4,17 +4,21 @@ import {keys} from "lodash";
 
 export class StoryListItem extends Component {
   render() {
-    const {id, title} = this.props;
+    const {id, title, description} = this.props;
     return (
-      <div>
-        <h2 ref="storyTitle">{title}</h2>
-        <p>
-          <Link
-            ref="storyLink"
-            to={`/stories/story/${id}`}>
-            Launch
-          </Link>
-        </p>
+      <div className="panel panel-default">
+        <div className="panel-body">
+          <h2 testRef="storyTitle">{title}</h2>
+          <p className="lead">{description}</p>
+          <p>
+            <Link
+              className="btn btn-primary btn-lg"
+              testRef="storyLink"
+              to={`/stories/story/${id}`}>
+              Launch
+            </Link>
+          </p>
+        </div>
       </div>
     );
   }
@@ -25,22 +29,21 @@ export default class StoryList extends Component {
     const {stories} = this.props;
     if (!stories || stories.length < 1) {
       return (
-        <div ref="errorMessage" className="alert alert-info">No Stories</div>
+        <div testRef="errorMessage" className="alert alert-info">No Stories</div>
       );
     }
     return keys(stories).map((index) => {
       return (
         <StoryListItem
           key={stories[index].id}
-          id={stories[index].id}
-          title={stories[index].title} />
+          {...stories[index]} />
       );
     });
   }
 
   render() {
     return (
-      <div refCollection="storyListContainer">
+      <div testRefCollection="storyListContainer">
         {this.renderList()}
       </div>
     );

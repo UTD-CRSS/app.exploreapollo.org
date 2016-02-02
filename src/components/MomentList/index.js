@@ -7,7 +7,7 @@ export class MomentListItem extends Component {
     const {id, title} = this.props;
     return (
       <div>
-        <h2 ref="momentTitle">{title}</h2>
+        <h2 testRef="momentTitle">{title}</h2>
         <p>
           <Link
             ref="momentLink"
@@ -25,7 +25,7 @@ export default class MomentList extends Component {
     const {moments} = this.props;
     if (!moments || moments.length < 1) {
       return (
-        <div ref="errorMessage" className="alert alert-info">No Moments</div>
+        <div testRef="errorMessage" className="alert alert-info">No Moments</div>
       );
     }
 
@@ -41,7 +41,7 @@ export default class MomentList extends Component {
 
   render() {
     return (
-      <div refCollection="listContainer">
+      <div testRefCollection="listContainer">
         {this.renderList()}
       </div>
     );

@@ -33,10 +33,10 @@ export default class Timeline extends Component {
         <TimelineMessage
           key={item.id}
           id={item.id}
-          name={item.name}
+          name={item.speakerName}
           active={item.active}
           clickEvent={clickEvent}
-          startTime={item.startTime}
+          startTime={item.metStart}
           text={item.text} />
       );
     });

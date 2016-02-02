@@ -1,10 +1,8 @@
 import {
-  dummyMoments,
-  dummyTranscripts,
-  dummyStories,
-  dummyMomentsArray
 } from "../utils/dummyData";
-import {delay, random} from "lodash";
+import {isArray} from "lodash";
+
+import config from "../../config";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
@@ -27,16 +25,15 @@ export function loadMoments(args) {
   const {momentId} = args;
   return dispatch => {
     dispatch(fetchMoments());
-    const moments = (momentId)? dummyMoments[momentId] : dummyMomentsArray;
-    
-    // simulate async request
-    delay(() => {
-      if (moments) {
+    fetch(`${config.apiEntry}/api/moments/${momentId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((moment) => {
         dispatch(receiveMoments({
-          moments
+          moments: moment
         }));
-      }
-    }, random(1, 5) * 200);
+      });
   };
 }
 
@@ -60,15 +57,16 @@ export function loadStory(args) {
   const {storyId} = args;
   return dispatch => {
     dispatch(fetchStory());
-    const story = dummyStories[storyId];
-    // simulate async request
-    delay(() => {
-      if (story) {
+
+    fetch(`${config.apiEntry}/api/stories/${storyId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((story) => {
         dispatch(receiveStory({
           story
         }));
-      }
-    }, random(1, 5) * 200);
+      });
   };
 }
 
@@ -91,15 +89,18 @@ function fetchStories() {
 export function loadStories() { //could send args... but we're just getting all stories
   return dispatch => {
     dispatch(fetchStories());
-    const stories = dummyStories;
     // simulate async request
-    delay(() => {
-      if (stories) {
-        dispatch(receiveStories({
-          stories
-        }));
-      }
-    }, random(1, 5) * 200);
+    fetch(`${config.apiEntry}/api/stories`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((stories) => {
+        if(isArray(stories) && stories.length > 0) {
+          dispatch(receiveStories({
+            stories
+          }));
+        }
+      });
   };
 }
 
@@ -111,26 +112,28 @@ function fetchTranscripts() {
   };
 }
 
-function receiveTranscripts(args) {
-  const {transcripts} = args;
+function receiveTranscripts({transcripts}) {
   return {
     type: RECEIVE_TRANSCRIPTS,
     transcripts
   };
 }
 
-export function loadTranscripts() { //can pass args
-  //const {momentId} = args; // TODO: use this
+export function loadTranscripts({momentId}) {
   return dispatch => {
     dispatch(fetchTranscripts());
-    // simulate async request
-    delay(() => {
-      if (dummyTranscripts) {
-        dispatch(receiveTranscripts({
-          transcripts: dummyTranscripts
-        }));
-      }
-    }, random(1, 5) * 200);
+
+    fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((transcripts) => {
+        if(isArray(transcripts) && transcripts.length > 0) {
+          dispatch(receiveTranscripts({
+            transcripts: transcripts
+          }));
+        }
+      });
   };
 }
 

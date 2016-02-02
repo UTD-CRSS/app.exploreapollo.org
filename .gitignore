@@ -29,3 +29,6 @@ node_modules
 dist
 
 .DS_Store
+
+#ignore idea folder from jetbrains for webstorm
+.idea
