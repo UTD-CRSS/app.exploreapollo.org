@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import classNames from "classnames";
 
+import Spinner from "react-spinner";
+
 import {
   loadStory
 } from "../../actions";
@@ -23,11 +25,10 @@ export default class StoryViewer extends Component {
   render() {
     const classes = classNames("row");
     if (this.props.loading) {
-      return (
-        <div>
-          Loading Story.
-        </div>
-      );
+      return <div className="text-center lead">
+        <p>Loading Story...</p>
+        <Spinner />
+      </div>;
     }
 
     return (

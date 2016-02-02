@@ -7,7 +7,7 @@ export class AppHeader extends Component {
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
-            <Link ref="appRouteTitle" className="navbar-brand" to="/">
+            <Link testRef="appRouteTitle" className="navbar-brand" to="/">
               Explore Apollo
             </Link>
           </div>
@@ -16,11 +16,6 @@ export class AppHeader extends Component {
             <li>
               <Link to="/stories">
                 Stories
-              </Link>
-            </li>
-            <li>
-              <Link to="/moments">
-                Moments
               </Link>
             </li>
           </ul>

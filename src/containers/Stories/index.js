@@ -6,6 +6,7 @@ import {
 } from "../../actions";
 
 import {StoryList} from "../../components";
+import Spinner from "react-spinner";
 
 export default class Stories extends Component {
   componentWillMount() {
@@ -14,14 +15,15 @@ export default class Stories extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <div>
-          Loading Stories.
+        <div className="text-center lead">
+          <p>Loading Stories...</p>
+          <Spinner />
         </div>
       );
     }
     const Stories = this.props.stories;
     return (
-      <div>
+      <div className="container">
         <h1>Stories</h1>
         <StoryList stories={Stories} />
       </div>

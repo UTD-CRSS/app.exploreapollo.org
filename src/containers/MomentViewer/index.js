@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import {get, findIndex, each} from "lodash";
 
+import Spinner from "react-spinner";
+
 import {
   loadMoments,
   loadTranscripts,
@@ -20,11 +22,9 @@ class MomentViewer extends Component {
       momentId: this.props.currentMomentId
     });
     this.props.loadTranscripts({
-      transcripts: this.props.currentTranscripts
+      momentId: this.props.currentMomentId
     });
   }
-
-  startSlice = (this.props.currentMoment) ?  this.props.currentMoment.startSlice : 0;
 
   render() {
     const {
@@ -35,8 +35,9 @@ class MomentViewer extends Component {
       loadAudio
     } = this.props;
     if (loading) {
-      return <div>
-        Loading Moment.
+      return <div className="text-center lead">
+        <p>Loading moment...</p>
+        <Spinner />
       </div>;
     }
 
@@ -47,7 +48,7 @@ class MomentViewer extends Component {
     }
 
     const {time, playing, audio} = this.props.currentAudio;
-    const currentMissionTime = this.props.currentMoment.startSlice + (time * 1000);
+    const currentMissionTime = this.props.currentMoment.metStart + (time * 1000);
     let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
       return i.startTime > currentMissionTime;
     });
@@ -56,15 +57,15 @@ class MomentViewer extends Component {
     each(currentTranscripts.transcripts, function(i) {
       i.active = false;
     });
-    
+
     activeIndex -= 1;
     if(activeIndex >= 0) {
       currentTranscripts.transcripts[activeIndex].active = true;
     }
     const timelineClickEvent = function(startTime) {
-      if(startSlice) {
+      if(metStart) {
         loadAudio({
-          time: (startTime - startSlice) / 1000
+          time: (startTime - metStart) / 1000
         });
       }
     };
@@ -72,8 +73,8 @@ class MomentViewer extends Component {
     const {
       title,
       audioUrl,
-      startSlice,
-      endSlice
+      metStart,
+      metEnd
     } = currentMoment;
     const missionLength = currentMission.length;
     return (
@@ -81,8 +82,8 @@ class MomentViewer extends Component {
         <MomentPlayer
           title={title}
           url={audioUrl}
-          start={startSlice}
-          end={endSlice}
+          start={metStart}
+          end={metEnd}
           audio={audio}
           time={time}
           playing={playing}

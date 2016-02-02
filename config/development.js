@@ -1,0 +1,2 @@
+// development config
+export default {};
