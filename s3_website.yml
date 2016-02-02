@@ -22,5 +22,7 @@ cloudfront_distribution_config:
     items:
       CNAME: app-staging.exploreapollo.org
 <% end %>
-max_age: 120
+max_age:
+  "*.js": <%= 60 * 60 * 24 * 30 * 2 %>
+  "*": 300
 gzip: true
