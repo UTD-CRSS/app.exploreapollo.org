@@ -11,13 +11,13 @@ deploy:
   - provider: script
     edge: true
     skip_cleanup: true
-    script: scripts/deploy.sh
+    script: scripts/deploy.sh production
     on:
       branch: master
   - provider: script
     edge: true
     skip_cleanup: true
-    script: scripts/deploy.sh
+    script: scripts/deploy.sh staging
     on:
       branch: develop
 env:

@@ -1,7 +1,7 @@
 site: dist
 s3_id: <%= ENV['EXP_S3_ACCESS_KEY'] %>
 s3_secret: <%= ENV['EXP_S3_SECRET'] %>
-<% if ENV['TRAVIS_BRANCH'] === 'master' %>
+<% if ENV['APP_ENV'] === 'production' %>
 s3_bucket: app.exploreapollo.org
 cloudfront_distribution_id: E1J3P5BUW5Q7L6
 cloudfront_distribution_config:
