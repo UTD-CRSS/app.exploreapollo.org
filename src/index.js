@@ -1,6 +1,6 @@
-import "babel-core/polyfill";
 import "./scss/main.scss";
 import React from "react";
+import ReactDom from "react-dom";
 // import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { ReduxRouter } from "redux-router";
@@ -12,10 +12,8 @@ if (location.href.indexOf("#") != -1) {
 
 const store = configureStore();
 
-React.render((
+ReactDom.render((
   <Provider store={store}>
-    {() =>
-      <ReduxRouter />
-    }
+    <ReduxRouter />
   </Provider>
 ), document.getElementById("houston"));
