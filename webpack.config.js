@@ -8,8 +8,7 @@ var isProduction = process.env.NODE_ENV === "production";
 var babelLoader = "babel?" + [
   "presets[]=react",
   "presets[]=es2015",
-  "presets[]=stage-2",
-  "plugins[]=transform-export-extensions",
+  "presets[]=stage-0",
   "plugins[]=transform-runtime"
 ].join(",");
 
