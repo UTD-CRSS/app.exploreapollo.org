@@ -46,6 +46,16 @@ The development promotion workflow is as such:
 This project is semantically versioned. Changes that break compatibility with
 the remote API are considered breaking changes.
 
+### Debugging
+
+When in doubt: delete the node modules folder and npm install again.
+
+```bash
+rm -rf node_modules
+npm cache clean
+npm i --progress=false
+```
+
 ### Project Structure
 
 Source lives in `src/`. Compiled output goes in `dist/`.
