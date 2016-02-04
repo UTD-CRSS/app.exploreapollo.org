@@ -55,7 +55,7 @@
     "classnames": "^2.2.1",
     "connect-history-api-fallback": "^1.1.0",
     "deep-equal": "^1.0.1",
-    "history": "^1.13.1",
+    "history": "^2.0.0",
     "html-webpack-plugin": "^1.7.0",
     "karma": "^0.13.15",
     "moment": "^2.10.6",
