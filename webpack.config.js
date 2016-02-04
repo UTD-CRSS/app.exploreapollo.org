@@ -3,20 +3,36 @@ var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var webpack = require("webpack");
 
+var isProduction = process.env.NODE_ENV === "production";
+
+var babelLoader = "babel?" + [
+  "presets[]=react",
+  "presets[]=es2015",
+  "presets[]=stage-0",
+  "plugins[]=transform-runtime"
+].join(",");
+
 module.exports = {
   context: path.join(__dirname, "src"),
 
   entry: ["./"],
 
+  devtool: !isProduction && "#source-map",
+
   output: {
     path: path.join(__dirname, "dist"),
     publicPath: "/",
-    filename: process.env.NODE_ENV === "production" ? "bundle-[hash].js" : "bundle.js"
+    filename: process.env.NODE_ENV === "production"
+      ? "bundle-[hash].js"
+      : "bundle.js"
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      favicon: "src/favicon.ico"
+      title: "Explore Apollo",
+      template: "index.html", // Load a custom template
+      inject: "body", //scripts are injected to here
+      favicon: "./favicon.ico"
     }),
     new webpack.ProvidePlugin({
       fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
@@ -33,11 +49,11 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: process.env.NODE_ENV === "production" ? [
-          "babel"
+        loaders: isProduction ? [
+          babelLoader
         ] : [
           "react-hot",
-          "babel"
+          babelLoader
         ]
       },
       {

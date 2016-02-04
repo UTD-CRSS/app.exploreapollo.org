@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
+TARGET_ENV=$1
+
 export NODE_ENV=production
-export APP_ENV=production
+export APP_ENV="${TARGET_ENV:-staging}"
 NPM_BIN=$(npm bin)
 
 echo "cleaning up"

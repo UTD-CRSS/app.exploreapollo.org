@@ -1,7 +1,7 @@
 site: dist
 s3_id: <%= ENV['EXP_S3_ACCESS_KEY'] %>
 s3_secret: <%= ENV['EXP_S3_SECRET'] %>
-<% if ENV['TRAVIS_BRANCH'] === 'master' %>
+<% if ENV['APP_ENV'] === 'production' %>
 s3_bucket: app.exploreapollo.org
 cloudfront_distribution_id: E1J3P5BUW5Q7L6
 cloudfront_distribution_config:
@@ -22,5 +22,7 @@ cloudfront_distribution_config:
     items:
       CNAME: app-staging.exploreapollo.org
 <% end %>
-max_age: 120
+max_age:
+  "*.js": <%= 60 * 60 * 24 * 30 * 2 %>
+  "*": 300
 gzip: true

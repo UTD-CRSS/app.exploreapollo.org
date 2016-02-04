@@ -6,6 +6,7 @@
 [![Dependency Status](https://david-dm.org/UTD-CRSS/app.exploreapollo.org.svg)](https://david-dm.org/UTD-CRSS/app.exploreapollo.org)
 [![devDependency Status](https://david-dm.org/UTD-CRSS/app.exploreapollo.org/dev-status.svg)](https://david-dm.org/UTD-CRSS/app.exploreapollo.org#info=devDependencies)
 [![Stories in Ready](https://badge.waffle.io/UTD-CRSS/app.exploreapollo.org.svg?label=ready&title=Ready)](http://waffle.io/UTD-CRSS/app.exploreapollo.org)
+[![Code Climate](https://codeclimate.com/github/UTD-CRSS/app.exploreapollo.org/badges/gpa.svg)](https://codeclimate.com/github/UTD-CRSS/app.exploreapollo.org)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/utd-crss.svg)](https://saucelabs.com/u/utd-crss)
 
@@ -45,6 +46,16 @@ The development promotion workflow is as such:
 
 This project is semantically versioned. Changes that break compatibility with
 the remote API are considered breaking changes.
+
+### Debugging
+
+When in doubt: delete the node modules folder and npm install again.
+
+```bash
+rm -rf node_modules
+npm cache clean
+npm i --progress=false
+```
 
 ### Project Structure
 
