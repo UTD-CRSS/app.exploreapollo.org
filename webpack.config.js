@@ -27,6 +27,13 @@ module.exports = {
       : "bundle.js"
   },
 
+  resolve: {
+    root: path.resolve("./src"),
+    alias: {
+      test: path.resolve("./test")
+    }
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: "Explore Apollo",
