@@ -105,7 +105,7 @@ function audio(state = initialAudioState, action = {}) {
     return Object.assign(
       {},
       state,
-      _.omit({
+      _.omitBy({
         loading: false,
         audio: action.audio,
         playing: action.playing,
