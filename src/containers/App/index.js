@@ -19,6 +19,13 @@ export class AppHeader extends Component {
               </Link>
             </li>
           </ul>
+          <ul className="nav navbar-nav navbar-right">
+            <li>
+              <Link to="/settings">
+                Settings
+              </Link>
+            </li>
+          </ul>
         </div>
       </nav>
     );
