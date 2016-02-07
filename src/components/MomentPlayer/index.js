@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 import classNames from "classnames";
 import Wavesurfer from "react-wavesurfer";
-import styles from "./index.scss";
+import "./index.scss";
 
 function wrapAudioPlayerElements(child) {
   const PlayButtonName = PlayButton.name;
   const WavesurferName = Wavesurfer.name;
-  const height = '128px'
+  const height = "128px";
   const styles = {
     [PlayButtonName]: {
-      position: 'absolute',
+      position: "absolute",
       width: height,
       height: height,
       padding: 5
@@ -18,18 +18,18 @@ function wrapAudioPlayerElements(child) {
       marginLeft: height
     }
   };
-  return <div style={styles[child.type.name]}>
+  return (<div style={styles[child.type.name]}>
     {child}
-  </div>
+  </div>);
 }
 
 export function AudioPlayer({children}) {
   const containerStyles = {
-    position: 'relative'
+    position: "relative"
   };
-  return <div style={containerStyles}>
+  return (<div style={containerStyles}>
     {React.Children.map(children, wrapAudioPlayerElements)}
-  </div>
+  </div>);
 }
 
 export function PlayButton({isPlaying, play, pause}){
@@ -41,7 +41,7 @@ export function PlayButton({isPlaying, play, pause}){
   const clickFunction = (isPlaying) ? pause : play;
   const iconStyles = {
     fontSize: "4em"
-  }
+  };
   return (
     <div className="playButtonContainer"
          onClick={clickFunction}>

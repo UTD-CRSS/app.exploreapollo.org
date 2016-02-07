@@ -28,9 +28,9 @@ module.exports = {
   },
 
   resolve: {
-    root: path.resolve('./src'),
+    root: path.resolve("./src"),
     alias: {
-      test: path.resolve('./test')
+      test: path.resolve("./test")
     }
   },
 

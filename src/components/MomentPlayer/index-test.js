@@ -1,7 +1,7 @@
 /*eslint-env mocha*/
 import {assert} from "chai";
-import React, {Component} from "react";
-import MomentPlayer, {PlayButton} from "./index";
+import React from "react";
+import {PlayButton} from "./index";
 import testTree from "react-test-tree";
 import {hasClass} from "test/utils";
 
