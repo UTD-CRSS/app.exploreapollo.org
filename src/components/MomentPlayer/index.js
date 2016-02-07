@@ -1,20 +1,22 @@
 import React, {Component} from "react";
 import classNames from "classnames";
 
-export class PlayButton extends Component {
-  render() {
-    const {isPlaying, play, pause} = this.props;
-    let classes = classNames("glyphicon", "icon-large", {"glyphicon-pause": isPlaying}, {"glyphicon-play": !isPlaying});
-    let clickFunction = (isPlaying)? pause : play;
-    return (
-      <div>
-        <i
-          className={classes}
-          onClick={clickFunction}>
-        </i>
-      </div>
-    );
-  }
+export function PlayButton({isPlaying, play, pause}){
+  const classes = classNames(
+    "glyphicon",
+    "icon-large",
+    {"glyphicon-pause": isPlaying},
+    {"glyphicon-play": !isPlaying}
+  );
+  const clickFunction = (isPlaying) ? pause : play;
+  return (
+    <div>
+      <i
+        testRef="playIcon"
+        className={classes}
+        onClick={clickFunction} />
+    </div>
+  );
 }
 
 export default class MomentPlayer extends Component {
@@ -86,9 +88,7 @@ export default class MomentPlayer extends Component {
     const {start, end} = this.props;
     const time = this.props.time ? this.props.time / 1000 : 0;
     return ((time * 1000 / (end - start)) * 1e5);
-  }
-
-  render() {
+  } render() {
     return (
       <div>
         <h4 className="text-center">
