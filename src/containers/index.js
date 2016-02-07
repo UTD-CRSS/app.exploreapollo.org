@@ -5,3 +5,4 @@ export MomentViewer from "./MomentViewer";
 export Stories from "./Stories";
 export StoryViewer from "./StoryViewer";
 export NoMatch from "./NoMatch";
+export Settings from "./Settings";
