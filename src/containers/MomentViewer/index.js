@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {get, findIndex, each, inRange} from "lodash";
+import {get, findIndex, each} from "lodash";
 
 import Spinner from "react-spinner";
 
