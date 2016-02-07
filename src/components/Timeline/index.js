@@ -1,19 +1,25 @@
 import React, {Component} from "react";
 import classNames from "classnames";
+import {HumanReadableMs} from "../";
 
 export class TimelineMessage extends Component {
   render() {
     const {name, text, active, startTime} = this.props;
     return (
-      <div>
-        <p className="cursor-pointer" onClick={this.props.clickEvent.bind(this, startTime)}>
+      <div className="list-group-item transcript-item">
+        <div className="cursor-pointer" onClick={this.props.clickEvent.bind(this, startTime)}>
           <strong>
             {name}:
           </strong>
+          <div className="start-time">
+            {HumanReadableMs({ms: startTime})}
+          </div>
+        </div>
+        <div>
           <span className={classNames({"active-transcript": active})}>
             {active} {text}
           </span>
-        </p>
+        </div>
       </div>
     );
   }
@@ -28,7 +34,7 @@ export default class Timeline extends Component {
         <div ref="errorMessage" className="alert alert-info">No Messages</div>
       );
     }
-    return timeline.map((item) => {
+    let items = timeline.map((item) => {
       return (
         <TimelineMessage
           key={item.id}
@@ -40,13 +46,23 @@ export default class Timeline extends Component {
           text={item.text} />
       );
     });
+    return (
+      <div className="list-group">
+        {items}
+      </div>
+    )
   }
 
   render() {
-    let classes = classNames("col-md-6", "timeline-container");
+    let classes = classNames("timeline-container", "panel", "panel-default");
     return (
-      <div refCollection="timelineContainer" className={classes}>
-        {this.renderList()}
+      <div className="col-md-6">
+        <div refCollection="timelineContainer" className={classes}>
+          <div className="panel-heading">
+            <h3 className="panel-title">Transcript</h3>
+          </div>
+          {this.renderList()}
+        </div>
       </div>
     );
   }
