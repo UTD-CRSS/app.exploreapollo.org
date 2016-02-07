@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {get, findIndex, each} from "lodash";
+import {get} from "lodash";
 
 import Spinner from "react-spinner";
 
@@ -15,6 +15,8 @@ import {
   Timeline,
   MomentNote
 } from "../../components";
+
+import getActiveIndex from "./getActiveIndex";
 
 class MomentViewer extends Component {
   componentWillMount() {
@@ -34,6 +36,7 @@ class MomentViewer extends Component {
       currentTranscripts,
       loadAudio
     } = this.props;
+
     if (loading) {
       return <div className="text-center lead">
         <p>Loading moment...</p>
@@ -48,19 +51,24 @@ class MomentViewer extends Component {
     }
 
     const {time, playing, audio} = this.props.currentAudio;
-    const currentMissionTime = this.props.currentMoment.metStart + (time * 1000);
-    const activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
-      return i.metStart >= currentMissionTime;
-    });
+    let {transcripts} = currentTranscripts;
 
     //this is bad, but necessary until I can think of a clever solution
-    each(currentTranscripts.transcripts, function(i) {
-      i.active = false;
+    transcripts = transcripts.map(function(i) {
+      return i.set("active", false);
     });
 
+    const momentMetStart = this.props.currentMoment.metStart;
+    const currentMissionTime = momentMetStart + (time * 1000);
+
+    const activeIndex = getActiveIndex(
+      transcripts,
+      currentMissionTime
+    );
+
     if(activeIndex >= 0) {
-      const calcIndex = activeIndex === 0 ? activeIndex : activeIndex - 1;
-      currentTranscripts.transcripts[calcIndex].active = true;
+      const activeMessage = transcripts.get(activeIndex).set("active", true);
+      transcripts = transcripts.set(activeIndex, activeMessage);
     }
 
     const timelineClickEvent = function(startTime) {
@@ -92,7 +100,9 @@ class MomentViewer extends Component {
           loadAudio={loadAudio}
           missionLength={missionLength} />
         <div className="row">
-          <Timeline timeline={currentTranscripts.transcripts} clickEvent={timelineClickEvent}/>
+          <Timeline
+            timeline={transcripts}
+            clickEvent={timelineClickEvent}/>
           <MomentNote note={[]} />
         </div>
       </div>

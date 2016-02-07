@@ -18,7 +18,6 @@ export function TimelineMessage({name, text, active, startTime, clickEvent}) {
         </strong>
         <div className="start-time">
           {HumanReadableMs({ms: startTime})}
-          {active}
         </div>
       </div>
       <div>{text}</div>
@@ -27,7 +26,7 @@ export function TimelineMessage({name, text, active, startTime, clickEvent}) {
 }
 
 function TimelineList({timeline, clickEvent}) {
-  if (!timeline || timeline.length < 1) {
+  if (!timeline || timeline.size < 1) {
     return (
       <div testRef="errorMessage" className="alert alert-info">No Messages</div>
     );
@@ -35,13 +34,13 @@ function TimelineList({timeline, clickEvent}) {
   let items = timeline.map((item) => {
     return (
       <TimelineMessage
-      key={item.id}
-      id={item.id}
-      name={item.speakerName}
-      active={item.active}
+      key={item.get("id")}
+      id={item.get("id")}
+      name={item.get("speakerName")}
+      active={item.get("active")}
       clickEvent={clickEvent}
-      startTime={item.metStart}
-      text={item.text} />
+      startTime={item.get("metStart")}
+      text={item.get("text")} />
     );
   });
   return (
