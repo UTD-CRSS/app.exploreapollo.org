@@ -5,12 +5,17 @@ import thunk from "redux-thunk";
 import createLogger from "redux-logger";
 import rootReducer from "../reducers";
 import createHistory from "history/lib/createBrowserHistory";
+import {compact} from "lodash";
 
-const finalCreateStore = compose(
+const isProduction = process.env.NODE_ENV === "production";
+
+const middleware = compact([
   applyMiddleware(thunk),
   reduxReactRouter({ routes, createHistory }),
-  applyMiddleware(createLogger())
-)(createStore);
+  !isProduction && applyMiddleware(createLogger())
+]);
+
+const finalCreateStore = compose.apply(this, middleware)(createStore);
 
 export default function configureStore(initialState) {
   const store = finalCreateStore(rootReducer, initialState);
