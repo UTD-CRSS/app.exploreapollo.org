@@ -69,6 +69,9 @@ export default class MomentPlayer extends Component {
 
   render() {
     const {url, playing, time, loadAudio} = this.props;
+    const surferOptions = {
+      normalize: true
+    };
     return (<div>
       <h1 className="text-center">
         Now Playing: {this.props.title}
@@ -83,6 +86,7 @@ export default class MomentPlayer extends Component {
           pos={time}
           onPosChange={onPositionChange.bind(this, loadAudio)}
           playing={playing}
+          options={surferOptions}
         />
       </AudioPlayer>
     </div>);
