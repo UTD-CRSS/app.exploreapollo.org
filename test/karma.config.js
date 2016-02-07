@@ -4,6 +4,9 @@ var _ = require("lodash");
 
 function base() {
   return {
+    client: {
+      captureConsole: true
+    },
     frameworks: ["mocha"],
     files: ["tests.webpack.js"],
     preprocessors: {
