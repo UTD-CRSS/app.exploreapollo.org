@@ -1,30 +1,21 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import classNames from "classnames";
-
 import Spinner from "react-spinner";
 
-import {
-  loadStory
-} from "../../actions";
-
-import {
-  StoryTimeline
-} from "../../components";
-
-import {
-  dummyLandmarks
-} from "../../utils/dummyData";
+import {loadStory} from "../../actions";
+import {StoryTimeline} from "../../components";
+import {dummyLandmarks} from "../../utils/dummyData";
 
 export default class StoryViewer extends Component {
   componentWillMount() {
-    this.props.loadStory({
-      storyId: this.props.currentStoryId
+    const {loadStory, currentStoryId} = this.props;
+    loadStory({
+      storyId: currentStoryId
     });
   }
   render() {
-    const classes = classNames("row");
-    if (this.props.loading) {
+    const {loading, currentStory} = this.props;
+    if (loading) {
       return <div className="text-center lead">
         <p>Loading Story...</p>
         <Spinner />
@@ -32,8 +23,10 @@ export default class StoryViewer extends Component {
     }
 
     return (
-      <div className={classes}>
-        <StoryTimeline story={this.props.currentStory} landmarks={dummyLandmarks}/>
+      <div className="row">
+        <StoryTimeline
+          story={currentStory}
+          landmarks={dummyLandmarks}/>
       </div>
     );
   }

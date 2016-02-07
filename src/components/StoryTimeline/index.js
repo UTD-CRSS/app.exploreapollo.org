@@ -7,7 +7,10 @@ function PlayAllButton({storyId, momentId}) {
   const url = "/moments/moment/" + momentId + "?story=" + storyId;
   return (<div>
     <div className="story-timeline-play">
-      <Link className="btn btn-lg btn-primary" to={url}>Play All <i className="glyphicon glyphicon-play"></i></Link>
+      <Link className="btn btn-lg btn-primary" to={url}>
+        Play All
+        <i className="glyphicon glyphicon-play" />
+      </Link>
     </div>
   </div>);
 }
@@ -58,7 +61,10 @@ export function MomentCard({id, title, metStart, content}) {
           {content}
         </p>
         <div className="story-timeline-play">
-          <a href={url}>Listen <i className="glyphicon glyphicon-play"></i></a>
+          <Link to={url}>
+            Listen
+            <i className="glyphicon glyphicon-play" />
+          </Link>
         </div>
       </div>
     </div>
