@@ -64,7 +64,6 @@ class MomentViewer extends Component {
     }
     const timelineClickEvent = function(startTime) {
       let seekTime = (startTime - metStart) / 1000;
-      audio.currentTime = seekTime;
       if(metStart) {
         loadAudio({
           time: seekTime
