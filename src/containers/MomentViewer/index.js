@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {get, findIndex, each} from "lodash";
+import {get, findIndex, each, inRange} from "lodash";
 
 import Spinner from "react-spinner";
 
@@ -49,8 +49,8 @@ class MomentViewer extends Component {
 
     const {time, playing, audio} = this.props.currentAudio;
     const currentMissionTime = this.props.currentMoment.metStart + (time * 1000);
-    let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
-      return i.startTime > currentMissionTime;
+    const activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
+      return i.metStart >= currentMissionTime;
     });
 
     //this is bad, but necessary until I can think of a clever solution
@@ -58,12 +58,13 @@ class MomentViewer extends Component {
       i.active = false;
     });
 
-    activeIndex -= 1;
     if(activeIndex >= 0) {
-      currentTranscripts.transcripts[activeIndex].active = true;
+      const calcIndex = activeIndex === 0 ? activeIndex : activeIndex - 1;
+      currentTranscripts.transcripts[calcIndex].active = true;
     }
+
     const timelineClickEvent = function(startTime) {
-      let seekTime = (startTime - metStart) / 1000;
+      const seekTime = (startTime - metStart) / 1000;
       if(metStart) {
         loadAudio({
           time: seekTime

@@ -3,8 +3,14 @@ import classNames from "classnames";
 import {HumanReadableMs} from "../";
 
 export function TimelineMessage({name, text, active, startTime, clickEvent}) {
+  const listItemClasses = classNames(
+    "list-group-item",
+    "transcript-item",
+    "cursor-pointer",
+    {active: active}
+  );
   return (
-    <a className="list-group-item transcript-item cursor-pointer"
+    <a className={listItemClasses}
        onClick={clickEvent.bind(this, startTime)}>
       <div>
         <strong>
@@ -12,13 +18,10 @@ export function TimelineMessage({name, text, active, startTime, clickEvent}) {
         </strong>
         <div className="start-time">
           {HumanReadableMs({ms: startTime})}
+          {active}
         </div>
       </div>
-      <div>
-        <span className={classNames({"active-transcript": active})}>
-          {active} {text}
-        </span>
-      </div>
+      <div>{text}</div>
     </a>
   );
 }
