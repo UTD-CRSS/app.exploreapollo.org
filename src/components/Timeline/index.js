@@ -6,8 +6,9 @@ export class TimelineMessage extends Component {
   render() {
     const {name, text, active, startTime} = this.props;
     return (
-      <div className="list-group-item transcript-item">
-        <div className="cursor-pointer" onClick={this.props.clickEvent.bind(this, startTime)}>
+      <a className="list-group-item transcript-item cursor-pointer"
+         onClick={this.props.clickEvent.bind(this, startTime)}>
+        <div>
           <strong>
             {name}:
           </strong>
@@ -20,7 +21,7 @@ export class TimelineMessage extends Component {
             {active} {text}
           </span>
         </div>
-      </div>
+      </a>
     );
   }
 }
