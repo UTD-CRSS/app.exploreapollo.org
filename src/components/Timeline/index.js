@@ -50,7 +50,7 @@ export default class Timeline extends Component {
       <div className="list-group">
         {items}
       </div>
-    )
+    );
   }
 
   render() {
