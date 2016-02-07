@@ -69,6 +69,7 @@
     "react-router": "^1.0.2",
     "react-spinner": "^0.2.3",
     "react-test-tree": "^1.0.0",
+    "react-wavesurfer": "^0.2.3",
     "redux": "^3.0.4",
     "redux-devtools": "^3.0.2",
     "redux-logger": "^2.2.1",

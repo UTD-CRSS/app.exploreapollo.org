@@ -1,22 +1,71 @@
 import React, {Component} from "react";
 import classNames from "classnames";
+import Wavesurfer from "react-wavesurfer";
+import styles from "./index.scss";
+
+function wrapAudioPlayerElements(child) {
+  const PlayButtonName = PlayButton.name;
+  const WavesurferName = Wavesurfer.name;
+  const height = '128px'
+  const styles = {
+    [PlayButtonName]: {
+      position: 'absolute',
+      width: height,
+      height: height,
+      padding: 5
+    },
+    [WavesurferName]: {
+      marginLeft: height
+    }
+  };
+  return <div style={styles[child.type.name]}>
+    {child}
+  </div>
+}
+
+export function AudioPlayer({children}) {
+  const containerStyles = {
+    position: 'relative'
+  };
+  return <div style={containerStyles}>
+    {React.Children.map(children, wrapAudioPlayerElements)}
+  </div>
+}
 
 export function PlayButton({isPlaying, play, pause}){
   const classes = classNames(
     "glyphicon",
-    "icon-large",
     {"glyphicon-pause": isPlaying},
     {"glyphicon-play": !isPlaying}
   );
   const clickFunction = (isPlaying) ? pause : play;
+  const buttonStyles = {
+    width: "100%",
+    height: "100%",
+    color: "white",
+    textAlign: "center",
+    background: "rgb(11, 61, 145)",
+    borderRadius: "50%",
+  };
+  const iconStyles = {
+    fontSize: "4em"
+  }
   return (
-    <div>
-      <i
-        testRef="playIcon"
-        className={classes}
-        onClick={clickFunction} />
+    <div style={buttonStyles}
+         className="playButtonContainer"
+         onClick={clickFunction}>
+      <i testRef="playIcon"
+         style={iconStyles}
+         className={classes} />
     </div>
   );
+}
+
+function onPositionChange(loadAudio, e) {
+  const currentTime = e.originalArgs[0];
+  loadAudio({
+    time: currentTime
+  });
 }
 
 export default class MomentPlayer extends Component {
@@ -58,7 +107,7 @@ export default class MomentPlayer extends Component {
   playAudio() {
     const {start, end, audio} = this.props;
     if (audio.currentTime * 1000 < (end - start)) {
-      this.props.audio.play();
+      //this.props.audio.play();
       this.props.loadAudio({
         playing: true
       });
@@ -88,43 +137,26 @@ export default class MomentPlayer extends Component {
     const {start, end} = this.props;
     const time = this.props.time ? this.props.time / 1000 : 0;
     return ((time * 1000 / (end - start)) * 1e5);
-  } render() {
-    return (
-      <div>
-        <h4 className="text-center">
-          Now Playing: {this.props.title}
-        </h4>
-        <div className="text-center">
-          <PlayButton
-            isPlaying={this.props.playing}
-            play={this.playAudio.bind(this)}
-            pause={this.pauseAudio.bind(this)} />
-          <div style={{
-            position: "relative",
-            cursor: "pointer"
-          }}
-          onClick={this.progressBarClicked.bind(this)}
-          className="progress">
-            <div
-              key={this.getCurrentTimeLeftOffset()}
-              className="slideTransition"
-              style={{
-                position: "absolute",
-                left: `${this.getCurrentTimeLeftOffset()}%`,
-                background: "red",
-                height: "100%",
-                width: "4px"
-              }} />
-            <div
-              className="progress-bar"
-              style={{
-                marginLeft: `${this.getSliceLeftOffset()}%`,
-                width: `${this.getSliceWidth()}%`
-              }}
-              role="progressbar" />
-        </div>
-      </div>
-    </div>
-    );
+  }
+
+  render() {
+    const {url, playing, time, loadAudio} = this.props;
+    return (<div>
+      <h1 className="text-center">
+        Now Playing: {this.props.title}
+      </h1>
+      <AudioPlayer>
+        <PlayButton
+          isPlaying={this.props.playing}
+          play={this.playAudio.bind(this)}
+          pause={this.pauseAudio.bind(this)} />
+        <Wavesurfer
+          audioFile={url}
+          pos={time}
+          onPosChange={onPositionChange.bind(this, loadAudio)}
+          playing={playing}
+        />
+      </AudioPlayer>
+    </div>);
   }
 }
