@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import classNames from "classnames";
 import Wavesurfer from "react-wavesurfer";
 import "./index.scss";
+import {throttle} from "lodash";
 
 function wrapAudioPlayerElements(child) {
   const PlayButtonName = PlayButton.name;
@@ -52,12 +53,12 @@ export function PlayButton({isPlaying, play, pause}){
   );
 }
 
-function onPositionChange(loadAudio, e) {
+const onPositionChange = throttle(function (loadAudio, e) {
   const currentTime = e.originalArgs[0];
   loadAudio({
     time: currentTime
   });
-}
+}, 300);
 
 function setPlaying(loadAudio, playing) {
   loadAudio({
