@@ -4,55 +4,61 @@ html, body, #houston {
     height: 100%;
 }
 
-#houston {
-  #app {
+// App containe
+.app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .app-panel {
+    width: 100%;
+    flex: 1;
+    position: relative;
+  }
+}
+
+// Viewer cotainer
+.moment-viewer-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  padding: 0px 15px;
+
+  .moment-player-panel {
+    padding: 0px 15px;
+  }
+
+  .timeline-panel {
     height: 100%;
+    margin: 0;
+    display: flex;
+  }
+}
+
+// Transcript Timeline
+
+.transcript-panel {
+  display: flex;
+
+  .timeline-container {
+    flex: 1;
+  }
+}
+
+ .timeline-container {
     display: flex;
     flex-direction: column;
 
-    .app-panel {
-      width: 100%;
+    .panel-heading {
+      box-sizing: content-box;
+    }
+
+    .list-group {
       flex: 1;
-      position: relative;
-
-      .inner-panel {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        padding: 0px 15px;
-
-        .moment-player-panel {
-          padding: 0px 15px;
-        }
-
-        .timeline-panel {
-          height: 100%;
-          margin: 0;
-          display: flex;
-
-          #transcript-panel {
-            display: flex;
-
-            .timeline-container {
-              flex: 1;
-              display: flex;
-              flex-direction: column;
-
-              .panel-heading {
-                box-sizing: content-box;
-              }
-
-              .list-group {
-                flex: 1;
-                overflow-y: auto;
-              }
-            }
-          }
-        }
-      }
+      overflow-y: auto;
     }
   }
 }

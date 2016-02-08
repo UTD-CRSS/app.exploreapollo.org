@@ -107,7 +107,7 @@ class MomentViewer extends Component {
     ];
 
     return (
-      <div id="moment-viewer" className="inner-panel">
+      <div className="moment-viewer-container">
         <MomentPlayer
           title={title}
           url={audioUrl}
