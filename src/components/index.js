@@ -5,3 +5,6 @@ export MomentPlayer from "./MomentPlayer";
 export MomentNote from "./MomentNote";
 export Timeline from "./Timeline";
 export HumanReadableMs from "./humanReadableMs.js";
+export MomentWidgets from "./MomentWidgets";
+export WordCountGraph from "./WordCountGraph";
+export LoadingIndicator from "./LoadingIndicator";
