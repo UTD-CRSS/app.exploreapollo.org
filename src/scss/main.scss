@@ -48,18 +48,17 @@ html, body, #houston {
   }
 }
 
- .timeline-container {
-    display: flex;
-    flex-direction: column;
+.timeline-container {
+  display: flex;
+  flex-direction: column;
 
-    .panel-heading {
-      box-sizing: content-box;
-    }
+  .panel-heading {
+    box-sizing: content-box;
+  }
 
-    .list-group {
-      flex: 1;
-      overflow-y: auto;
-    }
+  .list-group {
+    flex: 1;
+    overflow-y: auto;
   }
 }
 
