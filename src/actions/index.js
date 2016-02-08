@@ -6,6 +6,8 @@ import config from "../../config";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
+export const FETCH_METRICS = "FETCH_METRICS";
+export const RECEIVE_METRICS = "RECEIVE_METRICS";
 
 function receiveMoments(args) {
   const {moments} = args;
@@ -33,6 +35,32 @@ export function loadMoments(args) {
         dispatch(receiveMoments({
           moments: moment
         }));
+      });
+  };
+}
+
+function fetchMetrics() {
+  return {
+    type: FETCH_METRICS
+  };
+}
+
+function receiveMetrics({metrics}) {
+  return {
+    type: RECEIVE_METRICS,
+    metrics
+  };
+}
+
+export function loadMetrics({momentId}) {
+  return dispatch => {
+    dispatch(fetchMetrics());
+    fetch(`${config.apiEntry}/api/moments/${momentId}/metrics`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((metrics) => {
+        dispatch(receiveMetrics({metrics}));
       });
   };
 }
