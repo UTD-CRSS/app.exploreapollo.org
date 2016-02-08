@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import * as ActionTypes from "../actions";
 import { normalize, Schema, arrayOf } from "normalizr";
 import _ from "lodash";
+import {fromJS} from "immutable";
 
 const Moment = new Schema("moments");
 //const Transcript = new Schema("transcripts");
@@ -89,7 +90,7 @@ function transcripts(state = initialTranscriptState, action = {}) {
       state,
       {
         loading: false,
-        transcripts: action.transcripts
+        transcripts: fromJS(action.transcripts)
       }
     );
   default:
