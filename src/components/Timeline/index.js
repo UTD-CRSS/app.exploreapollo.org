@@ -58,7 +58,7 @@ export default function Timeline({timeline, clickEvent}) {
   );
 
   return (
-    <div className="col-md-6">
+    <div id="transcript-panel" className="col-md-6">
       <div testRefCollection="timelineContainer" className={classes}>
         <div className="panel-heading">
           <h3 className="panel-title">Transcript</h3>

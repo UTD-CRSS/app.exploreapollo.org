@@ -36,9 +36,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div id="app">
         <AppHeader/>
-        <div className="container-fluid">
+        <div className="app-panel">
           {this.props.children}
         </div>
       </div>
