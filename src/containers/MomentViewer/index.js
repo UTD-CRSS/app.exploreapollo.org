@@ -107,7 +107,7 @@ class MomentViewer extends Component {
     ];
 
     return (
-      <div>
+      <div className="moment-viewer-container">
         <MomentPlayer
           title={title}
           url={audioUrl}
@@ -118,7 +118,7 @@ class MomentViewer extends Component {
           playing={playing}
           loadAudio={loadAudio}
           missionLength={missionLength} />
-        <div style={{marginTop: "0.5em"}} className="row">
+        <div style={{marginTop: "0.5em"}} className="timeline-panel row">
           <Timeline
             timeline={transcripts}
             clickEvent={timelineClickEvent}/>

@@ -73,7 +73,7 @@ export default class MomentPlayer extends Component {
     const surferOptions = {
       normalize: true
     };
-    return (<div>
+    return (<div className="moment-player-panel">
       <h1 className="text-center">
         Now Playing: {this.props.title}
       </h1>
