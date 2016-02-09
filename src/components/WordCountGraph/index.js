@@ -1,19 +1,25 @@
-import React from "react";
+import React, {Component} from "react";
+import shouldPureComponentUpdate from "react-pure-render/function";
 import Dimensions from "react-dimensions";
 import {VictoryChart, VictoryLine} from "victory";
 
-function WordCountGraph({data, containerWidth}) {
-  const chartData = data.toArray().map((datum) => {
-    return {
-      x: datum.get("met_start"),
-      y: Number(datum.getIn(["data", "count"]))
-    };
-  });
+class WordCountGraph extends Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
 
-  return (<VictoryChart width={containerWidth}
-                        height={containerWidth/(16/4)}>
-    <VictoryLine data={chartData} />
-  </VictoryChart>);
+  render() {
+    const {data, containerWidth} = this.props;
+    const chartData = data.toArray().map((datum) => {
+      return {
+        x: datum.get("met_start"),
+        y: Number(datum.getIn(["data", "count"]))
+      };
+    });
+
+    return (<VictoryChart width={containerWidth}
+                          height={containerWidth/(16/4)}>
+      <VictoryLine data={chartData} />
+    </VictoryChart>);
+  }
 }
 
 export default Dimensions()(WordCountGraph);
