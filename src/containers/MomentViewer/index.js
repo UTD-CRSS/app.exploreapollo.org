@@ -1,20 +1,25 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
-import {get, findIndex, each} from "lodash";
+import {get} from "lodash";
 
 import Spinner from "react-spinner";
 
 import {
   loadMoments,
   loadTranscripts,
-  loadAudio
+  loadAudio,
+  loadMetrics
 } from "../../actions";
 
 import {
   MomentPlayer,
   Timeline,
-  MomentNote
+  MomentWidgets,
+  WordCountGraph,
+  LoadingIndicator
 } from "../../components";
+
+import getActiveIndex from "./getActiveIndex";
 
 class MomentViewer extends Component {
   componentWillMount() {
@@ -22,6 +27,9 @@ class MomentViewer extends Component {
       momentId: this.props.currentMomentId
     });
     this.props.loadTranscripts({
+      momentId: this.props.currentMomentId
+    });
+    this.props.loadMetrics({
       momentId: this.props.currentMomentId
     });
   }
@@ -32,8 +40,10 @@ class MomentViewer extends Component {
       currentMission,
       loading,
       currentTranscripts,
-      loadAudio
+      loadAudio,
+      metrics
     } = this.props;
+
     if (loading) {
       return <div className="text-center lead">
         <p>Loading moment...</p>
@@ -48,24 +58,31 @@ class MomentViewer extends Component {
     }
 
     const {time, playing, audio} = this.props.currentAudio;
-    const currentMissionTime = this.props.currentMoment.metStart + (time * 1000);
-    let activeIndex = findIndex(currentTranscripts.transcripts, function(i) {
-      return i.startTime > currentMissionTime;
-    });
+    let {transcripts} = currentTranscripts;
 
     //this is bad, but necessary until I can think of a clever solution
-    each(currentTranscripts.transcripts, function(i) {
-      i.active = false;
+    transcripts = transcripts.map(function(i) {
+      return i.set("active", false);
     });
 
-    activeIndex -= 1;
+    const momentMetStart = this.props.currentMoment.metStart;
+    const currentMissionTime = momentMetStart + (time * 1000);
+
+    const activeIndex = getActiveIndex(
+      transcripts,
+      currentMissionTime
+    );
+
     if(activeIndex >= 0) {
-      currentTranscripts.transcripts[activeIndex].active = true;
+      const activeMessage = transcripts.get(activeIndex).set("active", true);
+      transcripts = transcripts.set(activeIndex, activeMessage);
     }
+
     const timelineClickEvent = function(startTime) {
+      const seekTime = (startTime - metStart) / 1000;
       if(metStart) {
         loadAudio({
-          time: (startTime - metStart) / 1000
+          time: seekTime
         });
       }
     };
@@ -77,8 +94,20 @@ class MomentViewer extends Component {
       metEnd
     } = currentMoment;
     const missionLength = currentMission.length;
+
+    const wordCountProps = {
+      key: "WordCountGraph",
+      title: "Word Count"
+    };
+
+    const momentWidgets = [
+      metrics.loading
+        ? <LoadingIndicator {...wordCountProps} />
+        : <WordCountGraph data={metrics.WordCount} {...wordCountProps} />
+    ];
+
     return (
-      <div>
+      <div className="moment-viewer-container">
         <MomentPlayer
           title={title}
           url={audioUrl}
@@ -89,9 +118,13 @@ class MomentViewer extends Component {
           playing={playing}
           loadAudio={loadAudio}
           missionLength={missionLength} />
-        <div className="row">
-          <Timeline timeline={currentTranscripts.transcripts} clickEvent={timelineClickEvent}/>
-          <MomentNote note={[]} />
+        <div style={{marginTop: "0.5em"}} className="timeline-panel row">
+          <Timeline
+            timeline={transcripts}
+            clickEvent={timelineClickEvent}/>
+          <MomentWidgets>
+            {momentWidgets}
+          </MomentWidgets>
         </div>
       </div>
     );
@@ -99,7 +132,7 @@ class MomentViewer extends Component {
 }
 
 function mapStateToProps(state) {
-  const {audio} = state;
+  const {audio, metrics} = state;
   const { id } = state.router.params;
   const { loading, entities } = state.moments;
   if (loading) {
@@ -112,18 +145,21 @@ function mapStateToProps(state) {
   const { moments, missions } = entities;
   const moment = get(moments, id);
   const mission = get(missions, moment.mission);
+
   return {
     currentMomentId: id,
     loading,
     currentMission: mission,
     currentMoment: moment,
     currentTranscripts: transcripts,
-    currentAudio: audio
+    currentAudio: audio,
+    metrics
   };
 }
 
 export default connect(mapStateToProps, {
   loadMoments,
   loadTranscripts,
-  loadAudio
+  loadAudio,
+  loadMetrics
 })(MomentViewer);

@@ -1,53 +1,72 @@
-import React, {Component} from "react";
+import React from "react";
 import classNames from "classnames";
+import {HumanReadableMs} from "../";
 
-export class TimelineMessage extends Component {
-  render() {
-    const {name, text, active, startTime} = this.props;
-    return (
+export function TimelineMessage({name, text, active, startTime, clickEvent}) {
+  const listItemClasses = classNames(
+    "list-group-item",
+    "transcript-item",
+    "cursor-pointer",
+    {active: active}
+  );
+  return (
+    <a className={listItemClasses}
+       onClick={clickEvent.bind(this, startTime)}>
       <div>
-        <p className="cursor-pointer" onClick={this.props.clickEvent.bind(this, startTime)}>
-          <strong>
-            {name}:
-          </strong>
-          <span className={classNames({"active-transcript": active})}>
-            {active} {text}
-          </span>
-        </p>
+        <strong>
+          {name}:
+        </strong>
+        <div className="start-time">
+          {HumanReadableMs({ms: startTime})}
+        </div>
       </div>
-    );
-  }
+      <div>{text}</div>
+    </a>
+  );
 }
 
-export default class Timeline extends Component {
-
-  renderList() {
-    const {timeline, clickEvent} = this.props;
-    if (!timeline || timeline.length < 1) {
-      return (
-        <div ref="errorMessage" className="alert alert-info">No Messages</div>
-      );
-    }
-    return timeline.map((item) => {
-      return (
-        <TimelineMessage
-          key={item.id}
-          id={item.id}
-          name={item.speakerName}
-          active={item.active}
-          clickEvent={clickEvent}
-          startTime={item.metStart}
-          text={item.text} />
-      );
-    });
-  }
-
-  render() {
-    let classes = classNames("col-md-6", "timeline-container");
+function TimelineList({timeline, clickEvent}) {
+  if (!timeline || timeline.size < 1) {
     return (
-      <div refCollection="timelineContainer" className={classes}>
-        {this.renderList()}
-      </div>
+      <div testRef="errorMessage" className="alert alert-info">No Messages</div>
     );
   }
+  let items = timeline.map((item) => {
+    return (
+      <TimelineMessage
+      key={item.get("id")}
+      id={item.get("id")}
+      name={item.get("speakerName")}
+      active={item.get("active")}
+      clickEvent={clickEvent}
+      startTime={item.get("metStart")}
+      text={item.get("text")} />
+    );
+  });
+  return (
+    <div className="list-group">
+    {items}
+    </div>
+  );
+}
+
+export default function Timeline({timeline, clickEvent}) {
+  const classes = classNames(
+    "timeline-container",
+    "panel",
+    "panel-default"
+  );
+
+  return (
+    <div className="transcript-panel col-md-6">
+      <div testRefCollection="timelineContainer" className={classes}>
+        <div className="panel-heading">
+          <h3 className="panel-title">Transcript</h3>
+        </div>
+        <TimelineList
+          timeline={timeline}
+          clickEvent={clickEvent} />
+      </div>
+    </div>
+  );
 }

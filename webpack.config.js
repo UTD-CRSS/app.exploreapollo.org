@@ -27,6 +27,13 @@ module.exports = {
       : "bundle.js"
   },
 
+  resolve: {
+    root: path.join(__dirname, "src"),
+    alias: {
+      test: path.join(__dirname, "test")
+    }
+  },
+
   plugins: [
     new HtmlWebpackPlugin({
       title: "Explore Apollo",
@@ -39,6 +46,15 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       "process.env": {
+        COMMIT: JSON.stringify(
+          process.env.TRAVIS_COMMIT ||
+          process.env.GIT_COMMIT ||
+          "none"
+        ),
+        TRAVIS_BUILD_ID: JSON.stringify(
+          process.env.TRAVIS_BUILD_ID ||
+          "N/A"
+        ),
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
         APP_ENV: JSON.stringify(process.env.APP_ENV || "development")
       }

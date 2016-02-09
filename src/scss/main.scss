@@ -1,5 +1,68 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
+html, body, #houston {
+    height: 100%;
+}
+
+// App containe
+.app-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .app-panel {
+    width: 100%;
+    flex: 1;
+    position: relative;
+  }
+}
+
+// Viewer cotainer
+.moment-viewer-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  padding: 0px 15px;
+
+  .moment-player-panel {
+    padding: 0px 15px;
+  }
+
+  .timeline-panel {
+    height: 100%;
+    margin: 0;
+    display: flex;
+  }
+}
+
+// Transcript Timeline
+
+.transcript-panel {
+  display: flex;
+
+  .timeline-container {
+    flex: 1;
+  }
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+
+  .panel-heading {
+    box-sizing: content-box;
+  }
+
+  .list-group {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+
 .glyphicon.icon-large {
 	font-size: 3em;
 }
@@ -10,24 +73,20 @@
 
 .active-transcript {
   font-weight: bold;
-  color:#337ab7;
-  background-color: lighten(yellow,30);
-  border-radius: 8px;
-  padding:5px;
-  margin-left:5px;
-  box-shadow: 1px 1px 2px #888888
 }
 
 .cursor-pointer {
   cursor: pointer;
 }
-.timeline-container{
-  font-family: "Lucida Console", Monaco, monospace;
-  background-color:lightgray;
-  padding:25px;
-  border-radius: 50px;
-  box-shadow: 10px 10px 2px #888888
+
+.timeline-container {
+  .transcript-item {
+    .start-time {
+      float: right;
+    }
+  }
 }
+
 .story-timeline-container {
   min-height: 100%;
   .story-play-all {

@@ -6,8 +6,8 @@ export default function HumanReadableMs({ms}) {
   if (typeof ms === "string") {
     ms = parseInt(ms);
   }
-  const startDate = new Date(-14552880 + ms);
+  const startDate = -14552880 + ms/1000;
   return <span>
-    {Moment(startDate).format("dddd, MMMM Do YYYY, h:mm:ss a")}
+    {Moment(startDate, "X").format("h:mm:ss a")}
   </span>;
 }
