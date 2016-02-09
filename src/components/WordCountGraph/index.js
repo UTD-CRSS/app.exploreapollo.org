@@ -8,6 +8,11 @@ class WordCountGraph extends Component {
 
   render() {
     const {data, containerWidth} = this.props;
+
+    if (data.size < 1) {
+      return <p className="text-center text-muted">No Data Yet</p>;
+    }
+
     const chartData = data.toArray().map((datum) => {
       return {
         x: datum.get("met_start"),
