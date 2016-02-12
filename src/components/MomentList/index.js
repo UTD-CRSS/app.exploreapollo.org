@@ -10,7 +10,7 @@ export class MomentListItem extends Component {
         <h2 testRef="momentTitle">{title}</h2>
         <p>
           <Link
-            ref="momentLink"
+            testRef="momentLink"
             to={`/moments/moment/${id}`}>
             Launch
           </Link>
