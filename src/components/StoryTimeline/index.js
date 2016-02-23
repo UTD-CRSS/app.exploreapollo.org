@@ -28,45 +28,44 @@ export function StoryCard({
   title,
   description
 }) {
-  return (<div className="jumbotron text-center" style={{margin: 0}}>
-    <div className="story-timeline-item-content">
-      <h2 className="story-timeline-title">
-        {title}
-      </h2>
-      <p className="lead">
-        {description}
-      </p>
-      {showPlayAll && _.isNumber(firstMomentId)
-        ? <PlayAllButton momentId={firstMomentId} storyId={storyId} />
-        : <NoMomentsNotice />}
+  return (
+    <div className="jumbotron clearfix">
+      <div className="col-sm-6 col-sm-offset-3 story-timeline-item-content">
+        <h2 className="story-timeline-title">
+          {title}
+        </h2>
+        <p className="lead">
+          {description}
+        </p>
+        {showPlayAll && _.isNumber(firstMomentId)
+          ? <PlayAllButton momentId={firstMomentId} storyId={storyId} />
+          : <NoMomentsNotice />}
+      </div>
     </div>
-  </div>);
+  );
 }
 
 export function MomentCard({id, title, metStart, content}) {
   const url = "/moments/moment/" + id;
   return (<div className="story-timeline-item story-item">
     <div className="story-timeline-item-node" />
-    <div className="story-timeline-item-content">
-      <div>
+    <div className="story-timeline-item-content clearfix">
+      <div className="pull-left">
         <div className="story-timeline-title">
           {title}
         </div>
         <div className="story-timeline-time">
-          <HumanReadableMs ms={metStart} />
+          {HumanReadableMs({ms: metStart, date: true})}
         </div>
-      </div>
-      <div>
         <p className="story-timeline-content">
           {content}
         </p>
-        <div className="story-timeline-play">
-          <Link to={url}>
-            Listen
+      </div>
+      <div className="story-timeline-play pull-right">
+          <Link to={url} className="btn btn-lg btn-primary">
             <i className="glyphicon glyphicon-play" />
           </Link>
         </div>
-      </div>
     </div>
   </div>);
 }
@@ -80,7 +79,7 @@ export function LandmarkCard({id, title, metStart}) {
           {title}
         </div>
         <div className="story-timeline-time">
-          <HumanReadableMs ms={metStart} />
+          {HumanReadableMs({ms: metStart})}
         </div>
       </div>
     </div>
@@ -89,7 +88,8 @@ export function LandmarkCard({id, title, metStart}) {
 
 export default class StoryTimeline extends Component {
   renderCards() {
-    const {landmarks} = this.props;
+    // const {landmarks} = this.props;
+    let landmarks = []; //TEMPORARY UNTIL WE GET LANDMARKS SORTED OUT :)
     const moments = this.props.story.momentList;
     const cards = _.sortBy(moments.concat(landmarks), "metStart");
     return cards.map((card) => {
@@ -100,7 +100,7 @@ export default class StoryTimeline extends Component {
             id={card.id}
             title={card.title}
             content={card.description}
-            metStart={card.metStart}
+            metStart={card.met_start}
             time={card.time} />
         );
       } else {
@@ -109,7 +109,7 @@ export default class StoryTimeline extends Component {
             key={card.id}
             id={card.id}
             title={card.title}
-            metStart={card.metStart}
+            metStart={card.met_start}
             time={card.time} />
         );
       }
