@@ -23,7 +23,7 @@ export default class StoryViewer extends Component {
     }
 
     return (
-      <div className="row">
+      <div>
         <StoryTimeline
           story={currentStory}
           landmarks={dummyLandmarks}/>
