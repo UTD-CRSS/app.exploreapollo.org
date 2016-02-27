@@ -58,7 +58,7 @@ const onPositionChange = throttle(function (loadAudio, e) {
   loadAudio({
     time: currentTime
   });
-}, 300);
+}, 300, {trailing: false});
 
 function setPlaying(loadAudio, playing) {
   loadAudio({
@@ -69,7 +69,14 @@ function setPlaying(loadAudio, playing) {
 export default class MomentPlayer extends Component {
 
   render() {
-    const {url, playing, time, loadAudio} = this.props;
+    const {
+      url,
+      playing,
+      time,
+      loadAudio,
+      onEnd,
+      autoplay
+    } = this.props;
     const surferOptions = {
       normalize: true
     };
@@ -88,6 +95,12 @@ export default class MomentPlayer extends Component {
           onPosChange={onPositionChange.bind(this, loadAudio)}
           playing={playing}
           options={surferOptions}
+          onFinish={onEnd}
+          onReady={function () {
+            if (autoplay) {
+              setPlaying(loadAudio, true);
+            }
+          }}
         />
       </AudioPlayer>
     </div>);

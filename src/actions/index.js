@@ -4,13 +4,14 @@ import {isArray} from "lodash";
 
 import config from "../../config";
 
+import {fromJS} from "immutable";
+
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
 export const FETCH_METRICS = "FETCH_METRICS";
 export const RECEIVE_METRICS = "RECEIVE_METRICS";
 
-function receiveMoments(args) {
-  const {moments} = args;
+function receiveMoments({moments}) {
   return {
     type: RECEIVE_MOMENT,
     moments
@@ -32,6 +33,7 @@ export function loadMoments(args) {
         return response.json();
       })
       .then((moment) => {
+        moment.media = fromJS(moment.media);
         dispatch(receiveMoments({
           moments: moment
         }));
@@ -67,8 +69,7 @@ export function loadMetrics({momentId}) {
 
 export const RECEIVE_STORY = "RECEIVE_STORY";
 export const FETCH_STORY = "FETCH_STORY";
-function receiveStory(args) {
-  const {story} = args;
+function receiveStory({story}) {
   return {
     type: RECEIVE_STORY,
     story
@@ -100,8 +101,7 @@ export function loadStory(args) {
 
 export const RECEIVE_STORIES = "RECEIVE_STORIES";
 export const FETCH_STORIES = "FETCH_STORIES";
-function receiveStories(args) {
-  const {stories} = args;
+function receiveStories({stories}) {
   return {
     type: RECEIVE_STORIES,
     stories
@@ -174,24 +174,24 @@ export const RECEIVE_AUDIO = "RECEIVE_AUDIO";
 // }
 
 function receiveAudio({
-  audio, time, playing
+  time, playing, momentId
 }) {
   return {
     type: RECEIVE_AUDIO,
     playing,
-    audio,
-    time
+    time,
+    momentId
   };
 }
 
 export function loadAudio({
-  audio, time, playing
+  time, playing, momentId
 }) {
   return dispatch => {
     dispatch(receiveAudio({
       playing,
-      audio,
-      time
+      time,
+      momentId
     }));
   };
 }

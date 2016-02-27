@@ -4,7 +4,7 @@ import {Link} from "react-router";
 import {HumanReadableMs} from "../";
 
 function PlayAllButton({storyId, momentId}) {
-  const url = "/moments/moment/" + momentId + "?story=" + storyId;
+  const url = `/stories/story/${storyId}/moment/${momentId}`;
   return (<div>
     <div className="story-timeline-play">
       <Link className="btn btn-lg btn-primary" to={url}>
@@ -45,8 +45,8 @@ export function StoryCard({
   );
 }
 
-export function MomentCard({id, title, metStart, content}) {
-  const url = "/moments/moment/" + id;
+export function MomentCard({id, storyId, title, metStart, content}) {
+  const url = `/stories/story/${storyId}/moment/${id}`;
   return (<div className="story-timeline-item story-item">
     <div className="story-timeline-item-node" />
     <div className="story-timeline-item-content clearfix">
@@ -98,6 +98,7 @@ export default class StoryTimeline extends Component {
           <MomentCard
             key={card.id}
             id={card.id}
+            storyId={this.props.story.id}
             title={card.title}
             content={card.description}
             metStart={card.met_start}
