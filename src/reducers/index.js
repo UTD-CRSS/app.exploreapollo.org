@@ -52,9 +52,7 @@ function story(state = initialStoryState, action = {}) {
       return Object.assign(
         {},
         state,
-        {
-          loading: false
-        },
+        {loading: false},
         action.story
       );
     default:
@@ -101,14 +99,14 @@ function transcripts(state = initialTranscriptState, action = {}) {
 function audio(state = initialAudioState, action = {}) {
   switch(action.type) {
     case ActionTypes.FETCH_AUDIO:
-      return Object.assign({}, state);
+      return Object.assign({}, state, {time: null, playing: false});
     case ActionTypes.RECEIVE_AUDIO:
       return Object.assign(
         {},
         state,
         _.omitBy({
           loading: false,
-          audio: action.audio,
+          momentId: action.momentId,
           playing: action.playing,
           time: action.time
         }, _.isUndefined)

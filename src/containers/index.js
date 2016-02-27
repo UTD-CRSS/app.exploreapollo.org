@@ -6,3 +6,4 @@ export Stories from "./Stories";
 export StoryViewer from "./StoryViewer";
 export NoMatch from "./NoMatch";
 export Settings from "./Settings";
+export PlaylistViewer from "./PlaylistViewer";
