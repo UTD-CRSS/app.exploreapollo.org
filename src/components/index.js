@@ -8,3 +8,4 @@ export HumanReadableMs from "./humanReadableMs.js";
 export MomentWidgets from "./MomentWidgets";
 export WordCountGraph from "./WordCountGraph";
 export LoadingIndicator from "./LoadingIndicator";
+export SlideShowPanel from "./SlideShowPanel";

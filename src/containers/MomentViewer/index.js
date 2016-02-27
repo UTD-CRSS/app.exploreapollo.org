@@ -16,7 +16,8 @@ import {
   Timeline,
   MomentWidgets,
   WordCountGraph,
-  LoadingIndicator
+  LoadingIndicator,
+  SlideShowPanel,
 } from "../../components";
 
 import getActiveIndex from "./getActiveIndex";
@@ -112,10 +113,21 @@ class MomentViewer extends Component {
       title: "Word Count"
     };
 
+    const wordCountWidget = metrics.loading
+      ? <LoadingIndicator {...wordCountProps} />
+      : <WordCountGraph data={metrics.WordCount} {...wordCountProps} />;
+
+    const slideShowProps = {
+      key: "slideShow",
+      title: "Media"
+    };
+    const slideShowWidget = loading
+      ? <LoadingIndicator {...slideShowProps} />
+      : <SlideShowPanel images={currentMoment.media} {...slideShowProps} />;
+
     const momentWidgets = [
-      metrics.loading
-        ? <LoadingIndicator {...wordCountProps} />
-        : <WordCountGraph data={metrics.WordCount} {...wordCountProps} />
+      slideShowWidget,
+      wordCountWidget
     ];
 
     return (
