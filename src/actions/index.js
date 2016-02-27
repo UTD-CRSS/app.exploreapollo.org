@@ -4,6 +4,8 @@ import {isArray} from "lodash";
 
 import config from "../../config";
 
+import {fromJS} from "immutable";
+
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
 export const FETCH_METRICS = "FETCH_METRICS";
@@ -31,6 +33,7 @@ export function loadMoments(args) {
         return response.json();
       })
       .then((moment) => {
+        moment.media = fromJS(moment.media);
         dispatch(receiveMoments({
           moments: moment
         }));
