@@ -9,8 +9,7 @@ export const FETCH_MOMENT = "FETCH_MOMENT";
 export const FETCH_METRICS = "FETCH_METRICS";
 export const RECEIVE_METRICS = "RECEIVE_METRICS";
 
-function receiveMoments(args) {
-  const {moments} = args;
+function receiveMoments({moments}) {
   return {
     type: RECEIVE_MOMENT,
     moments
@@ -67,8 +66,7 @@ export function loadMetrics({momentId}) {
 
 export const RECEIVE_STORY = "RECEIVE_STORY";
 export const FETCH_STORY = "FETCH_STORY";
-function receiveStory(args) {
-  const {story} = args;
+function receiveStory({story}) {
   return {
     type: RECEIVE_STORY,
     story
@@ -100,8 +98,7 @@ export function loadStory(args) {
 
 export const RECEIVE_STORIES = "RECEIVE_STORIES";
 export const FETCH_STORIES = "FETCH_STORIES";
-function receiveStories(args) {
-  const {stories} = args;
+function receiveStories({stories}) {
   return {
     type: RECEIVE_STORIES,
     stories
