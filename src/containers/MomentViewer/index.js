@@ -22,16 +22,26 @@ import {
 import getActiveIndex from "./getActiveIndex";
 
 class MomentViewer extends Component {
+
+  fetch(props) {
+    props.loadAudio({
+      time: 0,
+      momentId: props.currentMomentId,
+      playing: false
+    });
+    props.loadMoments({momentId: props.currentMomentId});
+    props.loadTranscripts({momentId: props.currentMomentId});
+    props.loadMetrics({momentId: props.currentMomentId});
+  }
+
   componentWillMount() {
-    this.props.loadMoments({
-      momentId: this.props.currentMomentId
-    });
-    this.props.loadTranscripts({
-      momentId: this.props.currentMomentId
-    });
-    this.props.loadMetrics({
-      momentId: this.props.currentMomentId
-    });
+    this.fetch(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentMomentId !== this.props.currentMomentId) {
+      this.fetch(nextProps);
+    }
   }
 
   render() {
@@ -41,7 +51,9 @@ class MomentViewer extends Component {
       loading,
       currentTranscripts,
       loadAudio,
-      metrics
+      metrics,
+      onEnd,
+      autoplay
     } = this.props;
 
     if (loading) {
@@ -57,7 +69,7 @@ class MomentViewer extends Component {
       </div>;
     }
 
-    const {time, playing, audio} = this.props.currentAudio;
+    const {time, playing} = this.props.currentAudio;
     let {transcripts} = currentTranscripts;
 
     //this is bad, but necessary until I can think of a clever solution
@@ -113,10 +125,11 @@ class MomentViewer extends Component {
           url={audioUrl}
           start={metStart}
           end={metEnd}
-          audio={audio}
           time={time}
           playing={playing}
           loadAudio={loadAudio}
+          autoplay={autoplay}
+          onEnd={onEnd}
           missionLength={missionLength} />
         <div style={{marginTop: "0.5em"}} className="timeline-panel row">
           <Timeline
@@ -133,21 +146,22 @@ class MomentViewer extends Component {
 
 function mapStateToProps(state) {
   const {audio, metrics} = state;
-  const { id } = state.router.params;
+  const { momentId } = state.router.params;
   const { loading, entities } = state.moments;
-  if (loading) {
+  const { moments, missions } = entities;
+  const moment = get(moments, momentId);
+  if (loading || !moment) {
     return {
-      currentMomentId: id,
-      loading
+      currentMomentId: momentId,
+      loading: true,
+      currentAudio: audio
     };
   }
   const transcripts = state.transcripts;
-  const { moments, missions } = entities;
-  const moment = get(moments, id);
   const mission = get(missions, moment.mission);
 
   return {
-    currentMomentId: id,
+    currentMomentId: momentId,
     loading,
     currentMission: mission,
     currentMoment: moment,

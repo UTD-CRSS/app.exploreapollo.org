@@ -34,16 +34,16 @@ export default class StoryViewer extends Component {
 
 
 function mapStateToProps(state) {
-  const { id } = state.router.params;
+  const { storyId } = state.router.params;
   const story = state.story;
   if (story.loading) {
     return {
-      currentStoryId: id,
+      currentStoryId: storyId,
       loading: story.loading
     };
   }
   return {
-    currentStoryId: id,
+    currentStoryId: storyId,
     loading: story.loading,
     currentStory: story
   };
