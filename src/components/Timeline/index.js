@@ -26,7 +26,7 @@ export function TimelineMessage({name, text, active, startTime, clickEvent}) {
 }
 
 function TimelineList({timeline, clickEvent}) {
-  if (!timeline || timeline.size < 1) {
+  if (!timeline || timeline.length < 1) {
     return (
       <div testRef="errorMessage" className="alert alert-info">No Messages</div>
     );
