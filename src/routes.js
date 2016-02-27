@@ -13,16 +13,20 @@ import {
   Stories,
   StoryViewer,
   App,
-  Settings
+  Settings,
+  PlaylistViewer
 } from "./containers";
 
 export default (
     <Route name="app" path="/" component={App}>
       <IndexRoute component={Dashboard} />
       <Route path="settings" component={Settings} />
-      <Route path="moments/moment/:id" component={MomentViewer} />
+      <Route path="moments/moment/:momentId" component={MomentViewer} />
       <Route path="moments" component={Moments} />
-      <Route path="stories/story/:id" component={StoryViewer} />
+      <Route path="stories/story/:storyId" component={StoryViewer} />
+      <Route path="stories/story/:storyId/moment" component={PlaylistViewer}>
+        <Route path=":momentId" component={MomentViewer} />
+      </Route>
       <Route path="stories" component={Stories} />
       <Route path="*" component={NoMatch}/>
     </Route>

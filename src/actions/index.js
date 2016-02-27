@@ -174,24 +174,24 @@ export const RECEIVE_AUDIO = "RECEIVE_AUDIO";
 // }
 
 function receiveAudio({
-  audio, time, playing
+  time, playing, momentId
 }) {
   return {
     type: RECEIVE_AUDIO,
     playing,
-    audio,
-    time
+    time,
+    momentId
   };
 }
 
 export function loadAudio({
-  audio, time, playing
+  time, playing, momentId
 }) {
   return dispatch => {
     dispatch(receiveAudio({
       playing,
-      audio,
-      time
+      time,
+      momentId
     }));
   };
 }
