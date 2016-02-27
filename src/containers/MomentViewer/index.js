@@ -17,7 +17,7 @@ import {
   MomentWidgets,
   WordCountGraph,
   LoadingIndicator,
-  SlideShowPanel,
+  SlideShowPanel
 } from "../../components";
 
 import getActiveIndex from "./getActiveIndex";
