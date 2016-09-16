@@ -7,7 +7,7 @@ import "./index.scss";
 import Spinner from "react-spinner";
 
 import Wavesurfer from "react-wavesurfer";
-import {PlayButton, wrapAudioPlayerElements, AudioPlayer} from "../../components/MomentPlayer";
+import {PlayButton, AudioPlayer} from "../../components/MomentPlayer";
 
 import {
   loadMoments,
@@ -108,7 +108,6 @@ class DJ extends Component {
       loading,
       currentTranscripts,
       loadAudio,
-      metrics,
       onEnd,
       autoplay
     } = this.props;
