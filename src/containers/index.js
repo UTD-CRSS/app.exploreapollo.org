@@ -7,3 +7,4 @@ export StoryViewer from "./StoryViewer";
 export NoMatch from "./NoMatch";
 export Settings from "./Settings";
 export PlaylistViewer from "./PlaylistViewer";
+export DJ from "./DJ";

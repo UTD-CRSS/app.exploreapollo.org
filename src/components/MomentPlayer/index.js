@@ -4,7 +4,7 @@ import Wavesurfer from "react-wavesurfer";
 import "./index.scss";
 import {throttle} from "lodash";
 
-function wrapAudioPlayerElements(child) {
+export function wrapAudioPlayerElements(child) {
   const PlayButtonName = PlayButton.name;
   const WavesurferName = Wavesurfer.name;
   const height = "128px";
@@ -75,22 +75,27 @@ export default class MomentPlayer extends Component {
       time,
       loadAudio,
       onEnd,
-      autoplay
+      autoplay,
+      title,
+      titleEl,
+      volume
     } = this.props;
     const surferOptions = {
       normalize: true
     };
+
     return (<div className="moment-player-panel">
-      <h1 className="text-center">
-        Now Playing: {this.props.title}
-      </h1>
+      {titleEl ? titleEl(title) : <h1 className="text-center">
+        Now Playing: {title}
+      </h1>}
       <AudioPlayer>
         <PlayButton
-          isPlaying={this.props.playing}
+          isPlaying={playing}
           play={setPlaying.bind(this, loadAudio, true)}
           pause={setPlaying.bind(this, loadAudio, false)} />
         <Wavesurfer
           audioFile={url}
+          volume={volume}
           pos={time}
           onPosChange={onPositionChange.bind(this, loadAudio)}
           playing={playing}
