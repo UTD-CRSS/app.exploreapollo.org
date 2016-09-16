@@ -7,7 +7,7 @@ import {
 
 import {MomentList} from "../../components";
 
-export default class Moments extends Component {
+export class Moments extends Component {
   componentWillMount() {
     this.props.loadMoments({});
   }
