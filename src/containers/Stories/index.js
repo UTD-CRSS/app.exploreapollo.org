@@ -8,7 +8,7 @@ import {
 import {StoryList} from "../../components";
 import Spinner from "react-spinner";
 
-export default class Stories extends Component {
+export class Stories extends Component {
   componentWillMount() {
     this.props.loadStories();
   }

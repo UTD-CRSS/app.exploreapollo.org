@@ -6,7 +6,7 @@ import {loadStory} from "../../actions";
 import {StoryTimeline} from "../../components";
 import {dummyLandmarks} from "../../utils/dummyData";
 
-export default class StoryViewer extends Component {
+export class StoryViewer extends Component {
   componentWillMount() {
     const {loadStory, currentStoryId} = this.props;
     loadStory({
