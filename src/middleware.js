@@ -1,3 +1,5 @@
+/*global ga*/
+
 // TODO: Fix double event on moment page load.
 
 import { RECEIVE_AUDIO } from "./actions"; 
