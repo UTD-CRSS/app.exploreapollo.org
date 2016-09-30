@@ -1,6 +1,7 @@
 /*global ga*/
 
 import { RECEIVE_AUDIO } from "./actions";
+import {throttle, isFunction} from "lodash";
 
 // Tracks page-views and audio play times.
 export function googleAnalytics(store) {
@@ -14,58 +15,28 @@ export function googleAnalytics(store) {
   const gaPlayTimeEventAction = "playTime";
   const gaPlayTimeEventIntervalInMilliseconds = 5000;
 
-  // Sends events to Google Analytics periodically to track audio play time.
-  let playTimeEventInterval = null;
-
-  // Tracks play time when audio is stopped, which clears playTimeEventInterval.
-  let playTimeEventIntervalStartTimeInMilliseconds = null;
-
   // Some helper functions.
-  function sendPlayTimeEvent(playTimeInMilliseconds) {
-    ga("send", "event", gaMomentEventCategory, gaPlayTimeEventAction, store.getState().audio.momentId, playTimeInMilliseconds);
-  }
-  function startSendingPlayTimeEvents() {
-    if(!playTimeEventInterval) {
-      playTimeEventIntervalStartTimeInMilliseconds = (new Date()).getTime();
-
-      playTimeEventInterval = setInterval(() => {
-        sendPlayTimeEvent(gaPlayTimeEventIntervalInMilliseconds);
-        playTimeEventIntervalStartTimeInMilliseconds = (new Date()).getTime();
-      }, gaPlayTimeEventIntervalInMilliseconds);
+  const sendPlayTimeEvent = throttle(function(playTimeInMilliseconds) {
+    if (isFunction(ga)) {
+      ga("send", "event", gaMomentEventCategory, gaPlayTimeEventAction, store.getState().audio.momentId, playTimeInMilliseconds);
     }
-  }
-  function stopSendingPlayTimeEvents() {
-    if(playTimeEventInterval) {
-      clearInterval(playTimeEventInterval);
-
-      // Track the time-played since the most recent interval 
-      const timeInMilliseconds = (new Date()).getTime();
-      sendPlayTimeEvent(timeInMilliseconds - playTimeEventIntervalStartTimeInMilliseconds);
-
-      playTimeEventInterval = null;
-      playTimeEventIntervalStartTimeInMilliseconds = null;
-    }
-  }
-
+  }, gaPlayTimeEventIntervalInMilliseconds);
   // Return a function handling actions.
   return next => action => {
     switch (action.type) {
       case ROUTER_DID_CHANGE:
-        // Audio has stopped, so stop sending play time events.
-        stopSendingPlayTimeEvents();
-
         // Send a page-view.
-        ga("set", "page", action.payload.location.pathname + action.payload.location.search);
-        ga("send", "pageview");
+        if (isFunction(ga)) {
+          ga("set", "page", action.payload.location.pathname + action.payload.location.search);
+          ga("send", "pageview");
+        }
 
         break;
       case RECEIVE_AUDIO:
-        if(action.playing) {
+        const isPlaying = !!store.getState().audio.playing || !!action.playing;
+        if(isPlaying && action.time) {
           // Audio has started playing, so start sending play time events.
-          startSendingPlayTimeEvents();
-        } else if(action.playing === false) {
-          // Audio has stopped playing, so stop sending play time events.
-          stopSendingPlayTimeEvents();
+          sendPlayTimeEvent(action.time);
         }
 
         break;
