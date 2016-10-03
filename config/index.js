@@ -1,9 +1,9 @@
-import defaultConfig from "./default";
+var defaultConfig = require("./default");
 
 // TODO: more robust config management
-const specificConfig = require(`./${process.env.APP_ENV}.js`).default;
+const specificConfig = require(`./${process.env.APP_ENV || "development"}.js`);
 
-export default Object.assign(
+module.exports = Object.assign(
   {},
   defaultConfig,
   specificConfig

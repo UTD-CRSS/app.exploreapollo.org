@@ -1,2 +1,2 @@
 // development config
-export default {};
+module.exports = {};
