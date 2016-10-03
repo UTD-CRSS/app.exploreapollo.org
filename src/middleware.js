@@ -1,7 +1,6 @@
-/*global ga*/
-
 import { RECEIVE_AUDIO } from "./actions";
 import {throttle, isFunction} from "lodash";
+import ga from "ga";
 
 // Tracks page-views and audio play times.
 export function googleAnalytics(store) {
@@ -21,6 +20,7 @@ export function googleAnalytics(store) {
       ga("send", "event", gaMomentEventCategory, gaPlayTimeEventAction, store.getState().audio.momentId, playTimeInMilliseconds);
     }
   }, gaPlayTimeEventIntervalInMilliseconds);
+  
   // Return a function handling actions.
   return next => action => {
     switch (action.type) {
@@ -34,7 +34,7 @@ export function googleAnalytics(store) {
         break;
       case RECEIVE_AUDIO:
         const isPlaying = !!store.getState().audio.playing || !!action.playing;
-        if(isPlaying && action.time) {
+        if (isPlaying && action.time) {
           // Audio has started playing, so start sending play time events.
           sendPlayTimeEvent(action.time);
         }
