@@ -2,6 +2,7 @@
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var webpack = require("webpack");
+var config = require("./config");
 
 var isProduction = process.env.NODE_ENV === "production";
 
@@ -39,7 +40,8 @@ module.exports = {
       title: "Explore Apollo",
       template: "index.html", // Load a custom template
       inject: "body", //scripts are injected to here
-      favicon: "./favicon.ico"
+      favicon: "./favicon.ico",
+      GoogleAnalyticsCode: config.GoogleAnalyticsCode
     }),
     new webpack.ProvidePlugin({
       fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
@@ -85,5 +87,9 @@ module.exports = {
       { test: /\.eot$/,    loader: "file-loader" },
       { test: /\.svg$/,    loader: "file-loader" }
     ]
+  },
+
+  externals: {
+    "ga": "ga"
   }
 };
