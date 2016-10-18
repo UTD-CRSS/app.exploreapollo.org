@@ -19,15 +19,36 @@ export class AppHeader extends Component {
               </Link>
             </li>
           </ul>
-          <ul className="nav navbar-nav navbar-right">
-            <li>
-              <Link to="/settings">
-                Settings
-              </Link>
-            </li>
-          </ul>
         </div>
       </nav>
+    );
+  }
+}
+
+export class AppFooter extends Component {
+  render() {
+    return (
+      <footer className="container-fluid">
+        <div className="row">
+          <div className="col-md-4 col-md-offset-2">
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/stories?mission=apollo11">Apollo 11</Link></li>
+              <li><a href="https://exploreapollo.org/">Project Homepage</a></li>
+            </ul>
+          </div>
+          
+          <div className="col-md-4 col-md-offset-1">
+            <ul>
+              <li><a href="https://exploreapollo.org/about/">About Us</a></li>
+              <li><a href="https://github.com/UTD-CRSS">GitHub</a></li>
+              <li><Link to="/settings">Settings</Link></li>
+            </ul>
+          </div>
+          
+          <p>ExploreApollo.org uses signal, speech and language processing algorithms to extract new information, merge information sources, and provide a new perspective on the NASA Apollo missions.</p>
+        </div>
+      </footer>
     );
   }
 }
@@ -41,6 +62,7 @@ export default class App extends Component {
         <div className="app-panel">
           {this.props.children}
         </div>
+        <AppFooter/>
       </div>
     );
   }
