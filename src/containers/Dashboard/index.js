@@ -5,19 +5,48 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <div className="row">
+        <div className="row" style={{marginBottom: "2em"}}>
           <img src="http://www.wallpapersxl.com/wallpapers/1600x900/astronaut/208100/astronaut-outer-space-moon-nasa-astronauts-free-208100.jpg" alt="Apollo 11" style={{width: "100%", maxWidth: "1600px"}} />
 
-          <div className="panel panel-default">
+          <div className="panel panel-default" style={{backgroundColor: "rgba(0, 0, 0, 0.5)", color: "#fff", position: "absolute", left: "20px", top: "30%"}}>
             <div className="panel-body">
-              <h1>Apollo 11</h1>
-              <p>One small step for man, one giant leap for mankind.</p>
-              <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                <h1>Apollo 11</h1>
+                <p>One small step for man, one giant leap for mankind.</p>
+                <Link className="btn btn-lg btn-primary" style={{backgroundColor: "rgba(0, 0, 0, 0.5)", borderColor: "#fff"}} to="/stories?mission=apollo11">Launch</Link>
             </div>
           </div>
         </div>
       </div>
     );
+
+    /*
+    <div className="container">
+      <div className="panel panel-default">
+        <div className="panel-body">
+          <div className="row">
+            <div className="col-sm-4">
+              <img style={{maxWidth: "100%"}} src="https://exploreapollo-data.s3.amazonaws.com/static-photos/apollo11.jpg" />
+            </div>
+
+            <div className="col-sm-8">
+              <h1>Apollo 11</h1>
+              <p>One small step for man, one giant leap for mankind.</p>
+
+              <h2>Featured Stories</h2>
+              <ul style={{listStyleType: "none", padding: 0}}>
+                <li><a href="/"><i className="glyphicon glyphicon-play-circle" style={{fontSize: "1.75em", verticalAlign: "bottom", paddingRight: "0.5em"}} />asdf</a></li>
+                <li><a href="/"><i className="glyphicon glyphicon-play-circle" style={{fontSize: "1.75em", verticalAlign: "bottom", paddingRight: "0.5em"}} />asdf</a></li>
+                <li><a href="/"><i className="glyphicon glyphicon-play-circle" style={{fontSize: "1.75em", verticalAlign: "bottom", paddingRight: "0.5em"}} />asdf</a></li>
+                <li><a href="/"><i className="glyphicon glyphicon-play-circle" style={{fontSize: "1.75em", verticalAlign: "bottom", paddingRight: "0.5em"}} />asdf</a></li>
+              </ul>
+
+              <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    */
 
     /*
     return (
