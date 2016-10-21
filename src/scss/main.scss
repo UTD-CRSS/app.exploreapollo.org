@@ -12,9 +12,19 @@ body {
   background-color: #000;
   border-color: #000;
   margin-bottom: 0;
+  z-index: 1000;
+
+  .navbar-header .navbar-brand,
+  .navbar-nav > li > a {
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 }
 
-// App containe
+// App container
 .app-container {
   height: 100%;
   display: flex;
@@ -24,6 +34,67 @@ body {
     width: 100%;
     flex: 1;
     position: relative;
+  }
+}
+
+// Footer
+footer {
+  position: relative;
+  padding: 80px 0 20px 0;
+  
+  .background {
+    background: url('http://weknowyourdreams.com/images/stars/stars-07.jpg');
+    opacity: 0.3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+
+  .footer-links {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 1em;
+
+      a {
+        color: #fff;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  .footer-text {
+    color: #fff;
+    text-align: center;
+    margin-top: 2em;
+  }
+}
+
+// Homepage mission selector
+.mission-selector {
+  position: relative;
+
+  .panel {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    z-index: 1000;
+
+    & .btn {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-color: #fff;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+    }
   }
 }
 
@@ -168,6 +239,16 @@ body {
       top: 19px;
       z-index: 1000;
     }
+  }
+}
+
+.fade-to-black {
+  &.up {
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+  }
+
+  &.down {
+    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
   }
 }
 

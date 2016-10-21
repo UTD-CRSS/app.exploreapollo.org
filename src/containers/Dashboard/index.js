@@ -4,17 +4,19 @@ import {Link} from "react-router";
 export default class Dashboard extends Component {
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row" style={{marginBottom: "2em"}}>
+      <div className="container-fluid" style={{padding: 0, marginBottom: "2em"}}>
+        <div className="mission-selector">
           <img src="http://www.wallpapersxl.com/wallpapers/1600x900/astronaut/208100/astronaut-outer-space-moon-nasa-astronauts-free-208100.jpg" alt="Apollo 11" style={{width: "100%", maxWidth: "1600px"}} />
 
-          <div className="panel panel-default" style={{backgroundColor: "rgba(0, 0, 0, 0.5)", color: "#fff", position: "absolute", left: "20px", top: "30%"}}>
+          <div className="panel panel-default" style={{position: "absolute", left: "20px", top: "30%"}}>
             <div className="panel-body">
                 <h1>Apollo 11</h1>
                 <p>One small step for man, one giant leap for mankind.</p>
-                <Link className="btn btn-lg btn-primary" style={{backgroundColor: "rgba(0, 0, 0, 0.5)", borderColor: "#fff"}} to="/stories?mission=apollo11">Launch</Link>
+                <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
             </div>
           </div>
+
+          <div className="fade-to-black up" style={{position: "absolute", left: 0, bottom: 0, width: "100%", height: "50%"}} />
         </div>
       </div>
     );
