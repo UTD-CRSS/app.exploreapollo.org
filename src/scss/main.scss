@@ -13,6 +13,7 @@ body {
   border-color: #000;
   margin-bottom: 0;
   z-index: 1000;
+  min-height: inherit;
 
   .navbar-header .navbar-brand,
   .navbar-nav > li > a {
@@ -77,10 +78,7 @@ footer {
   }
 }
 
-// Homepage mission selector
-.mission-selector {
-  position: relative;
-
+.dashboard-container {
   .panel {
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
@@ -95,6 +93,20 @@ footer {
         color: #000;
       }
     }
+  }
+}
+
+// Homepage mission selector
+.mission-selector {
+  position: relative;
+}
+
+.featured-stories {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 0.5em;
   }
 }
 

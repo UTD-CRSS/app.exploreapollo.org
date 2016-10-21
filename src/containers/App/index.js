@@ -34,7 +34,7 @@ export class AppFooter extends Component {
 
         <div className="container">
           <div className="row">
-            <div className="col-md-4 col-md-offset-2">
+            <div className="col-sm-4 col-sm-offset-2">
               <ul className="footer-links">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/stories?mission=apollo11">Apollo 11</Link></li>
@@ -42,7 +42,7 @@ export class AppFooter extends Component {
               </ul>
             </div>
             
-            <div className="col-md-4 col-md-offset-1">
+            <div className="col-sm-4 col-sm-offset-1">
               <ul className="footer-links">
                 <li><a href="https://exploreapollo.org/about/">About Us</a></li>
                 <li><a href="https://github.com/UTD-CRSS">GitHub</a></li>
