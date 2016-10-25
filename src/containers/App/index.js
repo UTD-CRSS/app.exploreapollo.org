@@ -18,6 +18,11 @@ export class AppHeader extends Component {
                 Stories
               </Link>
             </li>
+            <li>
+              <Link to="/">
+                Surprise Me!
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>

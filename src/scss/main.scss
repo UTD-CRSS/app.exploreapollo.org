@@ -21,7 +21,16 @@ body {
 
     &:hover {
       color: #fff;
+      text-decoration: underline;
     }
+  }
+
+  .navbar-header .navbar-brand {
+    font-size: 32px;
+  }
+
+  .navbar-nav > li > a {
+    font-size: 20px;
   }
 }
 
@@ -44,7 +53,8 @@ footer {
   padding: 80px 0 20px 0;
   
   .background {
-    background: url('http://weknowyourdreams.com/images/stars/stars-07.jpg');
+    background: url('https://s3.amazonaws.com/exploreapollo-data/static-photos/stars.jpg');
+    background-position-y: -340px;
     opacity: 0.3;
     position: absolute;
     left: 0;
@@ -55,6 +65,7 @@ footer {
   }
 
   .footer-links {
+    font-size: 18px;
     list-style-type: none;
     padding: 0;
 
@@ -73,6 +84,7 @@ footer {
 
   .footer-text {
     color: #fff;
+    font-size: 12px;
     text-align: center;
     margin-top: 2em;
   }

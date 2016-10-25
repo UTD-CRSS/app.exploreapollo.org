@@ -18,11 +18,11 @@ export default class Dashboard extends Component {
       <div className="dashboard-container">
         <div className="container-fluid hidden-xs" style={{padding: 0, marginBottom: "2em"}}>
           <div className="mission-selector">
-            <img src="http://www.wallpapersxl.com/wallpapers/1600x900/astronaut/208100/astronaut-outer-space-moon-nasa-astronauts-free-208100.jpg" alt="Apollo 11" style={{width: "100%", maxWidth: "1600px"}} />
+            <img src="https://s3.amazonaws.com/exploreapollo-data/static-photos/apollo-11-astronaut.jpg" alt="Apollo 11" style={{display: "block", width: "100%", maxWidth: "1600px", margin: "0 auto"}} />
 
             <div className="panel panel-default" style={{position: "absolute", left: "20px", top: "30%", maxWidth: "35%"}}>
               <div className="panel-body">
-                  <h1>Apollo 11</h1>
+                  <h1 style={{marginTop: 0}}>Apollo 11</h1>
                   <p>One small step for man, one giant leap for mankind.</p>
                   <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
               </div>
