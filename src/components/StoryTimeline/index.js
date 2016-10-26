@@ -5,20 +5,24 @@ import {HumanReadableMs} from "../";
 
 function PlayAllButton({storyId, momentId}) {
   const url = `/stories/story/${storyId}/moment/${momentId}`;
-  return (<div>
-    <div className="story-timeline-play">
-      <Link className="btn btn-lg btn-primary" to={url}>
-        Play All
-        <i className="glyphicon glyphicon-play" />
-      </Link>
+  return (
+    <div>
+      <div className="story-timeline-play">
+        <Link className="btn btn-lg btn-primary" to={url}>
+          Play All
+          <i className="glyphicon glyphicon-play" />
+        </Link>
+      </div>
     </div>
-  </div>);
+  );
 }
 
 function NoMomentsNotice() {
-  return (<div className="alert alert-info">
-    This story does not have any moments yet
-  </div>);
+  return (
+    <div className="alert alert-info">
+      This story does not have any moments yet
+    </div>
+  );
 }
 
 export function StoryCard({
@@ -47,43 +51,47 @@ export function StoryCard({
 
 export function MomentCard({id, storyId, title, metStart, content}) {
   const url = `/stories/story/${storyId}/moment/${id}`;
-  return (<div className="story-timeline-item story-item">
-    <div className="story-timeline-item-node" />
-    <div className="story-timeline-item-content clearfix">
-      <div className="pull-left">
-        <div className="story-timeline-title">
-          {title}
+  return (
+    <div className="story-timeline-item story-item">
+      <div className="story-timeline-item-node" />
+      <div className="story-timeline-item-content clearfix">
+        <div className="pull-left">
+          <div className="story-timeline-title">
+            {title}
+          </div>
+          <div className="story-timeline-time">
+            {HumanReadableMs({ms: metStart, date: true})}
+          </div>
+          <p className="story-timeline-content">
+            {content}
+          </p>
         </div>
-        <div className="story-timeline-time">
-          {HumanReadableMs({ms: metStart, date: true})}
-        </div>
-        <p className="story-timeline-content">
-          {content}
-        </p>
+        <div className="story-timeline-play pull-right">
+            <Link to={url} className="btn btn-lg btn-primary">
+              <i className="glyphicon glyphicon-play" />
+            </Link>
+          </div>
       </div>
-      <div className="story-timeline-play pull-right">
-          <Link to={url} className="btn btn-lg btn-primary">
-            <i className="glyphicon glyphicon-play" />
-          </Link>
-        </div>
     </div>
-  </div>);
+  );
 }
 
 export function LandmarkCard({id, title, metStart}) {
-  return (<div key={title+id}className="story-timeline-item landmark-item">
-    <div className="story-timeline-item-node"></div>
-    <div className="story-timeline-item-content">
-      <div>
-        <div className="story-timeline-title">
-          {title}
-        </div>
-        <div className="story-timeline-time">
-          {HumanReadableMs({ms: metStart})}
+  return (
+    <div key={title+id}className="story-timeline-item landmark-item">
+      <div className="story-timeline-item-node"></div>
+      <div className="story-timeline-item-content">
+        <div>
+          <div className="story-timeline-title">
+            {title}
+          </div>
+          <div className="story-timeline-time">
+            {HumanReadableMs({ms: metStart})}
+          </div>
         </div>
       </div>
     </div>
-  </div>);
+  );
 }
 
 export default class StoryTimeline extends Component {
