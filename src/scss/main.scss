@@ -114,12 +114,6 @@ footer {
 
 // Viewer cotainer
 .moment-viewer-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  height: 100%;
-  width: 100%;
-  position: absolute;
   padding: 0 15px;
 
   .moment-player-panel {
@@ -146,6 +140,7 @@ footer {
 .timeline-container {
   display: flex;
   flex-direction: column;
+  max-height: 320px;
 
   .panel-heading {
     box-sizing: content-box;
@@ -228,18 +223,6 @@ footer {
       }
       .story-timeline-play {
         font-size: 1.5em;
-      }
-    }
-    &.story-item {
-      .story-timeline-item-content {
-        border: 1px solid #ddd;
-        background-color: #fafafa;
-        border-radius: 4px;
-      }
-    }
-    &.landmark-item {
-      .story-timeline-item-content {
-
       }
     }
     .story-timeline-item-node {
