@@ -36,7 +36,7 @@ export function googleAnalytics(store) {
         const isPlaying = !!store.getState().audio.playing || !!action.playing;
         if (isPlaying && action.time) {
           // Audio has started playing, so start sending play time events.
-          sendPlayTimeEvent(action.time);
+          sendPlayTimeEvent(Math.round(1000 * action.time));
         }
 
         break;
