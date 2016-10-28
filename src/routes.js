@@ -15,6 +15,7 @@ import {
   App,
   Settings,
   PlaylistViewer,
+  Search,
   DJ
 } from "./containers";
 
@@ -29,6 +30,7 @@ export default (
         <Route path=":momentId" component={MomentViewer} />
       </Route>
       <Route path="stories" component={Stories} />
+      <Route path="search" component={Search} />
       <Route path="dj" component={DJ} />
       <Route path="*" component={NoMatch}/>
     </Route>
