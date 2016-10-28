@@ -1,9 +1,34 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router";
+import Spinner from "react-spinner";
+import {loadMoments} from "../../actions";
 import MomentList from "../../components/MomentList";
 
-export default class Search extends Component {
+export class Search extends Component {
+  componentWillMount() {
+      const {loadMoments} = this.props;
+
+      loadMoments({momentId: ""});
+  }
   render() {
+    const renderSearchResults = () => {
+        const {loading, moments} = this.props;
+
+        if(loading) {
+            return (
+                <div className="text-center lead">
+                    <p>Searching...</p>
+                    <Spinner />
+                </div>
+            );
+        } else {
+            return (
+                <MomentList moments={moments} />
+            );
+        }
+    };
+
     return (
       <div className="container">
         <form>
@@ -14,9 +39,9 @@ export default class Search extends Component {
 
             <div className="form-group">
                 <label htmlFor="missions">Missions</label>
-                <select multiple className="form-control" id="missions">
-                    <option selected>Apollo 11</option>
-                    <option selected>Other Mission</option>
+                <select multiple className="form-control" id="missions" style={{color: "#000"}}>
+                    <option>Apollo 11</option>
+                    <option>Other Mission</option>
                 </select>
             </div>
 
@@ -37,12 +62,7 @@ export default class Search extends Component {
             </div>
         </form>
 
-        <MomentList moments={[
-            {id: 1, title: "adsf"},
-            {id: 2, title: "adsf"},
-            {id: 3, title: "adsf"},
-            {id: 4, title: "adsf"}
-        ]} />
+        {renderSearchResults()}
 
         <nav aria-label="Page navigation">
             <ul className="pagination">
@@ -67,3 +87,16 @@ export default class Search extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const moments = state.moments;
+
+  return {
+    loading: moments.loading,
+    moments: moments.entities.moments
+  };
+}
+
+export default connect(mapStateToProps, {
+  loadMoments
+})(Search);
