@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Spinner from "react-spinner";
 import { map } from "lodash";
 import { loadMoments } from "../../actions";
-import MomentList from "../../components/MomentList";
 import { MomentCard } from "../../components/StoryTimeline";
 
 export class Search extends Component {
