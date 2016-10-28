@@ -50,7 +50,7 @@ export function StoryCard({
 }
 
 export function MomentCard({id, storyId, title, metStart, content}) {
-  const url = `/stories/story/${storyId}/moment/${id}`;
+  const url = (typeof storyId !== "undefined") ? `/stories/story/${storyId}/moment/${id}` : `/moments/moment/${id}`;
   return (
     <div className="panel panel-default story-timeline-item story-item">
       <div className="story-timeline-item-node" />

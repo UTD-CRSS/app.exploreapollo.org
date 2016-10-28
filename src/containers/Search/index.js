@@ -2,14 +2,21 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router";
 import Spinner from "react-spinner";
+import {map} from "lodash";
 import {loadMoments} from "../../actions";
 import MomentList from "../../components/MomentList";
+import {MomentCard} from "../../components/StoryTimeline";
 
 export class Search extends Component {
-  componentWillMount() {
+  onSearchClicked(e) {
       const {loadMoments} = this.props;
 
       loadMoments({momentId: ""});
+
+      e.preventDefault();
+  }
+  onSurpriseMeClicked(e) {
+      e.preventDefault();
   }
   render() {
     const renderSearchResults = () => {
@@ -24,7 +31,11 @@ export class Search extends Component {
             );
         } else {
             return (
-                <MomentList moments={moments} />
+                <div>
+                    {_.map(moments, (moment) => {
+                        return <MomentCard key={moment.id} id={moment.id} title={moment.title} metStart={moment.metStart} content={moment.description} />;
+                    })}
+                </div>
             );
         }
     };
@@ -45,7 +56,8 @@ export class Search extends Component {
                 </select>
             </div>
 
-            <button type="submit" className="btn btn-default">Search</button>
+            <button type="submit" className="btn btn-default" onClick={this.onSearchClicked.bind(this)} style={{marginRight: "1em"}}>Search</button>
+            <button type="submit" className="btn btn-default" onClick={this.onSurpriseMeClicked.bind(this)}>Surprise Me!</button>
         </form>
 
         <hr />
