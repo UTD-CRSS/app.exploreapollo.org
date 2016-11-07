@@ -44,7 +44,8 @@ export function PlayButton({isPlaying, play, pause}){
     fontSize: "4em"
   };
   return (
-    <div className="playButtonContainer"
+    <div style={{color: "#000"}}
+         className="playButtonContainer"
          onClick={clickFunction}>
       <i testRef="playIcon"
          style={iconStyles}
