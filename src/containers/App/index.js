@@ -80,7 +80,7 @@ export class FloatingFeedbackButton extends Component {
       top: "50%",
       right: "-49px",
       zIndex: 9999,
-      webkitTransform: "rotate(-90deg)",
+      WebkitTransform: "rotate(-90deg)",
       msTransform: "rotate(-90deg)",
       transform: "rotate(-90deg)"
     };
