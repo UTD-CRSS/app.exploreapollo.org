@@ -47,6 +47,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "bootstrap": "^3.3.6",
+    "bootswatch": "^3.3.7",
     "classnames": "^2.2.1",
     "connect-history-api-fallback": "^1.1.0",
     "css-loader": "^0.23.1",
