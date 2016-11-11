@@ -44,7 +44,6 @@ export function loadMoments(args) {
 
 export function redirectToRandomMoment() {
   return dispatch => {
-    dispatch(fetchMoments());
     fetch(`${config.apiEntry}/api/moments/random`)
       .then((response) => {
         return response.json();
