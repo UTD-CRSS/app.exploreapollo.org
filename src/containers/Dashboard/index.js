@@ -32,7 +32,11 @@ export default class Dashboard extends Component {
                     <li><FeaturedStoryLink text="Apollo Touchdown" to="/stories/story/4" /></li>
                   </ul>
 
-                  <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                  <div style={{marginTop: "2em"}}>
+                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                    <span style={{padding: "0 1em"}}>or</span>
+                    <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
+                  </div>
               </div>
             </div>
 
@@ -60,7 +64,11 @@ export default class Dashboard extends Component {
                     <li><FeaturedStoryLink text="Apollo Touchdown" to="/stories/story/4" /></li>
                   </ul>
 
-                  <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11" style={{marginTop: "1em"}}>Launch</Link>
+                  <div style={{marginTop: "2em"}}>
+                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                    <span style={{padding: "0 1em"}}>or</span>
+                    <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
+                  </div>
                 </div>
               </div>
             </div>
