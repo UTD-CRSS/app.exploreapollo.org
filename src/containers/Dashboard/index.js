@@ -24,6 +24,14 @@ export default class Dashboard extends Component {
               <div className="panel-body">
                   <h1 style={{marginTop: 0}}>Apollo 11</h1>
                   <p>One small step for man, one giant leap for mankind.</p>
+                  
+                  <ul className="featured-stories">
+                    <li><FeaturedStoryLink text="Apollo Launch" to="/stories/story/1" /></li>
+                    <li><FeaturedStoryLink text="Lunar Landing" to="/stories/story/2" /></li>
+                    <li><FeaturedStoryLink text="Moon Surface Walk" to="/stories/story/3" /></li>
+                    <li><FeaturedStoryLink text="Apollo Touchdown" to="/stories/story/4" /></li>
+                  </ul>
+
                   <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
               </div>
             </div>
