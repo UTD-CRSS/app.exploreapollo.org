@@ -21,7 +21,7 @@ export class RandomMoment extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 

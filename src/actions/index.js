@@ -5,7 +5,7 @@ import {isArray} from "lodash";
 import config from "../../config";
 
 import {fromJS} from "immutable";
-import { pushState } from 'redux-router';
+import { pushState } from "redux-router";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
