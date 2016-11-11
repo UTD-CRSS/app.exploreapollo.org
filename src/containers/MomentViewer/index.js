@@ -155,6 +155,7 @@ class MomentViewer extends Component {
     );
   }
 }
+MomentViewer.defaultProps = {autoplay: true};
 
 function mapStateToProps(state) {
   const {audio, metrics} = state;
