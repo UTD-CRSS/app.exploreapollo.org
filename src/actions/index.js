@@ -5,6 +5,7 @@ import {isArray} from "lodash";
 import config from "../../config";
 
 import {fromJS} from "immutable";
+import { pushState } from "redux-router";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
@@ -37,6 +38,19 @@ export function loadMoments(args) {
         dispatch(receiveMoments({
           moments: moment
         }));
+      });
+  };
+}
+
+export function redirectToRandomMoment() {
+  return dispatch => {
+    fetch(`${config.apiEntry}/api/moments/random`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((moment) => {
+        moment.media = fromJS(moment.media);
+        dispatch(pushState(null, `/moments/moment/${moment.id}`));
       });
   };
 }
