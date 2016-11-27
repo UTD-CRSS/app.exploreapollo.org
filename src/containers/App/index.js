@@ -23,6 +23,16 @@ export class AppHeader extends Component {
                 Search
               </Link>
             </li>
+            <li>
+              <Link to="/moments/random">
+                Surprise Me!
+              </Link>
+            </li>
+            <li>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
+                Submit Feedback
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -43,13 +53,13 @@ export class AppFooter extends Component {
               <ul className="footer-links">
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/stories?mission=apollo11">Apollo 11</Link></li>
-                <li><a href="https://exploreapollo.org/">Project Homepage</a></li>
+                <li><Link to="/moments/random">Surprise Me!</Link></li>
               </ul>
             </div>
             
             <div className="col-sm-4 col-sm-offset-1">
               <ul className="footer-links">
-                <li><a href="https://exploreapollo.org/about/">About Us</a></li>
+                <li><a href="https://exploreapollo.org/">Project Homepage</a></li>
                 <li><a href="https://github.com/UTD-CRSS">GitHub</a></li>
                 <li><Link to="/settings">Settings</Link></li>
               </ul>
@@ -63,12 +73,43 @@ export class AppFooter extends Component {
   }
 }
 
-export default class App extends Component {
+export class FloatingFeedbackButton extends Component {
+  constructor() {
+    super();
 
+    this.state = { isVisible: true };
+  }
+  onCloseClicked() {
+    this.setState({ isVisible: false});
+  }
+  render() {
+    const style = {
+      display: this.state.isVisible ? "inline-block" : "none",
+      height: "35px", // fix text blurriness...
+      position: "fixed",
+      top: "50%",
+      right: "-49px",
+      zIndex: 9999,
+      WebkitTransform: "rotate(-90deg)",
+      msTransform: "rotate(-90deg)",
+      transform: "rotate(-90deg)"
+    };
+
+    return (
+      <div className="btn-group" style={style} role="group" aria-label="...">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank" className="btn btn-primary">Feedback</a>
+        <button type="button" className="btn btn-danger" onClick={this.onCloseClicked.bind(this)}><span className="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+      </div>
+    );
+  }
+}
+
+export default class App extends Component {
   render() {
     return (
       <div className="app-container">
         <AppHeader/>
+        <FloatingFeedbackButton/>
         <div className="app-panel">
           {this.props.children}
         </div>

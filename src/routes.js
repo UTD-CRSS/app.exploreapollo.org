@@ -13,6 +13,7 @@ import {
   Stories,
   StoryViewer,
   App,
+  RandomMoment,
   Settings,
   PlaylistViewer,
   Search,
@@ -31,6 +32,7 @@ export default (
       </Route>
       <Route path="stories" component={Stories} />
       <Route path="search" component={Search} />
+      <Route path="moments/random" component={RandomMoment} />
       <Route path="dj" component={DJ} />
       <Route path="*" component={NoMatch}/>
     </Route>
