@@ -16,7 +16,8 @@ import {
   RandomMoment,
   Settings,
   PlaylistViewer,
-  DJ
+  DJ,
+  Apollo11Explorer
 } from "./containers";
 
 export default (
@@ -30,6 +31,8 @@ export default (
         <Route path=":momentId" component={MomentViewer} />
       </Route>
       <Route path="stories" component={Stories} />
+      <Route path="stories/apollo11" component={Apollo11Explorer} />
+      <Route path="stories/apollo11/:missionDay" component={Apollo11Explorer}/>
       <Route path="moments/random" component={RandomMoment} />
       <Route path="dj" component={DJ} />
       <Route path="*" component={NoMatch}/>
