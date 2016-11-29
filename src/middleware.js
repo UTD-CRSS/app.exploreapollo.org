@@ -1,15 +1,9 @@
-import { RECEIVE_AUDIO } from "./actions";
+import { ROUTER_DID_CHANGE, RECEIVE_AUDIO } from "./actions";
 import {throttle, isFunction} from "lodash";
 import ga from "ga";
 
 // Tracks page-views and audio play times.
 export function googleAnalytics(store) {
-  // This constant isn't exported from redux-router so I'm having to redefine it.
-  // It's a bit of a hack and makes the Google Analytics code dependent on redux-router's internal implementation.
-  // The better way to do this is to subscribe to the react router using browserHistory,
-  // but redux and redux-router make it difficult to access browswerHistory in a middleware function..
-  const ROUTER_DID_CHANGE = "@@reduxReactRouter/routerDidChange";
-
   const gaMomentEventCategory = "Moment";
   const gaPlayTimeEventAction = "playTime";
   const gaPlayTimeEventIntervalInMilliseconds = 5000;

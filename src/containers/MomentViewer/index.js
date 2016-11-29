@@ -106,7 +106,9 @@ class MomentViewer extends Component {
       metStart,
       metEnd
     } = currentMoment;
-    const missionLength = currentMission.length;
+
+    // If viewing a standablone moment, missionLength should be 1.
+    const missionLength = currentMission ? currentMission.length : 1;
 
     const wordCountProps = {
       key: "WordCountGraph",

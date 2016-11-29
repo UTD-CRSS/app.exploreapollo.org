@@ -19,14 +19,21 @@ Moment.define({
 //   transcripts: arrayOf(Transcript)
 // });
 
-const initialMomentState = {entities: {}, result: null, loading: true};
-const initialTranscriptState = {transcripts: [], loading: true};
+const initialMomentState = {entities: {}, result: null, loading: false};
+const initialTranscriptState = {transcripts: [], loading: false};
 const initialAudioState = {audio: null, time: 0};
-const initialStoryState = {momentList: [], loading: true};
-const initialStoriesState = {stories: [], loading: true};
+const initialStoryState = {momentList: [], loading: false};
+const initialStoriesState = {stories: [], loading: false};
 
 function moments(state = initialMomentState, action = {}) {
   switch(action.type) {
+    case ActionTypes.ROUTER_DID_CHANGE:
+      // Clear moments to ensure the search results section is empty.
+      if(action.payload.location.pathname === "/search") {
+        return Object.assign({}, state, {entities: {}});
+      } else {
+        return state;
+      }
     case ActionTypes.FETCH_MOMENT:
       return Object.assign({}, state, {loading: true});
     case ActionTypes.RECEIVE_MOMENT:
