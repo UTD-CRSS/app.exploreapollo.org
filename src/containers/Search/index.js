@@ -13,9 +13,6 @@ export class Search extends Component {
 
     e.preventDefault();
   }
-  onSurpriseMeClicked(e) {
-    e.preventDefault();
-  }
   render() {
     const renderSearchResults = () => {
       const {loading, moments} = this.props;
@@ -29,9 +26,9 @@ export class Search extends Component {
         );
       } else {
         return (
-          <div>
+          <div className="story-timeline-container">
             {map(moments, (moment) => {
-              return <MomentCard key={moment.id} id={moment.id} title={moment.title} metStart={moment.metStart} content={moment.description} />;
+              return <MomentCard key={moment.id} id={moment.id} title={moment.title} metStart={moment.metStart} content={"Transcript goes here..."} />;
             })}
           </div>
         );
@@ -42,57 +39,16 @@ export class Search extends Component {
       <div className="container">
         <form>
           <div className="form-group">
-            <label htmlFor="searchQuery">Search Query (transcripts, tags, astronauts, etc.)</label>
+            <label htmlFor="searchQuery">Search Moments By Transcript</label>
             <input type="text" className="form-control" id="searchQuery" />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="missions">Missions</label>
-            <select multiple className="form-control" id="missions" style={{ color: "#000" }}>
-              <option>Apollo 11</option>
-              <option>Other Mission</option>
-            </select>
-          </div>
-
           <button type="submit" className="btn btn-default" onClick={this.onSearchClicked.bind(this)} style={{ marginRight: "1em" }}>Search</button>
-          <button type="submit" className="btn btn-default" onClick={this.onSurpriseMeClicked.bind(this)}>Surprise Me!</button>
         </form>
 
         <hr />
-        <h2>Search Results</h2>
-        <form>
-          <div className="form-group">
-            <label htmlFor="sortBy">Sort By</label>
-            <select className="form-control" id="sortBy">
-              <option>Relevance</option>
-              <option>Rating</option>
-              <option>Popularity</option>
-              <option>Random</option>
-            </select>
-          </div>
-        </form>
 
         {renderSearchResults()}
-
-        <nav aria-label="Page navigation">
-          <ul className="pagination">
-            <li>
-              <a href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li>
-              <a href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
       </div>
     );
   }
