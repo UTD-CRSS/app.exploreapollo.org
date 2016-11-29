@@ -40,10 +40,13 @@ export class Search extends Component {
         <form>
           <div className="form-group">
             <label htmlFor="searchQuery">Search Moments By Transcript</label>
-            <input type="text" className="form-control" id="searchQuery" />
+            <div className="input-group">
+              <input type="text" className="form-control" id="searchQuery" />
+              <span className="input-group-btn">
+                <button type="submit" className="btn btn-default" onClick={this.onSearchClicked.bind(this)}>Search</button>
+              </span>
+            </div>
           </div>
-
-          <button type="submit" className="btn btn-default" onClick={this.onSearchClicked.bind(this)} style={{ marginRight: "1em" }}>Search</button>
         </form>
 
         <hr />
