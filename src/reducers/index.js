@@ -29,11 +29,7 @@ function moments(state = initialMomentState, action = {}) {
   switch(action.type) {
     case ActionTypes.ROUTER_DID_CHANGE:
       // Clear moments to ensure the search results section is empty.
-      if(action.payload.location.pathname === "/search") {
-        return Object.assign({}, state, {entities: {}});
-      } else {
-        return state;
-      }
+      return (action.payload.location.pathname === "/search") ? Object.assign({}, state, {entities: {}}) : state;
     case ActionTypes.FETCH_MOMENT:
       return Object.assign({}, state, {loading: true});
     case ActionTypes.RECEIVE_MOMENT:
