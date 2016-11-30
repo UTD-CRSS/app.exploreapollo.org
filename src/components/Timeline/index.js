@@ -58,14 +58,20 @@ export default function Timeline({timeline, clickEvent}) {
   );
 
   return (
-    <div className="transcript-panel col-md-6">
-      <div testRefCollection="timelineContainer" className={classes}>
-        <div className="panel-heading">
-          <h3 className="panel-title">Transcript</h3>
+    <div className="col-md-6">
+      <div style={{width: "100%", height: "100%", position: "relative"}}>
+        <div style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0}}>
+          <div className="transcript-panel">
+            <div testRefCollection="timelineContainer" className={classes}>
+              <div className="panel-heading">
+                <h3 className="panel-title">Transcript</h3>
+              </div>
+              <TimelineList
+                timeline={timeline}
+                clickEvent={clickEvent} />
+            </div>
+          </div>
         </div>
-        <TimelineList
-          timeline={timeline}
-          clickEvent={clickEvent} />
       </div>
     </div>
   );
