@@ -121,26 +121,19 @@ footer {
   }
 
   .timeline-panel {
-    height: 100%;
     margin: 0;
     display: flex;
   }
 }
 
 // Transcript Timeline
-
 .transcript-panel {
-  display: flex;
-
-  .timeline-container {
-    flex: 1;
-  }
+  height: 100%;
 }
-
 .timeline-container {
   display: flex;
   flex-direction: column;
-  max-height: 320px;
+  max-height: 100%;
 
   .panel-heading {
     box-sizing: content-box;
