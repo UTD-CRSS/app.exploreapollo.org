@@ -60,7 +60,7 @@ export default function Timeline({timeline, clickEvent}) {
   return (
     <div className="col-md-6">
       <div style={{width: "100%", height: "100%", position: "relative"}}>
-        <div style={{position: "absolute", top: 0, right: 0, bottom: 0, left: 0}}>
+        <div style={{position: "absolute", top: 0, right: 0, bottom: "21px", left: 0}}>
           <div className="transcript-panel">
             <div testRefCollection="timelineContainer" className={classes}>
               <div className="panel-heading">
