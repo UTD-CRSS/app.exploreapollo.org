@@ -21,7 +21,6 @@ export class Apollo11Explorer extends Component {
     const stories = _.sortBy(this.props.stories, "met_start"); 
 
     var targetstories = [];
-    console.log(day);
     switch(day){
       case "1":
         mstart = 0;
@@ -95,7 +94,6 @@ export class Apollo11Explorer extends Component {
         </div>
       );
     }
-    const Stories = _.sortBy(this.props.stories,"met_start");
     const url = `/stories/`;
     return (
       <div className="container">

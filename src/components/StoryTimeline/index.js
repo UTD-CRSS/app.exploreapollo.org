@@ -196,8 +196,7 @@ export default class StoryTimeline extends Component {
   }
   render() {
     let landmarks = []; //TEMPORARY UNTIL WE GET LANDMARKS SORTED OUT :)
-    const moments = this.props.story.momentList;
-    const cards = _.sortBy(moments.concat(landmarks), "met_start");    
+    const moments = this.props.story.momentList;   
 
     const {story} = this.props;
     const {momentList} = story;

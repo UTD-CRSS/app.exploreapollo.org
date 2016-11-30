@@ -10,7 +10,6 @@ import {
   NoMatch,
   Moments,
   MomentViewer,
-  Stories,
   StoryViewer,
   App,
   RandomMoment,
