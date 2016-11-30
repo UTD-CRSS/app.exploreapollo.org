@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
                   </ul>
 
                   <div style={{marginTop: "2em"}}>
-                    <Link className="btn btn-lg btn-primary" to="/stories/apollo11">Launch</Link>
+                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
                     <span style={{padding: "0 1em"}}>or</span>
                     <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
                   </div>
@@ -65,7 +65,7 @@ export default class Dashboard extends Component {
                   </ul>
 
                   <div style={{marginTop: "2em"}}>
-                    <Link className="btn btn-lg btn-primary" to="/stories/apollo11">Launch</Link>
+                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
                     <span style={{padding: "0 1em"}}>or</span>
                     <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
                   </div>

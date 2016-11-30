@@ -5,6 +5,7 @@ import Spinner from "react-spinner";
 import {loadStory} from "../../actions";
 import {StoryTimeline} from "../../components";
 import {dummyLandmarks} from "../../utils/dummyData";
+import {DayDisplay} from "../../components";
 
 export class StoryViewer extends Component {
   componentWillMount() {
@@ -15,6 +16,9 @@ export class StoryViewer extends Component {
   }
   render() {
     const {loading, currentStory} = this.props;
+		const day = this.props.params.missionDay;
+
+		const url = `/stories/story/${this.props.params.storyId}/`;
     if (loading) {
       return <div className="text-center lead">
         <p>Loading Story...</p>
@@ -23,10 +27,15 @@ export class StoryViewer extends Component {
     }
 
     return (
+			
       <div>
+				<div className="container">
+					<DayDisplay day={this.props.params.missionDay} url={url}/>
+				</div>
         <StoryTimeline
           story={currentStory}
-          landmarks={dummyLandmarks}/>
+          landmarks={dummyLandmarks}
+					missionDay={this.props.params.missionDay}/>
       </div>
     );
   }
