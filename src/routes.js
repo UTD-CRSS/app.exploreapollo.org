@@ -27,7 +27,7 @@ export default (
       <Route path="moments/moment/:momentId" component={MomentViewer} />
       <Route path="moments" component={Moments} />
       <Route path="stories/story/:storyId" component={StoryViewer} />
-			<Route path="stories/story/:storyId/day/:missionDay" component={StoryViewer}/>
+      <Route path="stories/story/:storyId/day/:missionDay" component={StoryViewer}/>
       <Route path="stories/story/:storyId/moment" component={PlaylistViewer}>
         <Route path=":momentId" component={MomentViewer} />
       </Route>
