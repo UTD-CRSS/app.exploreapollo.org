@@ -33,9 +33,26 @@ function fetchMoments() {
 
 export function loadMoments(args) {
   const {momentId} = args;
+
   return dispatch => {
     dispatch(fetchMoments());
     fetch(`${config.apiEntry}/api/moments/${momentId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((moment) => {
+        moment.media = fromJS(moment.media);
+        dispatch(receiveMoments({
+          moments: moment
+        }));
+      });
+  };
+}
+
+export function searchMomentsByTranscript(transcriptSnippet) {
+  return dispatch => {
+    dispatch(fetchMoments());
+    fetch(`${config.apiEntry}/api/moments/search?q=${transcriptSnippet}`)
       .then((response) => {
         return response.json();
       })

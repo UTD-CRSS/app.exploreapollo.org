@@ -1,15 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "react-spinner";
-import { map } from "lodash";
-import { loadMoments } from "../../actions";
+import { map, isEmpty } from "lodash";
+import { searchMomentsByTranscript } from "../../actions";
 import { MomentCard } from "../../components/StoryTimeline";
 
 export class Search extends Component {
-  onSearchClicked(e) {
-    const {loadMoments} = this.props;
+  constructor(props) {
+    super(props);
 
-    loadMoments({ momentId: "" });
+    this.state = {searchQuery: ""};
+  }
+  onSearchQueryChanged(e) {
+    this.setState({searchQuery: e.target.value});
+  }
+  onSearchClicked(e) {
+    const {searchMomentsByTranscript} = this.props;
+
+    if(this.state.searchQuery.length > 0) {
+      searchMomentsByTranscript(this.state.searchQuery);
+    }
 
     e.preventDefault();
   }
@@ -25,11 +35,13 @@ export class Search extends Component {
           </div>
         );
       } else {
+        const searchResultChildren = !isEmpty(moments) ? map(moments, (moment) => {
+          return <MomentCard key={moment.id} id={moment.id} title={moment.title} metStart={moment.metStart} content={moment.description} />;
+        }) : <p style={{textAlign: "center"}}>No search results...</p>;
+        
         return (
           <div className="story-timeline-container">
-            {map(moments, (moment) => {
-              return <MomentCard key={moment.id} id={moment.id} title={moment.title} metStart={moment.metStart} content={"Transcript goes here..."} />;
-            })}
+            {searchResultChildren}
           </div>
         );
       }
@@ -41,7 +53,7 @@ export class Search extends Component {
           <div className="form-group">
             <label htmlFor="searchQuery">Search Moments By Transcript</label>
             <div className="input-group">
-              <input type="text" className="form-control" id="searchQuery" />
+              <input type="text" className="form-control" id="searchQuery" value={this.state.searchQuery} onChange={this.onSearchQueryChanged.bind(this)} />
               <span className="input-group-btn">
                 <button type="submit" className="btn btn-default" onClick={this.onSearchClicked.bind(this)}>Search</button>
               </span>
@@ -67,5 +79,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  loadMoments
+  searchMomentsByTranscript
 })(Search);
