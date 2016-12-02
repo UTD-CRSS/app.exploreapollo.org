@@ -10,3 +10,4 @@ export Settings from "./Settings";
 export PlaylistViewer from "./PlaylistViewer";
 export Search from "./Search";
 export DJ from "./DJ";
+export Apollo11Explorer from "./Apollo11Explorer";
