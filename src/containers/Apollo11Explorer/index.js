@@ -18,7 +18,7 @@ export class Apollo11Explorer extends Component {
     var mstart;
     var mend;
     const day = this.props.params.missionDay;
-    const stories = _.sortBy(this.props.stories, "met_start"); 
+    const stories = _.sortBy(this.props.stories, "met_start");
 
     var targetstories = [];
     switch(day){
@@ -60,14 +60,14 @@ export class Apollo11Explorer extends Component {
         break;
       default:
         mstart = -746879993;
-        mend = 746879993;    
+        mend = 746879993;
     }
 
     targetstories = _.filter(
       stories,function(story){
         return day == null || (story.met_start != null && ((story.met_start >= mstart && story.met_start <= mend) || (story.met_start < mstart && story.met_end > mstart)));
       }
-    );    
+    );
 
     if(_.isEmpty(targetstories)){
       return (
@@ -75,7 +75,7 @@ export class Apollo11Explorer extends Component {
           <div className="panel panel-default story-timeline-item story-item">
             <h3>&nbsp;No stories on this day</h3>
             <h3>&nbsp;</h3>
-          </div> 
+          </div>
           <p>&nbsp;</p>
         </div>
       );
@@ -84,7 +84,7 @@ export class Apollo11Explorer extends Component {
         <StoryList stories={targetstories}/>
       );
     }
-  }  
+  }
   render() {
     if (this.props.loading) {
       return (
@@ -94,7 +94,7 @@ export class Apollo11Explorer extends Component {
         </div>
       );
     }
-    const url = `/stories/`;
+    const url = `/apollo11/`;
     return (
       <div className="container">
         <DayDisplay day={this.props.params.missionDay} url={url}/>

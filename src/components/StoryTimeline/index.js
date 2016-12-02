@@ -25,7 +25,6 @@ function NoMomentsNotice() {
   );
 }
 
-
 export function StoryCard({
   showPlayAll = false,
   storyId,
@@ -94,7 +93,6 @@ export function LandmarkCard({id, title, met_start}) {
     </div>
   );
 }
-
 
 export default class StoryTimeline extends Component {
   //const {landmarks} = this.props;

@@ -10,11 +10,13 @@ import {
   NoMatch,
   Moments,
   MomentViewer,
+  Stories,
   StoryViewer,
   App,
   RandomMoment,
   Settings,
   PlaylistViewer,
+  Search,
   DJ,
   Apollo11Explorer
 } from "./containers";
@@ -30,8 +32,10 @@ export default (
       <Route path="stories/story/:storyId/moment" component={PlaylistViewer}>
         <Route path=":momentId" component={MomentViewer} />
       </Route>
-      <Route path="stories" component={Apollo11Explorer}/>
-      <Route path="stories/day/:missionDay" component={Apollo11Explorer}/>
+      <Route path="search" component={Search} />
+      <Route path="stories" component={Stories}/>
+      <Route path="apollo11" component={Apollo11Explorer}/>
+      <Route path="apollo11/day/:missionDay" component={Apollo11Explorer}/>
       <Route path="moments/random" component={RandomMoment} />
       <Route path="dj" component={DJ} />
       <Route path="*" component={NoMatch}/>
