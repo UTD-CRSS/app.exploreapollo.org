@@ -5,12 +5,18 @@ import {isArray} from "lodash";
 import config from "../../config";
 
 import {fromJS} from "immutable";
-import { pushState } from "redux-router";
+import {pushState} from "redux-router";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
 export const FETCH_METRICS = "FETCH_METRICS";
 export const RECEIVE_METRICS = "RECEIVE_METRICS";
+
+// This constant isn't exported from redux-router so I'm having to redefine it.
+// It's a bit of a hack and makes the Google Analytics code dependent on redux-router's internal implementation.
+// The better way to do this is to subscribe to the react router using browserHistory,
+// but redux and redux-router make it difficult to access browserHistory in a middleware function..
+export const ROUTER_DID_CHANGE = "@@reduxReactRouter/routerDidChange";
 
 function receiveMoments({moments}) {
   return {
@@ -27,9 +33,26 @@ function fetchMoments() {
 
 export function loadMoments(args) {
   const {momentId} = args;
+
   return dispatch => {
     dispatch(fetchMoments());
     fetch(`${config.apiEntry}/api/moments/${momentId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((moment) => {
+        moment.media = fromJS(moment.media);
+        dispatch(receiveMoments({
+          moments: moment
+        }));
+      });
+  };
+}
+
+export function searchMomentsByTranscript(transcriptSnippet) {
+  return dispatch => {
+    dispatch(fetchMoments());
+    fetch(`${config.apiEntry}/api/moments/search?q=${transcriptSnippet}`)
       .then((response) => {
         return response.json();
       })

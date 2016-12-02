@@ -18,7 +18,7 @@ export default class Dashboard extends Component {
       <div className="dashboard-container">
         <div className="container-fluid hidden-xs" style={{padding: 0, marginBottom: "2em"}}>
           <div className="mission-selector">
-            <img src="https://s3.amazonaws.com/exploreapollo-data/static-photos/apollo-11-astronaut.jpg" alt="Apollo 11" style={{display: "block", width: "100%", maxWidth: "1600px", margin: "0 auto"}} />
+            <img src="https://s3.amazonaws.com/exploreapollo-data/static-photos/apollo-11-astronaut.jpg" alt="Apollo 11" style={{display: "block", width: "100%", margin: "0 auto"}} />
 
             <div className="panel panel-default" style={{position: "absolute", left: "20px", top: "30%", maxWidth: "35%"}}>
               <div className="panel-body">
@@ -32,7 +32,11 @@ export default class Dashboard extends Component {
                     <li><FeaturedStoryLink text="Apollo Touchdown" to="/stories/story/4" /></li>
                   </ul>
 
-                  <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                  <div style={{marginTop: "2em"}}>
+                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                    <span style={{padding: "0 1em"}}>or</span>
+                    <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
+                  </div>
               </div>
             </div>
 
@@ -60,7 +64,11 @@ export default class Dashboard extends Component {
                     <li><FeaturedStoryLink text="Apollo Touchdown" to="/stories/story/4" /></li>
                   </ul>
 
-                  <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11" style={{marginTop: "1em"}}>Launch</Link>
+                  <div style={{marginTop: "2em"}}>
+                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                    <span style={{padding: "0 1em"}}>or</span>
+                    <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
+                  </div>
                 </div>
               </div>
             </div>

@@ -9,3 +9,4 @@ export MomentWidgets from "./MomentWidgets";
 export WordCountGraph from "./WordCountGraph";
 export LoadingIndicator from "./LoadingIndicator";
 export SlideShowPanel from "./SlideShowPanel";
+export DayDisplay from "./DayDisplay";

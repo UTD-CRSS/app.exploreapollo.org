@@ -19,6 +19,11 @@ export class AppHeader extends Component {
               </Link>
             </li>
             <li>
+              <Link to="/search">
+                Search
+              </Link>
+            </li>
+            <li>
               <Link to="/moments/random">
                 Surprise Me!
               </Link>
@@ -47,11 +52,11 @@ export class AppFooter extends Component {
             <div className="col-sm-4 col-sm-offset-2">
               <ul className="footer-links">
                 <li><Link to="/">Home</Link></li>
-                <li><Link to="/stories?mission=apollo11">Apollo 11</Link></li>
+                <li><Link to="/apollo11">Apollo 11</Link></li>
                 <li><Link to="/moments/random">Surprise Me!</Link></li>
               </ul>
             </div>
-            
+
             <div className="col-sm-4 col-sm-offset-1">
               <ul className="footer-links">
                 <li><a href="https://exploreapollo.org/">Project Homepage</a></li>
