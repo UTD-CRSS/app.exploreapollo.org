@@ -36,7 +36,7 @@ export class Search extends Component {
         );
       } else {
         const searchResultChildren = !isEmpty(moments) ? map(moments, (moment) => {
-          return <MomentCard key={moment.id} id={moment.id} title={moment.title} metStart={moment.metStart} content={moment.description} />;
+          return <MomentCard key={moment.id} id={moment.id} title={moment.title} met_start={moment.metStart} content={moment.description} />;
         }) : <p style={{textAlign: "center"}}>No search results...</p>;
         
         return (
