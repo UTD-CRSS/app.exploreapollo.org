@@ -95,12 +95,80 @@ export function LandmarkCard({id, title, metStart}) {
 }
 
 export default class StoryTimeline extends Component {
-  renderCards() {
-    // const {landmarks} = this.props;
+  //const {landmarks} = this.props;
+  checkDay(){
+    var mstart;
+    var mend;
+    const day = this.props.missionDay;
+
     let landmarks = []; //TEMPORARY UNTIL WE GET LANDMARKS SORTED OUT :)
     const moments = this.props.story.momentList;
-    const cards = _.sortBy(moments.concat(landmarks), "metStart");
-    return cards.map((card) => {
+    const cards = _.sortBy(moments.concat(landmarks), "met_start"); 
+
+    var targetcards = [];
+    switch(day){
+      case "1":
+        mstart = 0;
+        mend = 55680000;
+        break;
+      case "2":
+        mstart = 55680001;
+        mend = 142080000;
+        break;
+      case "3":
+        mstart = 142080001;
+        mend = 228479999;
+        break;
+      case "4":
+        mstart = 228480000;
+        mend = 314879998;
+        break;
+      case "5":
+        mstart = 314879999;
+        mend = 401279997;
+        break;
+      case "6":
+        mstart = 401279998;
+        mend = 487679996;
+        break;
+      case "7":
+        mstart = 487679997;
+        mend = 574079995;
+        break;
+      case "8":
+        mstart = 574079996;
+        mend = 660479994;
+        break;
+      case "9":
+        mstart = 660479995;
+        mend = 746879993;
+        break;
+      default:
+        mstart = -746879993;
+        mend = 746879993;    
+    }
+    
+
+    //DT - fills targetcards with moments that start, end or pass through the selected day (e.g. a moment that starts on day 1 then ends on day 4 would register for days 1,2,3, and 4)
+    targetcards = _.filter(
+      cards,function(card){
+        return card == null || (card.met_start != null && ((card.met_start >= mstart && card.met_start <= mend) || (card.met_start < mstart && card.met_end > mstart)));
+      }
+    );  
+
+    if(_.isEmpty(targetcards)){
+      return (
+        <div>
+          <div className="panel panel-default story-timeline-item story-item">
+            
+            <h3>&nbsp;No moments on this day</h3>
+            <h3>&nbsp;</h3>
+          </div> 
+          <p>&nbsp;</p>
+        </div>
+      );
+    }
+    return targetcards.map((card) => {
       if(_.has(card, "description")){
         return (
           <MomentCard
@@ -127,26 +195,25 @@ export default class StoryTimeline extends Component {
   render() {
     const {story} = this.props;
     const {momentList} = story;
-
+    
     const isMomentListEmpty = _.isEmpty(momentList);
     const showPlayAll = !isMomentListEmpty;
     const firstMomentId = (_.head(momentList) || {}).id;
-
+    
     return (
-      <div>
-        <StoryCard showPlayAll={showPlayAll}
+      <div className="container">
+        <div className="story-timeline-container">
+          <div>
+            <StoryCard showPlayAll={showPlayAll}
                    storyId={story.id}
                    firstMomentId={firstMomentId}
-                   {...story} />
-        <div className="col-xs-10 col-xs-offset-2">
-          <div className="row story-timeline-container">
-            <div className="story-timeline-line"></div>
-            <div className="col-md-9">
-              {this.renderCards()}
-            </div>
+                   {...story} />  
           </div>
-        </div>
-      </div>
+          <h1>&nbsp;</h1>  
+          {this.checkDay()}
+
+        </div>  
+      </div>  
     );
   }
 }
