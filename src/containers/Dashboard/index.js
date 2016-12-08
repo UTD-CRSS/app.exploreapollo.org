@@ -4,10 +4,10 @@ import {Link} from "react-router";
 class FeaturedStoryLink extends Component {
   render() {
     return (
-      <a href={this.props.to} style={{color: "#fff"}}>
+      <Link to={this.props.to} style={{color: "#fff"}}>
         <i className="glyphicon glyphicon-play-circle" style={{fontSize: "1.75em", verticalAlign: "bottom", paddingRight: "0.5em"}} />
         {this.props.text}
-      </a>
+      </Link>
     );
   }
 }
