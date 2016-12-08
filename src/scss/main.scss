@@ -241,8 +241,20 @@ footer {
     background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
   }
 }
-.day-buttons-centered {
-    margin: auto;
+
+.day-btn-col {
+  padding: 3px 3px 3px 3px;
+  .day-btn-label{
+    font-size: 1.2em;
+  }
+  .day-btn-text{
+    font-size: .8em;
+  }
+  .day-btn {
     width: 100%;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+  }
 }
+
 
