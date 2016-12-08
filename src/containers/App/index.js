@@ -14,8 +14,8 @@ export class AppHeader extends Component {
 
           <ul className="nav navbar-nav">
             <li>
-              <Link to="/stories">
-                Stories
+              <Link to="/apollo11">
+                Apollo 11
               </Link>
             </li>
             <li>
