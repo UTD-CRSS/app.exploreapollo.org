@@ -65,47 +65,68 @@ export default class DayDisplay extends Component{
     }
     return(
       <div>
-        <div className="day-buttons-centered">
-          <Link className="btn btn-sm btn-info" to={url}>
-            <h2>Show All</h2>
-            <h6>July 16-24</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/1")}>
-            <h2>Day 1</h2>
-            <h6>July 16th, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/2")}>
-            <h2>Day 2</h2>
-            <h6>July 17th, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/3")}>
-            <h2>Day 3</h2>
-            <h6>July 18th, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/4")}>
-            <h2>Day 4</h2>
-            <h6>July 19th, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/5")}>
-            <h2>Day 5</h2>
-            <h6>July 20th, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/6")}>
-            <h2>Day 6</h2>
-            <h6>July 21st, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/7")}>
-            <h2>Day 7</h2>
-            <h6>July 22nd, 1969</h6>
-          </Link>
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/8")}>
-            <h2>Day 8</h2>
-            <h6>July 23rd, 1969</h6>
-          </Link>        
-          <Link className="btn btn-sm btn-primary" to={url.concat("day/9")}>
-            <h2>Day 9</h2>
-            <h6>July 24th, 1969</h6>
-          </Link>
+        <div className="row">
+          <div className="col-lg-1 day-btn-col"/>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-info" to={url}>
+              <div className="day-btn-label">Show All</div>
+              <div className="day-btn-text">Jul 16-24</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/1")}>
+              <div className="day-btn-label">Day 1</div>
+              <div className="day-btn-text">Jul 16th</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/2")}>
+              <div className="day-btn-label">Day 2</div>
+              <div className="day-btn-text">Jul 17th</div>
+            </Link>
+          </div>
+         <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/3")}>
+              <div className="day-btn-label">Day 3</div>
+              <div className="day-btn-text">Jul 18th</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/4")}>
+              <div className="day-btn-label">Day 4</div>
+              <div className="day-btn-text">Jul 19th</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/5")}>
+              <div className="day-btn-label">Day 5</div>
+              <div className="day-btn-text">Jul 20th</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/6")}>
+              <div className="day-btn-label">Day 6</div>
+              <div className="day-btn-text">Jul 21st</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/7")}>
+              <div className="day-btn-label">Day 7</div>
+              <div className="day-btn-text">Jul 22nd</div>
+            </Link>
+          </div>
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/8")}>
+              <div className="day-btn-label">Day 8</div>
+              <div className="day-btn-text">Jul 23rd</div>
+            </Link>
+          </div>     
+          <div className="col-lg-1 day-btn-col">
+            <Link className="btn day-btn btn-primary" to={url.concat("day/9")}>
+              <div className="day-btn-label">Day 9</div>
+              <div className="day-btn-text">Jul 24th</div>
+            </Link>
+          </div>
         </div>
         <img src={imgUrl} style={{display: "block", width: "100%", margin: "0 auto"}} />
         <h1>{label}</h1>
