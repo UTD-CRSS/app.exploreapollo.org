@@ -60,7 +60,7 @@ export function MomentCard({id, storyId, title, metStart, content}) {
             {title}
           </div>
           <div className="story-timeline-time">
-            {HumanReadableMs({ms: metStart, date: true})}
+            {HumanReadableMs({ms: metStart, date: true, year: true})}
           </div>
           <p className="story-timeline-content">
             {content}
