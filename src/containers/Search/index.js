@@ -51,7 +51,7 @@ export class Search extends Component {
       <div className="container">
         <form>
           <div className="form-group">
-            <label htmlFor="searchQuery">Search Moments By Transcript</label>
+            <label htmlFor="searchQuery">Search Moments By Title &amp; Description</label>
             <div className="input-group">
               <input type="text" className="form-control" id="searchQuery" value={this.state.searchQuery} onChange={this.onSearchQueryChanged.bind(this)} />
               <span className="input-group-btn">

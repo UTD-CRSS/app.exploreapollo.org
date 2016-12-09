@@ -4,10 +4,10 @@ import {Link} from "react-router";
 class FeaturedStoryLink extends Component {
   render() {
     return (
-      <a href={this.props.to} style={{color: "#fff"}}>
+      <Link to={this.props.to} style={{color: "#fff"}}>
         <i className="glyphicon glyphicon-play-circle" style={{fontSize: "1.75em", verticalAlign: "bottom", paddingRight: "0.5em"}} />
         {this.props.text}
-      </a>
+      </Link>
     );
   }
 }
@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
                   </ul>
 
                   <div style={{marginTop: "2em"}}>
-                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                    <Link className="btn btn-lg btn-primary" to="/apollo11">Launch</Link>
                     <span style={{padding: "0 1em"}}>or</span>
                     <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
                   </div>
@@ -65,7 +65,7 @@ export default class Dashboard extends Component {
                   </ul>
 
                   <div style={{marginTop: "2em"}}>
-                    <Link className="btn btn-lg btn-primary" to="/stories?mission=apollo11">Launch</Link>
+                    <Link className="btn btn-lg btn-primary" to="/apollo11">Launch</Link>
                     <span style={{padding: "0 1em"}}>or</span>
                     <Link className="btn btn-lg btn-primary" to="/moments/random">Surprise Me!</Link>
                   </div>

@@ -5,7 +5,7 @@ import {isArray} from "lodash";
 import config from "../../config";
 
 import {fromJS} from "immutable";
-import {pushState} from "redux-router";
+import {replaceState} from "redux-router";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
@@ -66,14 +66,16 @@ export function searchMomentsByTranscript(transcriptSnippet) {
 }
 
 export function redirectToRandomMoment() {
-  return dispatch => {
+  return (dispatch, getState) => {
     fetch(`${config.apiEntry}/api/moments/random`)
       .then((response) => {
         return response.json();
       })
       .then((moment) => {
-        moment.media = fromJS(moment.media);
-        dispatch(pushState(null, `/moments/moment/${moment.id}`));
+        if(getState().router.location.pathname === "/moments/random") {
+          moment.media = fromJS(moment.media);
+          dispatch(replaceState(null, `/moments/moment/${moment.id}`));
+        }
       });
   };
 }
