@@ -11,6 +11,8 @@ import {
   loadMetrics
 } from "../../actions";
 
+import ChordDiagram from "../../components/ChordDiagram";
+
 import {
   MomentPlayer,
   Timeline,
@@ -152,6 +154,9 @@ class MomentViewer extends Component {
           <MomentWidgets>
             {momentWidgets}
           </MomentWidgets>
+        </div>
+        <div className="chord-diagram">
+          <ChordDiagram/>
         </div>
       </div>
     );
