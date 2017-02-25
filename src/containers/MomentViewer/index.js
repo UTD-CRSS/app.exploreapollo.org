@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {get} from "lodash";
-
 import Spinner from "react-spinner";
+import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
 
 import {
   loadMoments,
@@ -11,15 +11,16 @@ import {
   loadMetrics
 } from "../../actions";
 
-import ChordDiagram from "../../components/ChordDiagram";
-
 import {
   MomentPlayer,
   Timeline,
   MomentWidgets,
-  WordCountGraph,
   LoadingIndicator,
-  SlideShowPanel
+  SlideShowPanel,
+  LineDiagram,
+  BarDiagram,
+  ChordDiagram,
+  DashboardDiagram
 } from "../../components";
 
 import getActiveIndex from "./getActiveIndex";
@@ -112,15 +113,6 @@ class MomentViewer extends Component {
     // If viewing a standablone moment, missionLength should be 1.
     const missionLength = currentMission ? currentMission.length : 1;
 
-    const wordCountProps = {
-      key: "WordCountGraph",
-      title: "Word Count"
-    };
-
-    const wordCountWidget = metrics.loading
-      ? <LoadingIndicator {...wordCountProps} />
-      : <WordCountGraph data={metrics.WordCount} {...wordCountProps} />;
-
     const slideShowProps = {
       key: "slideShow",
       title: "Media"
@@ -129,10 +121,38 @@ class MomentViewer extends Component {
       ? <LoadingIndicator {...slideShowProps} />
       : <SlideShowPanel images={currentMoment.media} {...slideShowProps} />;
 
-    const momentWidgets = [
-      slideShowWidget,
-      wordCountWidget
-    ];
+    const lineDiagramProps = {
+      key: "LineDiagram",
+      title: "Line Diagram"
+    };
+    const lineDiagramWidget = metrics.loading
+      ? <LoadingIndicator {...lineDiagramProps} />
+      : <LineDiagram data={metrics.WordCount} {...lineDiagramProps} />;
+
+    const barDiagramProps = {
+      key: "BarDiagram",
+      title: "Bar Diagram"
+    };
+    const barDiagramWidget = metrics.loading
+      ? <LoadingIndicator {...barDiagramProps} />
+      : <BarDiagram data={metrics.WordCount} {...barDiagramProps} />;
+
+    const dashboardDiagramProps = {
+      key: "DashboardDiagram",
+      title: "Dashboard Diagram"
+    };
+    const dashboardDiagramWidget = metrics.loading
+      ? <LoadingIndicator {...dashboardDiagramProps} />
+      : <DashboardDiagram data={metrics.WordCount} {...dashboardDiagramProps} />;
+
+    const chordDiagramProps = {
+      key: "ChordDiagram",
+      title: "Chord Diagram"
+    };
+    //TODO import real data
+    const chordDiagramWidget = metrics.loading
+      ? <LoadingIndicator {...chordDiagramProps} />
+      : <ChordDiagram data={require("../../../resources/readme.json")} {...chordDiagramProps} />;
 
     return (
       <div className="moment-viewer-container">
@@ -146,22 +166,42 @@ class MomentViewer extends Component {
           loadAudio={loadAudio}
           autoplay={autoplay}
           onEnd={onEnd}
-          missionLength={missionLength} />
+          missionLength={missionLength}/>
         <div style={{marginTop: "0.5em"}} className="timeline-panel row">
           <Timeline
             timeline={transcripts}
             clickEvent={timelineClickEvent}/>
+
           <MomentWidgets>
-            {momentWidgets}
+            {slideShowWidget}
+            <Tabs>
+              <TabList>
+                <Tab>LineDiagram</Tab>
+                <Tab>BarDiagram</Tab>
+                <Tab>ChordDiagram</Tab>
+                <Tab>Dashboard</Tab>
+              </TabList>
+              <TabPanel>
+                {lineDiagramWidget}
+              </TabPanel>
+              <TabPanel>
+                {barDiagramWidget}
+              </TabPanel>
+              <TabPanel>
+                {chordDiagramWidget}
+              </TabPanel>
+              <TabPanel>
+                {dashboardDiagramWidget}
+              </TabPanel>
+            </Tabs>
           </MomentWidgets>
-        </div>
-        <div className="chord-diagram">
-          <ChordDiagram/>
         </div>
       </div>
     );
   }
 }
+
+
 
 function mapStateToProps(state) {
   const {audio, metrics} = state;
