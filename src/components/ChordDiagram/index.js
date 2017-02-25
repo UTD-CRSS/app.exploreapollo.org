@@ -37,7 +37,7 @@ export default class ChordDiagram extends Component {
   render() {
     const {
       loading,
-      data,
+      //data,
       d3 = ""
     } = this.state;
 
