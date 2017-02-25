@@ -1,0 +1,46 @@
+.stars-bg {
+  background: url("../../../static/stars-fill.jpg") repeat;
+  animation: loader 15s infinite;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -3440px 0;
+  }
+}
+@-moz-keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -3440px 0;
+  }
+}
+@-ms-keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -3440px 0;
+  }
+}
+@-o-keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -3440px 0;
+  }
+}
+@keyframes loader {
+  from {
+    background-position: 0;
+  }
+  to {
+    background-position: -3440px 0;
+  }
+}

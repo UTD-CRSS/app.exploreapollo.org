@@ -18,7 +18,8 @@ import {
   PlaylistViewer,
   Search,
   DJ,
-  Apollo11Explorer
+  Apollo11Explorer,
+  Game
 } from "./containers";
 
 export default (
@@ -37,6 +38,7 @@ export default (
       <Route path="apollo11/day/:missionDay" component={Apollo11Explorer}/>
       <Route path="moments/random" component={RandomMoment} />
       <Route path="dj" component={DJ} />
+      <Route path="game" component={Game} />
       <Route path="*" component={NoMatch}/>
     </Route>
 );
