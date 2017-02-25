@@ -200,6 +200,7 @@ class MomentViewer extends Component {
     );
   }
 }
+MomentViewer.defaultProps = {autoplay: true};
 
 
 
