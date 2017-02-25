@@ -3,6 +3,7 @@ import "./index.scss";
 
 import LunarLander from "../../../static/lunar_lander.png";
 import Asteroid from "../../../static/asteroid.png";
+import Explosion from "../../../static/explosion.gif";
 
 const DOWN = 74;
 const UP =  75;
@@ -27,7 +28,10 @@ export default class Game extends Component {
   }
 
   handleMove(e) {
-    const {top} = this.state;
+    const {top, gameOver} = this.state;
+    if (gameOver) {
+      return;
+    }
     if (e.keyCode == DOWN) {
       if (top >= 90) {
         return this.setState({top: 90});
@@ -103,6 +107,7 @@ export default class Game extends Component {
       <p><code>J</code> UP, <code>K</code> DOWN</p>
       <div className="stars-bg" style={{height: "400px", position: "relative"}}>
         <img src={LunarLander} style={{height: `${LANDER_HEIGHT}px`, transition: "all 200ms", position: "absolute", top: `${top}%`, left: "10px"}} />
+        {gameOver && <img src={Explosion} style={{height: `${LANDER_HEIGHT}px`, transition: "all 200ms", position: "absolute", top: `${top}%`, left: "10px"}} />}
         {gameOver && <div style={{textAlign: "center", position: "absolute", top: "50%", left: "50%", transform: "translateY(-50%) translateX(-50%)", color: "red", fontSize: "4em"}}>
           Game over!
           <div><button className="btn btn-primary" onClick={this.resetGame.bind(this)}>Play Again</button></div>
