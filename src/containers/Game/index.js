@@ -104,7 +104,7 @@ export default class Game extends Component {
     const {top, rocks, gameOver} = this.state;
     return <div>
       <h4>Controls</h4>
-      <p><code>J</code> UP, <code>K</code> DOWN</p>
+      <p><code>J</code> DOWN, <code>K</code> UP</p>
       <div className="stars-bg" style={{height: "400px", position: "relative"}}>
         <img src={LunarLander} style={{height: `${LANDER_HEIGHT}px`, transition: "all 200ms", position: "absolute", top: `${top}%`, left: "10px"}} />
         {gameOver && <img src={Explosion} style={{height: `${LANDER_HEIGHT}px`, transition: "all 200ms", position: "absolute", top: `${top}%`, left: "10px"}} />}
