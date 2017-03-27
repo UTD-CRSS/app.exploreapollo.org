@@ -11,13 +11,14 @@ function WidgetContainer(component) {
       </div>
     );
 
-  return (<div key={key}
-               className="panel panel-default">
-    {heading}
-    <div className="panel-body">
-      {component}
+  return (
+    <div key={key} className="panel panel-default">
+      {heading}
+        <div className="panel-body">
+          {component}
+        </div>
     </div>
-  </div>);
+  );
 }
 
 export default function MomentWidgets({children}) {
@@ -26,7 +27,10 @@ export default function MomentWidgets({children}) {
     : (<div className="alert alert-info">
       No Moment Information Yet.
     </div>);
-  return (<div className="col-sm-6">
-    {content}
-  </div>);
+
+  return (
+    <div className="col-sm-6">
+      {content}
+    </div>
+  );
 }
