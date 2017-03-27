@@ -130,8 +130,20 @@ function metrics(state = {}, action = {}) {
         state,
         {loading: false},
         {
+          Speakers: metrics.filter((metric) => {
+            return metric.get("type") === "Speakers";
+          }),
+          TurnCount: metrics.filter((metric) => {
+            return metric.get("type") === "Nturns";
+          }),
           WordCount: metrics.filter((metric) => {
             return metric.get("type") === "WordCount";
+          }),
+          ConversationCount: metrics.filter((metric) => {
+            return metric.get("type") === "ConversationCount";
+          }),
+          InteractionMatrix: metrics.filter((metric) => {
+            return metric.get("type") === "InteractionMatrix";
           })
         }
       );
