@@ -127,7 +127,7 @@ class MomentViewer extends Component {
     };
     const lineDiagramWidget = metrics.loading
       ? <LoadingIndicator {...lineDiagramProps} />
-      : <LineDiagram data={metrics.WordCount} {...lineDiagramProps} />;
+      : <LineDiagram data={{time: currentMissionTime, conversation: metrics.ConversationCount, turn: metrics.TurnCount, word: metrics.WordCount}} {...lineDiagramProps} />;
 
     const barDiagramProps = {
       key: "BarDiagram",
@@ -135,7 +135,7 @@ class MomentViewer extends Component {
     };
     const barDiagramWidget = metrics.loading
       ? <LoadingIndicator {...barDiagramProps} />
-      : <BarDiagram data={metrics.WordCount} {...barDiagramProps} />;
+      : <BarDiagram time={currentMissionTime} data={metrics.TurnCount} {...barDiagramProps} />;
 
     const dashboardDiagramProps = {
       key: "DashboardDiagram",
@@ -149,10 +149,9 @@ class MomentViewer extends Component {
       key: "ChordDiagram",
       title: "Chord Diagram"
     };
-    //TODO import real data
     const chordDiagramWidget = metrics.loading
       ? <LoadingIndicator {...chordDiagramProps} />
-      : <ChordDiagram data={require("../../../resources/readme.json")} {...chordDiagramProps} />;
+      : <ChordDiagram data={{time: currentMissionTime, speakers: metrics.Speakers, interactions: metrics.InteractionMatrix}} {...chordDiagramProps} />;
 
     return (
       <div className="moment-viewer-container">
@@ -171,7 +170,6 @@ class MomentViewer extends Component {
           <Timeline
             timeline={transcripts}
             clickEvent={timelineClickEvent}/>
-
           <MomentWidgets>
             {slideShowWidget}
             <Tabs>
@@ -200,8 +198,6 @@ class MomentViewer extends Component {
     );
   }
 }
-
-
 
 function mapStateToProps(state) {
   const {audio, metrics} = state;
