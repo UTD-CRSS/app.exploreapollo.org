@@ -19,7 +19,8 @@ import {
   Search,
   DJ,
   Apollo11Explorer,
-  Game
+  Game,
+  About
 } from "./containers";
 
 export default (
@@ -39,6 +40,7 @@ export default (
       <Route path="moments/random" component={RandomMoment} />
       <Route path="dj" component={DJ} />
       <Route path="game" component={Game} />
+      <Route path="about" component={About} />
       <Route path="*" component={NoMatch}/>
     </Route>
 );
