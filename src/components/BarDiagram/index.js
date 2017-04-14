@@ -88,9 +88,7 @@ class BarDiagram extends Component {
 //Generate the legend based on the current data
 function generateLegend(data) {
   var result = [];
-  for(var i=0; i<data.length; i++) {
-    result.push(<span key={i} style={{color:D3.schemeCategory10[i]}}>&emsp;{data[i].name}&emsp;</span>);
-  }
+  data.map((datum, index) => result.push(<span key={index} style={{color:D3.schemeCategory10[index]}}>&emsp;{datum.name}&emsp;</span>));
   return result;
 }
 
