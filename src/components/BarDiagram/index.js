@@ -70,8 +70,7 @@ class BarDiagram extends Component {
                 colors={D3.scaleOrdinal(D3.schemeCategory10)}
                 opacity={1.0}
                 combined={false}
-                groupPadding="1%"
-                innerPadding="1%"
+                groupPadding="4px"
                 seriesVisible={true}
                 barVisible={true}/>
             </Animate>
