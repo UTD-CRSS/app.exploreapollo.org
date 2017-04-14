@@ -127,7 +127,14 @@ class MomentViewer extends Component {
     };
     const lineDiagramWidget = metrics.loading
       ? <LoadingIndicator {...lineDiagramProps} />
-      : <LineDiagram data={{time: currentMissionTime, conversation: metrics.ConversationCount, turn: metrics.TurnCount, word: metrics.WordCount}} {...lineDiagramProps} />;
+      : <LineDiagram data={{
+        time: currentMissionTime,
+        series: [
+          {name: "ConversationRate", value: metrics.ConversationCount},
+          {name: "TurnRate", value: metrics.TurnCount},
+          {name: "WordRate", value:  metrics.WordCount}
+        ]
+      }} {...lineDiagramProps} />;
 
     const barDiagramProps = {
       key: "BarDiagram",
@@ -135,7 +142,12 @@ class MomentViewer extends Component {
     };
     const barDiagramWidget = metrics.loading
       ? <LoadingIndicator {...barDiagramProps} />
-      : <BarDiagram time={currentMissionTime} data={metrics.TurnCount} {...barDiagramProps} />;
+      : <BarDiagram data={{
+        time: currentMissionTime,
+        series: [
+          {name: "WordRate", value: metrics.WordCount}
+        ]
+      }} {...barDiagramProps} />;
 
     const dashboardDiagramProps = {
       key: "DashboardDiagram",

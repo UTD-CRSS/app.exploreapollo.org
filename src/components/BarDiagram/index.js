@@ -2,20 +2,25 @@ import React, {Component} from "react";
 import shouldPureComponentUpdate from "react-pure-render/function";
 import Dimensions from "react-dimensions";
 import {Chart, Layer, Animate, Ticks, Bars} from "rumble-charts";
+import * as D3 from "d3";
 
 class BarDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    const {time, data, containerWidth} = this.props;
+    const {data, containerWidth} = this.props;
 
-    if(data.size < 1) {return <p className="text-center text-muted">No Data Yet</p>;}
+    //Don't render diagram without data
+    if(data.series.every(datum => {return datum.value.size < 1;})) {
+      return <p className="text-center text-muted">No Data Yet</p>;
+    }
 
-    const raw = form(data);
-    const slot = closestIndex(time, raw.map(function(index) {return Number(index.name);}));
-    const slice = raw.slice(Math.max(0, slot-2), Math.min(raw.length, slot+3));
-    const diagramData = [{data: slice.map(function(index) {return Number(index.data);})}];
-    const diagramTicks = slice.map(function(index) {return {name: String((index.name-raw[0].name)/1000)};});
+    //Data for the diagram
+    const rawAll = data.series.map((datum => {return {name: datum.name, value: form(datum.value)};})).filter(datum => datum.value.length > 0);
+    const lengths = rawAll.map(datum => datum.value.length);
+    const rawSingle = rawAll[lengths.indexOf(Math.max.apply(Math, lengths))];
+    const diagramData = rawAll.map(datum => {return {data: datum.value.map(datum => {return Number(datum.data);})};});
+    const diagramTicks = rawSingle.value.map(datum => {return {name: String((datum.name-rawSingle.value[0].name)/1000)};});
 
     return (
       <div style={{fontFamily:"sans-serif",fontSize:"0.8em"}}>
@@ -23,6 +28,7 @@ class BarDiagram extends Component {
           width={containerWidth}
           height={containerWidth/4}
           series={diagramData}
+          minX={0}
           minY={0}
           scaleX={{paddingStart:0,paddingEnd:0}}
           scaleY={{paddingTop:5}}>
@@ -37,16 +43,15 @@ class BarDiagram extends Component {
                 axis="x"
                 opacity={1.0}
                 position="bottom"
-                tickVisible={({tick}) => tick.x>=0}
-                label={({index, props}) => props.cticks[index].name}
+                label={"Time"}
                 labelVisible={true}
                 labelAttributes={{y:3}}
-                labelStyle={{textAnchor:"middle",alignmentBaseline:"before-edge",fill:"#33ff66"}}
+                labelStyle={{alignmentBaseline:"before-edge",fill:"#d3d3d3"}}
                 lineVisible={false}
                 lineStyle={{stroke:"#d3d3d3"}}
                 lineLength="100%"
                 lineOffset={0}
-                ticks={{maxTicks:5}}
+                ticks={{maxTicks:0}}
                 cticks={diagramTicks}/>
               <Ticks
                 axis="y"
@@ -54,15 +59,15 @@ class BarDiagram extends Component {
                 position="left"
                 tickVisible={({tick}) => tick.y>=0}
                 labelVisible={true}
-                labelAttributes={{x: -5}}
-                labelStyle={{textAnchor:"end",alignmentBaseline:"middle",fill:["#33ff66"]}}
+                labelAttributes={{x: -10}}
+                labelStyle={{textAnchor:"end",alignmentBaseline:"middle",fill:["#d3d3d3"]}}
                 lineVisible={true}
                 lineStyle={{stroke:"#d3d3d3"}}
                 lineLength="100%"
                 lineOffset={0}
                 ticks={{maxTicks:5}}/>
               <Bars
-                colors={["#33ff66"]}
+                colors={D3.scaleOrdinal(D3.schemeCategory10)}
                 opacity={1.0}
                 combined={false}
                 groupPadding="1%"
@@ -72,36 +77,33 @@ class BarDiagram extends Component {
             </Animate>
           </Layer>
         </Chart>
-        <center><p style={{fontSize:"1.0em"}}>
-          <span style={{color:"#33ff66"}}> WordCount </span>
-        </p></center>
+        <div style={{position: "center", fontSize: "1.2em", textAlign: "center"}}>
+          {generateLegend(rawAll)}
+        </div>
       </div>
     );
   }
 }
 
+//Generate the legend based on the current data
+function generateLegend(data) {
+  var result = [];
+  for(var i=0; i<data.length; i++) {
+    result.push(<span key={i} style={{color:D3.schemeCategory10[i]}}>&emsp;{data[i].name}&emsp;</span>);
+  }
+  return result;
+}
+
+//Parse data into format needed by the diagrams
 function form(data) {
   return data.toArray().map((datum => {return {
     name: String(datum.get("met_start")),
     data: [Number(datum.getIn(["data", "count"]))]
-  };})).sort(function(a, b) {
+  };})).sort(function(a, b) { //sort by met_start
     return a.name.localeCompare(b.name);
-  }).filter((element, index, self) => self.findIndex((e) => {
+  }).filter((element, index, self) => self.findIndex((e) => { //remove duplicates
     return e.name === element.name;
   }) === index);
-}
-
-function closestIndex(number, array) {
-  var result = 0;
-  var diff = Math.abs (number - array[0]);
-  for (var index = 0; index < array.length; index++) {
-    var newdiff = Math.abs (number - array[index]);
-    if (newdiff < diff) {
-      diff = newdiff;
-      result = index;
-    }
-  }
-  return result;
 }
 
 export default Dimensions()(BarDiagram);

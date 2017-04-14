@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import shouldPureComponentUpdate from "react-pure-render/function";
 import Dimensions from "react-dimensions";
 import {Chart, Layer, Animate, Ticks, Lines, Dots} from "rumble-charts";
+import * as D3 from "d3";
 
 class LineDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -9,38 +10,26 @@ class LineDiagram extends Component {
   render() {
     const {data, containerWidth} = this.props;
 
-    //Make sure we actually have data before we try rendering any diagrams
-    if(data.conversation.size < 1 && data.turn.size < 1 && data.word.size < 1) {return <p className="text-center text-muted">No Data Yet</p>;}
+    //Don't render diagram without data
+    if(data.series.every(datum => {return datum.value.size < 1;})) {
+      return <p className="text-center text-muted">No Data Yet</p>;
+    }
 
-    //Parse the data into correct formats and use the longest data array for the axis
-    //Order of data array must match the legend order!!!
-    //TODO allow any order and match legend to correct data[] array
-    const rawAll = [form(data.conversation), form(data.turn), form(data.word)];
-    const lengths = rawAll.map(function(a){return a.length;});
+    //Data for the diagram
+    const rawAll = data.series.map((datum => {return {name: datum.name, value: form(datum.value)};})).filter(datum => datum.value.length > 0);
+    const lengths = rawAll.map(datum => datum.value.length);
     const rawSingle = rawAll[lengths.indexOf(Math.max.apply(Math, lengths))];
+    const diagramData = rawAll.map(datum => {return {data: datum.value.map(datum => {return Number(datum.data);})};});
+    const diagramTicks = rawSingle.value.map(datum => {return {name: String((datum.name-rawSingle.value[0].name)/1000)};});
 
-    //Construct the data elements for the diagram and set the axis window
-    //TODO allow arbitrary size
-    const diagramData = [
-      {data: rawAll[0].map(function(index) {return Number(index.data);})},
-      {data: rawAll[1].map(function(index) {return Number(index.data);})},
-      {data: rawAll[2].map(function(index) {return Number(index.data);})}
-    ];
-    const diagramTicks = rawSingle.map(function(index) {return {name: String((index.name-rawSingle[0].name)/1000)};});
-    const window = (data.time-rawSingle[0].name)/(rawSingle[rawSingle.length-1].name-rawSingle[0].name)*(rawSingle.length-1);
-
-    //TODO colors need to be arbitrary
-    //TODO dot colors dont match line colors when data is missing
-    //TODO fix weird flickering caused by long animation durations
     return (
       <div style={{fontFamily:"sans-serif",fontSize:"0.8em"}}>
         <Chart
           width={containerWidth}
           height={containerWidth/4}
           series={diagramData}
-          minX={window}
+          minX={0}
           minY={0}
-          maxX={window+1}
           scaleX={{paddingStart:0,paddingEnd:0}}
           scaleY={{paddingTop:5}}>
           <Layer
@@ -54,32 +43,31 @@ class LineDiagram extends Component {
                 axis="x"
                 opacity={1.0}
                 position="bottom"
-                tickVisible={({tick}) => tick.x>=0}
-                label={({index, props}) => props.cticks[index].name}
-                labelVisible={false}
+                label={"Time"}
+                labelVisible={true}
                 labelAttributes={{y:3}}
-                labelStyle={{textAnchor:"middle",alignmentBaseline:"before-edge",fill:"#d3d3d3"}}
+                labelStyle={{alignmentBaseline:"before-edge",fill:"#d3d3d3"}}
                 lineVisible={false}
                 lineStyle={{stroke:"#d3d3d3"}}
                 lineLength="100%"
                 lineOffset={0}
-                ticks={{maxTicks:-1}}
+                ticks={{maxTicks:0}}
                 cticks={diagramTicks}/>
               <Ticks
                 axis="y"
                 opacity={1.0}
                 position="left"
                 tickVisible={({tick}) => tick.y>=0}
-                labelVisible={false}
-                labelAttributes={{x: -5}}
+                labelVisible={true}
+                labelAttributes={{x: -10}}
                 labelStyle={{textAnchor:"end",alignmentBaseline:"middle",fill:["#d3d3d3"]}}
                 lineVisible={true}
                 lineStyle={{stroke:"#d3d3d3"}}
-                lineLength="200%"
-                lineOffset={10}
+                lineLength="100%"
+                lineOffset={0}
                 ticks={{maxTicks:5}}/>
               <Lines
-                colors={["#FF0000","#00FF00","#0000FF"]}
+                colors={D3.scaleOrdinal(D3.schemeCategory10)}
                 opacity={1.0}
                 asAreas={false}
                 interpolation="monotone"
@@ -87,35 +75,29 @@ class LineDiagram extends Component {
                 lineVisible={true}
                 lineWidth={3}/>
               <Dots
-                colors={["#FF0000","#00FF00","#0000FF"]}
+                colors={D3.scaleOrdinal(D3.schemeCategory10)}
                 opacity={1.0}
                 dotType="circle"
                 circleRadius={4}
                 seriesVisible={true}/>
-              <Ticks
-                axis="y"
-                opacity={1.0}
-                position="left"
-                tickVisible={({tick}) => tick.y>=0}
-                labelVisible={true}
-                labelAttributes={{x: -5}}
-                labelStyle={{textAnchor:"middle",alignmentBaseline:"middle",fill:["#d3d3d3"]}}
-                lineVisible={true}
-                lineStyle={{stroke:"#d3d3d3"}}
-                lineLength="5%"
-                lineOffset={-50}
-                ticks={{maxTicks:5}}/>
             </Animate>
           </Layer>
         </Chart>
-        <center><p style={{fontSize:"1.0em"}}>
-          <span style={{color:"#FF0000"}}> ConversationCount </span>
-          <span style={{color:"#00FF00"}}> TurnCount </span>
-          <span style={{color:"#0000FF"}}> WordCount </span>
-        </p></center>
+        <div style={{position: "center", fontSize: "1.2em", textAlign: "center"}}>
+          {generateLegend(rawAll)}
+        </div>
       </div>
     );
   }
+}
+
+//Generate the legend based on the current data
+function generateLegend(data) {
+  var result = [];
+  for(var i=0; i<data.length; i++) {
+    result.push(<span key={i} style={{color:D3.schemeCategory10[i]}}>&emsp;{data[i].name}&emsp;</span>);
+  }
+  return result;
 }
 
 //Parse data into format needed by the diagrams
@@ -123,9 +105,9 @@ function form(data) {
   return data.toArray().map((datum => {return {
     name: String(datum.get("met_start")),
     data: [Number(datum.getIn(["data", "count"]))]
-  };})).sort(function(a, b) {
+  };})).sort(function(a, b) { //sort by met_start
     return a.name.localeCompare(b.name);
-  }).filter((element, index, self) => self.findIndex((e) => {
+  }).filter((element, index, self) => self.findIndex((e) => { //remove duplicates
     return e.name === element.name;
   }) === index);
 }
