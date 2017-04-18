@@ -61,7 +61,7 @@
     "immutable": "^3.7.6",
     "imports-loader": "^0.6.5",
     "karma": "^0.13.15",
-    "lodash": "^4.1.0",
+    "lodash": "^4.5.0",
     "moment": "^2.10.6",
     "node-sass": "^3.3.3",
     "normalizr": "^2.0.0",
