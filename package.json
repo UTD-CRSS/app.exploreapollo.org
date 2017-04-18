@@ -74,7 +74,7 @@
     "react-image-gallery": "^0.5.9",
     "react-pure-render": "^1.0.2",
     "react-redux": "^4.2.0",
-    "react-router": "^1.0.2",
+    "react-router": "^2.0.0",
     "react-spinner": "^0.2.3",
     "react-tabs": "^0.8.2",
     "react-test-tree": "^1.0.0",
