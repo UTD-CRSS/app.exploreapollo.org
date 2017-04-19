@@ -129,6 +129,8 @@ class MomentViewer extends Component {
       ? <LoadingIndicator {...lineDiagramProps} />
       : <LineDiagram data={{
         time: currentMissionTime,
+        start: this.props.currentMoment.metStart,
+        end: this.props.currentMoment.metEnd,
         series: [
           {name: "ConversationRate", value: metrics.ConversationCount},
           {name: "TurnRate", value: metrics.TurnCount},

@@ -17,10 +17,15 @@ class LineDiagram extends Component {
 
     //Data for the diagram
     const rawAll = data.series.map((datum => {return {name: datum.name, value: form(datum.value)};})).filter(datum => datum.value.length > 0);
+    const diagramData = rawAll.map(datum => {return {data: datum.value.map(datum => {return Number(datum.data);})};});
+
+    //Ticks for the diagram
     const lengths = rawAll.map(datum => datum.value.length);
     const rawSingle = rawAll[lengths.indexOf(Math.max.apply(Math, lengths))];
-    const diagramData = rawAll.map(datum => {return {data: datum.value.map(datum => {return Number(datum.data);})};});
-    const diagramTicks = rawSingle.value.map(datum => {return {name: String((datum.name-rawSingle.value[0].name)/1000)};});
+    const timeDelta = data.time-data.start;
+    const progress = (timeDelta/(data.end-data.start))*100;
+    const tickCurrent = (progress/100)*(rawSingle.value.length-1);
+    const tickDistance = 0.001*(rawSingle.value.length-1);
 
     return (
       <div style={{fontFamily:"sans-serif",fontSize:"0.8em"}}>
@@ -39,20 +44,6 @@ class LineDiagram extends Component {
             <Animate
               ease="linear"
               duration={1}>
-              <Ticks
-                axis="x"
-                opacity={1.0}
-                position="bottom"
-                label={"Time"}
-                labelVisible={true}
-                labelAttributes={{y:3}}
-                labelStyle={{alignmentBaseline:"before-edge",fill:"#d3d3d3"}}
-                lineVisible={false}
-                lineStyle={{stroke:"#d3d3d3"}}
-                lineLength="100%"
-                lineOffset={0}
-                ticks={{maxTicks:0}}
-                cticks={diagramTicks}/>
               <Ticks
                 axis="y"
                 opacity={1.0}
@@ -80,6 +71,20 @@ class LineDiagram extends Component {
                 dotType="circle"
                 circleRadius={4}
                 seriesVisible={true}/>
+              <Ticks
+                axis="x"
+                opacity={1.0}
+                position="bottom"
+                tickVisible={({tick}) => tick.x>=tickCurrent && tick.x<tickCurrent+tickDistance}
+                label={Math.round(timeDelta/1000)+"s"}
+                labelVisible={true}
+                labelAttributes={{y: 3}}
+                labelStyle={{textAnchor:"middle",alignmentBaseline:"before-edge",fill:"#ff0000"}}
+                lineVisible={true}
+                lineStyle={{stroke:"#ff0000"}}
+                lineLength="100%"
+                lineOffset="-100%"
+                ticks={{maxTicks:0,distance:tickDistance}}/>
             </Animate>
           </Layer>
         </Chart>
