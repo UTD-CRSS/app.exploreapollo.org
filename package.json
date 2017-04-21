@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/UTD-CRSS/app.exploreapollo.org#readme",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=7.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.3",

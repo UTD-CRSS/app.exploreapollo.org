@@ -86,6 +86,10 @@ module.exports = {
       { test: /\.ttf$/,    loader: "file-loader" },
       { test: /\.eot$/,    loader: "file-loader" },
       { test: /\.svg$/,    loader: "file-loader" },
+      { test: /\.png$/,    loader: "file-loader" },
+      { test: /\.jpg$/,    loader: "file-loader" },
+      { test: /\.gif$/,    loader: "file-loader" },
+      { test: /\.svg$/,    loader: "file-loader" },
       { test: /\.json$/,   loader: "json-loader" }
     ]
   },
