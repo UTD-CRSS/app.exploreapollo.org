@@ -9,30 +9,16 @@ class DashboardDiagram extends Component {
   render() {
     const {data, containerWidth} = this.props;
 
-    if (data.size < 1) {
-      return <p className="text-center text-muted">No Data Yet</p>;
-    }
+    if(data.size < 1) {return <p className="text-center text-muted">No Data Yet</p>;}
 
-    const options = {
-      fontFamily: "sans-serif",
-      fontSize: "0.8em",
-      colors: ["#33ff66"],
-      title: "Words over Time"
-    };
-    const diagramData = [{
-      data: data.toArray().map((datum) => {
-        return Number(datum.getIn(["data", "count"]));
-      })
-    }];
-    const diagramTicks = data.toArray().map((datum) => {
-      return {name: String(datum.get("met_start"))};
-    });
+    const diagramData = [{data: data.toArray().map((datum) => {return Number(datum.getIn(["data", "count"]));})}];
+    const diagramTicks = data.toArray().map((datum) => {return {name: String(datum.get("met_start"))};});
 
     return (
-      <div style={{fontFamily:options.fontFamily,fontSize:options.fontSize}}>
+      <div style={{fontFamily:"sans-serif",fontSize:"0.8em"}}>
         <Chart
           width={containerWidth}
-          height={containerWidth/(16/6)}
+          height={containerWidth/4}
           series={diagramData}
           minY={0}
           scaleX={{paddingStart: 0, paddingEnd: 0}}
@@ -46,17 +32,17 @@ class DashboardDiagram extends Component {
                 lineLength="100%"
                 lineVisible={true}
                 lineStyle={{stroke:"lightgray"}}
-                labelStyle={{textAnchor:"end", alignmentBaseline:"middle", fill:options.colors}}
+                labelStyle={{textAnchor:"end", alignmentBaseline:"middle", fill:["#33ff66"]}}
                 labelAttributes={{x: -5}}/>
               <Ticks
                 axis="x"
                 ticks={{maxTicks: -1}}
                 cticks={diagramTicks}
                 label={({index, props}) => props.cticks[index].name}
-                labelStyle={{textAnchor:"middle", alignmentBaseline:"before-edge", fill:options.colors}}
+                labelStyle={{textAnchor:"middle", alignmentBaseline:"before-edge", fill:["#33ff66"]}}
                 labelAttributes={{y: 3}}/>
               <Bars
-                colors={options.colors}
+                colors={["#33ff66"]}
                 groupPadding="3%"
                 innerPadding="0.5%"/>
             </Layer>
@@ -67,7 +53,6 @@ class DashboardDiagram extends Component {
             </Layer>
           </Layer>
         </Chart>
-        <p className="text-center text-muted">{options.title}</p>
       </div>);
   }
 }
