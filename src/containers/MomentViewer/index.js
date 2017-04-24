@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import {connect} from "react-redux";
 import {get} from "lodash";
 import Spinner from "react-spinner";
@@ -45,6 +46,30 @@ class MomentViewer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentMomentId !== this.props.currentMomentId) {
       this.fetch(nextProps);
+    }
+  }
+
+  componentDidUpdate() {
+    var parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
+    var timeline;
+    var scrollHeight = 0;
+    if(parent != undefined) {
+      timeline = parent.children[0].children[0].children[0].children[1];
+      var {transcripts} = this.props.currentTranscripts;
+      transcripts = transcripts.map(index => index.set("active", false));
+      var activeIndex = getActiveIndex(transcripts, this.props.currentMoment.metStart + (this.props.currentAudio.time * 1000));
+      if(activeIndex < 0) {
+        activeIndex = 0;
+      }
+      for(var i = activeIndex-2; i >= 0; i--) {
+        var activeItem = timeline.children[i];
+        if(activeItem != undefined) {
+          scrollHeight += timeline.children[i].offsetHeight-1;
+        }
+      }
+    }
+    if(timeline != undefined) {
+      timeline.scrollTop = scrollHeight;
     }
   }
 

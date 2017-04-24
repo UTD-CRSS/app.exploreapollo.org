@@ -24,13 +24,13 @@ function WidgetContainer(component) {
 export default function MomentWidgets({children}) {
   const content = React.Children.count(children) > 0
     ? React.Children.map(children, WidgetContainer)
-    : (<div className="alert alert-info">
-      No Moment Information Yet.
-    </div>);
+    : (<p className="text-center text-muted">No Data Yet</p>);
 
   return (
     <div className="col-sm-6">
-      {content}
+      <div style={{position: "relative", width: "100%", height: "100%"}}>
+        {content}
+      </div>
     </div>
   );
 }
