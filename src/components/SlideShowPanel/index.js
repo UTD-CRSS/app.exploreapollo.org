@@ -25,8 +25,11 @@ export default class SlideShowPanel extends Component {
       <ImageGallery
         items={slideShowImages.toJS()}
         autoPlay={true}
-        slideInterval={4000}
-        thumbnail={false}/>
+        infinite={true}
+        showBullets={true}
+        slideDuration={250}
+        slideInterval={10000}
+        showThumbnails={false}/>
     );
   }
 }

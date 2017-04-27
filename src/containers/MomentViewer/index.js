@@ -135,7 +135,7 @@ class MomentViewer extends Component {
       metEnd
     } = currentMoment;
 
-    // If viewing a standablone moment, missionLength should be 1.
+    // If viewing a standalone moment, missionLength should be 1.
     const missionLength = currentMission ? currentMission.length : 1;
 
     const slideShowProps = {
@@ -143,15 +143,15 @@ class MomentViewer extends Component {
       title: "Media"
     };
     const slideShowWidget = loading
-      ? <LoadingIndicator {...slideShowProps} />
-      : <SlideShowPanel images={currentMoment.media} {...slideShowProps} />;
+      ? <LoadingIndicator {...slideShowProps}/>
+      : <SlideShowPanel images={currentMoment.media} {...slideShowProps}/>;
 
     const lineDiagramProps = {
       key: "LineDiagram",
       title: "Line Diagram"
     };
     const lineDiagramWidget = metrics.loading
-      ? <LoadingIndicator {...lineDiagramProps} />
+      ? <LoadingIndicator {...lineDiagramProps}/>
       : <LineDiagram data={{
         time: currentMissionTime,
         start: this.props.currentMoment.metStart,
@@ -161,28 +161,33 @@ class MomentViewer extends Component {
           {name: "TurnRate", value: metrics.TurnCount},
           {name: "WordRate", value:  metrics.WordCount}
         ]
-      }} {...lineDiagramProps} />;
+      }} {...lineDiagramProps}/>;
 
     const barDiagramProps = {
       key: "BarDiagram",
       title: "Bar Diagram"
     };
     const barDiagramWidget = metrics.loading
-      ? <LoadingIndicator {...barDiagramProps} />
+      ? <LoadingIndicator {...barDiagramProps}/>
       : <BarDiagram data={{
         time: currentMissionTime,
         series: [
-          {name: "WordRate", value: metrics.WordCount}
+          //{name: "WordRate", value: metrics.WordCount}
         ]
-      }} {...barDiagramProps} />;
+      }} {...barDiagramProps}/>;
 
     const dashboardDiagramProps = {
       key: "DashboardDiagram",
       title: "Dashboard Diagram"
     };
     const dashboardDiagramWidget = metrics.loading
-      ? <LoadingIndicator {...dashboardDiagramProps} />
-      : <DashboardDiagram data={metrics.WordCount} {...dashboardDiagramProps} />;
+      ? <LoadingIndicator {...dashboardDiagramProps}/>
+      : <DashboardDiagram data={{
+        time: currentMissionTime,
+        series: [
+          //{name: "WordRate", value: metrics.WordCount}
+        ]
+      }} {...dashboardDiagramProps}/>;
 
     const chordDiagramProps = {
       key: "ChordDiagram",

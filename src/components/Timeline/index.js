@@ -11,16 +11,16 @@ export function TimelineMessage({name, text, active, startTime, clickEvent}) {
   );
   return (
     <a className={listItemClasses}
-       onClick={clickEvent.bind(this, startTime)}>
+      onClick={clickEvent.bind(this, startTime)}>
       <div>
-        <strong>
-          {name}:
-        </strong>
+        <strong>{name}:</strong>
         <div className="start-time">
           {HumanReadableMs({ms: startTime})}
         </div>
       </div>
-      <div>{text}</div>
+      <div>
+        {text}
+      </div>
     </a>
   );
 }

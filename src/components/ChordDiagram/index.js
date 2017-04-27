@@ -52,8 +52,13 @@ export default class ChordDiagram extends Component {
   render() {
     const {loading, d3 = ""} = this.state;
 
-    if (this.props.data.interactions.size < 1) {return <p className="text-center text-muted">No Data Yet</p>;}
-    if(loading) {return <p className="text-center text-muted">Loading</p>;}
+    //Don't render diagram without data
+    if (this.props.data.interactions.size < 1) {
+      return <p className="text-center text-muted">No Data Yet</p>;
+    }
+    if(loading) {
+      return <p className="text-center text-muted">Loading</p>;
+    }
 
     const el = Faux.createElement("svg");
     d3(el);
