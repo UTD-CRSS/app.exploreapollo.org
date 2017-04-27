@@ -138,18 +138,12 @@ class MomentViewer extends Component {
     // If viewing a standalone moment, missionLength should be 1.
     const missionLength = currentMission ? currentMission.length : 1;
 
-    const slideShowProps = {
-      key: "slideShow",
-      title: "Media"
-    };
+    const slideShowProps = {key: "slideShow", title: "Media"};
     const slideShowWidget = loading
       ? <LoadingIndicator {...slideShowProps}/>
       : <SlideShowPanel images={currentMoment.media} {...slideShowProps}/>;
 
-    const lineDiagramProps = {
-      key: "LineDiagram",
-      title: "Line Diagram"
-    };
+    const lineDiagramProps = {key: "LineDiagram", title: "Line Diagram"};
     const lineDiagramWidget = metrics.loading
       ? <LoadingIndicator {...lineDiagramProps}/>
       : <LineDiagram data={{
@@ -163,10 +157,7 @@ class MomentViewer extends Component {
         ]
       }} {...lineDiagramProps}/>;
 
-    const barDiagramProps = {
-      key: "BarDiagram",
-      title: "Bar Diagram"
-    };
+    const barDiagramProps = {key: "BarDiagram", title: "Bar Diagram"};
     const barDiagramWidget = metrics.loading
       ? <LoadingIndicator {...barDiagramProps}/>
       : <BarDiagram data={{
@@ -176,10 +167,7 @@ class MomentViewer extends Component {
         ]
       }} {...barDiagramProps}/>;
 
-    const dashboardDiagramProps = {
-      key: "DashboardDiagram",
-      title: "Dashboard Diagram"
-    };
+    const dashboardDiagramProps = {key: "DashboardDiagram", title: "Dashboard Diagram"};
     const dashboardDiagramWidget = metrics.loading
       ? <LoadingIndicator {...dashboardDiagramProps}/>
       : <DashboardDiagram data={{
@@ -189,13 +177,14 @@ class MomentViewer extends Component {
         ]
       }} {...dashboardDiagramProps}/>;
 
-    const chordDiagramProps = {
-      key: "ChordDiagram",
-      title: "Chord Diagram"
-    };
+    const chordDiagramProps = {key: "ChordDiagram", title: "Chord Diagram"};
     const chordDiagramWidget = metrics.loading
       ? <LoadingIndicator {...chordDiagramProps} />
-      : <ChordDiagram data={{time: currentMissionTime, speakers: metrics.Speakers, interactions: metrics.InteractionMatrix}} {...chordDiagramProps} />;
+      : <ChordDiagram data={{
+        time: currentMissionTime,
+        speakers: metrics.Speakers,
+        interactions: metrics.InteractionMatrix
+      }} {...chordDiagramProps} />;
 
     return (
       <div className="moment-viewer-container">

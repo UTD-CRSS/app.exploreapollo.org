@@ -24,8 +24,8 @@ export default class ChordDiagram extends Component {
     const rawInteractions = formInteractions(this.props.data.interactions);
     if(rawInteractions.length > 0) {
       const slot = closestIndex(this.props.data.time, rawInteractions.map(function(index) {return Number(index.name);}));
-      const speakers = JSON.parse(rawSpeakers[slot].data.replace(/\'/g, "\""));
-      const interactions = JSON.parse(rawInteractions[slot].data.replace(/\./g, ""));
+      const speakers = JSON.parse(rawSpeakers[slot].data);
+      const interactions = JSON.parse(rawInteractions[slot].data);
       this.setState({
         loading: false,
         slot: -1,
@@ -39,8 +39,8 @@ export default class ChordDiagram extends Component {
     const rawInteractions = formInteractions(this.props.data.interactions);
     if(rawInteractions.length > 0) {
       const slot = closestIndex(this.props.data.time, rawInteractions.map(function(index) {return Number(index.name);}));
-      const speakers = JSON.parse(rawSpeakers[slot].data.replace(/\'/g, "\""));
-      const interactions = JSON.parse(rawInteractions[slot].data.replace(/\./g, ""));
+      const speakers = JSON.parse(rawSpeakers[slot].data);
+      const interactions = JSON.parse(rawInteractions[slot].data);
       this.setState({
         loading: false,
         slot: slot,
@@ -98,10 +98,12 @@ function formSpeakers(data) {
   //so i'm creating duplicate steps...
   var result = data.toArray().map((datum => {return {
     name: String(Number(datum.get("met_start"))),
-    data: String(datum.getIn(["data", "names"]))
+    data: String(datum.getIn(["data", "names"])),
+    ids: String(datum.getIn(["data", "ids"]))
   };})).concat(data.toArray().map((datum => {return {
     name: String(Number(datum.get("met_start")) + 1),
-    data: String(datum.getIn(["data", "names"]))
+    data: String(datum.getIn(["data", "names"])),
+    ids: String(datum.getIn(["data", "ids"]))
   };}))).sort(function(a, b) {
     return a.name.localeCompare(b.name);
   }).filter((element, index, self) => self.findIndex((e) => {

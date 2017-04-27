@@ -11,6 +11,8 @@ export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
 export const FETCH_METRICS = "FETCH_METRICS";
 export const RECEIVE_METRICS = "RECEIVE_METRICS";
+export const FETCH_PERSON = "FETCH_PERSON";
+export const RECEIVE_PERSON = "RECEIVE_PERSON";
 
 // This constant isn't exported from redux-router so I'm having to redefine it.
 // It's a bit of a hack and makes the Google Analytics code dependent on redux-router's internal implementation.
@@ -76,6 +78,32 @@ export function redirectToRandomMoment() {
           moment.media = fromJS(moment.media);
           dispatch(replaceState(null, `/moments/moment/${moment.id}`));
         }
+      });
+  };
+}
+
+function fetchPerson() {
+  return {
+    type: FETCH_PERSON
+  };
+}
+
+function receivePerson({person}) {
+  return {
+    type: RECEIVE_PERSON,
+    person
+  };
+}
+
+export function loadPerson({personId}) {
+  return dispatch => {
+    dispatch(fetchPerson());
+    fetch(`${config.apiEntry}/api/people/${personId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((person) => {
+        dispatch(receivePerson({person}));
       });
   };
 }

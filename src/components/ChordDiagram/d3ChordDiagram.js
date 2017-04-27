@@ -2,13 +2,13 @@ import * as d3 from "d3";
 import curry from "lodash/curry";
 
 export default curry(function d3ChordDiagram(speakers, interactions, node) {
-  
+
   //FIXME should be the innerwidth of the tab container, not the entire window
   var width = window.innerWidth / 2;
   var height = width;
-  var innerRadius = Math.min(width, height) * 0.35;
-  var outerRadius = innerRadius * 1.1;
-  var color = d3.scaleOrdinal(d3.schemeCategory20c);
+  var innerRadius = Math.min(width, height) * 0.40;
+  var outerRadius = innerRadius * 1.10;
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
 
   var chord = d3.chord()
     .padAngle(0.05)
@@ -40,13 +40,10 @@ export default curry(function d3ChordDiagram(speakers, interactions, node) {
     .enter().append("g")
     .style("fill", function(d) {return color(d.index);});
 
-  //TODO none of these mouseovers actually work, something to do with the FAUX DOM?
   group.append("path")
     .style("fill", function(d) {return color(d.index);})
     .style("stroke", function(d) {return d3.rgb(color(d.index)).darker();})
-    .attr("d", arc)
-    .on("mouseover", fade(0.05))
-    .on("mouseout", fade(1));
+    .attr("d", arc);
 
   var groupTick = group.selectAll(".group-tick")
     .data(function(d) {return groupTicks(d, 1e3);})
@@ -54,17 +51,16 @@ export default curry(function d3ChordDiagram(speakers, interactions, node) {
       .attr("class", "group-tick")
       .attr("transform", function(d) {return "rotate(" + (d.angle * 180 / Math.PI - 90) + ") translate(" + outerRadius + ",0)";});
 
-  groupTick.append("line")
-    .attr("x2", 6);
-
   groupTick.append("text")
-      .attr("x", 8)
-      .attr("dy", ".35em")
-      .attr("transform", function(d) {return d.angle > Math.PI ? "rotate(180) translate(-16)" : null;})
-      .style("text-anchor", function(d) {return d.angle > Math.PI ? "end" : null;})
-      .text(function(d) {return d.label;});
+    .attr("y", 26)
+    .attr("transform", "rotate(90)")
+    .style("fill", "#000000")
+    .style("stroke", "#000000")
+    .style("font-size", "1.5em")
+    .style("font-weight", "bold")
+    .style("text-anchor", "middle")
+    .text(function(d) {return d.label;});
 
-  //TODO none of these mouseovers actually work, something to do with the FAUX DOM?
   g.append("g")
     .attr("class", "ribbons")
     .selectAll("path")
@@ -73,9 +69,7 @@ export default curry(function d3ChordDiagram(speakers, interactions, node) {
       .attr("d", ribbon)
       .style("fill", function(d) {return color(d.target.index);})
       .style("stroke", function(d) {return d3.rgb(color(d.target.index)).darker();})
-      .style("opacity", 0.9)
-      .on("mouseover", fadeChord(0.05, 0.05))
-      .on("mouseout", fadeChord(1, 0.9));
+      .style("opacity", 0.7);
 
   function groupTicks(d, step) {
     var k = (d.endAngle - d.startAngle) / d.value;
@@ -85,30 +79,6 @@ export default curry(function d3ChordDiagram(speakers, interactions, node) {
         label: speakers[d.index]
       };
     });
-  }
-
-  function fade(opacity) {
-    return function(g, i) {
-      svg.selectAll(".chord path")
-        .filter(function(d) {
-          return d.source.index != i && d.target.index != i;
-        })
-        .transition()
-        .style("opacity", opacity);
-    };
-  }
-
-  function fadeChord(opacityArcs, opacityChords) {
-    return function(g, i) {
-      svg.selectAll(".chord path")
-        .filter(function(d,j) { return j!=i; })
-      .transition()
-        .style("opacity", opacityChords);
-      svg.selectAll(".arc path")
-        .filter(function(d) { return !(d.index == g.source.index || d.index == g.target.index); })
-      .transition()
-        .style("opacity", opacityArcs);
-    };
   }
 
   function resize() {
