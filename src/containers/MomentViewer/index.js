@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
 import {connect} from "react-redux";
 import {get} from "lodash";
 import Spinner from "react-spinner";
@@ -45,6 +46,30 @@ class MomentViewer extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentMomentId !== this.props.currentMomentId) {
       this.fetch(nextProps);
+    }
+  }
+
+  componentDidUpdate() {
+    var parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
+    var timeline;
+    var scrollHeight = 0;
+    if(parent != undefined) {
+      timeline = parent.children[0].children[0].children[0].children[1];
+      var {transcripts} = this.props.currentTranscripts;
+      transcripts = transcripts.map(index => index.set("active", false));
+      var activeIndex = getActiveIndex(transcripts, this.props.currentMoment.metStart + (this.props.currentAudio.time * 1000));
+      if(activeIndex < 0) {
+        activeIndex = 0;
+      }
+      for(var i = activeIndex-2; i >= 0; i--) {
+        var activeItem = timeline.children[i];
+        if(activeItem != undefined) {
+          scrollHeight += timeline.children[i].offsetHeight-1;
+        }
+      }
+    }
+    if(timeline != undefined) {
+      timeline.scrollTop = scrollHeight;
     }
   }
 
@@ -110,49 +135,56 @@ class MomentViewer extends Component {
       metEnd
     } = currentMoment;
 
-    // If viewing a standablone moment, missionLength should be 1.
+    // If viewing a standalone moment, missionLength should be 1.
     const missionLength = currentMission ? currentMission.length : 1;
 
-    const slideShowProps = {
-      key: "slideShow",
-      title: "Media"
-    };
+    const slideShowProps = {key: "slideShow", title: "Media"};
     const slideShowWidget = loading
-      ? <LoadingIndicator {...slideShowProps} />
-      : <SlideShowPanel images={currentMoment.media} {...slideShowProps} />;
+      ? <LoadingIndicator {...slideShowProps}/>
+      : <SlideShowPanel images={currentMoment.media} {...slideShowProps}/>;
 
-    const lineDiagramProps = {
-      key: "LineDiagram",
-      title: "Line Diagram"
-    };
+    const lineDiagramProps = {key: "LineDiagram", title: "Line Diagram"};
     const lineDiagramWidget = metrics.loading
-      ? <LoadingIndicator {...lineDiagramProps} />
-      : <LineDiagram data={metrics.WordCount} {...lineDiagramProps} />;
+      ? <LoadingIndicator {...lineDiagramProps}/>
+      : <LineDiagram data={{
+        time: currentMissionTime,
+        start: this.props.currentMoment.metStart,
+        end: this.props.currentMoment.metEnd,
+        series: [
+          {name: "ConversationRate", value: metrics.ConversationCount},
+          {name: "TurnRate", value: metrics.TurnCount},
+          {name: "WordRate", value:  metrics.WordCount}
+        ]
+      }} {...lineDiagramProps}/>;
 
-    const barDiagramProps = {
-      key: "BarDiagram",
-      title: "Bar Diagram"
-    };
+    const barDiagramProps = {key: "BarDiagram", title: "Bar Diagram"};
     const barDiagramWidget = metrics.loading
-      ? <LoadingIndicator {...barDiagramProps} />
-      : <BarDiagram data={metrics.WordCount} {...barDiagramProps} />;
+      ? <LoadingIndicator {...barDiagramProps}/>
+      : <BarDiagram data={{
+        time: currentMissionTime,
+        series: [
+          //{name: "WordRate", value: metrics.WordCount}
+        ]
+      }} {...barDiagramProps}/>;
 
-    const dashboardDiagramProps = {
-      key: "DashboardDiagram",
-      title: "Dashboard Diagram"
-    };
+    const dashboardDiagramProps = {key: "DashboardDiagram", title: "Dashboard Diagram"};
     const dashboardDiagramWidget = metrics.loading
-      ? <LoadingIndicator {...dashboardDiagramProps} />
-      : <DashboardDiagram data={metrics.WordCount} {...dashboardDiagramProps} />;
+      ? <LoadingIndicator {...dashboardDiagramProps}/>
+      : <DashboardDiagram data={{
+        time: currentMissionTime,
+        series: [
+          //{name: "WordRate", value: metrics.WordCount}
+        ]
+      }} {...dashboardDiagramProps}/>;
 
-    const chordDiagramProps = {
-      key: "ChordDiagram",
-      title: "Chord Diagram"
-    };
-    //TODO import real data
+    const chordDiagramProps = {key: "ChordDiagram", title: "Chord Diagram"};
     const chordDiagramWidget = metrics.loading
       ? <LoadingIndicator {...chordDiagramProps} />
-      : <ChordDiagram data={require("../../../resources/readme.json")} {...chordDiagramProps} />;
+      : <ChordDiagram data={{
+        time: currentMissionTime,
+        speakers: metrics.Speakers,
+        interactions: metrics.InteractionMatrix
+      }} {...chordDiagramProps} />;
 
     return (
       <div className="moment-viewer-container">
@@ -171,7 +203,6 @@ class MomentViewer extends Component {
           <Timeline
             timeline={transcripts}
             clickEvent={timelineClickEvent}/>
-
           <MomentWidgets>
             {slideShowWidget}
             <Tabs>
@@ -200,8 +231,6 @@ class MomentViewer extends Component {
     );
   }
 }
-
-
 
 function mapStateToProps(state) {
   const {audio, metrics} = state;

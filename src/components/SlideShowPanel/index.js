@@ -10,7 +10,7 @@ export default class SlideShowPanel extends Component {
   render() {
     const {images} = this.props;
     if (!images || images.size < 1) {
-      return (<div className="text-center">No Media Yet.</div>);
+      return (<p className="text-center text-muted">No Data Yet</p>);
     }
 
     const slideShowImages = images.map(function (image) {
@@ -21,8 +21,15 @@ export default class SlideShowPanel extends Component {
       });
     });
 
-    return (<ImageGallery items={slideShowImages.toJS()}
-                          autoPlay={true}
-                          slideInterval={4000}/>);
+    return (
+      <ImageGallery
+        items={slideShowImages.toJS()}
+        autoPlay={true}
+        infinite={true}
+        showBullets={true}
+        slideDuration={250}
+        slideInterval={10000}
+        showThumbnails={false}/>
+    );
   }
 }
