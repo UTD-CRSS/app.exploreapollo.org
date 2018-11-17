@@ -11,7 +11,7 @@
 
 ## Development
 
-This project requires Node >=4.X and npm >=3.X You should install node using [nvm][].
+This project requires Node >=8.X and npm >=3.X You should install node using [nvm][].
 
 ### Start Hacking
 
