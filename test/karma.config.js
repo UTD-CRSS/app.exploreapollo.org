@@ -58,7 +58,9 @@ function sauceLabs() {
 
   return _.extend(base(), {
     sauceLabs: {
-      testName: "UTD CRSS Apollo SPA Tests"
+      testName: "UTD CRSS Apollo SPA Tests",
+      startConnect: false,
+      tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
     },
     browserDisconnectTimeout: 10000,
     browserDisconnectTolerance: 1,
