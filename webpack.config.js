@@ -96,5 +96,11 @@ module.exports = {
 
   externals: {
     "ga": "ga"
+  },
+
+  node: {
+    // nodejs built-in modules used by xmlhttprequest
+    fs: "empty",
+    child_process: "empty"
   }
 };
