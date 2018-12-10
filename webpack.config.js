@@ -6,13 +6,6 @@ var config = require("./config");
 
 var isProduction = process.env.NODE_ENV === "production";
 
-var babelLoader = "babel?" + [
-  "presets[]=react",
-  "presets[]=es2015",
-  "presets[]=stage-0",
-  "plugins[]=transform-runtime"
-].join(",");
-
 module.exports = {
   context: path.join(__dirname, "src"),
 
@@ -68,10 +61,10 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: isProduction ? [
-          babelLoader
+          "babel"
         ] : [
           "react-hot",
-          babelLoader
+          "babel"
         ]
       },
       {

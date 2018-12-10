@@ -1,13 +1,13 @@
-/*eslint-env mocha*/
-import {assert} from "chai";
+/*eslint-env jest*/
 import React from "react";
+import { shallow } from "enzyme";
+
 import Dashboard from "./index";
-import testTree from "react-test-tree";
 
 describe("Dashboard Component", function() {
   it("should exist", function() {
     // Render into document
-    var app = testTree(<Dashboard />);
-    assert.ok(app.isMounted());
+    var app = shallow(<Dashboard />);
+    expect(app.find("div.dashboard-container")).toHaveLength(1);
   });
 });

@@ -28,7 +28,7 @@ export function TimelineMessage({name, text, active, startTime, clickEvent}) {
 function TimelineList({timeline, clickEvent}) {
   if (!timeline || timeline.size < 1) {
     return (
-      <div testRef="errorMessage" className="alert alert-info">No Messages</div>
+      <div className="alert alert-info">No Messages</div>
     );
   }
   let items = timeline.map((item) => {
@@ -62,7 +62,7 @@ export default function Timeline({timeline, clickEvent}) {
       <div style={{position: "relative", width: "100%", height: "100%"}}>
         <div style={{position: "absolute", top: 0, right: 0, bottom: "21px", left: 0}}>
             <div className="transcript-panel">
-              <div testRefCollection="timelineContainer" className={classes}>
+              <div className={classes}>
                 <div className="panel-heading">
                   <h3 className="panel-title">Transcript</h3>
                 </div>
