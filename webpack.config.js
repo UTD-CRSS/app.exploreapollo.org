@@ -6,15 +6,16 @@ var config = require("./config");
 
 var isProduction = process.env.NODE_ENV === "production";
 
-var babelLoader = "babel?" + [
-  "presets[]=react",
-  "presets[]=es2015",
-  "presets[]=stage-0",
-  "plugins[]=transform-runtime"
+var babelLoader = "babel-loader?" + [
+  "presets[]=@babel/react",
+  "presets[]=@babel/preset-env",
+  "plugins[]=@babel/transform-runtime",
+  "plugins[]=@babel/plugin-syntax-export-default-from"
 ].join(",");
 
 module.exports = {
   context: path.join(__dirname, "src"),
+  mode: 'development',
 
   entry: ["./"],
 
@@ -29,7 +30,8 @@ module.exports = {
   },
 
   resolve: {
-    root: path.join(__dirname, "src"),
+    modules: ["node_modules",
+            path.join(__dirname, "src")],
     alias: {
       test: path.join(__dirname, "test")
     }
@@ -44,7 +46,8 @@ module.exports = {
       GoogleAnalyticsCode: config.GoogleAnalyticsCode
     }),
     new webpack.ProvidePlugin({
-      fetch: "imports?this=>global!exports?global.fetch!whatwg-fetch"
+      fetch: "exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd",
+      //fetch: "imports-loader?this=>global.fetch!whatwg-fetch"
     }),
     new webpack.DefinePlugin({
       "process.env": {
@@ -63,24 +66,24 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: isProduction ? [
+        use: isProduction ? [
           babelLoader
         ] : [
-          "react-hot",
+          "react-hot-loader/webpack",
           babelLoader
         ]
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.css$/,
-        loaders: ["style", "css"]
+        use: ["style-loader", "css-loader"]
       },
       { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf$/,    loader: "file-loader" },

@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 import { googleAnalytics } from "../middleware";
 import createLogger from "redux-logger";
 import rootReducer from "../reducers";
-import createHistory from "history/lib/createBrowserHistory";
+import createHistory from "react-router/node_modules/history/createBrowserHistory";
 import {compact} from "lodash";
 
 const isProduction = process.env.NODE_ENV === "production";
