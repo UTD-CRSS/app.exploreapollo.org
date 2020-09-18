@@ -7,10 +7,11 @@ var config = require("./config");
 var isProduction = process.env.NODE_ENV === "production";
 
 var babelLoader = "babel-loader?" + [
-  "presets[]=@babel/react",
+  "presets[]=@babel/preset-react",
   "presets[]=@babel/preset-env",
   "plugins[]=@babel/transform-runtime",
-  "plugins[]=@babel/plugin-syntax-export-default-from"
+  "plugins[]=@babel/plugin-syntax-export-default-from",
+  "plugins[]=@babel/plugin-proposal-class-properties",
 ].join(",");
 
 module.exports = {
@@ -45,10 +46,11 @@ module.exports = {
       favicon: "./favicon.ico",
       GoogleAnalyticsCode: config.GoogleAnalyticsCode
     }),
-    new webpack.ProvidePlugin({
-      fetch: "exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd",
-      //fetch: "imports-loader?this=>global.fetch!whatwg-fetch"
-    }),
+    // new webpack.ProvidePlugin({
+    //   fetch: "imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch"
+    //   //fetch: "exports-loader?self.fetch!whatwg-fetch",
+    //   //fetch: "imports-loader?this=>global.fetch!whatwg-fetch"
+    // }),
     new webpack.DefinePlugin({
       "process.env": {
         COMMIT: JSON.stringify(
@@ -68,14 +70,38 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)/,
         exclude: /node_modules/,
         use: isProduction ? [
-          babelLoader
+          babelLoader,
         ] : [
           "react-hot-loader/webpack",
-          babelLoader
-        ]
+          babelLoader,
+        ],
+
+      },
+      {
+        test: require.resolve('./src/containers/index.js'),
+        loader: 'exports-loader',
+        options: {
+          type: 'commonjs',
+          exports: [
+            'App',
+            'Dashboard',
+            'Moments',
+            'MomentViewer',
+            'Stories',
+            'StoryViewer',
+            'NoMatch',
+            'RandomMoment',
+            'Settings',
+            'PlaylistViewer',
+            'Search',
+            'DJ',
+            'Game',
+            'Apollo11Explorer'
+          ]
+        }
       },
       {
         test: /\.scss$/,
@@ -85,6 +111,15 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
+      // { test: /index\.js$/,
+      //   loader: 'exports-loader',
+      //   options: {
+      //     //type: "commonjs",
+      //     exports: [
+      //       'named Foo FooA'
+      //   ],
+      //   },
+      //   },
       { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf$/,    loader: "file-loader" },
       { test: /\.eot$/,    loader: "file-loader" },
