@@ -133,6 +133,7 @@ module.exports = {
   },
 
   externals: {
-    "ga": "ga"
+    "ga": "ga",
+
   }
 };
