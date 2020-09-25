@@ -39,12 +39,11 @@ function sauceLabs() {
     sl_safari: {
       base: "SauceLabs",
       browserName: "safari",
-      platform: "OS X 10.10"
+      platform: "OS X 10.15"
     },
     sl_iphone_ios_8: {
       base: "SauceLabs",
       browserName: "iphone",
-      version: "8.4",
       deviceName: "iPhone 6 Plus",
       deviceOrientation: "portrait"
     },
