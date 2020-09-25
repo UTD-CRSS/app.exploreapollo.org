@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import {Dashboard} from "../Dashboard";
 
 export class AppHeader extends Component {
   render() {
@@ -112,6 +113,7 @@ export class App extends Component {
         <div style={{padding: '1em', background: '#375a7f', color: 'white'}}>
           Now featuring: <a style={{color: 'white'}} href="https://exploreapollo-fearless-steps.herokuapp.com/">the Fearless Steps Challenge</a>
         </div>
+        <Dashboard/>
         <FloatingFeedbackButton/>
         <div className="app-panel">
           {this.props.children}
