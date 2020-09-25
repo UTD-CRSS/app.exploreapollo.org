@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.scss";
 import {findIndex} from "lodash";
-import {Link} from "react-router";
+import {Link} from "react-router-dom";
 
 function getCurrentIndex(moments, currentMomentId) {
   return findIndex(moments, {id: Number(currentMomentId)});

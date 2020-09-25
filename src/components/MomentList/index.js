@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link} from "react-router";
+import {Link} from "react-router-dom";
 import {keys} from "lodash";
 
 export class MomentListItem extends Component {
