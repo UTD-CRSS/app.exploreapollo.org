@@ -17,7 +17,7 @@ function getNextMoment(moments, currentMomentId) {
   return false;
 }
 
-class PlaylistViewer extends Component {
+export class PlaylistViewer extends Component {
 
   componentWillMount() {
     const {loadStory, currentStoryId} = this.props;

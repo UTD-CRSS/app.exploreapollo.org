@@ -20,7 +20,7 @@ export class MomentListItem extends Component {
   }
 }
 
-export default class MomentList extends Component {
+export class MomentList extends Component {
   renderList() {
     const {moments} = this.props;
     if (!moments || moments.length < 1) {

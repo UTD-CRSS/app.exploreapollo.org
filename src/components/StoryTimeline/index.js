@@ -94,7 +94,7 @@ export function LandmarkCard({id, title, metStart}) {
   );
 }
 
-export default class StoryTimeline extends Component {
+export class StoryTimeline extends Component {
   renderCards() {
     // const {landmarks} = this.props;
     let landmarks = []; //TEMPORARY UNTIL WE GET LANDMARKS SORTED OUT :)

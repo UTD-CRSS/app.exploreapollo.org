@@ -4,7 +4,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import shouldPureComponentUpdate from "react-pure-render/function";
 
-export default class SlideShowPanel extends Component {
+export class SlideShowPanel extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {

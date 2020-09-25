@@ -21,7 +21,7 @@ function WidgetContainer(component) {
   );
 }
 
-export default function MomentWidgets({children}) {
+export function MomentWidgets({children}) {
   const content = React.Children.count(children) > 0
     ? React.Children.map(children, WidgetContainer)
     : (<p className="text-center text-muted">No Data Yet</p>);

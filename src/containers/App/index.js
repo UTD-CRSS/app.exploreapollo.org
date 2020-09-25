@@ -104,7 +104,7 @@ export class FloatingFeedbackButton extends Component {
   }
 }
 
-export default class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div className="app-container">

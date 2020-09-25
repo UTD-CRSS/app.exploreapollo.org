@@ -4,7 +4,7 @@ import Dimensions from "react-dimensions";
 import {Chart, Layer, Animate, Ticks, Lines, Dots} from "rumble-charts";
 import * as D3 from "d3";
 
-class LineDiagram extends Component {
+export class LineDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {

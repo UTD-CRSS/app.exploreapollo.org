@@ -67,7 +67,7 @@ function setPlaying(loadAudio, playing) {
   });
 }
 
-export default class MomentPlayer extends Component {
+export class MomentPlayer extends Component {
 
   render() {
     const {

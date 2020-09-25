@@ -3,9 +3,9 @@ import { reduxReactRouter } from "redux-router";
 import routes from "../routes";
 import thunk from "redux-thunk";
 import { googleAnalytics } from "../middleware";
-import createLogger from "redux-logger";
+import { createLogger } from "redux-logger";
 import rootReducer from "../reducers";
-import createHistory from "react-router";
+import { createHistory } from "history";
 import {compact} from "lodash";
 
 const isProduction = process.env.NODE_ENV === "production";

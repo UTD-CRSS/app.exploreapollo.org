@@ -24,7 +24,7 @@ function getTravisBuildURL(id) {
   return (<a href={`${config.TravisBaseURL}/builds/${id}`}>Build {id}</a>);
 }
 
-export default class Settings extends Component {
+export class Settings extends Component {
   render() {
     const info = [
       {title: "Git Commit", value: getGitHubURL(process.env.COMMIT)},

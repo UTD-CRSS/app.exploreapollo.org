@@ -94,7 +94,7 @@ export function LandmarkCard({id, title, metStart}) {
   );
 }
 
-export default class Apollo11StoryTimeline extends Component {
+export class Apollo11StoryTimeline extends Component {
   //const {landmarks} = this.props;
   checkDay(){
     var mstart;

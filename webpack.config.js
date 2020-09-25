@@ -80,29 +80,29 @@ module.exports = {
         ],
 
       },
-      {
-        test: require.resolve('./src/containers/index.js'),
-        loader: 'exports-loader',
-        options: {
-          type: 'commonjs',
-          exports: [
-            'App',
-            'Dashboard',
-            'Moments',
-            'MomentViewer',
-            'Stories',
-            'StoryViewer',
-            'NoMatch',
-            'RandomMoment',
-            'Settings',
-            'PlaylistViewer',
-            'Search',
-            'DJ',
-            'Game',
-            'Apollo11Explorer'
-          ]
-        }
-      },
+      // {
+      //   test: require.resolve('./src/containers/index.js'),
+      //   loader: 'exports-loader',
+      //   options: {
+      //     type: 'commonjs',
+      //     exports: [
+      //       'App',
+      //       'Dashboard',
+      //       'Moments',
+      //       'MomentViewer',
+      //       'Stories',
+      //       'StoryViewer',
+      //       'NoMatch',
+      //       'RandomMoment',
+      //       'Settings',
+      //       'PlaylistViewer',
+      //       'Search',
+      //       'DJ',
+      //       'Game',
+      //       'Apollo11Explorer'
+      //     ]
+      //   }
+      // },
       {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"]

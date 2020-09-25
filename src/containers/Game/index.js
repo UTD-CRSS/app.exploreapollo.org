@@ -16,7 +16,7 @@ import random from "lodash/random";
 import some from "lodash/some";
 import filter from "lodash/filter";
 
-export default class Game extends Component {
+export class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {

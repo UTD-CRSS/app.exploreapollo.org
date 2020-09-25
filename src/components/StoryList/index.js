@@ -38,7 +38,7 @@ function renderStoryListItems(stories) {
   });
 }
 
-export default function StoryList({stories}) {
+export function StoryList({stories}) {
   return (
     <div testRefCollection="storyListContainer">
       {renderStoryListItems(stories)}

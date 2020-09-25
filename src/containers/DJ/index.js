@@ -23,7 +23,7 @@ import {
 
 import getActiveIndex from "../MomentViewer/getActiveIndex";
 
-class DJ extends Component {
+export class DJ extends Component {
 
   constructor(props) {
     super(props);

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import d3ChordDiagram from "./d3ChordDiagram";
 import Faux from "react-faux-dom";
 
-export default class ChordDiagram extends Component {
+export class ChordDiagram extends Component {
   constructor(props) {
     super(props);
     this.state = {loading: true};

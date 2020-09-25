@@ -50,7 +50,7 @@ function TimelineList({timeline, clickEvent}) {
   );
 }
 
-export default function Timeline({timeline, clickEvent}) {
+export function Timeline({timeline, clickEvent}) {
   const classes = classNames(
     "timeline-container",
     "panel",

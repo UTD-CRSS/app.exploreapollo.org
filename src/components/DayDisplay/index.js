@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router";
 
 
-export default class DayDisplay extends Component{
+export class DayDisplay extends Component{
   render(){
     var imgUrl;
     var label;

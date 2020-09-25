@@ -1,13 +1,13 @@
 import { routerStateReducer as router } from "redux-router";
 import { combineReducers } from "redux";
 import * as ActionTypes from "../actions";
-import { normalize, Schema, arrayOf } from "normalizr";
+import { normalize, schema } from "normalizr";
 import _ from "lodash";
 import {fromJS} from "immutable";
 
-const Moment = new Schema("moments");
+const Moment = new schema.Object("moments");
 //const Transcript = new Schema("transcripts");
-const Mission = new Schema("missions");
+const Mission = new schema.Object("missions");
 
 Moment.define({
   //transcripts: arrayOf(Transcript), //removed from moment
@@ -39,7 +39,7 @@ function moments(state = initialMomentState, action = {}) {
         {loading: false},
         normalize(
           action.moments,
-          _.isArray(action.moments) ? arrayOf(Moment) : Moment
+          _.isArray(action.moments) ? schema.Array(Moment) : Moment
         )
       );
     default:
@@ -159,7 +159,7 @@ const rootReducer = combineReducers({
   audio,
   stories,
   metrics,
-  router
+  //router
 });
 
 export default rootReducer;

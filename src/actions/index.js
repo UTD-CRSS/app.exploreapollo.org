@@ -5,7 +5,7 @@ import {isArray} from "lodash";
 import config from "../../config";
 
 import {fromJS} from "immutable";
-import {replaceState} from "redux-router";
+//import {replaceState} from "redux-router";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
 export const FETCH_MOMENT = "FETCH_MOMENT";
@@ -68,6 +68,7 @@ export function searchMomentsByTranscript(transcriptSnippet) {
 }
 
 export function redirectToRandomMoment() {
+
   return (dispatch, getState) => {
     fetch(`${config.apiEntry}/api/moments/random`)
       .then((response) => {
@@ -76,7 +77,10 @@ export function redirectToRandomMoment() {
       .then((moment) => {
         if(getState().router.location.pathname === "/moments/random") {
           moment.media = fromJS(moment.media);
-          dispatch(replaceState(null, `/moments/moment/${moment.id}`));
+          //dispatch(replaceState(null, `/moments/moment/${moment.id}`));
+          dispatch(
+            history.replace("/moments/random", `/moments/moment/${moment.id}`)
+          );
         }
       });
   };
@@ -233,7 +237,7 @@ export function loadTranscripts({momentId}) {
 }
 
 export const RECEIVE_AUDIO = "RECEIVE_AUDIO";
-// export const FETCH_AUDIO = "FETCH_AUDIO";
+export const FETCH_AUDIO = "FETCH_AUDIO";
 // function fetchAudio() {
 //   return {
 //     type: FETCH_AUDIO

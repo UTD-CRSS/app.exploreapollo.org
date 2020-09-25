@@ -26,7 +26,7 @@ import {
 
 import getActiveIndex from "./getActiveIndex";
 
-class MomentViewer extends Component {
+export class MomentViewer extends Component {
 
   fetch(props) {
     props.loadAudio({

@@ -12,7 +12,7 @@ class FeaturedStoryLink extends Component {
   }
 }
 
-export default class Dashboard extends Component {
+export class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard-container">
