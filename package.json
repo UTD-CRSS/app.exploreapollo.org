@@ -83,7 +83,7 @@
     "react-image-gallery": "^1.0.8",
     "react-pure-render": "^1.0.2",
     "react-redux": "^7.2.1",
-    "react-router": "^3.0.0",
+    "react-router": "^5.2.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "react-spinner": "^0.2.7",
@@ -102,7 +102,7 @@
     "wavesurfer.js": "^4.0.1",
     "webpack": "^4.44.2",
     "webpack-dev-middleware": "^3.7.2",
-    "webpack-hot-middleware": "^2.6.0",
+    "webpack-hot-middleware": "^2.25.0",
     "whatwg-fetch": "^3.4.1"
   },
   "peerDependencies": {
