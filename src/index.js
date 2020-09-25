@@ -4,7 +4,7 @@ import ReactDom from "react-dom";
 // import { render } from "react-dom";
 import { Provider } from "react-redux";
 //import { ReduxRouter } from "redux-router";
-import configureStore from "./store/configureStore";
+//import configureStore from "./store/configureStore";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 //import { App } from "containers"; 
 import { Routes } from "./routes";
@@ -30,7 +30,7 @@ if (location.href.indexOf("#") != -1) {
   history.replaceState({} , "", `${location.hash.substring(1)}`);
 }
 
-const store = configureStore();
+//const store = configureStore();
 
 ReactDom.render(
  // <Provider store={store}>
@@ -38,7 +38,7 @@ ReactDom.render(
     <h1>help plz</h1>
       <Switch>
       <Route name="app" path="/" component={App} />
-        <IndexRoute component={Dashboard} />
+        <Route path="/" component={Dashboard} />
         <Route path="settings" component={Settings} />
         <Route path="moments/moment/:momentId" component={MomentViewer} />
         <Route path="moments" component={Moments} />
