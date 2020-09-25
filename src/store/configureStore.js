@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
-import { reduxReactRouter } from "redux-router";
+//import { reduxReactRouter } from "redux-router";
 import routes from "../routes";
 import thunk from "redux-thunk";
 import { googleAnalytics } from "../middleware";
@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const middleware = compact([
   applyMiddleware(thunk),
-  reduxReactRouter({ routes, createHistory }),
+ //reduxReactRouter({ routes, createHistory }),
   applyMiddleware(googleAnalytics),
   !isProduction && applyMiddleware(createLogger())
 ]);

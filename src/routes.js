@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import { IndexRoute } from "react-router";
+
 
 import {
   Dashboard,
@@ -25,7 +25,7 @@ export default class Routes extends Component {
     return (
     <Switch>
       <Route name="app" path="/" component={App} exact></Route>
-        <IndexRoute component={Dashboard} />
+        <Route path="/" component={Dashboard} />
         <Route path="settings" component={Settings} />
         <Route path="moments/moment/:momentId" component={MomentViewer} />
         <Route path="moments" component={Moments} />
