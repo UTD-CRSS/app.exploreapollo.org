@@ -23,7 +23,7 @@ export default class Routes extends Component {
   render() {
     return (
     <Switch>
-      <Route name="app" path="/" component={App} exact></Route>
+      <Route name="app" path="/" component={App} ></Route>
         <Route path="settings" component={Settings} />
         <Route path="moments/moment/:momentId" component={MomentViewer} />
         <Route path="moments" component={Moments} />

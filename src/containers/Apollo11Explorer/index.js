@@ -11,7 +11,7 @@ import {StoryList} from "../../components";
 import Spinner from "react-spinner";
 
 export class Apollo11Explorer extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadStories();
   }
   checkDay(){

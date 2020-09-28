@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 //import { ReduxRouter } from "redux-router";
 //import configureStore from "./store/configureStore";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { Routes } from "./routes";
+import  Routes  from "./routes";
 
 import {
   Dashboard,
@@ -34,9 +34,8 @@ if (location.href.indexOf("#") != -1) {
 ReactDom.render(
  // <Provider store={store}>
     <BrowserRouter>
-
       <Switch>
-      <Route name="app" path="/" component={App} />
+      {/* <Route name="app" path="/" component={App} />
         <Route path="settings" component={Settings} />
         <Route path="moments/moment/:momentId" component={MomentViewer} />
         <Route path="moments" component={Moments} />
@@ -51,7 +50,8 @@ ReactDom.render(
         <Route path="moments/random" component={RandomMoment} />
         <Route path="dj" component={DJ} />
         <Route path="game" component={Game} />
-        <Route path="*" component={NoMatch}/>
+        <Route path="*" component={NoMatch}/> */}
+        <Routes />
       </Switch>
     </BrowserRouter>,
   //</Provider>
