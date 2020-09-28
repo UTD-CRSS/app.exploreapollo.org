@@ -21,11 +21,9 @@ import {
 
 export default class Routes extends Component {
   render() {
-    console.log("made it to routes")
     return (
     <Switch>
-      <Route name="app" path="/" component={App} exact></Route>
-        <Route path="/" component={Dashboard} />
+      <Route name="app" path="/" component={App} ></Route>
         <Route path="settings" component={Settings} />
         <Route path="moments/moment/:momentId" component={MomentViewer} />
         <Route path="moments" component={Moments} />
