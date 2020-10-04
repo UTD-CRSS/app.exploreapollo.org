@@ -95,6 +95,7 @@ module.exports = {
   },
 
   externals: {
-    "ga": "ga"
+    "ga": "ga",
+    xmlhttprequest: "{XMLHttpRequest:XMLHttpRequest}"
   }
 };

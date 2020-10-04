@@ -34,7 +34,7 @@
     "karma-chrome-launcher": "^0.2.0",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
-    "karma-sauce-launcher": "^0.3.0",
+    "karma-sauce-launcher": "^4.1.5",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.3.2",
@@ -63,7 +63,7 @@
     "karma": "^0.13.15",
     "lodash": "^4.1.0",
     "moment": "^2.10.6",
-    "node-sass": "^3.3.3",
+    "node-sass": "^4.14.1",
     "normalizr": "^2.0.0",
     "qs": "^6.0.2",
     "react": "^0.14.3",
@@ -92,6 +92,7 @@
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0",
-    "whatwg-fetch": "^0.11.0"
+    "whatwg-fetch": "^0.11.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }
