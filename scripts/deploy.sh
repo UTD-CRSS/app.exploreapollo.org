@@ -22,4 +22,4 @@ if ! hash s3_website 2>/dev/null; then
 fi
 
 echo "initiating push"
-#s3_website push
+s3_website push
