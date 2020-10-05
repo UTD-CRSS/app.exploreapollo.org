@@ -16,7 +16,7 @@ $NPM_BIN/webpack -p
 
 if ! hash s3_website 2>/dev/null; then
   echo "installing s3_website"
-  gem install s3_website
+  gem install s3_website -v 2.12.3
 fi
 
 echo "initiating push"
