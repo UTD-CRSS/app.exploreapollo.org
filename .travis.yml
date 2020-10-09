@@ -1,4 +1,5 @@
 sudo: false
+dist: trusty
 language: 
 - node_js
 - java
@@ -18,7 +19,6 @@ before_install:
 script:
 - npm run lint
 - npm test
-- jdk_switcher use openjdk8
 deploy:
 - provider: script
   skip_cleanup: true
