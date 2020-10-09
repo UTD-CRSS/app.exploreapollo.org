@@ -22,12 +22,14 @@ deploy:
   on:
     branch: master
     rvm: 1.9.3
+    jdk: openjdk8
 - provider: script
   skip_cleanup: true
   script: scripts/deploy.sh staging
   on:
     branch: develop
     rvm: 1.9.3
+    jdk: openjdk8
 env:
   global:
   - secure: gYGaHr8vx4RAwczHElLuVYfZf5lBcXYrwYLPIFAgQshxgPr22Vx3Ie12EldxeP++pjVnfoyTMkP9CMm9d+ya3olr7t3HEEDX7mK2xSKjPakG9k4b1IOtPNbClIOdYWc6PEUJKye853OaE0IgmZ/e0ShC6yS+fAKwsnUoHE2/fa1nksi0IqEqrRt+MvuxteBVTIzzWvs+mlbXbIXbVZa1m9N8hnJPTXXwb1F9cL58OV3pip/yWRltcSRJDMUM8ipjwwdoHSdze7O5LyiaJWc+ABji5fr4jog5WSzVOeDQAvMNbDc5mpOxx968fmWTqqAKANcqrt9u7VcnXjTRodAG3IsK8aOLe4aEvjvnwDItk8nQKIY8PzS7rErj3WacHPy+jguYwe7ehOD9zYAizcvBqo7E/TM1siBkosIQyRA5yvHRbLhsC4d1C3rRIyrD091IdF921NhKmZmTVOmAOznMSkIKep+QJ7Q/phfxt7TrX7n0nyjnfK2kMBym3uxFWLoX8AgXyD5l5+Wp2LQZyIsnhHvCV4ij8l3PvXdEVfKrd1nJuvWTxHfJK0MHhceiQhTITDMVW9qdYRHoRTRBJLqLuHAJiNvuweOFY+OPmcWDEKpZAHMy9P6fNjrgeyh6RpJRopr6f6bRZEBcUjSJz16RFIlDmwtD+a/TGXfep0xh6O0=
