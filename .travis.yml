@@ -1,7 +1,12 @@
 sudo: false
-language: node_js
+language: 
+- node_js
+- java
+jdk: 
+  - openjdk8
+  - oraclejdk8
 node_js:
-- 7
+- 12
 before_install:
 - npm install -g npm@latest
 script:
