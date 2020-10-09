@@ -14,7 +14,6 @@ script:
 - npm test
 deploy:
 - provider: script
-  edge: true
   skip_cleanup: true
   script: scripts/deploy.sh production
   on:
