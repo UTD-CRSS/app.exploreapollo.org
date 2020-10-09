@@ -20,7 +20,6 @@ deploy:
   on:
     branch: master
 - provider: script
-  edge: true
   skip_cleanup: true
   script: scripts/deploy.sh staging
   on:
