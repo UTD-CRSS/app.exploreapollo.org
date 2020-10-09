@@ -2,15 +2,19 @@ sudo: false
 language: 
 - node_js
 - java
+- ruby
 node_js:
   - 12
 jdk: 
   - openjdk8
   - oraclejdk8
+rvm:
+  - 1.9.3
 before_install:
 - npm install -g npm@latest
 - rvm install 1.9.3
 - gem update --system 1.8.24
+- travis_internal_ruby() { echo "$TRAVIS_RUBY_VERSION"; }
 script:
 - npm run lint
 - npm test
