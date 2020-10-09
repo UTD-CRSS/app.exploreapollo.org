@@ -109,8 +109,8 @@ export default class App extends Component {
     return (
       <div className="app-container">
         <AppHeader/>
-        <div style={{padding: '1em', background: '#375a7f', color: 'white'}}>
-          Now featuring: <a style={{color: 'white'}} href="https://exploreapollo-fearless-steps.herokuapp.com/">the Fearless Steps Challenge</a>
+        <div style={{padding: "1em", background: "#375a7f", color: "white"}}>
+          Now featuring: <a style={{color: "white"}} href="https://exploreapollo-fearless-steps.herokuapp.com/">the Fearless Steps Challenge</a>
         </div>
         <FloatingFeedbackButton/>
         <div className="app-panel">
