@@ -12,13 +12,11 @@ export class AppHeader extends Component {
               Explore Apollo
             </Link>
           </div>
-
+            
           <ul className="nav navbar-nav">
-            <li>
               <Link to="/apollo11">
                 Apollo 11
               </Link>
-            </li>
             <li>
               <Link to="/search">
                 Search
@@ -27,6 +25,11 @@ export class AppHeader extends Component {
             <li>
               <Link to="/moments/random">
                 Surprise Me!
+              </Link>
+            </li>
+            <li>
+              <Link to="/lessons"> 
+                Lesson Plans
               </Link>
             </li>
             <li>
