@@ -5,40 +5,27 @@ import {Dashboard} from "../Dashboard";
 export class AppHeader extends Component {
   render() {
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
         <div className="container-fluid">
-          <div className="navbar-header">
-            <Link  className="navbar-brand" to="/">
+            <Link to="/">
               Explore Apollo
             </Link>
-          </div>
-            
-          <ul className="nav navbar-nav">
               <Link to="/apollo11">
                 Apollo 11
-              </Link>
-            <li>
+              </Link>    
               <Link to="/search">
                 Search
               </Link>
-            </li>
-            <li>
               <Link to="/moments/random">
                 Surprise Me!
               </Link>
-            </li>
-            <li>
               <Link to="/lessons"> 
                 Lesson Plans
               </Link>
-            </li>
-            <li>
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
                 Submit Feedback
-              </a>
-            </li>
-          </ul>
-        </div>
+              </a>       
+        </div>           
       </nav>
     );
   }
