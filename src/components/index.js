@@ -14,3 +14,4 @@ export { LineDiagram } from "./LineDiagram";
 export { BarDiagram } from "./BarDiagram"; 
 export { ChordDiagram } from "./ChordDiagram"; 
 export { LessonList } from "./LessonList"; 
+export { DashboardDiagram } from "./DashboardDiagram";
