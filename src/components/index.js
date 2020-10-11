@@ -13,4 +13,4 @@ export { DayDisplay } from "./DayDisplay";
 export { LineDiagram } from "./LineDiagram";
 export { BarDiagram } from "./BarDiagram"; 
 export { ChordDiagram } from "./ChordDiagram"; 
-export { DashboardDiagram } from "./DashboardDiagram"; 
+export { LessonList } from "./LessonList"; 
