@@ -7,7 +7,9 @@ html, body, #houston {
 
 body {
   background-color: #000 !important;
+  font-family: "Andale Mono";
 }
+
 
 .navbar.navbar-default {
   background-color: #000;
@@ -29,7 +31,6 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-
   .app-panel {
     width: 100%;
     flex: 1;
