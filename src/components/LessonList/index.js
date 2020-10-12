@@ -5,13 +5,13 @@ export function LessonList() {
 
     return (
 
-        <div>
+        <text>
             Lesson plans are categorized as follows: {"\n"}
             K-2 {"\n"}
             3-5 {"\n"}
             6-8 {"\n"}
             9-12{"\n"}
-        </div>
+        </text>
 
     );
 
