@@ -6,7 +6,7 @@ export function LessonList() {
     return (
 
         <div>
-            Hello World
+            Hello, World!!
         </div>
 
     );
