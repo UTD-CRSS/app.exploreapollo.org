@@ -1,15 +1,16 @@
-@import '../../node_modules/bootswatch/dist/darkly/bootstrap.css';
-@import '../../node_modules/react-spinner/react-spinner.css';
+@import "../../node_modules/bootswatch/dist/darkly/bootstrap.css";
+@import "../../node_modules/react-spinner/react-spinner.css";
 
-html, body, #houston {
+html,
+body,
+#houston {
   height: 100%;
 }
 
 body {
   background-color: #000 !important;
-  font-family: "Andale Mono", "Orbitron";
+  font-family: "Andale Mono", "Rajdhani", "Orbitron";
 }
-
 
 .navbar.navbar-default {
   background-color: #000;
@@ -24,6 +25,11 @@ body {
       color: #00abbc;
     }
   }
+}
+
+.ExploreApollo {
+  font-family: "Orbitron";
+  font-size: 30px;
 }
 
 // App container
@@ -44,7 +50,7 @@ footer {
   padding: 80px 0 20px 0;
 
   .background {
-    background: url('https://s3.amazonaws.com/exploreapollo-data/static-photos/stars.jpg');
+    background: url("https://s3.amazonaws.com/exploreapollo-data/static-photos/stars.jpg");
     background-position-y: -340px;
     opacity: 0.3;
     position: absolute;
@@ -146,7 +152,6 @@ footer {
   }
 }
 
-
 .glyphicon.icon-large {
   font-size: 3em;
 }
@@ -177,17 +182,17 @@ footer {
     font-size: 1.5em;
     font-weight: bold;
     a {
-      color: #25799C;
+      color: #25799c;
     }
     a:hover {
       text-decoration: none;
-      color: darken(#25799C, 30%);
+      color: darken(#25799c, 30%);
     }
   }
   .story-timeline-line {
     z-index: 1;
     position: absolute;
-    background-color: #A2A2A2;
+    background-color: #a2a2a2;
     top: 0;
     bottom: 0;
     left: 35px;
@@ -235,21 +240,29 @@ footer {
 
 .fade-to-black {
   &.up {
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   &.down {
-    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 }
 
 .day-btn-col {
   padding: 3px 3px 3px 3px;
-  .day-btn-label{
+  .day-btn-label {
     font-size: 1.2em;
   }
-  .day-btn-text{
-    font-size: .8em;
+  .day-btn-text {
+    font-size: 0.8em;
   }
   .day-btn {
     width: 100%;

@@ -7,7 +7,7 @@ export class AppHeader extends Component {
     return (
       <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
         <div className="container-fluid">
-            <Link to="/">
+            <Link to="/" className="ExploreApollo">
               Explore Apollo
             </Link>
               <Link to="/apollo11">
