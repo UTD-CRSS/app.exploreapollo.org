@@ -6,11 +6,11 @@ export function LessonList() {
     return (
 
         <div>
-            Lesson plans are categorized as follows: {'\n'} 
-            K-2, 3-5, 6-8, and 9-12 {'\n'}
+            Lesson plans are categorized as follows: <br>
+            K-2, 3-5, 6-8, and 9-12 
 
             K-2: 
-                Who is Neil Armstrong? {'\n'}
+                Who is Neil Armstrong? 
                 Tech 
                 Practical/Activities
 
