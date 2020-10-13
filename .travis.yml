@@ -1,35 +1,35 @@
 sudo: false
 dist: trusty
-language:
-  - node_js
-  - java
+language: 
+- node_js
+- java
 node_js:
   - 12
-jdk:
+jdk: 
   - openjdk8
   - oraclejdk8
 rvm:
   - 1.9.3
 before_install:
-  - npm install -g npm@latest
-  - rvm install 1.9.3
-  - gem update --system 1.8.24
-  - travis_internal_ruby() { echo "1.9.3"; }
-  - echo $(travis_internal_ruby)
+- npm install -g npm@latest
+- rvm install 1.9.3
+- gem update --system 1.8.24
+- travis_internal_ruby() { echo "1.9.3"; }
+- echo $(travis_internal_ruby)
 script:
-  - npm run lint
-  - npm test
+- npm run lint
+- npm test
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: scripts/deploy.sh production
-    on:
-      branch: master
-  - provider: script
-    skip_cleanup: true
-    script: scripts/deploy.sh staging
-    on:
-      branch: develop
+- provider: script
+  skip_cleanup: true
+  script: scripts/deploy.sh production
+  on:
+    branch: master
+- provider: script
+  skip_cleanup: true
+  script: scripts/deploy.sh staging
+  on:
+    branch: develop
 env:
   global:
     - secure: r3e4vkVNz6rnVRqCAT6nu6kCE435bSB1nkRjFQpOSZM3LX1qe/6mnVRJBT8PvgEeNMQWiuQ1RBGy/zvBo7njw1mKXUOYeH7yitFwgDV3Ito/DVSQbEqDPcks+R0lC+10XsSJnt4gXuTnZlOgKesYuqVRbwMBP/l2fIBeedkk//MC5siZ43uZSmJjq+OmyUNB2flOT6IqO3psKPFjR9Rqn+/nCqLbSk/YQ/EVcql2Sf8t0v2emcYk25rJTEljYdEyqpNbMgpzU5wRR1YeRpGcw3rDSdBs393Ys+5IQhtCwqiX0Dda0s1eQmrCI55jFAgAZjj7X6GRoQJ03R3vHE/tmnFaSL7UBL8duCQOGSlDPokp5mrRwSVEO7sFN7n6jJZFiDW5booL7CDaoVbU66fGqzvWVcLdJp+gJImLYqCt4YtZoLXlmXxziuEKA8Qw+shhWtndStNVoB5RjfiSqvB8IJZZ0IqfHP3MHz4rZrZ96BnOGv1Pjeh5kMKPO7a1qSM8t/i/L2A4YgyLswu3L6AEXy4rjzfE3X5PZFPpHhku84GrG6UWKiqFFmSOsEzopRvjdj4Hep9nTj3bIxZOGHnSATvLrnM6t+i8NrYGSuvEi3btgRCPpdeq4177HJOmO293T39PhRPZvNAzJmqfDkVcaIQDYQ+7XQnR5HW4onp2ZkA=
