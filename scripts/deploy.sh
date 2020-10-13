@@ -16,7 +16,7 @@ $NPM_BIN/webpack -p
 
 if ! hash s3_website 2>/dev/null; then
   echo "installing s3_website"
-  gem install s3_website -v 2.12.2
+  gem install s3_website -v 3.10.0
   #bundle exec s3_website install
   #java -cp $(bundle show s3_website)/*.jar s3.website.Push
 fi
