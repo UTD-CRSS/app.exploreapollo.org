@@ -6,7 +6,7 @@ export function LessonList() {
     return (
 
         <div>
-            Lesson plans are categorized as follows: <br>
+            Lesson plans are categorized as follows: \n
             K-2, 3-5, 6-8, and 9-12 
 
             K-2: 
