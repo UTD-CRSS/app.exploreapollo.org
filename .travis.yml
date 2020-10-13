@@ -1,26 +1,31 @@
 sudo: false
+dist: trusty
 language:
   - node_js
   - java
+node_js:
+  - 12
 jdk:
   - openjdk8
   - oraclejdk8
-node_js:
-  - 12
+rvm:
+  - 1.9.3
 before_install:
   - npm install -g npm@latest
+  - rvm install 1.9.3
+  - gem update --system 1.8.24
+  - travis_internal_ruby() { echo "1.9.3"; }
+  - echo $(travis_internal_ruby)
 script:
   - npm run lint
   - npm test
 deploy:
   - provider: script
-    edge: true
     skip_cleanup: true
     script: scripts/deploy.sh production
     on:
       branch: master
   - provider: script
-    edge: true
     skip_cleanup: true
     script: scripts/deploy.sh staging
     on:
