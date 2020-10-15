@@ -6,7 +6,8 @@ export function LessonList() {
     return (
 
         <div>
-            Hello World
+            COMING SOON:
+            Learn about the Apollo Missions through guided lesson plans for all ages
         </div>
 
     );
