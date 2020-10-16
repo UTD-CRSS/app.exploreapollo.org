@@ -10,21 +10,48 @@ export class AppHeader extends Component {
             <Link to="/" className="ExploreApollo">
               Explore Apollo
             </Link>
-              <Link to="/apollo11">
-                Apollo 11
-              </Link>    
+        <div className="navitem">
+        <button className="navbtn">Missions</button>
+        <div class="dropdown-content">
+              <a href="/apollo11">Apollo 11</a>
+              <a href="#">Apollo 13</a>
+            </div>
+        </div>
+
+          <div className="navitem">
+            <button className="navbtn">
               <Link to="/search">
                 Search
-              </Link>
-              <Link to="/moments/random">
+          </Link>
+            </button>
+          </div>
+        
+        <div className="navitem">
+          <button className="navbtn">
+            <Link to="/moments/random">
                 Surprise Me!
               </Link>
-              <Link to="/lessons"> 
+          </button>
+         </div>
+       
+         <div className="navitem">
+          <button className="navbtn">
+            <Link to="/lessons"> 
                 Lesson Plans
-              </Link>
+            </Link>
+          </button>
+         </div>     
+        
+         <div className="navitem">
+          <button className="navbtn">
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
                 Submit Feedback
-              </a>       
+              </a>  
+          </button>
+         </div> 
+        
+             
+                 
         </div>           
       </nav>
     );
