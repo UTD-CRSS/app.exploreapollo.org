@@ -1,57 +1,61 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import {Dashboard} from "../Dashboard";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { Dashboard } from "../Dashboard";
 
 export class AppHeader extends Component {
   render() {
     return (
       <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
         <div className="container-fluid">
-            <Link to="/" className="ExploreApollo">
-              Explore Apollo
+          <Link to="/" className="ExploreApollo">
+            Explore Apollo
             </Link>
-        <div className="navitem">
-        <button className="navbtn">Missions</button>
-        <div class="dropdown-content">
+          <div className="navitem">
+            <button className="navbtn">Missions</button>
+            <div class="dropdown-content">
               <a href="/apollo11">Apollo 11</a>
               <a href="#">Apollo 13</a>
             </div>
-        </div>
+          </div>
 
           <div className="navitem">
             <button className="navbtn">
               <Link to="/search">
                 Search
-          </Link>
+               </Link>
             </button>
           </div>
-        
-        <div className="navitem">
-          <button className="navbtn">
-            <Link to="/moments/random">
+
+          <div className="navitem">
+            <button className="navbtn">
+              <Link to="/moments/random">
                 Surprise Me!
               </Link>
-          </button>
-         </div>
-       
-         <div className="navitem">
-        <button className="navbtn">Lesson Plans</button>
-        <div class="dropdown-content">
-              <a href="#k-2">Cadets (K-2)</a>
-              <a href="#3-5">Astronauts (3-5)</a>
-              <a href="#6-8">Spacecraft Pilots (6-8)</a>
-              <a href="#9-12">Commanders (9-12)</a>
+            </button>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">
+              <Link to="/lessons">
+                Lesson Plans
+          </Link>
+            </button>
+            <div class="dropdown-content">
+              <a href="/lessons/k-2">Cadets (K-2)</a>
+              <a href="/lessons/3-5">Astronauts (3-5)</a>
+              <a href="/lessons/6-8">Spacecraft Pilots (6-8)</a>
+              <a href="/lessons/9-12">Commanders (9-12)</a>
             </div>
-        </div>    
-        
-         <div className="navitem">
-          <button className="navbtn">
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
                 Submit Feedback
-              </a>  
-          </button>
-         </div>         
-        </div>           
+              </a>
+            </button>
+          </div>
+        </div>
       </nav>
     );
   }
@@ -62,7 +66,7 @@ export class AppFooter extends Component {
     return (
       <footer>
         <div className="background" />
-        <div className="fade-to-black down" style={{position: "absolute", left: 0, top: 0, width: "100%", height: "50%"}} />
+        <div className="fade-to-black down" style={{ position: "absolute", left: 0, top: 0, width: "100%", height: "50%" }} />
 
         <div className="container">
           <div className="row">
@@ -97,7 +101,7 @@ export class FloatingFeedbackButton extends Component {
     this.state = { isVisible: true };
   }
   onCloseClicked() {
-    this.setState({ isVisible: false});
+    this.setState({ isVisible: false });
   }
   render() {
     const style = {
@@ -125,16 +129,16 @@ export class App extends Component {
   render() {
     return (
       <div className="app-container">
-        <AppHeader/>
-        <div style={{padding: '1em', background: '#375a7f', color: 'white'}}>
-          Now featuring: <a style={{color: 'white'}} href="https://exploreapollo-fearless-steps.herokuapp.com/">the Fearless Steps Challenge</a>
+        <AppHeader />
+        <div style={{ padding: '1em', background: '#375a7f', color: 'white' }}>
+          Now featuring: <a style={{ color: 'white' }} href="https://exploreapollo-fearless-steps.herokuapp.com/">the Fearless Steps Challenge</a>
         </div>
-        <Dashboard/>
-        <FloatingFeedbackButton/>
+        <Dashboard />
+        <FloatingFeedbackButton />
         <div className="app-panel">
           {this.props.children}
         </div>
-        <AppFooter/>
+        <AppFooter />
       </div>
     );
   }
