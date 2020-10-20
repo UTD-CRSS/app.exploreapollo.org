@@ -11,8 +11,8 @@ export class LessonPlans extends Component {
             <div className="app-container">
                 <AppHeader /> 
                 <h1>
-                    COMING SOON:
-                    Learn about the Apollo Missions through guided lesson plans for all ages
+                <br></br><u><font size="7">Preparing to Launch:</font></u><br></br>
+                    <i><font size="6">Learn about the Apollo Missions through our guided curriculum!</font></i>
             </h1>
                 <LessonList />
                 <AppFooter />
