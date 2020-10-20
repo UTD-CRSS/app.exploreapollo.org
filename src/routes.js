@@ -15,6 +15,7 @@ import {
   Search,
   DJ,
   Apollo11Explorer,
+  Apollo13Explorer,
   Game,
   LessonPlans
 } from "./containers";
@@ -35,6 +36,7 @@ export default class Routes extends Component {
         <Route path="/stories" component={Stories}/>
         <Route path="/apollo11" component={Apollo11Explorer}/>
         <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer}/>
+        <Route path="/apollo13" component={Apollo13Explorer}/>
         <Route path="/moments/random" component={RandomMoment} />
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />

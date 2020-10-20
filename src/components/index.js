@@ -1,7 +1,8 @@
 export { MomentList } from "./MomentList";
 export { StoryList } from "./StoryList";
 export { StoryTimeline } from "./StoryTimeline";
-export { Apollo11StoryTimeline } from "./Apollo11StoryTimeline"; 
+export { Apollo11StoryTimeline } from "./Apollo11StoryTimeline";
+export { Apollo13StoryTimeline } from "./Apollo13StoryTimeline"; 
 export { MomentPlayer } from "./MomentPlayer";
 export { MomentNote } from "./MomentNote";
 export { Timeline } from "./Timeline";

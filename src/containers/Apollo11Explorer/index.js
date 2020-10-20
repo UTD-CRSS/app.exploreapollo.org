@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
 import {DayDisplay} from "../../components";
+import { AppFooter, AppHeader } from "../App";
 
 import {
   loadStories
@@ -86,6 +87,7 @@ export class Apollo11Explorer extends Component {
     }
   }
   render() {
+    
     if (this.props.loading) {
       return (
         <div className="text-center lead">
@@ -96,6 +98,7 @@ export class Apollo11Explorer extends Component {
     }
     const url = `/apollo11/`;
     return (
+
       <div className="container">
         <DayDisplay day={this.props.params.missionDay} url={url}/>
         {this.checkDay()}
