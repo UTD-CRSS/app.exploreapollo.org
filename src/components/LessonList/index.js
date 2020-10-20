@@ -23,7 +23,7 @@ export function LessonList() {
                     </button>
                 <br></br>Activities: 
                 <button className= 'k-2techbtn'>
-                        <a href='https://www.nasa.gov/audience/forstudents/k-4/stories/nasa-knows/what-is-a-spacesuit-k4.html'> <font color='#000000'> Listen to Neil Armstrong's famous words. </font> </a>
+                        <a href='https://app.exploreapollo.org/stories/story/2/moment/6'> <font color='#000000'> Listen to Neil Armstrong's famous words. </font> </a>
                     </button> What would you say if you were on the moon?
 
             </h4>
