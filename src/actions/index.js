@@ -35,11 +35,12 @@ function fetchMoments() {
 
 export function loadMoments(args) {
   const {momentId} = args;
-
+  //console.log("moments plz")
   return dispatch => {
     dispatch(fetchMoments());
     fetch(`${config.apiEntry}/api/moments/${momentId}`)
       .then((response) => {
+        //console.log("RESPONSE " + response)
         return response.json();
       })
       .then((moment) => {
@@ -155,19 +156,34 @@ function fetchStory() {
 
 export function loadStory(args) {
   const {storyId} = args;
-  return dispatch => {
-    dispatch(fetchStory());
+  //console.log("Story ID: " + storyId)
+  // return dispatch => {
+  //   dispatch(fetchStory());
 
-    fetch(`${config.apiEntry}/api/stories/${storyId}`)
+  //   fetch(`${config.apiEntry}/api/stories/${storyId}`)
+  //     .then((response) => {
+  //       console.log("RESPONSE " + response)
+  //       return response.json();
+  //     })
+  //     .then((story) => {
+  //       console.log("STORY: " + story)
+  //       dispatch(receiveStory({
+  //         story
+  //       }));
+  //     });
+  // };
+  fetch(`${config.apiEntry}/api/stories/${storyId}`)
       .then((response) => {
+        //console.log("RESPONSE " + response.json())
         return response.json();
       })
       .then((story) => {
-        dispatch(receiveStory({
-          story
-        }));
+       // console.log("STORY: " + story)
+        // dispatch(receiveStory({
+        //   story
+        // }));
+        return story
       });
-  };
 }
 
 export const RECEIVE_STORIES = "RECEIVE_STORIES";
