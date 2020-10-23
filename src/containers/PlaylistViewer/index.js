@@ -19,7 +19,7 @@ function getNextMoment(moments, currentMomentId) {
 
 export class PlaylistViewer extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     const {loadStory, currentStoryId} = this.props;
     loadStory({
       storyId: currentStoryId
@@ -34,6 +34,7 @@ export class PlaylistViewer extends Component {
       children,
       history
     } = this.props;
+
 
 
     if (loading) {

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import {DayDisplay} from "../../components";
 import { AppFooter, AppHeader } from "../App";
+import config from "../../../config";
 
 import {
   loadStories
@@ -12,15 +13,25 @@ import {StoryList} from "../../components";
 import Spinner from "react-spinner";
 
 export class Apollo11Explorer extends Component {
-  componentDidMount() {
-    this.props.loadStories();
+  constructor() {
+    super()
+    //let [story, setStory] = []
+    this.state = { loading: true, stories: []}
   }
+  async componentDidMount() {
+    let currentStoryId = this.props.match.params.storyId
+    const response = await fetch(`${config.apiEntry}/api/stories`)
+    const json = await response.json()
+    this.setState({ loading: false, stories: json })
+   // this.props.loadStories();
+  }
+
   checkDay(){
     var mstart;
     var mend;
-    const day = this.props.params.missionDay;
-    const stories = _.sortBy(this.props.stories, "met_start");
-
+    const stories = _.sortBy(this.state.stories, "met_start");
+    let tempUrl = this.props.location.pathname
+    const day = tempUrl.split("/")[3]
     var targetstories = [];
     switch(day){
       case "1":
@@ -87,7 +98,7 @@ export class Apollo11Explorer extends Component {
     }
   }
   render() {
-    
+
     if (this.props.loading) {
       return (
         <div className="text-center lead">
@@ -100,7 +111,7 @@ export class Apollo11Explorer extends Component {
     return (
 
       <div className="container">
-        <DayDisplay day={this.props.params.missionDay} url={url}/>
+        <DayDisplay day={1} url={url}/>
         {this.checkDay()}
       </div>
     );

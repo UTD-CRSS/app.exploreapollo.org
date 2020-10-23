@@ -27,6 +27,10 @@ import {
 import getActiveIndex from "./getActiveIndex";
 
 export class MomentViewer extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {state: []}
+  }
 
   fetch(props) {
     props.loadAudio({
@@ -39,7 +43,7 @@ export class MomentViewer extends Component {
     props.loadMetrics({momentId: props.currentMomentId});
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetch(this.props);
   }
 
@@ -185,7 +189,6 @@ export class MomentViewer extends Component {
         speakers: metrics.Speakers,
         interactions: metrics.InteractionMatrix
       }} {...chordDiagramProps} />;
-
     return (
       <div className="moment-viewer-container">
         <MomentPlayer
