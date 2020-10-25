@@ -19,17 +19,34 @@ export class AppHeader extends Component {
           </div>
 
           <div className="navitem">
-            <button className="navbtn">
+            <button className="navbtn">              
               <Link to="/search">
                 Search
                </Link>
             </button>
           </div>
 
+
           <div className="navitem">
             <button className="navbtn">
               <Link to="/moments/random">
                 Surprise Me!
+              </Link>
+            </button>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">
+              <Link to="">
+                Game
+              </Link>
+            </button>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">
+              <Link to="">
+                DJ
               </Link>
             </button>
           </div>
@@ -46,6 +63,14 @@ export class AppHeader extends Component {
               <a href="/lessons/6-8">Spacecraft Pilots (6-8)</a>
               <a href="/lessons/9-12">Commanders (9-12)</a>
             </div>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">
+              <Link to="">
+                News
+              </Link>
+            </button>
           </div>
 
           <div className="navitem">
