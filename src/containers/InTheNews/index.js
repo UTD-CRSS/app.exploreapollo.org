@@ -11,6 +11,8 @@ export default class InTheNews extends Component {
              <h1>We've been in the news! Check out the buzz (aldrin, haha). </h1> 
              <InTheNewsComponent />
              </div>
+
+
       );
         }
 }
