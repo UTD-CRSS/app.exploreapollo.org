@@ -3,16 +3,16 @@ import React, {Component} from "react";
 
 export class InTheNewsComponent extends Component {
     render() {
-    return(
-        <div className="newsLinks">
+        return(
+                <div className="newsLinks">
 
-        <font></font>
-        <h1><b><u>Check out the articles we've been in!</u></b><br></br></h1>
+                <font></font>
+                <h1><b><u>Check out the articles we've been in!</u></b><br></br></h1>
 
-        <h4><b>1. UTDallas News<br></br>Published: December 5, 2017</b><br></br></h4>
-        <a href="https://www.utdallas.edu/news/research/researchers-launch-moon-mission-audio-site/" target="_blank">
-    Researchers Launch Moon Mission Audio Site
-</a>
+                <h4><b>1. UTDallas News<br></br>Published: December 5, 2017</b><br></br></h4>
+                <a href="https://www.utdallas.edu/news/research/researchers-launch-moon-mission-audio-site/" target="_blank">
+                Researchers Launch Moon Mission Audio Site
+                </a>
 
 <br></br>
 
