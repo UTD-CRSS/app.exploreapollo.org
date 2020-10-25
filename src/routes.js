@@ -19,7 +19,8 @@ import {
   Search,
   DJ,
   Apollo11Explorer,
-  Game
+  Game,
+  InTheNews
 } from "./containers";
 
 export default (
@@ -32,6 +33,7 @@ export default (
       <Route path="stories/story/:storyId/moment" component={PlaylistViewer}>
         <Route path=":momentId" component={MomentViewer} />
       </Route>
+      <Route path="inthenews" component={InTheNews}/>
       <Route path="search" component={Search} />
       <Route path="stories" component={Stories}/>
       <Route path="apollo11" component={Apollo11Explorer}/>
