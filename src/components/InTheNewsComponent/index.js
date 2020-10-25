@@ -51,7 +51,7 @@ UTD Team Reconstructs Apollo Mission Recordings
 <br></br>
 
 <h4><b>7. Houston Public Media<br></br>Published: January 30, 2018</b><br></br></h4>
-        <a href="https://www.utdallas.edu/news/research/researchers-launch-moon-mission-audio-site/" target="_blank">
+        <a href="https://www.houstonpublicmedia.org/articles/news/2018/01/30/264541/what-researchers-found-on-hours-and-hours-of-audio-tapes-from-nasas-apollo-missions/" target="_blank">
     What Researchers Found On Hours And Hours Of Audio Tapes From NASA’s Apollo Missions
 </a>
 
