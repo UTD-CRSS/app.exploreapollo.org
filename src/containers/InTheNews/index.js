@@ -8,7 +8,7 @@ export class InTheNews extends Component {
     render() {
       return (
           <div className ="app-container">
-             <h1>Welcome to In The News </h1> 
+             <h1>We've been in the news! Checkout the latest buzz. </h1> 
           </div>
       );
         }
