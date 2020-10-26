@@ -12,7 +12,6 @@ export class InTheNewsComponent extends Component {
           </b>
           <br></br>
         </h1>
-
         <h4>
           <b>
             1. UTDallas News<br></br>Published: December 5, 2017
@@ -127,10 +126,14 @@ export class InTheNewsComponent extends Component {
           </b>
           <br></br>
         </h4>
-        <a href="https://www.youtube.com/watch?v=CTJtRNMac0E" target="_blank">
-          “Explore Apollo” Audio Archive
-        </a>
-
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/CTJtRNMac0E"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
         <br></br>
 
         <h4>
@@ -207,8 +210,11 @@ export class InTheNewsComponent extends Component {
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep88_heroesbehindheroes_pt1.mp3"
           target="_blank"
         >
-          Podcast: Part 1
+          Podcast Part 1 : or Click the Audio Player Below
         </a>
+        <audio controls>
+          <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep88_heroesbehindheroes_pt1.mp3" />
+        </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/heroes-behind-the-heroes"
@@ -221,8 +227,11 @@ export class InTheNewsComponent extends Component {
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep89_heroesbehindheroes_pt2.mp3"
           target="_blank"
         >
-          Podcast: Part 2
+          Podcast: Part 2 or click the audio player below
         </a>
+        <audio controls>
+          <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep89_heroesbehindheroes_pt2.mp3" />
+        </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/the-heroes-behind-the-heroes-part-2"
@@ -235,8 +244,11 @@ export class InTheNewsComponent extends Component {
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep90_heroesbehindheroes_pt3.mp3"
           target="_blank"
         >
-          Podcast: Part 3
+          Podcast: Part 3 or click the audio player below
         </a>
+        <audio controls>
+          <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep90_heroesbehindheroes_pt3.mp3" />
+        </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/the-heroes-behind-the-heroes-part-3"
@@ -249,8 +261,11 @@ export class InTheNewsComponent extends Component {
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep91_heroesbehindheroes_pt4.mp3"
           target="_blank"
         >
-          Podcast: Part 4
+          Podcast: Part 4 or click the audio player below
         </a>
+        <audio controls>
+          <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep91_heroesbehindheroes_pt4.mp3" />
+        </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/the-heroes-behind-the-heroes-part-4"
@@ -272,6 +287,7 @@ export class InTheNewsComponent extends Component {
         >
           Engineers restore audio recordings from Apollo 11 mission
         </a>
+       
         <br></br>
 
         <h4>
