@@ -34,6 +34,16 @@ export class AppHeader extends Component {
               </Link>
             </li>
             <li>
+              <Link to="/game">
+                Asteroid Strike
+              </Link>
+            </li>
+            <li>
+              <Link to="/dj">
+                DJ Apollo
+              </Link>
+            </li>
+            <li>
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
                 Submit Feedback
               </a>
