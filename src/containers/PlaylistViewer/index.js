@@ -21,6 +21,7 @@ export class PlaylistViewer extends Component {
 
   componentDidMount() {
     const {loadStory, currentStoryId} = this.props;
+    console.log(this.props)
     loadStory({
       storyId: currentStoryId
     });
@@ -35,6 +36,7 @@ export class PlaylistViewer extends Component {
       history
     } = this.props;
 
+    console.log(this.props)
 
 
     if (loading) {

@@ -28,7 +28,7 @@ export default class Routes extends Component {
         <Route path="/settings" component={Settings} />
         <Route path="/moments/moment/:momentId" component={MomentViewer} />
         <Route path="/moments" component={Moments} />
-        <Route path="/stories/story/:storyId" component={StoryViewer} />
+        <Route exact path="/stories/story/:storyId" component={StoryViewer} />
         <Route path="/stories/story/:storyId/moment" component={PlaylistViewer}>
           <Route path="/:momentId" component={MomentViewer} />
         </Route>

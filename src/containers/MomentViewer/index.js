@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {get} from "lodash";
 import Spinner from "react-spinner";
 import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
+import config from "../../../config";
+import {fromJS} from "immutable";
 
 import {
   loadMoments,
@@ -29,9 +31,10 @@ import getActiveIndex from "./getActiveIndex";
 export class MomentViewer extends Component {
   constructor(props) {
     super(props)
-    this.state = {state: []}
+    this.state = {loading: true, audio: {playing: false, time: 0, momentId: 0},
+    media: [], transcript: [], metric: []}
   }
-
+  
   fetch(props) {
     props.loadAudio({
       time: 0,
@@ -43,25 +46,46 @@ export class MomentViewer extends Component {
     props.loadMetrics({momentId: props.currentMomentId});
   }
 
-  componentDidMount() {
-    this.fetch(this.props);
+  async componentDidMount() {
+    //this.fetch(this.props);
+
+    let path = this.props.location.pathname
+    let momentId = path.split("/")[3]  // get the momentId
+
+    const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`)
+    const momentJson = await moments.json()
+    const momentMedia = fromJS(momentJson.media)
+    
+    const transcripts = await fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
+    const transcriptJson = await transcripts.json()
+
+
+    const metrics = await fetch(`${config.apiEntry}/api/moments/${momentId}/metrics`)
+    const metricsJson = await metrics.json()
+
+    this.setState({ 
+      loading: false, audio:{ playing: false, time: 0, momentId: momentId},
+      media: momentMedia, transcript: transcriptJson, metric: metricsJson
+    })
+
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentMomentId !== this.props.currentMomentId) {
-      this.fetch(nextProps);
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.currentMomentId !== this.state.momentId) {
+  //     this.fetch(nextProps);
+  //   }
+  //   //console.log(this.props)
+  // }
 
   componentDidUpdate() {
-    var parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
-    var timeline;
-    var scrollHeight = 0;
+    let parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
+    let timeline;
+    let scrollHeight = 0;
     if(parent != undefined) {
       timeline = parent.children[0].children[0].children[0].children[1];
-      var {transcripts} = this.props.currentTranscripts;
-      transcripts = transcripts.map(index => index.set("active", false));
-      var activeIndex = getActiveIndex(transcripts, this.props.currentMoment.metStart + (this.props.currentAudio.time * 1000));
+      let transcripts = this.state.transcript;
+      transcripts = transcripts.map(index => index["active"] = false);
+      let activeIndex = getActiveIndex(transcripts, this.state.media.metStart + (this.state.time * 1000));
       if(activeIndex < 0) {
         activeIndex = 0;
       }
@@ -79,16 +103,23 @@ export class MomentViewer extends Component {
 
   render() {
     const {
-      currentMoment,
+      //currentMoment,
       currentMission,
-      loading,
-      currentTranscripts,
+      //loading,
+     // currentTranscripts,
       loadAudio,
-      metrics,
+      //metrics,
       onEnd,
       autoplay
     } = this.props;
 
+    let currentMoment = this.state.audio.momentId
+    let loading = this.state.loading
+    let currentTranscripts = this.state.transcript
+    let metrics = this.state.metric
+    //let loadAudio = this.state.audio
+
+    
     if (loading) {
       return <div className="text-center lead">
         <p>Loading moment...</p>
@@ -102,15 +133,16 @@ export class MomentViewer extends Component {
       </div>;
     }
 
-    const {time, playing} = this.props.currentAudio;
-    let {transcripts} = currentTranscripts;
+    const {time, playing} = this.state.audio;  //THIS NEEDS TO BE FIXED
 
+   // let {transcripts} = currentTranscripts;
     //this is bad, but necessary until I can think of a clever solution
-    transcripts = transcripts.map(function(i) {
-      return i.set("active", false);
+    let transcripts = currentTranscripts.map(function(i) {
+      return i["active"] = false
+      //return i.set("active", false);
     });
 
-    const momentMetStart = this.props.currentMoment.metStart;
+    const momentMetStart = currentMoment.metStart;
     const currentMissionTime = momentMetStart + (time * 1000);
 
     const activeIndex = getActiveIndex(
@@ -149,11 +181,12 @@ export class MomentViewer extends Component {
 
     const lineDiagramProps = {key: "LineDiagram", title: "Line Diagram"};
     const lineDiagramWidget = metrics.loading
+
       ? <LoadingIndicator {...lineDiagramProps}/>
       : <LineDiagram data={{
         time: currentMissionTime,
-        start: this.props.currentMoment.metStart,
-        end: this.props.currentMoment.metEnd,
+        start: currentMoment.metStart,
+        end: currentMoment.metEnd,
         series: [
           {name: "ConversationRate", value: metrics.ConversationCount},
           {name: "TurnRate", value: metrics.TurnCount},
@@ -189,6 +222,7 @@ export class MomentViewer extends Component {
         speakers: metrics.Speakers,
         interactions: metrics.InteractionMatrix
       }} {...chordDiagramProps} />;
+
     return (
       <div className="moment-viewer-container">
         <MomentPlayer

@@ -47,7 +47,7 @@ export function PlayButton({isPlaying, play, pause}){
     <div style={{color: "#000"}}
          className="playButtonContainer"
          onClick={clickFunction}>
-      <i testRef="playIcon"
+      <i testef="playIcon"
          style={iconStyles}
          className={classes} />
     </div>

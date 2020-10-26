@@ -6,12 +6,12 @@ export function StoryListItem({id, title, description}) {
   return (
     <div className="panel panel-default">
       <div className="panel-body">
-        <h2 testRef="storyTitle">{title}</h2>
+        <h2 testref="storyTitle">{title}</h2>
         <p className="lead">{description}</p>
         <p>
           <Link
             className="btn btn-primary btn-lg"
-            testRef="storyLink"
+            testref="storyLink"
             to={`/stories/story/${id}`}>
             Launch
           </Link>
@@ -24,7 +24,7 @@ export function StoryListItem({id, title, description}) {
 function renderStoryListItems(stories) {
   if (!stories || stories.length < 1) {
     return (
-      <div testRef="errorMessage" className="alert alert-info">
+      <div testref="errorMessage" className="alert alert-info">
         No Stories
       </div>
     );
@@ -40,7 +40,7 @@ function renderStoryListItems(stories) {
 
 export function StoryList({stories}) {
   return (
-    <div testRefCollection="storyListContainer">
+    <div testrefcollection="storyListContainer">
       {renderStoryListItems(stories)}
     </div>
   );
