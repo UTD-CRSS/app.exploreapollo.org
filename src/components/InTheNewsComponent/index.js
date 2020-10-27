@@ -95,7 +95,7 @@ export class InTheNewsComponent extends Component {
           target="_blank">
           UT Dallas Researchers Help You Listen to the Apollo Missions
         </a>
-        <p></p>
+        <p>Some of it you’ll recognize (“one small step for man”) and some of it you won’t: many of the tapes have “sat unheard in storage for decades,” and cover some of the less glamorous discussions amongst egghead engineers and rocket scientists...</p>
 
         <br></br>
         <br></br>
@@ -113,6 +113,7 @@ export class InTheNewsComponent extends Component {
           Researchers analyze NASA moon mission audio to let public 'Explore
           Apollo'
         </a>
+        <p>Almost 50 years after the first humans launched to the moon, researchers in Dallas have taken a new look at NASA's Apollo missions. Or more appropriately, <i>a new listen...</i></p>
 
         <br></br>
         <br></br>
@@ -130,9 +131,9 @@ export class InTheNewsComponent extends Component {
           What Researchers Found On Hours And Hours Of Audio Tapes From NASA’s
           Apollo Missions
         </a>
-
+        <p>Dr. John Hansen and his team of researchers from UT-Dallas pored through countless hours of tapes from NASA’s archives with <b><i>much</i></b> more than preserving history in mind...</p>
         <br></br>
-        <br></br>
+        
 
 
         <h4>
@@ -180,9 +181,10 @@ export class InTheNewsComponent extends Component {
           target="_blank">
           NASA releases 19,000 hours of audio from historic Apollo 11 mission
         </a>
+        <p>The tapes capture the dramatic moments just before the moon landing, but also some lighthearted episodes...</p>
 
         <br></br>
-        <br></br>
+       
 
 
         <h4>
@@ -197,7 +199,7 @@ export class InTheNewsComponent extends Component {
           Hear the Backstage Story of the Apollo Program With Newly Released
           Audio
         </a>
-
+        <p>For decades, most of these tapes sat in storage. Only a fraction of the audio — like Armstrong’s famous first words from the moon — were ever released to the public. But now a years-long project to digitize and process the audio from the tapes has given this historic record new life...</p>
         <br></br>
         <br></br>
 
@@ -214,6 +216,7 @@ export class InTheNewsComponent extends Component {
           The Found Footage That Provides a Whole New Look at the Apollo 11 Moon
           Landing
         </a>
+        <p>...freshly unearthed footage of the 1969 lunar mission, with the help of a community of space nerds, will tell the story of the historic event in a new way, making the film as much a cinematic discovery as a celestial one.</p>
 
         <br></br>
         <br></br>
@@ -314,7 +317,7 @@ export class InTheNewsComponent extends Component {
         >
           Engineers restore audio recordings from Apollo 11 mission
         </a>
-       
+       <p>A team at the University of Texas at Dallas spent years digitizing old tapes of the conversations between mission control and the Apollo 11 astronauts.<b><i>Learn More...</i></b></p>
         <br></br>
         <br></br>
 
@@ -326,12 +329,13 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.dallasnews.com/news/education/2019/07/20/ut-dallas-celebrates-personal-ties-with-nasa-50-years-after-one-small-step-for-man/"
-          target="_blank"
-        >
+          target="_blank">
           UT-Dallas celebrates personal ties with NASA 50 years after ‘one small
           step for man’
         </a>
+        <p>What NASA’s soundscriber would have taken 172 years to accomplish, <b><u>Hansen’s rebuild did in only five!</u></b></p>
       </div>
+      
     );
   }
 }
