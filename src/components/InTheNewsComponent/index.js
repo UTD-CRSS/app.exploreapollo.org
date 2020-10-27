@@ -21,8 +21,7 @@ export class InTheNewsComponent extends Component {
         <p>"NASA recorded <b>thousands</b> of hours of audio from the Apollo lunar missions, yet most of us have only been able to hear the highlights...Imagine Apple's Siri trying to transcribe discussions amid random interruptions..."</p>
         <a
           href="https://www.utdallas.edu/news/research/researchers-launch-moon-mission-audio-site/"
-          target="_blank"
-        >
+          target="_blank">
           Researchers Launch Moon Mission Audio Site
         </a>
 
@@ -37,8 +36,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://dallasinnovates.com/utd-team-reconstructs-apollo-mission-recordings/"
-          target="_blank"
-        >
+          target="_blank">
           UTD Team Reconstructs Apollo Mission Recordings
         </a>
 
@@ -54,8 +52,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.nsf.gov/news/news_summ.jsp?cntn_id=244009"
-          target="_blank"
-        >
+          target="_blank">
           UT Dallas researchers develop techniques to analyze thousands of hours
           of Apollo mission audio
         </a>
@@ -72,8 +69,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.keranews.org/health-science-tech/2017-12-20/listen-to-unheard-audio-from-nasas-apollo-missions-dusted-off-by-ut-dallas-researchers"
-          target="_blank"
-        >
+          target="_blank">
           Listen To Unheard Audio From NASA’s Apollo Missions, Dusted Off By UT
           Dallas Researchers
         </a>
@@ -90,8 +86,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.dmagazine.com/frontburner/2017/12/ut-dallas-nasa-apollo-missions-audio/"
-          target="_blank"
-        >
+          target="_blank">
           UT Dallas Researchers Help You Listen to the Apollo Missions
         </a>
 
@@ -107,8 +102,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="http://www.collectspace.com/news/news-010518a-explore-apollo-audio-research.html"
-          target="_blank"
-        >
+          target="_blank">
           Researchers analyze NASA moon mission audio to let public 'Explore
           Apollo'
         </a>
@@ -125,8 +119,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.houstonpublicmedia.org/articles/news/2018/01/30/264541/what-researchers-found-on-hours-and-hours-of-audio-tapes-from-nasas-apollo-missions/"
-          target="_blank"
-        >
+          target="_blank">
           What Researchers Found On Hours And Hours Of Audio Tapes From NASA’s
           Apollo Missions
         </a>
@@ -162,8 +155,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href=": https://www.nasa.gov/feature/nasa-university-of-texas-at-dallas-reveal-apollo-11-behind-the-scenes-audio"
-          target="_blank"
-        >
+          target="_blank">
           University of Texas at Dallas Reveal Apollo 11 Behind-the-Scenes Audio
         </a>
 
@@ -179,8 +171,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.nbcnews.com/mach/science/nasa-releases-19-000-historic-audio-11-mission-ncna903721"
-          target="_blank"
-        >
+          target="_blank">
           NASA releases 19,000 hours of audio from historic Apollo 11 mission
         </a>
 
@@ -196,8 +187,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.discovermagazine.com/the-sciences/hear-the-backstage-story-of-the-apollo-program-with-newly-released-audio"
-          target="_blank"
-        >
+          target="_blank">
           Hear the Backstage Story of the Apollo Program With Newly Released
           Audio
         </a>
@@ -214,8 +204,7 @@ export class InTheNewsComponent extends Component {
         </h4>
         <a
           href="https://www.vanityfair.com/hollywood/2018/12/apollo-11-50th-year-anniversary"
-          target="_blank"
-        >
+          target="_blank">
           The Found Footage That Provides a Whole New Look at the Apollo 11 Moon
           Landing
         </a>
@@ -233,7 +222,8 @@ export class InTheNewsComponent extends Component {
           This is a 4 part Podcast.<br></br>
         </h4>
 
-        <a
+        
+        <a //podcast 1
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep88_heroesbehindheroes_pt1.mp3"
           target="_blank">
           Podcast Part 1 : or Click the Audio Player Below
@@ -251,7 +241,7 @@ export class InTheNewsComponent extends Component {
         <br></br>
         <br></br>
         
-        <a
+        <a //podcast 2
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep89_heroesbehindheroes_pt2.mp3"
           target="_blank">
           Podcast: Part 2 or click the audio player below
@@ -269,7 +259,7 @@ export class InTheNewsComponent extends Component {
         <br></br>
         <br></br>
 
-        <a
+        <a //podcast 3
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep90_heroesbehindheroes_pt3.mp3"
           target="_blank">
           Podcast: Part 3 or click the audio player below
@@ -287,7 +277,7 @@ export class InTheNewsComponent extends Component {
         <br></br>
         <br></br>
 
-        <a
+        <a //podcast 4
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep91_heroesbehindheroes_pt4.mp3" 
           target="_blank">
           Podcast: Part 4 or click the audio player below
