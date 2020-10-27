@@ -18,6 +18,7 @@ export class InTheNewsComponent extends Component {
           </b>
           <br></br>
         </h4>
+        <p>"NASA recorded <b>thousands</b> of hours of audio from the Apollo lunar missions, yet most of us have only been able to hear the highlights...Imagine Apple's Siri trying to transcribe discussions amid random interruptions..."</p>
         <a
           href="https://www.utdallas.edu/news/research/researchers-launch-moon-mission-audio-site/"
           target="_blank"
@@ -25,6 +26,7 @@ export class InTheNewsComponent extends Component {
           Researchers Launch Moon Mission Audio Site
         </a>
 
+        <br></br>
         <br></br>
 
         <h4>
@@ -41,6 +43,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -57,6 +61,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -73,6 +79,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -88,6 +96,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -102,7 +112,10 @@ export class InTheNewsComponent extends Component {
           Researchers analyze NASA moon mission audio to let public 'Explore
           Apollo'
         </a>
+
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -119,6 +132,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -134,7 +149,10 @@ export class InTheNewsComponent extends Component {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
+
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -150,6 +168,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -165,6 +185,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -181,6 +203,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -197,6 +221,8 @@ export class InTheNewsComponent extends Component {
         </a>
 
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -206,74 +232,79 @@ export class InTheNewsComponent extends Component {
           <br></br>
           This is a 4 part Podcast.<br></br>
         </h4>
+
         <a
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep88_heroesbehindheroes_pt1.mp3"
-          target="_blank"
-        >
+          target="_blank">
           Podcast Part 1 : or Click the Audio Player Below
         </a>
+        <br></br>
         <audio controls>
           <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep88_heroesbehindheroes_pt1.mp3" />
         </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/heroes-behind-the-heroes"
-          target="_blank"
-        >
+          target="_blank">
           News Article: Part 1
         </a>
         <br></br>
+        <br></br>
+        
         <a
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep89_heroesbehindheroes_pt2.mp3"
-          target="_blank"
-        >
+          target="_blank">
           Podcast: Part 2 or click the audio player below
         </a>
+        <br></br>
         <audio controls>
           <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep89_heroesbehindheroes_pt2.mp3" />
         </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/the-heroes-behind-the-heroes-part-2"
-          target="_blank"
-        >
+          target="_blank">
           News Article: Part 2
         </a>
         <br></br>
+        <br></br>
+
         <a
           href="https://www.nasa.gov/sites/default/files/atoms/audio/ep90_heroesbehindheroes_pt3.mp3"
-          target="_blank"
-        >
+          target="_blank">
           Podcast: Part 3 or click the audio player below
         </a>
+        <br></br>
         <audio controls>
           <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep90_heroesbehindheroes_pt3.mp3" />
         </audio>
         <br></br>
         <a
           href="https://www.nasa.gov/johnson/HWHAP/the-heroes-behind-the-heroes-part-3"
-          target="_blank"
-        >
+          target="_blank">
           News Article: Part 3
         </a>
         <br></br>
+        <br></br>
+
         <a
-          href="https://www.nasa.gov/sites/default/files/atoms/audio/ep91_heroesbehindheroes_pt4.mp3"
-          target="_blank"
-        >
+          href="https://www.nasa.gov/sites/default/files/atoms/audio/ep91_heroesbehindheroes_pt4.mp3" 
+          target="_blank">
           Podcast: Part 4 or click the audio player below
         </a>
+        <br></br>
         <audio controls>
           <source src="https://www.nasa.gov/sites/default/files/atoms/audio/ep91_heroesbehindheroes_pt4.mp3" />
         </audio>
         <br></br>
-        <a
+        <a 
           href="https://www.nasa.gov/johnson/HWHAP/the-heroes-behind-the-heroes-part-4"
-          target="_blank"
-        >
+          target="_blank">
           News Article: Part 4
         </a>
         <br></br>
+        <br></br>
+
 
         <h4>
           <b>
@@ -288,6 +319,7 @@ export class InTheNewsComponent extends Component {
           Engineers restore audio recordings from Apollo 11 mission
         </a>
        
+        <br></br>
         <br></br>
 
         <h4>
