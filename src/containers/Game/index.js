@@ -5,8 +5,8 @@ import LunarLander from "../../../static/lunar_lander.png";
 import Asteroid from "../../../static/asteroid.png";
 import Explosion from "../../../static/explosion.gif";
 
-const DOWN = 74;
-const UP =  75;
+const DOWN = 83//74;
+const UP =  87//75;
 const INCREMENT = 10;
 const ROCK_INCREMENT = 0.5;
 const ROCK_WIDTH = 20;
@@ -104,7 +104,7 @@ export default class Game extends Component {
     const {top, rocks, gameOver} = this.state;
     return <div>
       <h4>Controls</h4>
-      <p><code>J</code> DOWN, <code>K</code> UP</p>
+      <p><code>W</code> UP, <code>S</code> DOWN</p>
       <div className="stars-bg" style={{height: "400px", position: "relative"}}>
         <img src={LunarLander} style={{height: `${LANDER_HEIGHT}px`, transition: "all 200ms", position: "absolute", top: `${top}%`, left: "10px"}} />
         {gameOver && <img src={Explosion} style={{height: `${LANDER_HEIGHT}px`, transition: "all 200ms", position: "absolute", top: `${top}%`, left: "10px"}} />}
