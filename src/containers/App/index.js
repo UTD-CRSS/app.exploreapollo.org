@@ -54,7 +54,7 @@ export class AppHeader extends Component {
               </a>
             </li>
             <li>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
+              <a href="https://forms.gle/Wfz9W3nDcdrVNcyS7" target="_blank">
                 Submit Feedback
               </a>
             </li>
