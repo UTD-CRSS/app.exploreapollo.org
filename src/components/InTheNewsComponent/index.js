@@ -6,27 +6,31 @@ export class InTheNewsComponent extends Component {
     return (
       <div className="newsLinks">
         <font></font>
-        <h1>
+        {/* <h1>
           <b>
             <u>Check out the articles we've been in!</u>
           </b>
           <br></br>
-        </h1>
+          <br></br>
+        </h1> */}
+
+
         <h4>
           <b>
-            1. UTDallas News<br></br>Published: December 5, 2017
+            1. UTD Today<br></br>Published: December 5, 2017
           </b>
           <br></br>
         </h4>
-        <p>"NASA recorded <b>thousands</b> of hours of audio from the Apollo lunar missions, yet most of us have only been able to hear the highlights...Imagine Apple's Siri trying to transcribe discussions amid random interruptions..."</p>
         <a
           href="https://www.utdallas.edu/news/research/researchers-launch-moon-mission-audio-site/"
           target="_blank">
           Researchers Launch Moon Mission Audio Site
         </a>
+        <p>"NASA recorded <b>thousands</b> of hours of audio from the Apollo lunar missions, yet most of us have only been able to hear the highlights...Imagine Apple's Siri trying to transcribe discussions amid random interruptions..."</p>
+
 
         <br></br>
-        <br></br>
+        {/* <br></br> */}
 
         <h4>
           <b>
@@ -39,9 +43,11 @@ export class InTheNewsComponent extends Component {
           target="_blank">
           UTD Team Reconstructs Apollo Mission Recordings
         </a>
+        <p>'CRSS has made <i>significant</i> advancements in machine learning and knowledge extraction to assess human interaction for one of the most challenging engineering tasks in the history of mankind.' ~ <i>John H.L. Hansen</i></p>
+
 
         <br></br>
-        <br></br>
+        {/* <br></br> */}
 
 
         <h4>
@@ -56,9 +62,9 @@ export class InTheNewsComponent extends Component {
           UT Dallas researchers develop techniques to analyze thousands of hours
           of Apollo mission audio
         </a>
-
+        <p>University of Texas (UT) at Dallas researchers develop speech-processing techniques to reconstruct NASA lunar mission audio from a massive archive. The team developed algorithms to process, recognize and analyze the audio to determine who said what and when in an advance in diarization research...</p>
         <br></br>
-        <br></br>
+        
 
 
         <h4>
@@ -73,7 +79,7 @@ export class InTheNewsComponent extends Component {
           Listen To Unheard Audio From NASA’s Apollo Missions, Dusted Off By UT
           Dallas Researchers
         </a>
-
+        <p>Images from the moon landing and other major space moments of the 1960s are familiar to many Americans. <b>But what about the <i>sounds</i>? </b></p>
         <br></br>
         <br></br>
 
@@ -89,6 +95,7 @@ export class InTheNewsComponent extends Component {
           target="_blank">
           UT Dallas Researchers Help You Listen to the Apollo Missions
         </a>
+        <p></p>
 
         <br></br>
         <br></br>
@@ -96,7 +103,7 @@ export class InTheNewsComponent extends Component {
 
         <h4>
           <b>
-            6. Collect Space news<br></br>Published: January 5, 2018
+            6. collectSpace<br></br>Published: January 5, 2018
           </b>
           <br></br>
         </h4>
@@ -140,8 +147,7 @@ export class InTheNewsComponent extends Component {
           src="https://www.youtube.com/embed/CTJtRNMac0E"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+          allowfullscreen></iframe>
 
         <br></br>
         <br></br>
