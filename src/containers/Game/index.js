@@ -5,8 +5,8 @@ import LunarLander from "../../../static/lunar_lander.png";
 import Asteroid from "../../../static/asteroid.png";
 import Explosion from "../../../static/explosion.gif";
 
-const DOWN = 83//74;
-const UP =  87//75;
+const DOWN = 83;//74;
+const UP =  87;//75;
 const INCREMENT = 10;
 const ROCK_INCREMENT = 0.5;
 const ROCK_WIDTH = 20;
