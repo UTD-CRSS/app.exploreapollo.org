@@ -34,7 +34,27 @@ export class AppHeader extends Component {
               </Link>
             </li>
             <li>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform" target="_blank">
+              <Link to="/game">
+                Asteroid Strike
+              </Link>
+            </li>
+            <li>
+              <Link to="/dj">
+                DJ Apollo
+              </Link>
+            </li>
+            <li>
+              <a href="https://exploreapollo-fearless-steps.herokuapp.com/" target="_blank">
+                FSC: Phase 1
+              </a>
+            </li>
+            <li>
+              <a href="https://fearless-steps.github.io/ChallengePhase2/Data.html" target="_blank">
+                FSC: Phase 2
+              </a>
+            </li>
+            <li>
+              <a href="https://forms.gle/Wfz9W3nDcdrVNcyS7" target="_blank">
                 Submit Feedback
               </a>
             </li>
@@ -114,8 +134,8 @@ export default class App extends Component {
     return (
       <div className="app-container">
         <AppHeader/>
-        <div style={{padding: "1em", background: "#375a7f", color: "white"}}>
-          Now featuring: <a style={{color: "white"}} href="https://exploreapollo-fearless-steps.herokuapp.com/">the Fearless Steps Challenge</a>
+        <div style={{padding: "1em", background: "#375a7f",width: "100%", color: "white"}}>
+          Now featuring: the Fearless Steps Challenge (FSC)
         </div>
         <FloatingFeedbackButton/>
         <div className="app-panel">

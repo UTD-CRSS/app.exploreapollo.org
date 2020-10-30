@@ -7,18 +7,19 @@ export default class InTheNews extends Component {
     return (
       <div className="app-container">
 
-        <h1>We've been in the news! Check out the buzz! </h1>
+        <h1 className ="center"><b><u>Fearless Steps: In the NEWS!</u></b></h1>
+        <br></br>
         <div className="row">
-          <div className="col-md-7" >
-            <img src={inthenews} />
-          </div>
           <div className="col-md-5">
             <InTheNewsComponent />
           </div>
+          <br></br>
+          <div className="col-sm-1" >
+            <img src={inthenews} className = "newslogo" width="auto" height="auto"/>
+          </div>
+           
         </div>
       </div>
-
-
     );
   }
 }
