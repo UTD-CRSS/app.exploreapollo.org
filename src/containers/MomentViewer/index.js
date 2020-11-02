@@ -6,6 +6,7 @@ import Spinner from "react-spinner";
 import {Tab, Tabs, TabList, TabPanel} from "react-tabs";
 import config from "../../../config";
 import {fromJS} from "immutable";
+import {metrics as setMetrics} from "../../reducers";
 
 import {
   loadMoments,
@@ -50,7 +51,15 @@ export class MomentViewer extends Component {
     //this.fetch(this.props);
 
     let path = this.props.location.pathname
-    let momentId = path.split("/")[3]  // get the momentId
+    let momentId
+    if(path.includes("story"))
+    {
+        momentId = path.split("/")[5]  // get the momentId
+    }
+    else
+    {
+        momentId = path.split("/")[3]  // get the momentId
+    }
 
     const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`)
     const momentJson = await moments.json()
@@ -59,10 +68,9 @@ export class MomentViewer extends Component {
     const transcripts = await fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
     const transcriptJson = await transcripts.json()
 
-
-    const metrics = await fetch(`${config.apiEntry}/api/moments/${momentId}/metrics`)
-    const metricsJson = await metrics.json()
-
+    const orgMetrics = await fetch(`${config.apiEntry}/api/moments/${momentId}/metrics`)
+    const metricsJson = await orgMetrics.json()
+    
     this.setState({ 
       loading: false, audio:{ playing: false, time: 0, momentId: momentId},
       media: momentMedia, transcript: transcriptJson, metric: metricsJson
@@ -116,7 +124,9 @@ export class MomentViewer extends Component {
     let currentMoment = this.state.audio.momentId
     let loading = this.state.loading
     let currentTranscripts = this.state.transcript
-    let metrics = this.state.metric
+    //let metrics = this.state.metric
+    let metrics = setMetrics(this.state.metric)
+    console.log(metrics)
     //let loadAudio = this.state.audio
 
     

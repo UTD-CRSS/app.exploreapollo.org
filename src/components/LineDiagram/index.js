@@ -9,7 +9,9 @@ export class LineDiagram extends Component {
 
   render() {
     const {data, containerWidth} = this.props;
+    console.log("Data Line Diagram")
     console.log(data)
+    console.log(containerWidth)
 
     //Don't render diagram without data
     if(data.series.every(datum => {return datum.value.size < 1;})) {
@@ -106,9 +108,18 @@ function generateLegend(data) {
 
 //Parse data into format needed by the diagrams
 function form(data) {
-  return data.toArray().map((datum => {return {
-    name: String(datum.get("met_start")),
-    data: [Number(datum.getIn(["data", "count"]))]
+  console.log("FORM")
+  console.log(data)
+  console.log("SIZE");
+  console.log(data.size)
+  if(data.size < 1)
+  {
+    console.log("TOO SMALL")
+    return []
+  }
+  return data.map((datum => {return { //removed data.map.toArray
+    name: String(datum["met_start"]),
+    data: [Number(datum["data"]["count"])]
   };})).sort(function(a, b) { //sort by met_start
     return a.name.localeCompare(b.name);
   }).filter((element, index, self) => self.findIndex((e) => { //remove duplicates

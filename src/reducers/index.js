@@ -1,4 +1,4 @@
-import { routerStateReducer as router } from "redux-router";
+//import { routerStateReducer as router } from "redux-router";
 import { combineReducers } from "redux";
 import * as ActionTypes from "../actions";
 import { normalize, schema } from "normalizr";
@@ -119,37 +119,41 @@ function audio(state = initialAudioState, action = {}) {
   }
 }
 
-function metrics(state = {}, action = {}) {
-  switch(action.type) {
-    case ActionTypes.FETCH_METRICS:
-      return Object.assign({}, state, {loading: true});
-    case ActionTypes.RECEIVE_METRICS:
-      const metrics = fromJS(action.metrics);
+export function metrics(mets) {
+  //switch(action.type) {
+  //  case ActionTypes.FETCH_METRICS:
+  //    return Object.assign({}, state, {loading: true});
+  //  case ActionTypes.RECEIVE_METRICS:
+  //    const metrics = fromJS(action.metrics);
+      
+  //    let mets = fromJS(orgMetrics)
+      console.log("METRICS")
+      console.log(mets)
       return Object.assign(
         {},
-        state,
+        {},
         {loading: false},
         {
-          Speakers: metrics.filter((metric) => {
-            return metric.get("type") === "Speakers";
+          Speakers: mets.filter((metric) => {
+            return metric["type"] === "Speakers";
           }),
-          TurnCount: metrics.filter((metric) => {
-            return metric.get("type") === "Nturns";
+          TurnCount: mets.filter((metric) => {
+            return metric["type"] === "Nturns";
           }),
-          WordCount: metrics.filter((metric) => {
-            return metric.get("type") === "WordCount";
+          WordCount: mets.filter((metric) => {
+            return metric["type"] === "WordCount";
           }),
-          ConversationCount: metrics.filter((metric) => {
-            return metric.get("type") === "ConversationCount";
+          ConversationCount: mets.filter((metric) => {
+            return metric["type"] === "ConversationCount";
           }),
-          InteractionMatrix: metrics.filter((metric) => {
-            return metric.get("type") === "InteractionMatrix";
+          InteractionMatrix: mets.filter((metric) => {
+            return metric["type"] === "InteractionMatrix";
           })
         }
       );
-    default:
-      return state;
-  }
+    //default:
+    //  return state;
+ // }
 }
 
 const rootReducer = combineReducers({
