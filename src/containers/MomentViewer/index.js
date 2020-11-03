@@ -64,6 +64,11 @@ export class MomentViewer extends Component {
     const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`)
     const momentJson = await moments.json()
     const momentMedia = fromJS(momentJson.media)
+    const startmet = fromJS(momentJson.metStart)
+    const endmet = fromJS(momentJson.metEnd)
+    const url = fromJS(momentJson.audioUrl)
+    const t = fromJS(momentJson.title)
+    const mission = fromJS(momentJson.mission)
     
     const transcripts = await fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
     const transcriptJson = await transcripts.json()
@@ -73,7 +78,9 @@ export class MomentViewer extends Component {
     
     this.setState({ 
       loading: false, audio:{ playing: false, time: 0, momentId: momentId},
-      media: momentMedia, transcript: transcriptJson, metric: metricsJson
+      media: momentMedia, transcript: transcriptJson, metric: metricsJson,
+      metStart: startmet, metEnd: endmet,
+      audioUrl: url, title: t, currentMission: mission
     })
 
   }
@@ -111,22 +118,22 @@ export class MomentViewer extends Component {
 
   render() {
     const {
-      //currentMoment,
-      currentMission,
-      //loading,
+      //currentMission,
      // currentTranscripts,
-      loadAudio,
-      //metrics,
+    //  loadAudio,
       onEnd,
       autoplay
     } = this.props;
 
-    let currentMoment = this.state.audio.momentId
+    console.log("ON END");
+    console.log(onEnd)
+
     let loading = this.state.loading
-    let currentTranscripts = this.state.transcript
-    //let metrics = this.state.metric
+    let transcripts = this.state.transcript
     let metrics = setMetrics(this.state.metric)
-    console.log(metrics)
+    let title = this.state.title
+    let currentMission = this.state.currentMission
+    //console.log(metrics)
     //let loadAudio = this.state.audio
 
     
@@ -137,7 +144,7 @@ export class MomentViewer extends Component {
       </div>;
     }
 
-    if (!currentMoment) {
+    if (!this.state.audio.momentId) {
       return <div>
         Error fetching moment.
       </div>;
@@ -145,14 +152,18 @@ export class MomentViewer extends Component {
 
     const {time, playing} = this.state.audio;  //THIS NEEDS TO BE FIXED
 
+    //console.log(currentTranscripts)
+
    // let {transcripts} = currentTranscripts;
     //this is bad, but necessary until I can think of a clever solution
-    let transcripts = currentTranscripts.map(function(i) {
-      return i["active"] = false
+    //let transcripts = currentTranscripts.map(function(i) {
+    //  return i["active"] = false
       //return i.set("active", false);
-    });
+    //});
+    
+    //console.log(transcripts)
 
-    const momentMetStart = currentMoment.metStart;
+    const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + (time * 1000);
 
     const activeIndex = getActiveIndex(
@@ -161,25 +172,27 @@ export class MomentViewer extends Component {
     );
 
     if(activeIndex >= 0) {
-      const activeMessage = transcripts.get(activeIndex).set("active", true);
-      transcripts = transcripts.set(activeIndex, activeMessage);
+      transcripts[activeIndex]["active"] = true;
+      const activeMessage = transcripts[activeIndex];
+      transcripts[activeIndex] = activeMessage;
+      transcripts = transcripts[activeIndex];
     }
 
     const timelineClickEvent = function(startTime) {
-      const seekTime = (startTime - metStart) / 1000;
-      if(metStart) {
+      const seekTime = (startTime - momentMetStart) / 1000;
+      if(momentMetStart) {
         loadAudio({
           time: seekTime
         });
       }
     };
 
-    const {
+  /*  const {
       title,
       audioUrl,
       metStart,
       metEnd
-    } = currentMoment;
+    } = currentMoment; */
 
     // If viewing a standalone moment, missionLength should be 1.
     const missionLength = currentMission ? currentMission.length : 1;
@@ -187,16 +200,16 @@ export class MomentViewer extends Component {
     const slideShowProps = {key: "slideShow", title: "Media"};
     const slideShowWidget = loading
       ? <LoadingIndicator {...slideShowProps}/>
-      : <SlideShowPanel images={currentMoment.media} {...slideShowProps}/>;
+      : <SlideShowPanel images={this.state.media} {...slideShowProps}/>;
 
-    const lineDiagramProps = {key: "LineDiagram", title: "Line Diagram"};
+    const lineDiagramProps = {key: "LineDiagram", title: "Line Diagram", containerWidth: 315, containerHeight: 315};
     const lineDiagramWidget = metrics.loading
 
       ? <LoadingIndicator {...lineDiagramProps}/>
       : <LineDiagram data={{
         time: currentMissionTime,
-        start: currentMoment.metStart,
-        end: currentMoment.metEnd,
+        start: this.state.metStart,
+        end: this.state.metEnd,
         series: [
           {name: "ConversationRate", value: metrics.ConversationCount},
           {name: "TurnRate", value: metrics.TurnCount},
@@ -236,12 +249,12 @@ export class MomentViewer extends Component {
     return (
       <div className="moment-viewer-container">
         <MomentPlayer
-          title={title}
-          url={audioUrl}
-          start={metStart}
-          end={metEnd}
-          time={time}
-          playing={playing}
+          title={this.state.title}
+          url={this.state.audioUrl}
+          start={this.state.metStart}
+          end={this.state.metEnd}
+          time={this.state.audio.time}
+          playing={this.state.audio.playing}
           loadAudio={loadAudio}
           autoplay={autoplay}
           onEnd={onEnd}

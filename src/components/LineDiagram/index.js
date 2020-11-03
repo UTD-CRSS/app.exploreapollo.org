@@ -8,7 +8,7 @@ export class LineDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    const {data, containerWidth} = this.props;
+    const {data, containerWidth, containerHeight} = this.props;
     console.log("Data Line Diagram")
     console.log(data)
     console.log(containerWidth)
@@ -108,15 +108,6 @@ function generateLegend(data) {
 
 //Parse data into format needed by the diagrams
 function form(data) {
-  console.log("FORM")
-  console.log(data)
-  console.log("SIZE");
-  console.log(data.size)
-  if(data.size < 1)
-  {
-    console.log("TOO SMALL")
-    return []
-  }
   return data.map((datum => {return { //removed data.map.toArray
     name: String(datum["met_start"]),
     data: [Number(datum["data"]["count"])]

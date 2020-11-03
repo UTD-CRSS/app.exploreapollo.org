@@ -31,6 +31,8 @@ function TimelineList({timeline, clickEvent}) {
       <div testref="errorMessage" className="alert alert-info">No Messages</div>
     );
   }
+  //console.log("ITEMS")
+  //console.log(timeline)
   let items = timeline.map((item) => {
     return (
       <TimelineMessage
