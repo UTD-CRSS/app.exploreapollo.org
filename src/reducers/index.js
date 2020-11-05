@@ -120,15 +120,6 @@ function audio(state = initialAudioState, action = {}) {
 }
 
 export function metrics(mets) {
-  //switch(action.type) {
-  //  case ActionTypes.FETCH_METRICS:
-  //    return Object.assign({}, state, {loading: true});
-  //  case ActionTypes.RECEIVE_METRICS:
-  //    const metrics = fromJS(action.metrics);
-      
-  //    let mets = fromJS(orgMetrics)
-      console.log("METRICS")
-      console.log(mets)
       return Object.assign(
         {},
         {},
@@ -151,9 +142,6 @@ export function metrics(mets) {
           })
         }
       );
-    //default:
-    //  return state;
- // }
 }
 
 const rootReducer = combineReducers({

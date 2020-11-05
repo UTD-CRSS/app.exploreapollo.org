@@ -9,9 +9,9 @@ export class LineDiagram extends Component {
 
   render() {
     const {data, containerWidth, containerHeight} = this.props;
-    console.log("Data Line Diagram")
-    console.log(data)
-    console.log(containerWidth)
+    //console.log("Data Line Diagram")
+    //console.log(data)
+    //console.log(containerWidth)
 
     //Don't render diagram without data
     if(data.series.every(datum => {return datum.value.size < 1;})) {

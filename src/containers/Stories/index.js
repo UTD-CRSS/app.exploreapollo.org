@@ -1,19 +1,23 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
 
-import {
-  loadStories
-} from "../../actions";
-
-import {StoryList} from "../../components";
+import { StoryList } from "../../components";
 import Spinner from "react-spinner";
+import config from "../../../config";
 
 export class Stories extends Component {
-  componentWillMount() {
-    this.props.loadStories();
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, stories: [] };
+  }
+
+  async componentDidMount() {
+    let stories = await fetch(`${config.apiEntry}/api/stories`);
+    let storyJson = await stories.json();
+
+    this.setState({ loading: false, stories: storyJson });
   }
   render() {
-    if (this.props.loading) {
+    if (this.state.loading) {
       return (
         <div className="text-center lead">
           <p>Loading Stories...</p>
@@ -21,7 +25,7 @@ export class Stories extends Component {
         </div>
       );
     }
-    const Stories = this.props.stories;
+    const Stories = this.state.stories;
     return (
       <div className="container">
         <h1>Stories</h1>
@@ -30,20 +34,3 @@ export class Stories extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const {stories} = state;
-  if (stories.loading) {
-    return {
-      loading: stories.loading
-    };
-  }
-  return {
-    loading: stories.loading,
-    stories: stories.stories
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadStories
-})(Stories);

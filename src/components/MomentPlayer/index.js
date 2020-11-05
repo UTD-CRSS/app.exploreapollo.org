@@ -62,25 +62,48 @@ const onPositionChange = throttle(function (loadAudio, e) {
 }, 300, {trailing: false});
 
 function setPlaying(loadAudio, playing) {
-  loadAudio({
-    playing
-  });
+   loadAudio({
+     playing
+   });
 }
 
+
+
 export class MomentPlayer extends Component {
+
+  constructor(props)
+  {
+    super(props);
+    this.state = {playing: false, time: 0}
+  }
+  
+  playaudio() {
+    this.setState({playing: true});
+  }
+  
+  pauseaudio() {
+    this.setState({playing: false});
+  }
+
+  seek(e) {
+    const seekTime = e.originalArgs[0];
+    this.setState({time: seekTime});
+  }
 
   render() {
     const {
       url,
-      playing,
-      time,
-      loadAudio,
+      //playing,
+      //time,
+      //loadAudio,
       onEnd,
       autoplay,
       title,
       titleEl,
       volume
     } = this.props;
+
+    const {playing, time} = this.state;
     const surferOptions = {
       normalize: true
     };
@@ -92,19 +115,19 @@ export class MomentPlayer extends Component {
       <AudioPlayer>
         <PlayButton
           isPlaying={playing}
-          play={setPlaying.bind(this, loadAudio, true)}
-          pause={setPlaying.bind(this, loadAudio, false)} />
+          play={this.playaudio.bind(this)}
+          pause={this.pauseaudio.bind(this)} />
         <Wavesurfer
           audioFile={url}
           volume={volume}
           pos={time}
-          onPosChange={onPositionChange.bind(this, loadAudio)}
+          onPosChange={this.seek.bind(this)}
           playing={playing}
           options={surferOptions}
           onFinish={onEnd}
           onReady={function () {
             if (autoplay) {
-              setPlaying(loadAudio, true);
+              this.playaudio.bind(this);
             }
           }}
         />

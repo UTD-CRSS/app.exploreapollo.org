@@ -8,6 +8,8 @@ import Spinner from "react-spinner";
 
 import Wavesurfer from "react-wavesurfer";
 import {PlayButton, AudioPlayer} from "../../components/MomentPlayer";
+import config from "../../../config";
+import {fromJS} from "immutable";
 
 import {
   loadMoments,
@@ -27,30 +29,67 @@ export class DJ extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {loading: false, audio:{ playing: false, time: 0, momentId: 1},
+    media: [], transcript: [], metric: [],
+    metStart: 0, metEnd: 0,
+    audioUrl: "", title: "", currentMission: null,
+    scPlaying: false,
+    scTime: 0,
+    scVolume: 1,
+    apolloVolume: 1,
+    crossFade: 0,
+    autoplay: false,
+    onEnd: null};
   }
 
 
-  fetch(props) {
-    props.loadAudio({
-      time: 0,
-      momentId: props.currentMomentId,
-      playing: false
-    });
-    props.loadMoments({momentId: props.currentMomentId});
-    props.loadTranscripts({momentId: props.currentMomentId});
-    props.loadMetrics({momentId: props.currentMomentId});
+  // fetch(props) {
+  //   props.loadAudio({
+  //     time: 0,
+  //     momentId: props.currentMomentId,
+  //     playing: false
+  //   });
+  //   props.loadMoments({momentId: props.currentMomentId});
+  //   props.loadTranscripts({momentId: props.currentMomentId});
+  //   props.loadMetrics({momentId: props.currentMomentId});
+  // }
+
+  async componentDidMount() {
+    let momentId = 1
+    const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`)
+    const momentJson = await moments.json()
+    const momentMedia = fromJS(momentJson.media)
+    const startmet = fromJS(momentJson.metStart)
+    const endmet = fromJS(momentJson.metEnd)
+    const url = fromJS(momentJson.audioUrl)
+    const t = fromJS(momentJson.title)
+    const mission = fromJS(momentJson.mission)
+    const transcripts = await fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
+    const transcriptJson = await transcripts.json()
+    const orgMetrics = await fetch(`${config.apiEntry}/api/moments/${momentId}/metrics`)
+    const metricsJson = await orgMetrics.json()
+    
+    this.setState({ 
+      loading: false, audio:{ playing: false, time: 0, momentId: momentId},
+      media: momentMedia, transcript: transcriptJson, metric: metricsJson,
+      metStart: startmet, metEnd: endmet,
+      audioUrl: url, title: t, currentMission: mission,
+      scPlaying: false,
+      scTime: 0,
+      scVolume: 1,
+      apolloVolume: 1,
+      crossFade: 0,
+      autoplay: false,
+      onEnd: null
+    })
+
   }
 
-  componentWillMount() {
-    this.fetch(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.currentMomentId !== this.props.currentMomentId) {
-      this.fetch(nextProps);
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.currentMomentId !== this.props.currentMomentId) {
+  //     this.fetch(nextProps);
+  //   }
+  // }
 
   scPlay() {
     this.setState({scPlaying: true});
@@ -67,12 +106,12 @@ export class DJ extends Component {
 
   masterPlay() {
     this.scPlay();
-    this.props.loadAudio({playing: true});
+    this.setState({audio: {playing: true}});
   }
 
   masterPause() {
     this.scPause();
-    this.props.loadAudio({playing: false});
+    this.setState({audio: {playing: false}});
   }
 
   setVolumeFactory(playerKey) {
@@ -102,38 +141,31 @@ export class DJ extends Component {
   }
 
   render() {
-    const {
-      currentMoment,
-      currentMission,
-      loading,
-      currentTranscripts,
-      loadAudio,
-      onEnd,
-      autoplay
-    } = this.props;
-
-    if (loading) {
+    // const {
+    //   currentMoment,
+    //   currentMission,
+    //   loading,
+    //   currentTranscripts,
+    //   loadAudio,
+    const currentMission = this.state.currentMission;
+    const { autoplay, onEnd } = this.state;
+    if (this.state.loading) {
       return <div className="text-center lead">
-        <p>Loading moment...</p>
+        <p>Loading DJ Apollo...</p>
         <Spinner />
       </div>;
     }
 
-    if (!currentMoment) {
+    if (!this.state.audio.momentId) {
       return <div>
         Error fetching moment.
       </div>;
     }
 
-    const {time, playing} = this.props.currentAudio;
-    let {transcripts} = currentTranscripts;
+    const {time, playing} = this.state.audio;
+    let transcripts = this.state.transcript;
 
-    //this is bad, but necessary until I can think of a clever solution
-    transcripts = transcripts.map(function(i) {
-      return i.set("active", false);
-    });
-
-    const momentMetStart = this.props.currentMoment.metStart;
+    const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + (time * 1000);
 
     const activeIndex = getActiveIndex(
@@ -142,33 +174,36 @@ export class DJ extends Component {
     );
 
     if(activeIndex >= 0) {
-      const activeMessage = transcripts.get(activeIndex).set("active", true);
-      transcripts = transcripts.set(activeIndex, activeMessage);
+      transcripts[activeIndex]["active"] = true;
+      const activeMessage = transcripts[activeIndex];
+      transcripts[activeIndex] = activeMessage;
+      transcripts = transcripts[activeIndex];
     }
 
     const timelineClickEvent = function(startTime) {
       const seekTime = (startTime - metStart) / 1000;
-      if(metStart) {
-        loadAudio({
-          time: seekTime
-        });
-      }
+      this.state.audio.time = seekTime;
+      // if(metStart) {
+      //   loadAudio({
+      //     time: seekTime
+      //   });
+      //}
     };
 
-    const {
-      title,
-      audioUrl,
-      metStart,
-      metEnd
-    } = currentMoment;
-    const missionLength = currentMission.length;
+     const {
+       title,
+       audioUrl,
+       metStart,
+       metEnd
+     } = this.state;
+    const missionLength = currentMission ? currentMission.length : 1;
 
     const {
-      scPlaying = false,
-      scTime = 0,
-      scVolume = 1,
-      apolloVolume = 1,
-      crossFade = 0
+      scPlaying,
+      scTime,
+      scVolume,
+      apolloVolume,
+      crossFade
     } = this.state;
 
     return (

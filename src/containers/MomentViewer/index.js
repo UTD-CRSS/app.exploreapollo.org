@@ -33,10 +33,11 @@ export class MomentViewer extends Component {
   constructor(props) {
     super(props)
     this.state = {loading: true, audio: {playing: false, time: 0, momentId: 0},
-    media: [], transcript: [], metric: []}
+    media: [], transcript: [], metric: [], metStart: 0, metEnd: 0,
+    audioUrl: "", title: "", currentMission: null }
   }
   
-  fetch(props) {
+  /*fetch(props) {
     props.loadAudio({
       time: 0,
       momentId: props.currentMomentId,
@@ -45,7 +46,7 @@ export class MomentViewer extends Component {
     props.loadMoments({momentId: props.currentMomentId});
     props.loadTranscripts({momentId: props.currentMomentId});
     props.loadMetrics({momentId: props.currentMomentId});
-  }
+  }*/
 
   async componentDidMount() {
     //this.fetch(this.props);
@@ -125,8 +126,8 @@ export class MomentViewer extends Component {
       autoplay
     } = this.props;
 
-    console.log("ON END");
-    console.log(onEnd)
+    //console.log("ON END");
+    //console.log(onEnd)
 
     let loading = this.state.loading
     let transcripts = this.state.transcript
@@ -181,9 +182,10 @@ export class MomentViewer extends Component {
     const timelineClickEvent = function(startTime) {
       const seekTime = (startTime - momentMetStart) / 1000;
       if(momentMetStart) {
-        loadAudio({
-          time: seekTime
-        });
+        this.state.audio.time = seekTime;
+        // loadAudio({
+        //   time: seekTime
+        // });
       }
     };
 
