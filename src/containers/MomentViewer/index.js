@@ -182,7 +182,7 @@ export class MomentViewer extends Component {
     const timelineClickEvent = function(startTime) {
       const seekTime = (startTime - momentMetStart) / 1000;
       if(momentMetStart) {
-        this.state.audio.time = seekTime;
+        this.setState({audio: {playing: this.state.audio.playing, time: seekTime, momentId: this.state.audio.momentId}})
         // loadAudio({
         //   time: seekTime
         // });
