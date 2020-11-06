@@ -7,7 +7,7 @@ export class InTheNews extends Component {
   render() {
     return (
       <div className="app-container">
-         <AppHeader /> 
+        <AppHeader />
         <h1 className="center">
           <b>
             <u>Fearless Steps: In the NEWS!</u>
@@ -28,7 +28,7 @@ export class InTheNews extends Component {
             />
           </div>
         </div>
-        <AppFooter /> 
+        <AppFooter />
       </div>
     );
   }

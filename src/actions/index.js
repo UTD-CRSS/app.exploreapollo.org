@@ -1,10 +1,9 @@
-import {
-} from "../utils/dummyData";
-import {isArray} from "lodash";
+import {} from "../utils/dummyData";
+import { isArray } from "lodash";
 
 import config from "../../config";
 
-import {fromJS} from "immutable";
+import { fromJS } from "immutable";
 //import {replaceState} from "redux-router";
 
 export const RECEIVE_MOMENT = "RECEIVE_MOMENT";
@@ -20,40 +19,40 @@ export const RECEIVE_PERSON = "RECEIVE_PERSON";
 // but redux and redux-router make it difficult to access browserHistory in a middleware function..
 export const ROUTER_DID_CHANGE = "@@reduxReactRouter/routerDidChange";
 
-function receiveMoments({moments}) {
+function receiveMoments({ moments }) {
   return {
     type: RECEIVE_MOMENT,
-    moments
+    moments,
   };
 }
 
 function fetchMoments() {
   return {
-    type: FETCH_MOMENT
+    type: FETCH_MOMENT,
   };
 }
 
 export function loadMoments(args) {
-  const {momentId} = args;
-  //console.log("moments plz")
-  return dispatch => {
+  const { momentId } = args;
+  return (dispatch) => {
     dispatch(fetchMoments());
     fetch(`${config.apiEntry}/api/moments/${momentId}`)
       .then((response) => {
-        //console.log("RESPONSE " + response)
         return response.json();
       })
       .then((moment) => {
         moment.media = fromJS(moment.media);
-        dispatch(receiveMoments({
-          moments: moment
-        }));
+        dispatch(
+          receiveMoments({
+            moments: moment,
+          })
+        );
       });
   };
 }
 
 export function searchMomentsByTranscript(transcriptSnippet) {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(fetchMoments());
     fetch(`${config.apiEntry}/api/moments/search?q=${transcriptSnippet}`)
       .then((response) => {
@@ -61,22 +60,23 @@ export function searchMomentsByTranscript(transcriptSnippet) {
       })
       .then((moment) => {
         moment.media = fromJS(moment.media);
-        dispatch(receiveMoments({
-          moments: moment
-        }));
+        dispatch(
+          receiveMoments({
+            moments: moment,
+          })
+        );
       });
   };
 }
 
 export function redirectToRandomMoment() {
-
   return (dispatch, getState) => {
     fetch(`${config.apiEntry}/api/moments/random`)
       .then((response) => {
         return response.json();
       })
       .then((moment) => {
-        if(getState().router.location.pathname === "/moments/random") {
+        if (getState().router.location.pathname === "/moments/random") {
           moment.media = fromJS(moment.media);
           //dispatch(replaceState(null, `/moments/moment/${moment.id}`));
           dispatch(
@@ -89,120 +89,116 @@ export function redirectToRandomMoment() {
 
 function fetchPerson() {
   return {
-    type: FETCH_PERSON
+    type: FETCH_PERSON,
   };
 }
 
-function receivePerson({person}) {
+function receivePerson({ person }) {
   return {
     type: RECEIVE_PERSON,
-    person
+    person,
   };
 }
 
-export function loadPerson({personId}) {
-  return dispatch => {
+export function loadPerson({ personId }) {
+  return (dispatch) => {
     dispatch(fetchPerson());
     fetch(`${config.apiEntry}/api/people/${personId}`)
       .then((response) => {
         return response.json();
       })
       .then((person) => {
-        dispatch(receivePerson({person}));
+        dispatch(receivePerson({ person }));
       });
   };
 }
 
 function fetchMetrics() {
   return {
-    type: FETCH_METRICS
+    type: FETCH_METRICS,
   };
 }
 
-function receiveMetrics({metrics}) {
+function receiveMetrics({ metrics }) {
   return {
     type: RECEIVE_METRICS,
-    metrics
+    metrics,
   };
 }
 
-export function loadMetrics({momentId}) {
-  return dispatch => {
+export function loadMetrics({ momentId }) {
+  return (dispatch) => {
     dispatch(fetchMetrics());
     fetch(`${config.apiEntry}/api/moments/${momentId}/metrics`)
       .then((response) => {
         return response.json();
       })
       .then((metrics) => {
-        dispatch(receiveMetrics({metrics}));
+        dispatch(receiveMetrics({ metrics }));
       });
   };
 }
 
 export const RECEIVE_STORY = "RECEIVE_STORY";
 export const FETCH_STORY = "FETCH_STORY";
-function receiveStory({story}) {
+function receiveStory({ story }) {
   return {
     type: RECEIVE_STORY,
-    story
+    story,
   };
 }
 
 function fetchStory() {
   return {
-    type: FETCH_STORY
+    type: FETCH_STORY,
   };
 }
 
 export function loadStory(args) {
-  const {storyId} = args;
-  //console.log("Story ID: " + storyId)
+  const { storyId } = args;
   // return dispatch => {
   //   dispatch(fetchStory());
 
   //   fetch(`${config.apiEntry}/api/stories/${storyId}`)
   //     .then((response) => {
-  //       console.log("RESPONSE " + response)
   //       return response.json();
   //     })
   //     .then((story) => {
-  //       console.log("STORY: " + story)
   //       dispatch(receiveStory({
   //         story
   //       }));
   //     });
   // };
   fetch(`${config.apiEntry}/api/stories/${storyId}`)
-      .then((response) => {
-        //console.log("RESPONSE " + response.json())
-        return response.json();
-      })
-      .then((story) => {
-       // console.log("STORY: " + story)
-        // dispatch(receiveStory({
-        //   story
-        // }));
-        return story
-      });
+    .then((response) => {
+      return response.json();
+    })
+    .then((story) => {
+      // dispatch(receiveStory({
+      //   story
+      // }));
+      return story;
+    });
 }
 
 export const RECEIVE_STORIES = "RECEIVE_STORIES";
 export const FETCH_STORIES = "FETCH_STORIES";
-function receiveStories({stories}) {
+function receiveStories({ stories }) {
   return {
     type: RECEIVE_STORIES,
-    stories
+    stories,
   };
 }
 
 function fetchStories() {
   return {
-    type: FETCH_STORIES
+    type: FETCH_STORIES,
   };
 }
 
-export function loadStories() { //could send args... but we're just getting all stories
-  return dispatch => {
+export function loadStories() {
+  //could send args... but we're just getting all stories
+  return (dispatch) => {
     dispatch(fetchStories());
     // simulate async request
     fetch(`${config.apiEntry}/api/stories`)
@@ -210,10 +206,12 @@ export function loadStories() { //could send args... but we're just getting all 
         return response.json();
       })
       .then((stories) => {
-        if(isArray(stories) && stories.length > 0) {
-          dispatch(receiveStories({
-            stories
-          }));
+        if (isArray(stories) && stories.length > 0) {
+          dispatch(
+            receiveStories({
+              stories,
+            })
+          );
         }
       });
   };
@@ -223,19 +221,19 @@ export const RECEIVE_TRANSCRIPTS = "RECEIVE_TRANSCRIPTS";
 export const FETCH_TRANSCRIPTS = "FETCH_TRANSCRIPTS";
 function fetchTranscripts() {
   return {
-    type: FETCH_TRANSCRIPTS
+    type: FETCH_TRANSCRIPTS,
   };
 }
 
-function receiveTranscripts({transcripts}) {
+function receiveTranscripts({ transcripts }) {
   return {
     type: RECEIVE_TRANSCRIPTS,
-    transcripts
+    transcripts,
   };
 }
 
-export function loadTranscripts({momentId}) {
-  return dispatch => {
+export function loadTranscripts({ momentId }) {
+  return (dispatch) => {
     dispatch(fetchTranscripts());
 
     fetch(`${config.apiEntry}/api/moments/${momentId}/transcripts`)
@@ -243,10 +241,12 @@ export function loadTranscripts({momentId}) {
         return response.json();
       })
       .then((transcripts) => {
-        if(isArray(transcripts) && transcripts.length > 0) {
-          dispatch(receiveTranscripts({
-            transcripts: transcripts
-          }));
+        if (isArray(transcripts) && transcripts.length > 0) {
+          dispatch(
+            receiveTranscripts({
+              transcripts: transcripts,
+            })
+          );
         }
       });
   };
@@ -260,25 +260,23 @@ export const FETCH_AUDIO = "FETCH_AUDIO";
 //   };
 // }
 
-function receiveAudio({
-  time, playing, momentId
-}) {
+function receiveAudio({ time, playing, momentId }) {
   return {
     type: RECEIVE_AUDIO,
     playing,
     time,
-    momentId
+    momentId,
   };
 }
 
-export function loadAudio({
-  time, playing, momentId
-}) {
-  return dispatch => {
-    dispatch(receiveAudio({
-      playing,
-      time,
-      momentId
-    }));
+export function loadAudio({ time, playing, momentId }) {
+  return (dispatch) => {
+    dispatch(
+      receiveAudio({
+        playing,
+        time,
+        momentId,
+      })
+    );
   };
 }

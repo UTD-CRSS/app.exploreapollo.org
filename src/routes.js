@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
-
 import {
   NoMatch,
   Moments,
@@ -18,14 +17,14 @@ import {
   Apollo13Explorer,
   Game,
   LessonPlans,
-  InTheNews
+  InTheNews,
 } from "./containers";
 
 export default class Routes extends Component {
   render() {
     return (
-    <Switch>
-      <Route name="app" exact path="/" component={App} ></Route>
+      <Switch>
+        <Route name="app" exact path="/" component={App}></Route>
         <Route path="/settings" component={Settings} />
         <Route path="/moments/moment/:momentId" component={MomentViewer} />
         <Route path="/moments" component={Moments} />
@@ -34,17 +33,17 @@ export default class Routes extends Component {
           <Route path="/:momentId" component={MomentViewer} />
         </Route>
         <Route path="/search" component={Search} />
-        <Route path="/stories" component={Stories}/>
-        <Route path="/apollo11" component={Apollo11Explorer}/>
-        <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer}/>
-        <Route path="/apollo13" component={Apollo13Explorer}/>
+        <Route path="/stories" component={Stories} />
+        <Route path="/apollo11" component={Apollo11Explorer} />
+        <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer} />
+        <Route path="/apollo13" component={Apollo13Explorer} />
         <Route path="/moments/random" component={RandomMoment} />
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />
         <Route path="/lessons" component={LessonPlans} />
         <Route path="/inthenews" component={InTheNews} />
-        <Route path="*" component={NoMatch}/>
+        <Route path="*" component={NoMatch} />
       </Switch>
-  )
-}
+    );
+  }
 }
