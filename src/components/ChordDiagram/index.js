@@ -24,7 +24,7 @@ export class ChordDiagram extends Component {
     return false;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const rawSpeakers = formSpeakers(this.props.data.speakers);
     const rawInteractions = formInteractions(this.props.data.interactions);
     if (rawInteractions.length > 0) {
@@ -44,7 +44,7 @@ export class ChordDiagram extends Component {
     }
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     const rawSpeakers = formSpeakers(this.props.data.speakers);
     const rawInteractions = formInteractions(this.props.data.interactions);
     if (rawInteractions.length > 0) {
@@ -68,7 +68,7 @@ export class ChordDiagram extends Component {
     const { loading, d3 = "" } = this.state;
 
     //Don't render diagram without data
-    if (this.props.data.interactions.size < 1) {
+    if (this.props.data.interactions.size < 1 || this.props.data.interactions.size == undefined) {
       return <p className="text-center text-muted">No Data Yet</p>;
     }
     if (loading) {
@@ -90,18 +90,17 @@ function formInteractions(data) {
   //this is horrible... but I don't know how to keep react a step ahead
   //so i'm creating duplicate steps...
   var result = data
-    .toArray()
     .map((datum) => {
       return {
-        name: String(Number(datum.get("met_start"))),
-        data: String(datum.getIn(["data", "matrix"])),
+        name: String(Number(datum["met_start"])),
+        data: String(datum["data"]["matrix"]),
       };
     })
     .concat(
-      data.toArray().map((datum) => {
+      data.map((datum) => {
         return {
-          name: String(Number(datum.get("met_start")) + 1),
-          data: String(datum.getIn(["data", "matrix"])),
+          name: String(Number(datum["met_start"] + 1)),
+          data: String(datum["data"]["matrix"]),
         };
       })
     )
@@ -126,20 +125,19 @@ function formSpeakers(data) {
   //this is horrible... but I don't know how to keep react a step ahead
   //so i'm creating duplicate steps...
   var result = data
-    .toArray()
     .map((datum) => {
       return {
-        name: String(Number(datum.get("met_start"))),
-        data: String(datum.getIn(["data", "names"])),
-        ids: String(datum.getIn(["data", "ids"])),
+        name: String(Number(datum["met_start"])),
+        data: String(datum["data"]["names"]),
+        ids: String(datum["data"]["ids"]),
       };
     })
     .concat(
-      data.toArray().map((datum) => {
+      data.map((datum) => {
         return {
-          name: String(Number(datum.get("met_start")) + 1),
-          data: String(datum.getIn(["data", "names"])),
-          ids: String(datum.getIn(["data", "ids"])),
+          name: String(Number(datum["met_start"]) + 1),
+          data: String(datum["data"]["names"]),
+          ids: String(datum["data"]["ids"]),
         };
       })
     )

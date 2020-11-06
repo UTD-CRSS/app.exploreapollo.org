@@ -36,6 +36,9 @@ export class LineDiagram extends Component {
     //Ticks for the diagram
     const lengths = rawAll.map((datum) => datum.value.length);
     const rawSingle = rawAll[lengths.indexOf(Math.max.apply(Math, lengths))];
+    if (!rawSingle) {
+      return <p className="text-center text-muted">No Data Yet</p>;
+    }
     const timeDelta = data.time - data.start;
     const progress = (timeDelta / (data.end - data.start)) * 100;
     const tickCurrent = (progress / 100) * (rawSingle.value.length - 1);
