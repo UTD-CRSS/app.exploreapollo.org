@@ -44,7 +44,33 @@ export class MomentViewer extends Component {
       title: "",
       currentMission: null,
     };
+    this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
+
+  timelineClickEvent = function (startTime) {
+    let momentMetStart = this.state.metStart;
+    let seekTime;
+    console.log(this);
+    if (this.state.loading == undefined) 
+    { seekTime = startTime; console.log("help plz"); }
+    else seekTime = (startTime - momentMetStart) / 1000;
+    if (momentMetStart) {
+      if (this) {
+        this.setState({
+          audio: {
+            playing: this.state.audio.playing,
+            time: seekTime,
+            momentId: this.state.audio.momentId,
+          },
+        });
+      } else {
+        time = seekTime;
+      }
+      // loadAudio({
+      //   time: seekTime
+      // });
+    }
+  };
 
   /*fetch(props) {
     props.loadAudio({
@@ -170,26 +196,6 @@ export class MomentViewer extends Component {
       transcripts = transcripts[activeIndex];
     }
 
-    const timelineClickEvent = function (startTime) {
-      const seekTime = (startTime - momentMetStart) / 1000;
-      if (momentMetStart) {
-        if (this) {
-          this.setState({
-            audio: {
-              playing: this.state.audio.playing,
-              time: seekTime,
-              momentId: this.state.audio.momentId,
-            },
-          });
-        } else {
-          time = seekTime;
-        }
-        // loadAudio({
-        //   time: seekTime
-        // });
-      }
-    };
-
     /*  const {
       title,
       audioUrl,
@@ -291,9 +297,13 @@ export class MomentViewer extends Component {
           autoplay={autoplay}
           onEnd={onEnd}
           missionLength={missionLength}
+          clickEvent={this.timelineClickEvent}
         />
         <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
-          <Timeline timeline={transcripts} clickEvent={timelineClickEvent} />
+          <Timeline
+            timeline={transcripts}
+            clickEvent={this.timelineClickEvent}
+          />
           <MomentWidgets>
             {slideShowWidget}
             <Tabs>
