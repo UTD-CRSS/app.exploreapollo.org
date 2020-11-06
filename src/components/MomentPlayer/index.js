@@ -83,7 +83,7 @@ function setPlaying(loadAudio, playing) {
 export class MomentPlayer extends Component {
   constructor(props) {
     super(props);
-    this.state = { playing: this.props.playing, time: this.props.time };
+    this.state = { playing: this.props.playing, time: this.props.time, clickEvent: this.props.clickEvent };
   }
 
   playaudio() {
@@ -97,6 +97,7 @@ export class MomentPlayer extends Component {
   seek(e) {
     const seekTime = e.originalArgs[0];
     this.setState({ time: seekTime });
+    this.state.clickEvent.bind(this, seekTime);
   }
 
   render() {

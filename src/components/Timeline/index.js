@@ -28,6 +28,7 @@ function TimelineList({ timeline, clickEvent }) {
       </div>
     );
   }
+
   let items = timeline.map((item) => {
     return (
       <TimelineMessage
