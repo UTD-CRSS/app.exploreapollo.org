@@ -1,15 +1,15 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "react-spinner";
 
-import {loadStory} from "../../actions";
+import { loadStory } from "../../actions";
 
 import PlaylistNavBar from "../../components/PlaylistNavBar";
 
-import {findIndex} from "lodash";
+import { findIndex } from "lodash";
 
 function getNextMoment(moments, currentMomentId) {
-  const currentIndex = findIndex(moments, {id: Number(currentMomentId)});
+  const currentIndex = findIndex(moments, { id: Number(currentMomentId) });
   const nextIndex = currentIndex + 1;
   if (nextIndex < moments.length) {
     return moments[nextIndex];
@@ -18,11 +18,11 @@ function getNextMoment(moments, currentMomentId) {
 }
 
 export class PlaylistViewer extends Component {
-
   componentDidMount() {
-    const {loadStory, currentStoryId} = this.props;
+    const { loadStory, currentStoryId } = this.props;
+    console.log(this.props);
     loadStory({
-      storyId: currentStoryId
+      storyId: currentStoryId,
     });
   }
   render() {
@@ -32,16 +32,18 @@ export class PlaylistViewer extends Component {
       currentStoryId,
       currentMomentId,
       children,
-      history
+      history,
     } = this.props;
 
-
+    console.log(this.props);
 
     if (loading) {
-      return <div className="text-center lead">
-        <p>Loading Story...</p>
-        <Spinner />
-      </div>;
+      return (
+        <div className="text-center lead">
+          <p>Loading Story...</p>
+          <Spinner />
+        </div>
+      );
     }
 
     const moments = currentStory.momentList;
@@ -55,13 +57,16 @@ export class PlaylistViewer extends Component {
 
     return (
       <div>
-        <PlaylistNavBar currentStory={currentStory}
-                        currentMomentId={currentMomentId}
-                        moments={moments} />
-        {children && React.cloneElement(children, {
-          autoplay: true,
-          onEnd: onEnd.bind(this)
-        })}
+        <PlaylistNavBar
+          currentStory={currentStory}
+          currentMomentId={currentMomentId}
+          moments={moments}
+        />
+        {children &&
+          React.cloneElement(children, {
+            autoplay: true,
+            onEnd: onEnd.bind(this),
+          })}
       </div>
     );
   }
@@ -73,17 +78,17 @@ function mapStateToProps(state) {
   if (story.loading) {
     return {
       currentStoryId: storyId,
-      loading: story.loading
+      loading: story.loading,
     };
   }
   return {
     currentStoryId: storyId,
     currentMomentId: momentId,
     loading: story.loading,
-    currentStory: story
+    currentStory: story,
   };
 }
 
 export default connect(mapStateToProps, {
-  loadStory
+  loadStory,
 })(PlaylistViewer);

@@ -7,8 +7,8 @@ import testTree from "react-test-tree";
 class AppWithChild extends Component {
   render () {
     return (
-      <App testRef="appComponentParent">
-        <div testRef="appContent">woo</div>
+      <App testref="appComponentParent">
+        <div testref="appContent">woo</div>
       </App>
     );
   }

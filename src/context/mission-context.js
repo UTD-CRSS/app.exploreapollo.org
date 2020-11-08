@@ -4,12 +4,12 @@ import React, { useState, createContext } from "react";
 export const MissionContext = createContext();
 
 // Create a provider for components to consume and subscribe to changes
-export const MissionContextProvider = props => {
-    const [mission, setMission] = useState(0);
+export const MissionContextProvider = (props) => {
+  const [mission, setMission] = useState(0);
 
-    return (
-        <MissionContext.Provider value={[mission, setMission]}>
-            {props.children}
-        </MissionContext.Provider>
-    );
+  return (
+    <MissionContext.Provider value={[mission, setMission]}>
+      {props.children}
+    </MissionContext.Provider>
+  );
 };

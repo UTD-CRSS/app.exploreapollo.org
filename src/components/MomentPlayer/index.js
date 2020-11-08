@@ -1,8 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import classNames from "classnames";
 import Wavesurfer from "react-wavesurfer";
 import "./index.scss";
-import {throttle} from "lodash";
+import { throttle } from "lodash";
+import mediaplay from "../../../node_modules/open-iconic/png/media-play-8x.png";
+import mediapause from "../../../node_modules/open-iconic/png/media-pause-8x.png";
 
 export function wrapAudioPlayerElements(child) {
   const PlayButtonName = PlayButton.name;
@@ -13,102 +15,138 @@ export function wrapAudioPlayerElements(child) {
       position: "absolute",
       width: height,
       height: height,
-      padding: 5
+      padding: 5,
     },
     [WavesurferName]: {
-      marginLeft: height
-    }
+      marginLeft: height,
+    },
   };
-  return (<div style={styles[child.type.name]}>
-    {child}
-  </div>);
+  return <div style={styles[child.type.name]}>{child}</div>;
 }
 
-export function AudioPlayer({children}) {
+export function AudioPlayer({ children }) {
   const containerStyles = {
-    position: "relative"
-  };
-  return (<div style={containerStyles}>
-    {React.Children.map(children, wrapAudioPlayerElements)}
-  </div>);
-}
-
-export function PlayButton({isPlaying, play, pause}){
-  const classes = classNames(
-    "glyphicon",
-    {"glyphicon-pause": isPlaying},
-    {"glyphicon-play": !isPlaying}
-  );
-  const clickFunction = (isPlaying) ? pause : play;
-  const iconStyles = {
-    fontSize: "4em"
+    position: "relative",
   };
   return (
-    <div style={{color: "#000"}}
-         className="playButtonContainer"
-         onClick={clickFunction}>
-      <i testRef="playIcon"
-         style={iconStyles}
-         className={classes} />
+    <div style={containerStyles}>
+      {React.Children.map(children, wrapAudioPlayerElements)}
     </div>
   );
 }
 
-const onPositionChange = throttle(function (loadAudio, e) {
-  const currentTime = e.originalArgs[0];
-  loadAudio({
-    time: currentTime
-  });
-}, 300, {trailing: false});
+export function PlayButton({ isPlaying, play, pause }) {
+  const classes = classNames(
+    "glyphicon",
+    { "glyphicon-pause": isPlaying },
+    { "glyphicon-play": !isPlaying }
+  );
+  const clickFunction = isPlaying ? pause : play;
+  const iconStyles = {
+    fontSize: "4em",
+  };
+  return (
+    <div
+      style={{ color: "#000" }}
+      className="playButtonContainer"
+      onClick={clickFunction}
+    >
+      {!isPlaying ? (
+        <img src={mediaplay} className="play-pause"></img>
+      ) : (
+        <img src={mediapause} className="play-pause"></img>
+      )}
+      {/* <i testef="playIcon"
+         style={iconStyles}
+         className={classes} /> */}
+    </div>
+  );
+}
+
+const onPositionChange = throttle(
+  function (loadAudio, e) {
+    const currentTime = e.originalArgs[0];
+    loadAudio({
+      time: currentTime,
+    });
+  },
+  300,
+  { trailing: false }
+);
 
 function setPlaying(loadAudio, playing) {
   loadAudio({
-    playing
+    playing,
   });
 }
 
 export class MomentPlayer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { playing: this.props.playing, time: this.props.time, clickEvent: this.props.clickEvent };
+  }
+
+  playaudio() {
+    this.setState({ playing: true });
+  }
+
+  pauseaudio() {
+    this.setState({ playing: false });
+  }
+
+  seek(e) {
+    const seekTime = e.originalArgs[0];
+    this.setState({ time: seekTime });
+    this.state.clickEvent.bind(this, seekTime);
+  }
 
   render() {
     const {
       url,
-      playing,
-      time,
-      loadAudio,
+      //playing,
+      //time,
+      //loadAudio,
       onEnd,
       autoplay,
       title,
       titleEl,
-      volume
+      volume,
     } = this.props;
+
+    const { playing, time } = this.state;
     const surferOptions = {
-      normalize: true
+      normalize: true,
     };
 
-    return (<div className="moment-player-panel">
-      {titleEl ? titleEl(title) : <h1 className="text-center">
-        Now Playing: {title}
-      </h1>}
-      <AudioPlayer>
-        <PlayButton
-          isPlaying={playing}
-          play={setPlaying.bind(this, loadAudio, true)}
-          pause={setPlaying.bind(this, loadAudio, false)} />
-        <Wavesurfer
-          audioFile={url}
-          volume={volume}
-          pos={time}
-          onPosChange={onPositionChange.bind(this, loadAudio)}
-          playing={playing}
-          options={surferOptions}
-          onFinish={onEnd}
-          onReady={function () {
-            if (autoplay) {
-              setPlaying(loadAudio, true);
-            }
-          }}
-        />
-      </AudioPlayer>
-    </div>);
+    return (
+      <div className="moment-player-panel">
+        {titleEl ? (
+          titleEl(title)
+        ) : (
+          <h1 className="text-center">Now Playing: {title}</h1>
+        )}
+        <AudioPlayer>
+          <PlayButton
+            isPlaying={playing}
+            play={this.playaudio.bind(this)}
+            pause={this.pauseaudio.bind(this)}
+          />
+          <Wavesurfer
+            audioFile={url}
+            volume={volume}
+            pos={time}
+            onPosChange={this.seek.bind(this)}
+            playing={playing}
+            options={surferOptions}
+            onFinish={onEnd}
+            onReady={function () {
+              if (autoplay) {
+                this.playaudio.bind(this);
+              }
+            }}
+          />
+        </AudioPlayer>
+      </div>
+    );
   }
 }

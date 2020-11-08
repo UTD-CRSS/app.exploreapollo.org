@@ -14,4 +14,5 @@ export { Game } from "./Game";
 export { Apollo11Explorer } from "./Apollo11Explorer";
 export { Apollo13Explorer } from "./Apollo13Explorer";
 export { LessonPlans } from "./LessonPlans";
+export { InTheNews } from "./InTheNews";
 

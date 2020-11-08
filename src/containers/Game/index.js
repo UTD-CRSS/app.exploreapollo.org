@@ -15,6 +15,7 @@ let rockCounter = 0;
 import random from "lodash/random";
 import some from "lodash/some";
 import filter from "lodash/filter";
+import { AppFooter, AppHeader } from "../App";
 
 export class Game extends Component {
   constructor(props) {
@@ -103,6 +104,7 @@ export class Game extends Component {
   render() {
     const {top, rocks, gameOver} = this.state;
     return <div>
+      <AppHeader/>
       <h4>Controls</h4>
       <p><code>J</code> DOWN, <code>K</code> UP</p>
       <div className="stars-bg" style={{height: "400px", position: "relative"}}>
@@ -116,6 +118,7 @@ export class Game extends Component {
           return <img src={Asteroid} key={id} style={{position: "absolute", width: `${ROCK_WIDTH}px`, height: `${ROCK_WIDTH}px`, top: `${y}%`, left: `${x}%`}} />;
         })}
       </div>
+      <AppFooter/>
     </div>;
   }
 }

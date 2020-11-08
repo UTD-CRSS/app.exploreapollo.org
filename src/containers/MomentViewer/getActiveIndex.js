@@ -6,7 +6,7 @@ export default function getActiveIndex(transcripts, currentMissionTime) {
   }
 
   return transcripts.findLastIndex((value) => {
-    const metStart = value.get("metStart");
+    const metStart = value["metStart"];
     return currentMissionTime >= metStart;
   });
 }

@@ -1,39 +1,35 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
-import {DayDisplay} from "../../components";
+import { DayDisplay } from "../../components";
 import { AppFooter, AppHeader } from "../App";
 import config from "../../../config";
 
-import {
-  loadStories
-} from "../../actions";
+import { loadStories } from "../../actions";
 
-import {StoryList} from "../../components";
+import { StoryList } from "../../components";
 import Spinner from "react-spinner";
 
 export class Apollo11Explorer extends Component {
   constructor() {
-    super()
-    //let [story, setStory] = []
-    this.state = { loading: true, stories: []}
+    super();
+    this.state = { loading: true, stories: [] };
   }
   async componentDidMount() {
-    let currentStoryId = this.props.match.params.storyId
-    const response = await fetch(`${config.apiEntry}/api/stories`)
-    const json = await response.json()
-    this.setState({ loading: false, stories: json })
-   // this.props.loadStories();
+    let currentStoryId = this.props.match.params.storyId;
+    const response = await fetch(`${config.apiEntry}/api/stories`);
+    const json = await response.json();
+    this.setState({ loading: false, stories: json });
   }
 
-  checkDay(){
+  checkDay() {
     var mstart;
     var mend;
     const stories = _.sortBy(this.state.stories, "met_start");
-    let tempUrl = this.props.location.pathname
-    const day = tempUrl.split("/")[3]
+    let tempUrl = this.props.location.pathname;
+    const day = tempUrl.split("/")[3];
     var targetstories = [];
-    switch(day){
+    switch (day) {
       case "1":
         mstart = 0;
         mend = 55680000;
@@ -75,13 +71,16 @@ export class Apollo11Explorer extends Component {
         mend = 746879993;
     }
 
-    targetstories = _.filter(
-      stories,function(story){
-        return day == null || (story.met_start != null && ((story.met_start >= mstart && story.met_start <= mend) || (story.met_start < mstart && story.met_end > mstart)));
-      }
-    );
+    targetstories = _.filter(stories, function (story) {
+      return (
+        day == null ||
+        (story.met_start != null &&
+          ((story.met_start >= mstart && story.met_start <= mend) ||
+            (story.met_start < mstart && story.met_end > mstart)))
+      );
+    });
 
-    if(_.isEmpty(targetstories)){
+    if (_.isEmpty(targetstories)) {
       return (
         <div>
           <div className="panel panel-default story-timeline-item story-item">
@@ -91,14 +90,11 @@ export class Apollo11Explorer extends Component {
           <p>&nbsp;</p>
         </div>
       );
-    }else{
-      return (
-        <StoryList stories={targetstories}/>
-      );
+    } else {
+      return <StoryList stories={targetstories} />;
     }
   }
   render() {
-
     if (this.props.loading) {
       return (
         <div className="text-center lead">
@@ -109,9 +105,8 @@ export class Apollo11Explorer extends Component {
     }
     const url = `/apollo11/`;
     return (
-
       <div className="container">
-        <DayDisplay day={1} url={url}/>
+        <DayDisplay day={1} url={url} />
         {this.checkDay()}
       </div>
     );
@@ -119,16 +114,16 @@ export class Apollo11Explorer extends Component {
 }
 
 function mapStateToProps(state) {
-  const {stories} = state;
+  const { stories } = state;
   if (stories.loading) {
     return {
-      loading: stories.loading
+      loading: stories.loading,
     };
   }
   return {
     loading: stories.loading,
-    stories: stories.stories
+    stories: stories.stories,
   };
 }
 
-export default connect(mapStateToProps, {loadStories})(Apollo11Explorer);
+export default connect(mapStateToProps, { loadStories })(Apollo11Explorer);

@@ -321,4 +321,10 @@ a:hover {
 .navitem:hover .dropdown-content {display: block;}
 
 /* Change the background color of the nav button when the dropdown content is shown or selected over*/
-.navitem:hover .navbtn  {background-color: rgb(55, 90, 127);}
+.navitem:hover .navbtn  {background-color: rgb(55, 90, 127);}s
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
