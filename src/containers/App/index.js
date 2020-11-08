@@ -61,7 +61,7 @@ export class AppHeader extends Component {
           <div className="navitem">
             <button className="navbtn">
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfyGpbRXC3J2r3yJp_eBeYVmukkHoqkEx4rsSsiIgUxIaaEKw/viewform?usp=sf_link"
                 target="_blank"
               >
                 Submit Feedback
