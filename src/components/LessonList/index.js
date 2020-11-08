@@ -25,34 +25,23 @@ export function LessonList() {
         <b>K-2:</b>
         <br></br>History:
         <button className="k-2histbtn">
-          <a href="https://www.nasa.gov/audience/forstudents/k-4/stories/nasa-knows/who-was-neil-armstrong-k4.html">
+          <a href="https://drive.google.com/file/d/1-lfODu9I_ClBMptXIyTcItyai_ymXanf/view?usp=sharing">
             {" "}
-            <font color="#000000"> Who was Neil Armstrong?</font>{" "}
+            <font color="#000000">Man on the Moon!</font>{" "}
           </a>
-        </button>
-        <br></br>Tech:
-        <button className="k-2techbtn">
-          <a href="https://www.nasa.gov/audience/forstudents/k-4/stories/nasa-knows/what-is-a-spacesuit-k4.html">
-            {" "}
-            <font color="#000000"> What did Neil wear to the moon?</font>{" "}
-          </a>
-        </button>
-        <br></br>Activities:
-        <button className="k-2techbtn">
-          <a href="https://app.exploreapollo.org/stories/story/2/moment/6">
-            {" "}
-            <font color="#000000">
-              {" "}
-              Listen to Neil Armstrong's famous words.{" "}
-            </font>{" "}
-          </a>
-        </button>{" "}
-        What would you say if you were on the moon?
+        </button>   
       </h4>
+
       <h4>
         <br></br>
         <b>3-5:</b>
-        <br></br>History<br></br>Tech<br></br>Practical/Activities
+        <br></br>History:
+        <button className="k-2histbtn">
+          <a href="https://drive.google.com/file/d/179IAuqqypsIsOQkuc7H3CJou2RcfnhBg/view?usp=sharing">
+            {" "}
+            <font color="#000000">Teamwork Makes the Dream Work!</font>{" "}
+          </a>
+        </button>  
       </h4>
       <h4>
         <br></br>

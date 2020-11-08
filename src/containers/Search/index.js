@@ -4,6 +4,7 @@ import Spinner from "react-spinner";
 import { map, isEmpty } from "lodash";
 import { searchMomentsByTranscript } from "../../actions";
 import { MomentCard } from "../../components/StoryTimeline";
+import { AppFooter, AppHeader } from "../App";
 
 export class Search extends Component {
   constructor(props) {
@@ -48,6 +49,8 @@ export class Search extends Component {
     };
 
     return (
+      <div className = "app-container">
+        <AppHeader />
       <div className="container">
         <form>
           <div className="form-group">
@@ -64,6 +67,8 @@ export class Search extends Component {
         <hr />
 
         {renderSearchResults()}
+        </div>
+        <AppFooter />
       </div>
     );
   }
