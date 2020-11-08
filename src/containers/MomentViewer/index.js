@@ -129,7 +129,6 @@ export class MomentViewer extends Component {
 
   componentDidUpdate() {
     let parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
-    //console.log(parent)
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
@@ -138,8 +137,9 @@ export class MomentViewer extends Component {
       transcripts.forEach(t => t.active=false);
       let activeIndex = getActiveIndex(
         transcripts,
-        this.state.media.metStart + this.state.audio.time * 1000
+        this.state.metStart + this.state.audio.time * 1000
       );
+
       if (activeIndex < 0) {
         activeIndex = 0;
       }
@@ -199,8 +199,6 @@ export class MomentViewer extends Component {
       //transcripts[activeIndex] = activeMessage;
       //transcripts = transcripts[activeIndex];
     }
-
-    console.log(transcripts[activeIndex])
 
     /*  const {
       title,
@@ -297,7 +295,7 @@ export class MomentViewer extends Component {
           url={this.state.audioUrl}
           start={this.state.metStart}
           end={this.state.metEnd}
-          time={currentMissionTime}
+          time={this.state.audio.time}
           playing={this.state.audio.playing}
           loadAudio={loadAudio}
           autoplay={autoplay}
