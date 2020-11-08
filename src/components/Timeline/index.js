@@ -47,11 +47,6 @@ function TimelineList({ timeline, clickEvent }) {
 }
 
 export class Timeline extends Component {
-  // const classes = classNames(
-  //   "timeline-container",
-  //   "panel",
-  //   "panel-default"
-  // );
   constructor(props) {
     super(props);
     this.state = {
@@ -63,6 +58,7 @@ export class Timeline extends Component {
   componentDidUpdate() {}
 
   render() {
+    const classes = classNames("timeline-container", "panel", "panel-default");
     return (
       <div className="col-md-6">
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
@@ -76,7 +72,7 @@ export class Timeline extends Component {
             }}
           >
             <div className="transcript-panel">
-              <div testrefcollection="timelineContainer">
+              <div testrefcollection="timelineContainer" className={classes}>
                 <div className="panel-heading">
                   <h3 className="panel-title">Transcript</h3>
                 </div>
