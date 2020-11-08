@@ -26,7 +26,6 @@ export class AppHeader extends Component {
             </button>
           </div>
 
-
           <div className="navitem">
             <button className="navbtn">
               <Link to="/moments/random">
@@ -36,19 +35,11 @@ export class AppHeader extends Component {
           </div>
 
           <div className="navitem">
-            <button className="navbtn">
-              <Link to="">
-                Game
-              </Link>
-            </button>
-          </div>
-
-          <div className="navitem">
-            <button className="navbtn">
-              <Link to="">
-                DJ
-              </Link>
-            </button>
+            <button className="navbtn">Activities</button>
+            <div className="dropdown-content">
+              <a href="/game">Asteroid Strike</a>
+              <a href="/dj">DJ Apollo</a>
+            </div>
           </div>
 
           <div className="navitem">
