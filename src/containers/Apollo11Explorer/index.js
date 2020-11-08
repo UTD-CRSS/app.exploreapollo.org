@@ -105,9 +105,13 @@ export class Apollo11Explorer extends Component {
     }
     const url = `/apollo11/`;
     return (
-      <div className="container">
-        <DayDisplay day={1} url={url} />
-        {this.checkDay()}
+      <div className="app-container">
+        <AppHeader />
+        <div className="container">
+          <DayDisplay day={1} url={url} />
+          {this.checkDay()}
+        </div>
+        <AppFooter />
       </div>
     );
   }

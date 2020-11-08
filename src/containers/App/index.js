@@ -18,7 +18,7 @@ export class AppHeader extends Component {
             </div>
           </div>
 
-          <div className="navitem">
+          <div className="navitem" img>
             <button className="navbtn">
               <Link to="/search">Search</Link>
             </button>
@@ -32,7 +32,7 @@ export class AppHeader extends Component {
 
           <div className="navitem">
             <button className="navbtn">
-              <Link to="/lessons">Activities</Link>
+                Activities
             </button>
             <div className="dropdown-content">
               <a href="/game"> Game </a>
