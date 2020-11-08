@@ -129,15 +129,16 @@ export class MomentViewer extends Component {
 
   componentDidUpdate() {
     let parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
+    //console.log(parent)
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
       timeline = parent.children[0].children[0].children[0].children[1];
       let transcripts = this.state.transcript;
-      transcripts = transcripts.map((index) => (index["active"] = false));
+      transcripts.forEach(t => t.active=false);
       let activeIndex = getActiveIndex(
         transcripts,
-        this.state.media.metStart + this.state.time * 1000
+        this.state.media.metStart + this.state.audio.time * 1000
       );
       if (activeIndex < 0) {
         activeIndex = 0;
@@ -187,14 +188,19 @@ export class MomentViewer extends Component {
     const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + time * 1000;
 
+    transcripts.forEach(t => t.active=false);
+    //console.log(transcripts)
     const activeIndex = getActiveIndex(transcripts, currentMissionTime);
 
     if (activeIndex >= 0) {
-      transcripts[activeIndex]["active"] = true;
-      const activeMessage = transcripts[activeIndex];
-      transcripts[activeIndex] = activeMessage;
-      transcripts = transcripts[activeIndex];
+      transcripts[activeIndex].active = true;
+      
+      //const activeMessage = transcripts[activeIndex];
+      //transcripts[activeIndex] = activeMessage;
+      //transcripts = transcripts[activeIndex];
     }
+
+    console.log(transcripts[activeIndex])
 
     /*  const {
       title,
@@ -291,7 +297,7 @@ export class MomentViewer extends Component {
           url={this.state.audioUrl}
           start={this.state.metStart}
           end={this.state.metEnd}
-          time={this.state.audio.time}
+          time={currentMissionTime}
           playing={this.state.audio.playing}
           loadAudio={loadAudio}
           autoplay={autoplay}
@@ -325,7 +331,7 @@ export class MomentViewer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+/*function mapStateToProps(state) {
   const { audio, metrics } = state;
   const { momentId } = state.router.params;
   const { loading, entities } = state.moments;
@@ -358,3 +364,4 @@ export default connect(mapStateToProps, {
   loadAudio,
   loadMetrics,
 })(MomentViewer);
+*/
