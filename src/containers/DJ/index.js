@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { get } from "lodash";
-
+import { AppFooter, AppHeader } from "../App";
 import "./index.scss";
 
 import Spinner from "react-spinner";
@@ -10,6 +10,7 @@ import Wavesurfer from "react-wavesurfer";
 import { PlayButton, AudioPlayer } from "../../components/MomentPlayer";
 import config from "../../../config";
 import { fromJS } from "immutable";
+
 
 import {
   loadMoments,
@@ -252,6 +253,7 @@ export class DJ extends Component {
 
     return (
       <div>
+        <AppHeader/>
         <h1 className="text-center">Apollo 11 DJ</h1>
         <div className="dj-viewer-container">
           <div className="dj-viewer">
@@ -352,6 +354,7 @@ export class DJ extends Component {
             </div>
           </div>
         </div>
+        <AppFooter/>
       </div>
     );
   }
