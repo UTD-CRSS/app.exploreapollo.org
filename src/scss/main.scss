@@ -122,6 +122,7 @@ footer {
 // Viewer cotainer
 .moment-viewer-container {
   padding: 0 15px;
+  z-index: 0;
 
   .moment-player-panel {
     padding: 0 15px;
@@ -288,7 +289,9 @@ a:hover {
   font-size: 25px;
   border: none;
 }
-.navbtn a:hover {background-color:rgb(55, 90, 127);}
+.navbtn a:hover {
+  background-color: rgb(55, 90, 127);
+}
 
 /* The container <div> - needed to position the nav button content */
 .navitem {
@@ -302,7 +305,7 @@ a:hover {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 118px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -315,17 +318,21 @@ a:hover {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: rgb(151, 180, 211);}
+.dropdown-content a:hover {
+  background-color: rgb(151, 180, 211);
+}
 
 /* Show the dropdown menu on hover */
-.navitem:hover .dropdown-content {display: block;}
+.navitem:hover .dropdown-content {
+  display: block;
+}
 
 /* Change the background color of the nav button when the dropdown content is shown or selected over*/
-.navitem:hover .navbtn  {background-color: rgb(55, 90, 127);}s
-
-.center {
+.navitem:hover .navbtn {
+  background-color: rgb(55, 90, 127);
+}
+s .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
 }
-
