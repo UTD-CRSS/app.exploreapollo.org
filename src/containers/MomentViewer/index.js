@@ -49,6 +49,17 @@ export class MomentViewer extends Component {
   }
 
   timelineClickEvent = function (comp, startTime) {
+    //tolerance is to prevent number comparisons from being incorrect due to the very last decimal
+    //because if the startTime and this.state.audio.time are not "equal" then the code will
+    //create an infinite loop which will crash the momentViewer. We only experienced this issue on
+    //moment 5 for some reason, and adding a tolerance was the simplest way to fix it after
+    //attempting other debugging
+    let tolerance = .00000001;
+    if(Math.abs(startTime - this.state.audio.time) < tolerance)
+    {
+      console.log("EQUALS")
+      return;
+    }
     let momentMetStart = this.state.metStart;
     let seekTime;
     if (comp=="player") {
@@ -57,7 +68,6 @@ export class MomentViewer extends Component {
     else{
       seekTime = (startTime - momentMetStart) / 1000;
     }
-    console.log("Seek time: " + seekTime)
     if (momentMetStart) {
       if (this) {
         this.setState({
@@ -170,6 +180,7 @@ export class MomentViewer extends Component {
     const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + time * 1000;
 
+
     transcripts.forEach((t) => (t.active = false));
     const activeIndex = getActiveIndex(transcripts, currentMissionTime);
 
@@ -257,6 +268,7 @@ export class MomentViewer extends Component {
         {...chordDiagramProps}
       />
     );
+    console.log("MomentViewer Time 2: " + this.state.audio.time)
     return (
       <div className="app-container">
       <AppHeader />

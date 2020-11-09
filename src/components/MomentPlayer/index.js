@@ -96,16 +96,13 @@ export class MomentPlayer extends Component {
 
   seek(e) {
     const seekTime = e.originalArgs[0];
-    this.setState({ time: seekTime });
     this.state.clickEvent("player",seekTime);
   }
 
   render() {
     const {
       url,
-      //playing,
-      //time,
-      //loadAudio,
+      time,
       onEnd,
       autoplay,
       title,
@@ -113,7 +110,8 @@ export class MomentPlayer extends Component {
       volume,
     } = this.props;
 
-    const { playing, time } = this.state;
+    const { playing } = this.state;
+
     const surferOptions = {
       normalize: true,
     };
