@@ -18,26 +18,10 @@ export class AppHeader extends Component {
             </div>
           </div>
 
-          <div className="navitem" img>
-            <button className="navbtn">
-              <Link to="/search">Search</Link>
-            </button>
-          </div>
-
           <div className="navitem">
             <button className="navbtn">
               <Link to="/moments/random">Surprise Me!</Link>
             </button>
-          </div>
-
-          <div className="navitem">
-            <button className="navbtn">
-                Activities
-            </button>
-            <div className="dropdown-content">
-              <a href="/game"> Game </a>
-              <a href="/dj"> DJ</a>
-            </div>
           </div>
 
           <div className="navitem">
@@ -59,6 +43,24 @@ export class AppHeader extends Component {
           </div>
 
           <div className="navitem">
+            <button className="navbtn">FSC</button>
+            <div className="dropdown-content">
+              <a href="https://exploreapollo-fearless-steps.herokuapp.com/">
+                Fearless Steps Challenge: Phase 1
+              </a>
+              <a href="https://fearless-steps.github.io/ChallengePhase2/Data.html"> Fearless Steps Challenge: Phase 2</a>
+            </div>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">&#9732;</button>
+            <div className="dropdown-content">
+              <a href="/game"> Asteroid Strike </a>
+              <a href="/dj"> DJ</a>
+            </div>
+          </div>
+
+          <div className="navitem">
             <button className="navbtn">
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfyGpbRXC3J2r3yJp_eBeYVmukkHoqkEx4rsSsiIgUxIaaEKw/viewform?usp=sf_link"
@@ -66,6 +68,12 @@ export class AppHeader extends Component {
               >
                 Submit Feedback
               </a>
+            </button>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">
+              <Link to="/search"> &#x1F50D;</Link>
             </button>
           </div>
         </div>
@@ -183,15 +191,6 @@ export class App extends Component {
     return (
       <div className="app-container">
         <AppHeader />
-        <div style={{ padding: "1em", background: "#375a7f", color: "white" }}>
-          Now featuring:{" "}
-          <a
-            style={{ color: "white" }}
-            href="https://exploreapollo-fearless-steps.herokuapp.com/"
-          >
-            the Fearless Steps Challenge
-          </a>
-        </div>
         <Dashboard />
         <FloatingFeedbackButton />
         <div className="app-panel">{this.props.children}</div>
