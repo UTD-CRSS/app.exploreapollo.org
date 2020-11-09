@@ -17,32 +17,27 @@ export class Search extends Component {
   onSearchQueryChanged(e) {
     this.setState({ searchQuery: e.target.value });
   }
-  async onSearchClicked(e) {
-    // const {searchMomentsByTranscript} = this.props;
+  onSearchClicked(e) {
     this.setState({ ...this.state, searching: true });
     if (this.state.searchQuery.length > 0) {
       let transcriptSnippet = this.state.searchQuery;
-      const moment = fetch(
-        `${config.apiEntry}/api/moments/search?q=${transcriptSnippet}`
-      )
-        .then((res) => {
-          (res) => res.json();
-        })
-        .then((media) => {
-          return fromJS(media);
-        });
-      console.log("MOMENT");
-      console.log(moment);
-      this.setState({ ...this.state, loading: false, moments: moment });
-      //searchMomentsByTranscript(this.state.searchQuery);
+      this.getResults(transcriptSnippet);
     }
     this.setState({ ...this.state, searching: false });
     e.preventDefault();
   }
+
+  async getResults(query) {
+    const moment = await fetch(
+      `${config.apiEntry}/api/moments/search?q=${query}`
+    );
+    let momentJson = await moment.json();
+    this.setState({ ...this.state, loading: false, moments: momentJson });
+  }
+
   render() {
     const renderSearchResults = () => {
       const { loading, searching, moments } = this.state;
-      console.log(moments);
 
       if (loading && searching) {
         return (
@@ -52,7 +47,6 @@ export class Search extends Component {
           </div>
         );
       } else {
-        console.log(moments);
         const searchResultChildren = !isEmpty(moments) ? (
           map(moments, (moment) => {
             return (
