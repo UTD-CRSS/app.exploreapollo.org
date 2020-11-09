@@ -18,18 +18,16 @@ In exploreapollo-api/app/serializers/moment_serializer.rb, you can trace how the
 
 Due to this complexity, it is difficult to see exactly how one would need to add for the ability to relate multiple channels.
 
-(*) Note, the audio_cache_items table in Postgres is the audio that seems to be used on the app.exploreapollo.org website.
+(\*) Note, the audio_cache_items table in Postgres is the audio that seems to be used on the app.exploreapollo.org website.
 This table does actually support use of multiple channels. If the audio segments referenced in S3 have all channels
 available in the clips, you could try adding more channel IDs to this list of channels for each audio segment.
 
 Along with possibly the above, we believe that at the very least, the first steps are to:
-    (1) Add the audio from the different channels to S3 (unless the * note above is true).
-    (2) Add the entry into audio_cache_items (maybe also into audio_segments?).
-        - When you add the entry, need to ensure that the channel ID is correct. Note: channel IDs are different between missions.
-    (3) Add the relationship between that channel and the corresponding moment into the channels_moments table.
-    (4) Update the moment_serializer.rb file (and possibly functions/files it's dependent on) in exploreapollo-api to store
-        the list of audio urls instead of just one audio url.
-    (5) Update the app.exploreapollo.org to expect and receive multiple audio urls (this would be in the MomentViewer/index.js).
-    (5) Update the app.exploreapollo.org MomentViewer/index.js to create multiple MomentPlayers, each of which should be able to
-        play their corresponding audio at that point.
-        - Note, syncing these may require more work.
+(1) Add the audio from the different channels to S3 (unless the \* note above is true).
+(2) Add the entry into audio_cache_items (maybe also into audio_segments?). - When you add the entry, need to ensure that the channel ID is correct. Note: channel IDs are different between missions.
+(3) Add the relationship between that channel and the corresponding moment into the channels_moments table.
+(4) Update the moment_serializer.rb file (and possibly functions/files it's dependent on) in exploreapollo-api to store
+the list of audio urls instead of just one audio url.
+(5) Update the app.exploreapollo.org to expect and receive multiple audio urls (this would be in the MomentViewer/index.js).
+(5) Update the app.exploreapollo.org MomentViewer/index.js to create multiple MomentPlayers, each of which should be able to
+play their corresponding audio at that point. - Note, syncing these may require more work.

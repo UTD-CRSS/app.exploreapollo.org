@@ -36,15 +36,15 @@ export function AudioPlayer({ children }) {
 }
 
 export function PlayButton({ isPlaying, play, pause }) {
-  const classes = classNames(
-    "glyphicon",
-    { "glyphicon-pause": isPlaying },
-    { "glyphicon-play": !isPlaying }
-  );
+  // const classes = classNames(
+  //   "glyphicon",
+  //   { "glyphicon-pause": isPlaying },
+  //   { "glyphicon-play": !isPlaying }
+  // );
   const clickFunction = isPlaying ? pause : play;
-  const iconStyles = {
-    fontSize: "4em",
-  };
+  // const iconStyles = {
+  //   fontSize: "4em",
+  // };
   return (
     <div
       style={{ color: "#000" }}
@@ -97,7 +97,7 @@ export class MomentPlayer extends Component {
   seek(e) {
     const seekTime = e.originalArgs[0];
     this.setState({ time: seekTime });
-    this.state.clickEvent.bind(this, seekTime);
+    this.state.clickEvent("player",seekTime);
   }
 
   render() {

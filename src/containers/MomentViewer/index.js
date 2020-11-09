@@ -7,6 +7,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import config from "../../../config";
 import { fromJS } from "immutable";
 import { metrics as setMetrics } from "../../reducers";
+import { AppFooter, AppHeader } from "../App";
 
 import {
   loadMoments,
@@ -47,13 +48,16 @@ export class MomentViewer extends Component {
     this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
 
-  timelineClickEvent = function (startTime) {
+  timelineClickEvent = function (comp, startTime) {
     let momentMetStart = this.state.metStart;
     let seekTime;
-    console.log(this);
-    if (this.state.loading == undefined) 
-    { seekTime = startTime; console.log("help plz"); }
-    else seekTime = (startTime - momentMetStart) / 1000;
+    if (comp=="player") {
+      seekTime = startTime;
+    }
+    else{
+      seekTime = (startTime - momentMetStart) / 1000;
+    }
+    console.log("Seek time: " + seekTime)
     if (momentMetStart) {
       if (this) {
         this.setState({
@@ -63,29 +67,12 @@ export class MomentViewer extends Component {
             momentId: this.state.audio.momentId,
           },
         });
-      } else {
-        time = seekTime;
       }
-      // loadAudio({
-      //   time: seekTime
-      // });
     }
   };
 
-  /*fetch(props) {
-    props.loadAudio({
-      time: 0,
-      momentId: props.currentMomentId,
-      playing: false
-    });
-    props.loadMoments({momentId: props.currentMomentId});
-    props.loadTranscripts({momentId: props.currentMomentId});
-    props.loadMetrics({momentId: props.currentMomentId});
-  }*/
 
   async componentDidMount() {
-    //this.fetch(this.props);
-
     let path = this.props.location.pathname;
     let momentId;
     if (path.includes("story")) {
@@ -128,17 +115,16 @@ export class MomentViewer extends Component {
   }
 
   componentDidUpdate() {
-    let parent = ReactDOM.findDOMNode(this).children[1].children[0].children[0];
-    //console.log(parent)
+    let parent = ReactDOM.findDOMNode(this).children[2].children[0].children[0];
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
       timeline = parent.children[0].children[0].children[0].children[1];
       let transcripts = this.state.transcript;
-      transcripts.forEach(t => t.active=false);
+      transcripts.forEach((t) => (t.active = false));
       let activeIndex = getActiveIndex(
         transcripts,
-        this.state.media.metStart + this.state.audio.time * 1000
+        this.state.metStart + this.state.audio.time * 1000
       );
       if (activeIndex < 0) {
         activeIndex = 0;
@@ -157,9 +143,6 @@ export class MomentViewer extends Component {
 
   render() {
     const {
-      //currentMission,
-      // currentTranscripts,
-      //  loadAudio,
       onEnd,
       autoplay,
     } = this.props;
@@ -183,31 +166,16 @@ export class MomentViewer extends Component {
       return <div>Error fetching moment.</div>;
     }
 
-    let { time, playing } = this.state.audio; //THIS NEEDS TO BE FIXED
-
+    let { time, playing } = this.state.audio;
     const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + time * 1000;
 
-    transcripts.forEach(t => t.active=false);
-    //console.log(transcripts)
+    transcripts.forEach((t) => (t.active = false));
     const activeIndex = getActiveIndex(transcripts, currentMissionTime);
 
     if (activeIndex >= 0) {
       transcripts[activeIndex].active = true;
-      
-      //const activeMessage = transcripts[activeIndex];
-      //transcripts[activeIndex] = activeMessage;
-      //transcripts = transcripts[activeIndex];
     }
-
-    console.log(transcripts[activeIndex])
-
-    /*  const {
-      title,
-      audioUrl,
-      metStart,
-      metEnd
-    } = currentMoment; */
 
     // If viewing a standalone moment, missionLength should be 1.
     const missionLength = currentMission ? currentMission.length : 1;
@@ -289,79 +257,47 @@ export class MomentViewer extends Component {
         {...chordDiagramProps}
       />
     );
-
     return (
-      <div className="moment-viewer-container">
-        <MomentPlayer
-          title={this.state.title}
-          url={this.state.audioUrl}
-          start={this.state.metStart}
-          end={this.state.metEnd}
-          time={currentMissionTime}
-          playing={this.state.audio.playing}
-          loadAudio={loadAudio}
-          autoplay={autoplay}
-          onEnd={onEnd}
-          missionLength={missionLength}
-          clickEvent={this.timelineClickEvent}
-        />
-        <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
-          <Timeline
-            timeline={transcripts}
+      <div className="app-container">
+      <AppHeader />
+        <div className="moment-viewer-container">
+          <MomentPlayer
+            title={this.state.title}
+            url={this.state.audioUrl}
+            start={this.state.metStart}
+            end={this.state.metEnd}
+            time={this.state.audio.time}
+            playing={this.state.audio.playing}
+            loadAudio={loadAudio}
+            autoplay={autoplay}
+            onEnd={onEnd}
+            missionLength={missionLength}
             clickEvent={this.timelineClickEvent}
           />
-          <MomentWidgets>
-            {slideShowWidget}
-            <Tabs>
-              <TabList>
-                <Tab>LineDiagram</Tab>
-                <Tab>BarDiagram</Tab>
-                <Tab>ChordDiagram</Tab>
-                <Tab>Dashboard</Tab>
-              </TabList>
-              <TabPanel>{lineDiagramWidget}</TabPanel>
-              <TabPanel>{barDiagramWidget}</TabPanel>
-              <TabPanel>{chordDiagramWidget}</TabPanel>
-              <TabPanel>{dashboardDiagramWidget}</TabPanel>
-            </Tabs>
-          </MomentWidgets>
+          <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
+            <Timeline
+              timeline={transcripts}
+              clickEvent={this.timelineClickEvent}
+            />
+            <MomentWidgets>
+              {slideShowWidget}
+              <Tabs>
+                <TabList>
+                  <Tab>LineDiagram</Tab>
+                  <Tab>BarDiagram</Tab>
+                  <Tab>ChordDiagram</Tab>
+                  <Tab>Dashboard</Tab>
+                </TabList>
+                <TabPanel>{lineDiagramWidget}</TabPanel>
+                <TabPanel>{barDiagramWidget}</TabPanel>
+                <TabPanel>{chordDiagramWidget}</TabPanel>
+                <TabPanel>{dashboardDiagramWidget}</TabPanel>
+              </Tabs>
+            </MomentWidgets>
+          </div>
         </div>
+        <AppFooter />
       </div>
     );
   }
 }
-
-/*function mapStateToProps(state) {
-  const { audio, metrics } = state;
-  const { momentId } = state.router.params;
-  const { loading, entities } = state.moments;
-  const { moments, missions } = entities;
-  const moment = get(moments, momentId);
-  if (loading || !moment) {
-    return {
-      currentMomentId: momentId,
-      loading: true,
-      currentAudio: audio,
-    };
-  }
-  const transcripts = state.transcripts;
-  const mission = get(missions, moment.mission);
-
-  return {
-    currentMomentId: momentId,
-    loading,
-    currentMission: mission,
-    currentMoment: moment,
-    currentTranscripts: transcripts,
-    currentAudio: audio,
-    metrics,
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadMoments,
-  loadTranscripts,
-  loadAudio,
-  loadMetrics,
-})(MomentViewer);
-*/

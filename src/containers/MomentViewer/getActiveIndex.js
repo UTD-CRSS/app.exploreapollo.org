@@ -1,4 +1,4 @@
-import {List} from "immutable";
+import { List } from "immutable";
 
 export default function getActiveIndex(transcripts, currentMissionTime) {
   //console.log(List.isList(transcripts))
