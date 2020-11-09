@@ -57,7 +57,6 @@ export class MomentViewer extends Component {
     let tolerance = .00000001;
     if(Math.abs(startTime - this.state.audio.time) < tolerance)
     {
-      console.log("EQUALS")
       return;
     }
     let momentMetStart = this.state.metStart;
@@ -125,11 +124,11 @@ export class MomentViewer extends Component {
   }
 
   componentDidUpdate() {
-    let parent = ReactDOM.findDOMNode(this).children[2].children[0].children[0];
+    let parent = ReactDOM.findDOMNode(this).children[1].children[1].children[0];
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
-      timeline = parent.children[0].children[0].children[0].children[1];
+      timeline = parent.children[0].children[0].children[0].children[0].children[1];
       let transcripts = this.state.transcript;
       transcripts.forEach((t) => (t.active = false));
       let activeIndex = getActiveIndex(
@@ -145,10 +144,11 @@ export class MomentViewer extends Component {
           scrollHeight += timeline.children[i].offsetHeight - 1;
         }
       }
+      if (timeline != undefined) {
+        timeline.scrollTop = scrollHeight;
+      }
     }
-    if (timeline != undefined) {
-      timeline.scrollTop = scrollHeight;
-    }
+    
   }
 
   render() {
@@ -268,7 +268,6 @@ export class MomentViewer extends Component {
         {...chordDiagramProps}
       />
     );
-    console.log("MomentViewer Time 2: " + this.state.audio.time)
     return (
       <div className="app-container">
       <AppHeader />
