@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { connect } from "react-redux";
-import { get } from "lodash";
 import Spinner from "react-spinner";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import config from "../../../config";
 import { fromJS } from "immutable";
 import { metrics as setMetrics } from "../../reducers";
 import { AppFooter, AppHeader } from "../App";
-
-import {
-  loadMoments,
-  loadTranscripts,
-  loadAudio,
-  loadMetrics,
-} from "../../actions";
 
 import {
   MomentPlayer,
@@ -26,6 +17,7 @@ import {
   BarDiagram,
   ChordDiagram,
   DashboardDiagram,
+  PlaylistNavBar
 } from "../../components";
 
 import getActiveIndex from "./getActiveIndex";
@@ -44,6 +36,9 @@ export class MomentViewer extends Component {
       audioUrl: "",
       title: "",
       currentMission: null,
+      story: null,
+      storyId: 0,
+      storyMomentList: null
     };
     this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
@@ -84,10 +79,24 @@ export class MomentViewer extends Component {
   async componentDidMount() {
     let path = this.props.location.pathname;
     let momentId;
+    let storyId;
+    let storyObj;
+    let storyMomentList = [];
     if (path.includes("story")) {
       momentId = path.split("/")[5]; // get the momentId
+      storyId = path.split("/")[3];
+      const response = await fetch(
+        `${config.apiEntry}/api/stories/${storyId}`
+      );
+      storyObj = await response.json();
+      let momentList = fromJS(storyObj.momentList);
+      momentList.forEach(m => storyMomentList.push(m));
+      console.log(storyMomentList);
     } else {
       momentId = path.split("/")[3]; // get the momentId
+      storyObj = null;
+      storyId = 0;
+      storyMomentList = [];
     }
 
     const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`);
@@ -120,11 +129,14 @@ export class MomentViewer extends Component {
       audioUrl: url,
       title: t,
       currentMission: mission,
+      story: storyObj,
+      storyId: storyId,
+      storyMomentList: storyMomentList
     });
   }
 
   componentDidUpdate() {
-    let parent = ReactDOM.findDOMNode(this).children[1].children[1].children[0];
+    let parent = ReactDOM.findDOMNode(this).children[2].children[1].children[0];
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
@@ -160,7 +172,6 @@ export class MomentViewer extends Component {
     let loading = this.state.loading;
     let transcripts = this.state.transcript;
     let metrics = setMetrics(this.state.metric);
-    let title = this.state.title;
     let currentMission = this.state.currentMission;
 
     if (loading) {
@@ -176,7 +187,7 @@ export class MomentViewer extends Component {
       return <div>Error fetching moment.</div>;
     }
 
-    let { time, playing } = this.state.audio;
+    let { time } = this.state.audio;
     const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + time * 1000;
 
@@ -268,9 +279,20 @@ export class MomentViewer extends Component {
         {...chordDiagramProps}
       />
     );
+
+    const playlistNavBar = !this.state.storyMomentList ? (<div></div>) : (
+        <PlaylistNavBar
+          currentStory={this.state.story}
+          currentMomentId={this.state.audio.momentId}
+          moments={this.state.storyMomentList}
+        />
+    );
+
+    console.log(this.state.storyMomentList)
     return (
       <div className="app-container">
       <AppHeader />
+        {playlistNavBar}
         <div className="moment-viewer-container">
           <MomentPlayer
             title={this.state.title}
@@ -279,7 +301,6 @@ export class MomentViewer extends Component {
             end={this.state.metEnd}
             time={this.state.audio.time}
             playing={this.state.audio.playing}
-            loadAudio={loadAudio}
             autoplay={autoplay}
             onEnd={onEnd}
             missionLength={missionLength}

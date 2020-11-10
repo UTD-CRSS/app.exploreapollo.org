@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import _ from "lodash";
 import { DayDisplay } from "../../components";
 import { AppFooter, AppHeader } from "../App";
 import config from "../../../config";
-
-import { loadStories } from "../../actions";
 
 import { StoryList } from "../../components";
 import Spinner from "react-spinner";
@@ -16,7 +13,6 @@ export class Apollo11Explorer extends Component {
     this.state = { loading: true, stories: [] };
   }
   async componentDidMount() {
-    let currentStoryId = this.props.match.params.storyId;
     const response = await fetch(`${config.apiEntry}/api/stories`);
     const json = await response.json();
     this.setState({ loading: false, stories: json });
@@ -116,18 +112,3 @@ export class Apollo11Explorer extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { stories } = state;
-  if (stories.loading) {
-    return {
-      loading: stories.loading,
-    };
-  }
-  return {
-    loading: stories.loading,
-    stories: stories.stories,
-  };
-}
-
-export default connect(mapStateToProps, { loadStories })(Apollo11Explorer);

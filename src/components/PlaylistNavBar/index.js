@@ -4,7 +4,13 @@ import { findIndex } from "lodash";
 import { Link } from "react-router-dom";
 
 function getCurrentIndex(moments, currentMomentId) {
-  return findIndex(moments, { id: Number(currentMomentId) });
+  for(let i = 0; i < moments.length; i++)
+  {
+    if (moments[i].get("id") == currentMomentId)
+      return i;
+  }
+  return -1;
+  //return findIndex(moments, { id: Number(currentMomentId) });
 }
 
 function getPrev(moments, currentMomentId, storyId) {
@@ -12,7 +18,7 @@ function getPrev(moments, currentMomentId, storyId) {
   const prevIndex = currentIndex - 1;
 
   if (prevIndex >= 0) {
-    const momentId = moments[prevIndex].id;
+    const momentId = moments[prevIndex].get("id");
     return `/stories/story/${storyId}/moment/${momentId}`;
   }
 
@@ -20,26 +26,30 @@ function getPrev(moments, currentMomentId, storyId) {
 }
 
 function getNext(moments, currentMomentId, storyId) {
-  // deadline lol
-  // todo: dry
   const currentIndex = getCurrentIndex(moments, currentMomentId);
   const nextIndex = currentIndex + 1;
 
+  console.log("cur Index: " + currentIndex)
+  console.log("next index: " + nextIndex);
+
   if (nextIndex < moments.length) {
-    const momentId = moments[nextIndex].id;
+    const momentId = moments[nextIndex].get("id");
     return `/stories/story/${storyId}/moment/${momentId}`;
   }
 
   return false;
 }
 
-export default function PlaylistNavBar({
+export function PlaylistNavBar({
   currentStory,
   currentMomentId,
   moments,
 }) {
+  //console.log(moments[0].get("id"));
   const prevUrl = getPrev(moments, currentMomentId, currentStory.id);
   const nextUrl = getNext(moments, currentMomentId, currentStory.id);
+  console.log(prevUrl);
+  console.log(nextUrl)
   return (
     <div className={styles.playlistNavBar}>
       <Link

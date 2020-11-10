@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { get } from "lodash";
 import { AppFooter, AppHeader } from "../App";
 import "./index.scss";
 
@@ -12,14 +10,7 @@ import config from "../../../config";
 import { fromJS } from "immutable";
 
 
-import {
-  loadMoments,
-  loadTranscripts,
-  loadAudio,
-  loadMetrics,
-} from "../../actions";
-
-import { MomentPlayer, Timeline } from "../../components";
+// import { Timeline } from "../../components"; // Certain Timeline/Transcript components are commented out because they are non-functional currently
 
 import getActiveIndex from "../MomentViewer/getActiveIndex";
 
@@ -27,8 +18,8 @@ export class DJ extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
-      audio: { playing: false, time: 0, momentId: 1 },
+      loading: true,
+      audio: { playing: false, time: 0, momentId: 0 },
       media: [],
       transcript: [],
       metric: [],
@@ -47,21 +38,10 @@ export class DJ extends Component {
     };
   }
 
-  // fetch(props) {
-  //   props.loadAudio({
-  //     time: 0,
-  //     momentId: props.currentMomentId,
-  //     playing: false
-  //   });
-  //   props.loadMoments({momentId: props.currentMomentId});
-  //   props.loadTranscripts({momentId: props.currentMomentId});
-  //   props.loadMetrics({momentId: props.currentMomentId});
-  // }
-
   async componentDidMount() {
-    let momentId = 1;
-    const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`);
+    const moments = await fetch(`${config.apiEntry}/api/moments/random`);
     const momentJson = await moments.json();
+    let momentId = fromJS(momentJson.id);
     const momentMedia = fromJS(momentJson.media);
     const startmet = fromJS(momentJson.metStart);
     const endmet = fromJS(momentJson.metEnd);
@@ -98,11 +78,6 @@ export class DJ extends Component {
     });
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.currentMomentId !== this.props.currentMomentId) {
-  //     this.fetch(nextProps);
-  //   }
-  // }
   playaudio() {
     this.setState({
       audio: {
@@ -124,7 +99,6 @@ export class DJ extends Component {
   }
 
   seek(e) {
-    const seekTime = e.originalArgs[0];
     this.setState({
       audio: {
         playing: this.state.audio.playing,
@@ -196,12 +170,6 @@ export class DJ extends Component {
   }
 
   render() {
-    // const {
-    //   currentMoment,
-    //   currentMission,
-    //   loading,
-    //   currentTranscripts,
-    //   loadAudio,
     const currentMission = this.state.currentMission;
     const { autoplay, onEnd } = this.state;
     if (this.state.loading) {
@@ -226,21 +194,13 @@ export class DJ extends Component {
     const activeIndex = getActiveIndex(transcripts, currentMissionTime);
 
     if (activeIndex >= 0) {
-      transcripts[activeIndex]["active"] = true;
-      const activeMessage = transcripts[activeIndex];
-      transcripts[activeIndex] = activeMessage;
-      transcripts = transcripts[activeIndex];
+      transcripts[activeIndex].active = true;
     }
 
-    const timelineClickEvent = function (startTime) {
-      const seekTime = (startTime - metStart) / 1000;
-      this.state.audio.time = seekTime;
-      // if(metStart) {
-      //   loadAudio({
-      //     time: seekTime
-      //   });
-      //}
-    };
+    // const timelineClickEvent = function (startTime) {
+    //   const seekTime = (startTime - metStart) / 1000;
+    //   this.state.audio.time = seekTime;
+    // };
 
     const { title, audioUrl, metStart, metEnd } = this.state;
     const missionLength = currentMission ? currentMission.length : 1;
@@ -323,7 +283,7 @@ export class DJ extends Component {
             </div>
           </div>
           <div className="dj-viewer">
-            <h2 className="text-center">Landing Sequence Start</h2>
+            <h2 className="text-center">{this.state.title}</h2>
 
             <AudioPlayer>
               <PlayButton
@@ -346,12 +306,12 @@ export class DJ extends Component {
                 }}
               />
             </AudioPlayer>
-            <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
+            {/* <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
               <Timeline
                 timeline={transcripts}
                 clickEvent={timelineClickEvent}
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <AppFooter/>
@@ -359,37 +319,3 @@ export class DJ extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { audio, metrics } = state;
-  const momentId = 1;
-  const { loading, entities } = state.moments;
-  const { moments, missions } = entities;
-  const moment = get(moments, momentId);
-  if (loading || !moment) {
-    return {
-      currentMomentId: momentId,
-      loading: true,
-      currentAudio: audio,
-    };
-  }
-  const transcripts = state.transcripts;
-  const mission = get(missions, moment.mission);
-
-  return {
-    currentMomentId: momentId,
-    loading,
-    currentMission: mission,
-    currentMoment: moment,
-    currentTranscripts: transcripts,
-    currentAudio: audio,
-    metrics,
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadMoments,
-  loadTranscripts,
-  loadAudio,
-  loadMetrics,
-})(DJ);

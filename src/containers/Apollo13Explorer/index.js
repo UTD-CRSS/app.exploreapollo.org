@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import Apollo13logo from "../../../static/Apollo13logo.jpg";
-import { Link } from "react-router-dom";
 import { AppFooter, AppHeader } from "../App";
 import { Apollo13StoryTimeline } from "../../components";
-import { Dashboard } from "../Dashboard";
 
 export class Apollo13Explorer extends Component {
   render() {
     return (
-      //Testing manually adding in navbar/footer
       <div className="app-container">
         <AppHeader />
       

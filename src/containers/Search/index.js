@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Spinner from "react-spinner";
 import { map, isEmpty } from "lodash";
-import { searchMomentsByTranscript } from "../../actions";
 import { MomentCard } from "../../components/StoryTimeline";
 import { AppFooter, AppHeader } from "../App";
-import { fromJS } from "immutable";
 import config from "../../../config";
 
 export class Search extends Component {
@@ -108,16 +105,3 @@ export class Search extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const moments = state.moments;
-
-  return {
-    loading: moments.loading,
-    moments: moments.entities.moments,
-  };
-}
-
-export default connect(mapStateToProps, {
-  searchMomentsByTranscript,
-})(Search);

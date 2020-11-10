@@ -8,7 +8,7 @@ export class LineDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    const { data, containerWidth, containerHeight } = this.props;
+    const { data, containerWidth } = this.props;
 
     //Don't render diagram without data
     if (

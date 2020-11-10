@@ -16,4 +16,5 @@ export { BarDiagram } from "./BarDiagram";
 export { ChordDiagram } from "./ChordDiagram"; 
 export { LessonList } from "./LessonList"; 
 export { DashboardDiagram } from "./DashboardDiagram";
-export {InTheNewsComponent } from "./InTheNewsComponent";
+export { InTheNewsComponent } from "./InTheNewsComponent";
+export { PlaylistNavBar } from "./PlaylistNavBar";
