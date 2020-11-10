@@ -72,7 +72,7 @@ export class Search extends Component {
     return (
       <div className="app-container">
         <AppHeader />
-        <div className="container">
+        <div className="search-container">
           <form>
             <div className="form-group">
               <label htmlFor="searchQuery">

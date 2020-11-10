@@ -335,3 +335,13 @@ s .center {
   margin-left: auto;
   margin-right: auto;
 }
+
+.input-group {
+  z-index: 0;
+}
+
+.search-container {
+  height: 200%;
+  width: 75%;
+  align-self: center;
+}
