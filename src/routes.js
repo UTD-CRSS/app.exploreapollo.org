@@ -10,7 +10,6 @@ import {
   App,
   RandomMoment,
   Settings,
-  PlaylistViewer,
   Search,
   DJ,
   Apollo11Explorer,
@@ -18,7 +17,7 @@ import {
   Game,
   LessonPlans,
   InTheNews,
-  LoadingMoment
+  LoadingMoment,
 } from "./containers";
 
 export default class Routes extends Component {
@@ -30,8 +29,16 @@ export default class Routes extends Component {
         <Route path="/moments/moment/:momentId" component={MomentViewer} />
         <Route exact path="/moments" component={Moments} />
         <Route exact path="/stories/story/:storyId" component={StoryViewer} />
-        <Route exact path="/stories/story/:storyId/moment/:momentId" component={MomentViewer}/>
-        <Route exact path="/stories/story/:storyId/loading/:momentId" component={LoadingMoment}/>
+        <Route
+          exact
+          path="/stories/story/:storyId/moment/:momentId"
+          component={MomentViewer}
+        />
+        <Route
+          exact
+          path="/stories/story/:storyId/loading/:momentId"
+          component={LoadingMoment}
+        />
         <Route path="/search" component={Search} />
         <Route path="/stories" component={Stories} />
         <Route path="/apollo11" component={Apollo11Explorer} />

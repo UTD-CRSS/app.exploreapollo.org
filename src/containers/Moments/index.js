@@ -20,7 +20,7 @@ export class Moments extends Component {
 
     return (
       <div className="app-container">
-      <AppHeader />
+        <AppHeader />
         <div className="moments-container">
           <h1>Moments</h1>
           <MomentList moments={moments} />

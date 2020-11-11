@@ -17,7 +17,7 @@ import {
   BarDiagram,
   ChordDiagram,
   DashboardDiagram,
-  PlaylistNavBar
+  PlaylistNavBar,
 } from "../../components";
 
 import getActiveIndex from "./getActiveIndex";
@@ -38,7 +38,7 @@ export class MomentViewer extends Component {
       currentMission: null,
       story: null,
       storyId: 0,
-      storyMomentList: []
+      storyMomentList: [],
     };
     this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
@@ -49,17 +49,15 @@ export class MomentViewer extends Component {
     //create an infinite loop which will crash the momentViewer. We only experienced this issue on
     //moment 5 for some reason, and adding a tolerance was the simplest way to fix it after
     //attempting other debugging
-    let tolerance = .00000001;
-    if(Math.abs(startTime - this.state.audio.time) < tolerance)
-    {
+    let tolerance = 0.00000001;
+    if (Math.abs(startTime - this.state.audio.time) < tolerance) {
       return;
     }
     let momentMetStart = this.state.metStart;
     let seekTime;
-    if (comp=="player") {
+    if (comp == "player") {
       seekTime = startTime;
-    }
-    else{
+    } else {
       seekTime = (startTime - momentMetStart) / 1000;
     }
     if (momentMetStart) {
@@ -75,7 +73,6 @@ export class MomentViewer extends Component {
     }
   };
 
-
   async componentDidMount() {
     let path = this.props.location.pathname;
     let momentId;
@@ -85,12 +82,10 @@ export class MomentViewer extends Component {
     if (path.includes("story")) {
       momentId = path.split("/")[5]; // get the momentId
       storyId = path.split("/")[3];
-      const response = await fetch(
-        `${config.apiEntry}/api/stories/${storyId}`
-      );
+      const response = await fetch(`${config.apiEntry}/api/stories/${storyId}`);
       storyObj = await response.json();
       let momentList = fromJS(storyObj.momentList);
-      momentList.forEach(m => storyMomentList.push(m));
+      momentList.forEach((m) => storyMomentList.push(m));
     } else {
       momentId = path.split("/")[3]; // get the momentId
       storyObj = null;
@@ -130,7 +125,7 @@ export class MomentViewer extends Component {
       currentMission: mission,
       story: storyObj,
       storyId: storyId,
-      storyMomentList: storyMomentList
+      storyMomentList: storyMomentList,
     });
   }
 
@@ -139,7 +134,8 @@ export class MomentViewer extends Component {
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
-      timeline = parent.children[0].children[0].children[0].children[0].children[1];
+      timeline =
+        parent.children[0].children[0].children[0].children[0].children[1];
       let transcripts = this.state.transcript;
       transcripts.forEach((t) => (t.active = false));
       let activeIndex = getActiveIndex(
@@ -159,14 +155,10 @@ export class MomentViewer extends Component {
         timeline.scrollTop = scrollHeight;
       }
     }
-    
   }
 
   render() {
-    const {
-      onEnd,
-      autoplay,
-    } = this.props;
+    const { onEnd, autoplay } = this.props;
 
     let loading = this.state.loading;
     let transcripts = this.state.transcript;
@@ -180,17 +172,17 @@ export class MomentViewer extends Component {
         moments={this.state.storyMomentList}
         history={this.props.history}
       />
-  );
+    );
 
     if (loading) {
       return (
         <div className="app-container">
           <AppHeader />
-            {playlistNavBar}
-            <div className="text-center lead">
-              <p>Loading moment...</p>
-              <Spinner />
-            </div>
+          {playlistNavBar}
+          <div className="text-center lead">
+            <p>Loading moment...</p>
+            <Spinner />
+          </div>
           <AppFooter />
         </div>
       );
@@ -203,7 +195,6 @@ export class MomentViewer extends Component {
     let { time } = this.state.audio;
     const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + time * 1000;
-
 
     transcripts.forEach((t) => (t.active = false));
     const activeIndex = getActiveIndex(transcripts, currentMissionTime);
@@ -295,7 +286,7 @@ export class MomentViewer extends Component {
 
     return (
       <div className="app-container">
-      <AppHeader />
+        <AppHeader />
         {playlistNavBar}
         <div className="moment-viewer-container">
           <MomentPlayer

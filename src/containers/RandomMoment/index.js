@@ -12,9 +12,7 @@ export class RandomMoment extends Component {
 
   async componentDidMount() {
     const moments = await fetch(`${config.apiEntry}/api/moments/random`);
-    console.log(moments);
     let momentsJson = await moments.json();
-    console.log(momentsJson);
     let momentId = fromJS(momentsJson.id);
     this.props.history.push(`/moments/moment/${momentId}`);
   }

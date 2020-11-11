@@ -9,7 +9,6 @@ import { PlayButton, AudioPlayer } from "../../components/MomentPlayer";
 import config from "../../../config";
 import { fromJS } from "immutable";
 
-
 // import { Timeline } from "../../components"; // Certain Timeline/Transcript components are commented out because they are non-functional currently
 
 import getActiveIndex from "../MomentViewer/getActiveIndex";
@@ -98,7 +97,7 @@ export class DJ extends Component {
     });
   }
 
-  seek(e) {
+  seek() {
     this.setState({
       audio: {
         playing: this.state.audio.playing,
@@ -170,7 +169,7 @@ export class DJ extends Component {
   }
 
   render() {
-    const currentMission = this.state.currentMission;
+    //const currentMission = this.state.currentMission;
     const { autoplay, onEnd } = this.state;
     if (this.state.loading) {
       return (
@@ -202,8 +201,8 @@ export class DJ extends Component {
     //   this.state.audio.time = seekTime;
     // };
 
-    const { title, audioUrl, metStart, metEnd } = this.state;
-    const missionLength = currentMission ? currentMission.length : 1;
+    const { audioUrl } = this.state;
+    //const missionLength = currentMission ? currentMission.length : 1;
 
     const { scPlaying, scTime, scVolume, apolloVolume, crossFade } = this.state;
 
@@ -213,7 +212,7 @@ export class DJ extends Component {
 
     return (
       <div>
-        <AppHeader/>
+        <AppHeader />
         <h1 className="text-center">Apollo 11 DJ</h1>
         <div className="dj-viewer-container">
           <div className="dj-viewer">
@@ -314,7 +313,7 @@ export class DJ extends Component {
             </div> */}
           </div>
         </div>
-        <AppFooter/>
+        <AppFooter />
       </div>
     );
   }

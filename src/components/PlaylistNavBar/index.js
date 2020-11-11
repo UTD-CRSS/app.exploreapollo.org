@@ -3,10 +3,8 @@ import styles from "./index.scss";
 import { Link } from "react-router-dom";
 
 function getCurrentIndex(moments, currentMomentId) {
-  for(let i = 0; i < moments.length; i++)
-  {
-    if (moments[i].get("id") == currentMomentId)
-      return i;
+  for (let i = 0; i < moments.length; i++) {
+    if (moments[i].get("id") == currentMomentId) return i;
   }
   return -1;
   //return findIndex(moments, { id: Number(currentMomentId) });
@@ -40,25 +38,20 @@ export function PlaylistNavBar({
   currentStory,
   currentMomentId,
   moments,
-  history
+  history,
 }) {
-  if(currentStory == null && !history.location.pathname.includes("story") && !history.location.pathname.includes("loading"))
-  {
-    return (
-      <div></div>
-    )
-  }
-  else if (currentStory == null)
-  {
-    return (
-      <h3>
-        Loading...
-      </h3>
-    )
+  if (
+    currentStory == null &&
+    !history.location.pathname.includes("story") &&
+    !history.location.pathname.includes("loading")
+  ) {
+    return <div></div>;
+  } else if (currentStory == null) {
+    return <h3>Loading...</h3>;
   }
   const prevUrl = getPrev(moments, currentMomentId, currentStory.id);
   const nextUrl = getNext(moments, currentMomentId, currentStory.id);
-  
+
   return (
     <div className={styles.playlistNavBar}>
       <Link
@@ -69,17 +62,9 @@ export function PlaylistNavBar({
         <strong>{currentStory.title}</strong>
       </Link>
       <div>
-        {prevUrl && (
-          <Link to={prevUrl}>
-            Previous
-          </Link>
-        )}
+        {prevUrl && <Link to={prevUrl}>Previous</Link>}
         <h1> </h1>
-        {nextUrl && (
-          <Link to={nextUrl}>
-            Next
-          </Link>
-        )}
+        {nextUrl && <Link to={nextUrl}>Next</Link>}
       </div>
     </div>
   );

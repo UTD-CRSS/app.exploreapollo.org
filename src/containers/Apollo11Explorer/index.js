@@ -99,7 +99,7 @@ export class Apollo11Explorer extends Component {
         </div>
       );
     }
-    const url = `/apollo11/`;
+    const url = "/apollo11/";
     return (
       <div className="app-container">
         <AppHeader />

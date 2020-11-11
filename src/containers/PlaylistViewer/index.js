@@ -21,7 +21,6 @@ export class PlaylistViewer extends Component {
     this.state = { loading: true, story: [] };
   }
   async componentDidMount() {
-    console.log(this.props);
     let currentStoryId = this.props.match.params.storyId;
     const response = await fetch(
       `${config.apiEntry}/api/stories/${currentStoryId}`
@@ -41,8 +40,6 @@ export class PlaylistViewer extends Component {
 
     const {loading, story} = this.state;
     const storyId = story.id;
-
-    console.log(story);
 
     if (loading) {
       return (
@@ -71,8 +68,8 @@ export class PlaylistViewer extends Component {
           currentMomentId={currentMomentId}
           moments={moments}
         />
-        {children &&
-          React.cloneElement(children, {
+        {React.children &&
+          React.cloneElement(React.children, {
             autoplay: true,
             onEnd: onEnd.bind(this),
           })}
