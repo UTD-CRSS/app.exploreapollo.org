@@ -38,7 +38,7 @@ export class MomentViewer extends Component {
       currentMission: null,
       story: null,
       storyId: 0,
-      storyMomentList: null
+      storyMomentList: []
     };
     this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
@@ -91,7 +91,6 @@ export class MomentViewer extends Component {
       storyObj = await response.json();
       let momentList = fromJS(storyObj.momentList);
       momentList.forEach(m => storyMomentList.push(m));
-      console.log(storyMomentList);
     } else {
       momentId = path.split("/")[3]; // get the momentId
       storyObj = null;
@@ -174,11 +173,25 @@ export class MomentViewer extends Component {
     let metrics = setMetrics(this.state.metric);
     let currentMission = this.state.currentMission;
 
+    const playlistNavBar = (
+      <PlaylistNavBar
+        currentStory={this.state.story}
+        currentMomentId={this.state.audio.momentId}
+        moments={this.state.storyMomentList}
+        history={this.props.history}
+      />
+  );
+
     if (loading) {
       return (
-        <div className="text-center lead">
-          <p>Loading moment...</p>
-          <Spinner />
+        <div className="app-container">
+          <AppHeader />
+            {playlistNavBar}
+            <div className="text-center lead">
+              <p>Loading moment...</p>
+              <Spinner />
+            </div>
+          <AppFooter />
         </div>
       );
     }
@@ -280,15 +293,6 @@ export class MomentViewer extends Component {
       />
     );
 
-    const playlistNavBar = !this.state.storyMomentList ? (<div></div>) : (
-        <PlaylistNavBar
-          currentStory={this.state.story}
-          currentMomentId={this.state.audio.momentId}
-          moments={this.state.storyMomentList}
-        />
-    );
-
-    console.log(this.state.storyMomentList)
     return (
       <div className="app-container">
       <AppHeader />

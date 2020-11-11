@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./index.scss";
-import { findIndex } from "lodash";
 import { Link } from "react-router-dom";
 
 function getCurrentIndex(moments, currentMomentId) {
@@ -19,7 +18,7 @@ function getPrev(moments, currentMomentId, storyId) {
 
   if (prevIndex >= 0) {
     const momentId = moments[prevIndex].get("id");
-    return `/stories/story/${storyId}/moment/${momentId}`;
+    return `/stories/story/${storyId}/loading/${momentId}`;
   }
 
   return false;
@@ -29,12 +28,9 @@ function getNext(moments, currentMomentId, storyId) {
   const currentIndex = getCurrentIndex(moments, currentMomentId);
   const nextIndex = currentIndex + 1;
 
-  console.log("cur Index: " + currentIndex)
-  console.log("next index: " + nextIndex);
-
   if (nextIndex < moments.length) {
     const momentId = moments[nextIndex].get("id");
-    return `/stories/story/${storyId}/moment/${momentId}`;
+    return `/stories/story/${storyId}/loading/${momentId}`;
   }
 
   return false;
@@ -44,12 +40,25 @@ export function PlaylistNavBar({
   currentStory,
   currentMomentId,
   moments,
+  history
 }) {
-  //console.log(moments[0].get("id"));
+  if(currentStory == null && !history.location.pathname.includes("story") && !history.location.pathname.includes("loading"))
+  {
+    return (
+      <div></div>
+    )
+  }
+  else if (currentStory == null)
+  {
+    return (
+      <h3>
+        Loading...
+      </h3>
+    )
+  }
   const prevUrl = getPrev(moments, currentMomentId, currentStory.id);
   const nextUrl = getNext(moments, currentMomentId, currentStory.id);
-  console.log(prevUrl);
-  console.log(nextUrl)
+  
   return (
     <div className={styles.playlistNavBar}>
       <Link
@@ -61,13 +70,13 @@ export function PlaylistNavBar({
       </Link>
       <div>
         {prevUrl && (
-          <Link to={prevUrl} className="btn btn-default btn-lg">
+          <Link to={prevUrl}>
             Previous
           </Link>
         )}
-        <span> </span>
+        <h1> </h1>
         {nextUrl && (
-          <Link to={nextUrl} className="btn btn-primary btn-lg">
+          <Link to={nextUrl}>
             Next
           </Link>
         )}
