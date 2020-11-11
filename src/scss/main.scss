@@ -89,16 +89,23 @@ footer {
 
 .dashboard-container {
   .panel {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(20, 10, 22, 0.5);
     color: #fff;
     z-index: 1000;
+    padding: 25px;
+    font-weight: bold;
+    border-radius: 15px;
+    border-width: 5px;
+    
 
     & .btn {
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(17, 0, 13, 0.199);
       border-color: #fff;
+      border-radius: 25px;
+      border-width: 2px;
 
       &:hover {
-        background-color: #fff;
+        background-color: rgba(0, 0, 0, 0.651);
         color: #000;
       }
     }
@@ -116,6 +123,7 @@ footer {
 
   li {
     margin-bottom: 0.5em;
+    font-size: 20px;
   }
 }
 
@@ -285,8 +293,9 @@ a:hover {
 .navbtn {
   background-color: #000000;
   color: white;
-  padding: 16px;
-  font-size: 25px;
+  padding: 10px;
+  font-size: 28px;
+  font-weight: bolder;
   border: none;
 }
 .navbtn a:hover {
@@ -296,6 +305,7 @@ a:hover {
 /* The container <div> - needed to position the nav button content */
 .navitem {
   position: relative;
+  padding-top: 20px;
   display: inline-block;
 }
 

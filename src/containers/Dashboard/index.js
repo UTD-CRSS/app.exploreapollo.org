@@ -44,7 +44,7 @@ export class Dashboard extends Component {
               }}
             >
               <div className="panel-body">
-                <h1 style={{ marginTop: 0 }}>Apollo 11</h1>
+                <h1 style={{ marginTop: 1 }}>Apollo 11</h1>
                 <p>One small step for man, one giant leap for mankind.</p>
 
                 <ul className="featured-stories">
@@ -75,13 +75,13 @@ export class Dashboard extends Component {
                 </ul>
 
                 <div style={{ marginTop: "2em" }}>
-                  <Link className="btn btn-lg btn-primary" to="/apollo11">
-                    Launch
-                  </Link>
+                  <button className="btn btn-lg">
+                    <Link to="/apollo11"> Launch!</Link>
+                  </button>
                   <span style={{ padding: "0 1em" }}>or</span>
-                  <Link className="btn btn-lg btn-primary" to="/moments/random">
-                    Surprise Me!
-                  </Link>
+                  <button className="btn btn-lg">
+                    <Link to="/moments/random"> Surprise Me!</Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -143,17 +143,14 @@ export class Dashboard extends Component {
                   </ul>
 
                   <div style={{ marginTop: "2em" }}>
-                    <Link className="btn btn-lg btn-primary" to="/apollo11">
-                      Launch
-                    </Link>
-                    <span style={{ padding: "0 1em" }}>or</span>
-                    <Link
-                      className="btn btn-lg btn-primary"
-                      to="/moments/random"
-                    >
-                      Surprise Me!
-                    </Link>
-                  </div>
+                  <button className="btn btn-lg">
+                    <Link to="/apollo11"> Launch!</Link>
+                  </button>
+                  <span style={{ padding: "0 1em" }}>or</span>
+                  <button className="btn btn-lg">
+                    <Link to="/moments/random"> Surprise Me!</Link>
+                  </button>
+                </div>
                 </div>
               </div>
             </div>

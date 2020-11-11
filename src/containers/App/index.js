@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../../static/ExploreApolloLogo.gif";
 import { Dashboard } from "../Dashboard";
 
 export class AppHeader extends Component {
@@ -7,9 +8,9 @@ export class AppHeader extends Component {
     return (
       <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
         <div className="container-fluid">
-          <Link to="/" className="ExploreApollo">
-            Explore Apollo
-          </Link>
+          <a href="/">
+            <img src={logo} width= "95%" height="95%"/>
+          </a>
           <div className="navitem">
             <button className="navbtn">Missions</button>
             <div className="dropdown-content">
@@ -48,12 +49,15 @@ export class AppHeader extends Component {
               <a href="https://exploreapollo-fearless-steps.herokuapp.com/">
                 Fearless Steps Challenge: Phase 1
               </a>
-              <a href="https://fearless-steps.github.io/ChallengePhase2/Data.html"> Fearless Steps Challenge: Phase 2</a>
+              <a href="https://fearless-steps.github.io/ChallengePhase2/Data.html">
+                {" "}
+                Fearless Steps Challenge: Phase 2
+              </a>
             </div>
           </div>
 
           <div className="navitem">
-            <button className="navbtn">&#9732;</button>
+            <button className="navbtn">&#9733;</button>
             <div className="dropdown-content">
               <a href="/game"> Asteroid Strike </a>
               <a href="/dj"> DJ</a>
