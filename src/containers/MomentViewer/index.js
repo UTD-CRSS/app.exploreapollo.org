@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { connect } from "react-redux";
-import { get } from "lodash";
 import Spinner from "react-spinner";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import config from "../../../config";
 import { fromJS } from "immutable";
 import { metrics as setMetrics } from "../../reducers";
 import { AppFooter, AppHeader } from "../App";
-
-import {
-  loadMoments,
-  loadTranscripts,
-  loadAudio,
-  loadMetrics,
-} from "../../actions";
 
 import {
   MomentPlayer,
@@ -26,6 +17,7 @@ import {
   BarDiagram,
   ChordDiagram,
   DashboardDiagram,
+  PlaylistNavBar,
 } from "../../components";
 
 import getActiveIndex from "./getActiveIndex";
@@ -44,20 +36,30 @@ export class MomentViewer extends Component {
       audioUrl: "",
       title: "",
       currentMission: null,
+      story: null,
+      storyId: 0,
+      storyMomentList: [],
     };
     this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
 
   timelineClickEvent = function (comp, startTime) {
+    //tolerance is to prevent number comparisons from being incorrect due to the very last decimal
+    //because if the startTime and this.state.audio.time are not "equal" then the code will
+    //create an infinite loop which will crash the momentViewer. We only experienced this issue on
+    //moment 5 for some reason, and adding a tolerance was the simplest way to fix it after
+    //attempting other debugging
+    let tolerance = 0.00000001;
+    if (Math.abs(startTime - this.state.audio.time) < tolerance) {
+      return;
+    }
     let momentMetStart = this.state.metStart;
     let seekTime;
-    if (comp=="player") {
+    if (comp == "player") {
       seekTime = startTime;
-    }
-    else{
+    } else {
       seekTime = (startTime - momentMetStart) / 1000;
     }
-    console.log("Seek time: " + seekTime)
     if (momentMetStart) {
       if (this) {
         this.setState({
@@ -71,14 +73,24 @@ export class MomentViewer extends Component {
     }
   };
 
-
   async componentDidMount() {
     let path = this.props.location.pathname;
     let momentId;
+    let storyId;
+    let storyObj;
+    let storyMomentList = [];
     if (path.includes("story")) {
       momentId = path.split("/")[5]; // get the momentId
+      storyId = path.split("/")[3];
+      const response = await fetch(`${config.apiEntry}/api/stories/${storyId}`);
+      storyObj = await response.json();
+      let momentList = fromJS(storyObj.momentList);
+      momentList.forEach((m) => storyMomentList.push(m));
     } else {
       momentId = path.split("/")[3]; // get the momentId
+      storyObj = null;
+      storyId = 0;
+      storyMomentList = [];
     }
 
     const moments = await fetch(`${config.apiEntry}/api/moments/${momentId}`);
@@ -111,15 +123,19 @@ export class MomentViewer extends Component {
       audioUrl: url,
       title: t,
       currentMission: mission,
+      story: storyObj,
+      storyId: storyId,
+      storyMomentList: storyMomentList,
     });
   }
 
   componentDidUpdate() {
-    let parent = ReactDOM.findDOMNode(this).children[2].children[0].children[0];
+    let parent = ReactDOM.findDOMNode(this).children[2].children[1].children[0];
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
-      timeline = parent.children[0].children[0].children[0].children[1];
+      timeline =
+        parent.children[0].children[0].children[0].children[0].children[1];
       let transcripts = this.state.transcript;
       transcripts.forEach((t) => (t.active = false));
       let activeIndex = getActiveIndex(
@@ -135,29 +151,39 @@ export class MomentViewer extends Component {
           scrollHeight += timeline.children[i].offsetHeight - 1;
         }
       }
-    }
-    if (timeline != undefined) {
-      timeline.scrollTop = scrollHeight;
+      if (timeline != undefined) {
+        timeline.scrollTop = scrollHeight;
+      }
     }
   }
 
   render() {
-    const {
-      onEnd,
-      autoplay,
-    } = this.props;
+    const { onEnd, autoplay } = this.props;
 
     let loading = this.state.loading;
     let transcripts = this.state.transcript;
     let metrics = setMetrics(this.state.metric);
-    let title = this.state.title;
     let currentMission = this.state.currentMission;
+
+    const playlistNavBar = (
+      <PlaylistNavBar
+        currentStory={this.state.story}
+        currentMomentId={this.state.audio.momentId}
+        moments={this.state.storyMomentList}
+        history={this.props.history}
+      />
+    );
 
     if (loading) {
       return (
-        <div className="text-center lead">
-          <p>Loading moment...</p>
-          <Spinner />
+        <div className="app-container">
+          <AppHeader />
+          {playlistNavBar}
+          <div className="text-center lead">
+            <p>Loading moment...</p>
+            <Spinner />
+          </div>
+          <AppFooter />
         </div>
       );
     }
@@ -166,7 +192,7 @@ export class MomentViewer extends Component {
       return <div>Error fetching moment.</div>;
     }
 
-    let { time, playing } = this.state.audio;
+    let { time } = this.state.audio;
     const momentMetStart = this.state.metStart;
     const currentMissionTime = momentMetStart + time * 1000;
 
@@ -257,9 +283,11 @@ export class MomentViewer extends Component {
         {...chordDiagramProps}
       />
     );
+
     return (
       <div className="app-container">
-      <AppHeader />
+        <AppHeader />
+        {playlistNavBar}
         <div className="moment-viewer-container">
           <MomentPlayer
             title={this.state.title}
@@ -268,7 +296,6 @@ export class MomentViewer extends Component {
             end={this.state.metEnd}
             time={this.state.audio.time}
             playing={this.state.audio.playing}
-            loadAudio={loadAudio}
             autoplay={autoplay}
             onEnd={onEnd}
             missionLength={missionLength}

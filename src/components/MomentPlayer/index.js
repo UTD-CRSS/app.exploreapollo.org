@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import classNames from "classnames";
 import Wavesurfer from "react-wavesurfer";
 import "./index.scss";
-import { throttle } from "lodash";
 import mediaplay from "../../../node_modules/open-iconic/png/media-play-8x.png";
 import mediapause from "../../../node_modules/open-iconic/png/media-pause-8x.png";
 
@@ -36,15 +34,7 @@ export function AudioPlayer({ children }) {
 }
 
 export function PlayButton({ isPlaying, play, pause }) {
-  // const classes = classNames(
-  //   "glyphicon",
-  //   { "glyphicon-pause": isPlaying },
-  //   { "glyphicon-play": !isPlaying }
-  // );
   const clickFunction = isPlaying ? pause : play;
-  // const iconStyles = {
-  //   fontSize: "4em",
-  // };
   return (
     <div
       style={{ color: "#000" }}
@@ -56,28 +46,8 @@ export function PlayButton({ isPlaying, play, pause }) {
       ) : (
         <img src={mediapause} className="play-pause"></img>
       )}
-      {/* <i testef="playIcon"
-         style={iconStyles}
-         className={classes} /> */}
     </div>
   );
-}
-
-const onPositionChange = throttle(
-  function (loadAudio, e) {
-    const currentTime = e.originalArgs[0];
-    loadAudio({
-      time: currentTime,
-    });
-  },
-  300,
-  { trailing: false }
-);
-
-function setPlaying(loadAudio, playing) {
-  loadAudio({
-    playing,
-  });
 }
 
 export class MomentPlayer extends Component {
@@ -96,16 +66,13 @@ export class MomentPlayer extends Component {
 
   seek(e) {
     const seekTime = e.originalArgs[0];
-    this.setState({ time: seekTime });
     this.state.clickEvent("player",seekTime);
   }
 
   render() {
     const {
       url,
-      //playing,
-      //time,
-      //loadAudio,
+      time,
       onEnd,
       autoplay,
       title,
@@ -113,7 +80,8 @@ export class MomentPlayer extends Component {
       volume,
     } = this.props;
 
-    const { playing, time } = this.state;
+    const { playing } = this.state;
+
     const surferOptions = {
       normalize: true,
     };

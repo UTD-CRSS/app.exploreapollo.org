@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Spinner from "react-spinner";
 
-import { loadStory } from "../../actions";
-
-import PlaylistNavBar from "../../components/PlaylistNavBar";
+import { PlaylistNavBar } from "../../components/PlaylistNavBar";
 
 import { findIndex } from "lodash";
+import config from "../../../config";
 
 function getNextMoment(moments, currentMomentId) {
   const currentIndex = findIndex(moments, { id: Number(currentMomentId) });
@@ -18,24 +16,30 @@ function getNextMoment(moments, currentMomentId) {
 }
 
 export class PlaylistViewer extends Component {
-  componentDidMount() {
-    const { loadStory, currentStoryId } = this.props;
-    console.log(this.props);
-    loadStory({
-      storyId: currentStoryId,
-    });
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, story: [] };
+  }
+  async componentDidMount() {
+    let currentStoryId = this.props.match.params.storyId;
+    const response = await fetch(
+      `${config.apiEntry}/api/stories/${currentStoryId}`
+    );
+    const json = await response.json();
+    this.setState({ loading: false, story: json });
   }
   render() {
-    const {
-      loading,
-      currentStory,
-      currentStoryId,
-      currentMomentId,
-      children,
-      history,
-    } = this.props;
+    // const {
+    //   loading,
+    //   currentStory,
+    //   currentStoryId,
+    //   currentMomentId,
+    //   children,
+    //   history,
+    // } = this.props;
 
-    console.log(this.props);
+    const {loading, story} = this.state;
+    const storyId = story.id;
 
     if (loading) {
       return (
@@ -46,11 +50,13 @@ export class PlaylistViewer extends Component {
       );
     }
 
-    const moments = currentStory.momentList;
+    const moments = story.momentList;
+    const currentMomentId = moments[0].id;
+
     const onEnd = function () {
       const next = getNextMoment(moments, currentMomentId);
       if (next) {
-        const nextUrl = `/stories/story/${currentStoryId}/moment/${next.id}`;
+        const nextUrl = `/stories/story/${storyId}/moment/${next.id}`;
         history.push(nextUrl);
       }
     };
@@ -58,12 +64,12 @@ export class PlaylistViewer extends Component {
     return (
       <div>
         <PlaylistNavBar
-          currentStory={currentStory}
+          currentStory={story}
           currentMomentId={currentMomentId}
           moments={moments}
         />
-        {children &&
-          React.cloneElement(children, {
+        {React.children &&
+          React.cloneElement(React.children, {
             autoplay: true,
             onEnd: onEnd.bind(this),
           })}
@@ -71,24 +77,3 @@ export class PlaylistViewer extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { storyId, momentId } = state.router.params;
-  const story = state.story;
-  if (story.loading) {
-    return {
-      currentStoryId: storyId,
-      loading: story.loading,
-    };
-  }
-  return {
-    currentStoryId: storyId,
-    currentMomentId: momentId,
-    loading: story.loading,
-    currentStory: story,
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadStory,
-})(PlaylistViewer);

@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-//import { connect } from "react-redux";
 import Spinner from "react-spinner";
 import { StoryTimeline } from "../../components";
 import { dummyLandmarks } from "../../utils/dummyData";
 import config from "../../../config";
+import { AppHeader, AppFooter } from "../App";
 
 export class StoryViewer extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { loading: true, story: [] };
   }
   async componentDidMount() {
@@ -30,29 +30,13 @@ export class StoryViewer extends Component {
     }
 
     return (
-      <div>
-        <StoryTimeline story={currentStory} landmarks={dummyLandmarks} />
+      <div className="app-container">
+        <AppHeader />
+        <div>
+          <StoryTimeline story={currentStory} landmarks={dummyLandmarks} />
+        </div>
+        <AppFooter />
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  const { storyId } = state.router.params;
-  const story = state.story;
-  if (story.loading) {
-    return {
-      currentStoryId: storyId,
-      loading: story.loading,
-    };
-  }
-  return {
-    currentStoryId: storyId,
-    loading: story.loading,
-    currentStory: story,
-  };
-}
-
-//export default connect(mapStateToProps, {
-// loadStory
-//})(StoryViewer);

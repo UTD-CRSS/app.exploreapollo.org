@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { LessonPlans } from "../../containers";
+import React from "react";
 
 export function LessonList() {
   return (

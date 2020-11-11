@@ -131,7 +131,6 @@ footer {
 .moment-viewer-container {
   padding: 0 15px;
   z-index: 0;
-
   .moment-player-panel {
     padding: 0 15px;
   }
@@ -345,4 +344,18 @@ s .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.input-group {
+  z-index: 0;
+}
+
+.search-container {
+  height: 200%;
+  width: 75%;
+  align-self: center;
+}
+
+.moments-container {
+  margin-left: 3em;
 }

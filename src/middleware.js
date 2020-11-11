@@ -24,6 +24,7 @@ export function googleAnalytics(store) {
 
   // Return a function handling actions.
   return (next) => (action) => {
+    const isPlaying = !!store.getState().audio.playing || !!action.playing;
     switch (action.type) {
       case ROUTER_DID_CHANGE:
         // Send a page-view.
@@ -38,7 +39,6 @@ export function googleAnalytics(store) {
 
         break;
       case RECEIVE_AUDIO:
-        const isPlaying = !!store.getState().audio.playing || !!action.playing;
         if (isPlaying && action.time) {
           // Audio has started playing, so start sending play time events.
           sendPlayTimeEvent(Math.round(1000 * action.time));
