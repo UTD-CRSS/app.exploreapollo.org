@@ -9,12 +9,11 @@ export function StoryListItem({id, title, description}) {
         <h2 testref="storyTitle">{title}</h2>
         <p className="lead">{description}</p>
         <p>
-          <Link
-            className="btn btn-primary btn-lg"
-            testref="storyLink"
-            to={`/stories/story/${id}`}>
-            Launch
-          </Link>
+          <div style={{ marginTop: "2em" }}>
+            <button className="btn btn-primary btn-lg">
+              <Link to={`/stories/story/${id}`}> Launch</Link>
+            </button>
+          </div>
         </p>
       </div>
     </div>

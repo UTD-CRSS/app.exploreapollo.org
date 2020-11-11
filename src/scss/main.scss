@@ -96,7 +96,6 @@ footer {
     font-weight: bold;
     border-radius: 15px;
     border-width: 5px;
-    
 
     & .btn {
       background-color: rgba(17, 0, 13, 0.199);
@@ -210,6 +209,11 @@ footer {
   }
   .story-timeline-item.story-item {
     z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 200px;
+    width: 100%;
+    align-self: center;
   }
   .story-timeline-item {
     position: relative;

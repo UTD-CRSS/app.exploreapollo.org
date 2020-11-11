@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 import { HumanReadableMs } from "../";
+import mediaplay from "../../../node_modules/open-iconic/png/media-play-2x.png";
 
 function PlayAllButton({ storyId, momentId }) {
   const url = `/stories/story/${storyId}/moment/${momentId}`;
   return (
     <div>
       <div className="story-timeline-play">
-        <Link className="btn btn-lg btn-primary" to={url}>
-          Play All
-          <i className="glyphicon glyphicon-play" />
-        </Link>
+      <div style={{ marginTop: "2em" }}>
+            <button className="btn btn-primary btn-lg">
+              <Link to={url}> Play All</Link>
+            </button>
+          </div>
       </div>
     </div>
   );
@@ -63,9 +65,11 @@ export function MomentCard({ id, storyId, title, metStart, content }) {
           <p className="story-timeline-content">{content}</p>
         </div>
         <div className="story-timeline-play pull-right">
-          <Link to={url} className="btn btn-lg btn-primary">
-            <i className="glyphicon glyphicon-play" />
-          </Link>
+          <div style={{ marginTop: "1em" }}>
+            <button className="btn btn-primary btn-lg">
+              <Link to={url}> <img src={mediaplay}/> </Link>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -138,7 +142,7 @@ export class StoryTimeline extends Component {
         />
         <div className="col-xs-10 col-xs-offset-2">
           <div className="row story-timeline-container">
-            <div className="story-timeline-line"></div>
+            {/* <div className="story-timeline-line"></div> */}
             <div className="col-md-9">{this.renderCards()}</div>
           </div>
         </div>

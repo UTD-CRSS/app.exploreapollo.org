@@ -9,11 +9,11 @@ export class MomentListItem extends Component {
       <div>
         <h2 testref="momentTitle">{title}</h2>
         <p>
-          <Link
-            testref="momentLink"
-            to={`/moments/moment/${id}`}>
-            Launch
-          </Link>
+          <div style={{ marginTop: "2em" }}>
+            <button className="btn btn-primary btn-lg">
+              <Link to={`/moments/moment/${id}`}> Launch</Link>
+            </button>
+          </div>
         </p>
       </div>
     );

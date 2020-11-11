@@ -6,7 +6,7 @@ import { Dashboard } from "../Dashboard";
 export class AppHeader extends Component {
   render() {
     return (
-      <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
+      <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse" >
         <div className="container-fluid">
           <a href="/">
             <img src={logo} width= "95%" height="95%"/>
