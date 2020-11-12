@@ -16,8 +16,10 @@ export class LessonPlans extends Component {
               border-radius = "50px"
             />
         <LessonList />
-        <AppFooter />
+        <br/>
+        
       </div>
+      
     );
   }
 }

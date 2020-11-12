@@ -30,10 +30,10 @@ export class AppHeader extends Component {
               <Link to="/lessons">Lesson Plans</Link>
             </button>
             <div className="dropdown-content">
-              <a href="/lessons/k-2">Cadets (K-2)</a>
-              <a href="/lessons/3-5">Astronauts (3-5)</a>
-              <a href="/lessons/6-8">Spacecraft Pilots (6-8)</a>
-              <a href="/lessons/9-12">Commanders (9-12)</a>
+              <a href="#k-2">Cadets (K-2)</a>
+              <a href="#3-5">Astronauts (3-5)</a>
+              <a href="#6-8">Spacecraft Pilots (6-8)</a>
+              <a href="#9-12">Commanders (9-12)</a>
             </div>
           </div>
 
