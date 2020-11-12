@@ -57,14 +57,6 @@ export class AppHeader extends Component {
           </div>
 
           <div className="navitem">
-            <button className="navbtn">&#9733;</button>
-            <div className="dropdown-content">
-              <a href="/game"> Asteroid Strike </a>
-              <a href="/dj"> DJ</a>
-            </div>
-          </div>
-
-          <div className="navitem">
             <button className="navbtn">
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfyGpbRXC3J2r3yJp_eBeYVmukkHoqkEx4rsSsiIgUxIaaEKw/viewform?usp=sf_link"
@@ -73,6 +65,14 @@ export class AppHeader extends Component {
                 Submit Feedback
               </a>
             </button>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">&#9733;</button>
+            <div className="dropdown-content">
+              <a href="/game"> Asteroid Strike </a>
+              <a href="/dj"> DJ</a>
+            </div>
           </div>
 
           <div className="navitem">
