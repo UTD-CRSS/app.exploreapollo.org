@@ -3,44 +3,37 @@ import React from "react";
 export function LessonList() {
   return (
     <div className="app-container">
-      <h3>
-        Lesson plans are categorized as follows: <br></br>
-        K-2, 3-5, 6-8, and 9-12
-      </h3>
-
-      <button className="SubmitLessonPlanbtn">
+      <h3 className = "center">We would love more ideas and input on engaging lessons for everyone to learn</h3>
+      <button className="btn-primary btn-lg">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfVDLIPM5RjvHuZPaJ8LF3zyR7zBQzZrwXXwWJp7V_4a397sg/viewform?usp=sf_link">
-          {" "}
-          <font color="#000000">
-            {" "}
-            <b>Submit a Lesson Plan here!</b>
-          </font>{" "}
+            <font>Submit a Lesson Plan here!</font>
         </a>
       </button>
+      
 
-      <h4>
+      <h4 className ="center">
         <br></br>
-        <b>K-2:</b>
-        <br></br>History:
-        <button className="k-2histbtn">
+        <b className="center">K-2:</b>
+        <br></br>History: 
+      </h4>
+      <button className="btn-warning btn-lg round-out flex-grow-1">
           <a href="https://drive.google.com/file/d/1-lfODu9I_ClBMptXIyTcItyai_ymXanf/view?usp=sharing">
             {" "}
-            <font color="#000000">Man on the Moon!</font>{" "}
-          </a>
-        </button>   
-      </h4>
-
-      <h4>
-        <br></br>
-        <b>3-5:</b>
-        <br></br>History:
-        <button className="k-2histbtn">
-          <a href="https://drive.google.com/file/d/179IAuqqypsIsOQkuc7H3CJou2RcfnhBg/view?usp=sharing">
-            {" "}
-            <font color="#000000">Teamwork Makes the Dream Work!</font>{" "}
+            <font>Man on the Moon!</font>{" "}
           </a>
         </button>  
+
+      <h4 className ="center">
+        <br></br>
+        <b className="center">3-5:</b>
+        <br></br>History:
       </h4>
+      <button className="btn-info btn-lg round-out flex-grow-1">
+          <a href="https://drive.google.com/file/d/179IAuqqypsIsOQkuc7H3CJou2RcfnhBg/view?usp=sharing">
+            {" "}
+            <font>Teamwork Makes the Dream Work!</font>{" "}
+          </a>
+        </button>  
       <h4>
         <br></br>
         <b>6-8:</b>

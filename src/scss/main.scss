@@ -344,10 +344,14 @@ a:hover {
 .navitem:hover .navbtn {
   background-color: rgb(55, 90, 127);
 }
-s .center {
+.center {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+.round-out {
+  border-radius: 20px;
+  position: relative;
 }
 
 .input-group {
