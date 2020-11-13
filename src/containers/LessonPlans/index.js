@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LessonList } from "../../components";
 import lessonsbanner from "../../../static/LessonPlansImgs/LessonPlansBanner.png";
 import { AppHeader } from "../App";
-//import { AppFooter } from "../App";
+import { AppFooter } from "../App";
 
 export class LessonPlans extends Component {
   render() {
@@ -18,7 +18,11 @@ export class LessonPlans extends Component {
         />
         <LessonList />
         <br />
+        <div className="app-container">
+       <AppFooter />
+       </div>
       </div>
+      
     );
   }
 }

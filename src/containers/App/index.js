@@ -14,6 +14,7 @@ export class AppHeader extends Component {
           <div className="navitem">
             <button className="navbtn">Missions</button>
             <div className="dropdown-content">
+              <a href="/apollo1">Apollo 1</a>
               <a href="/apollo11">Apollo 11</a>
               <a href="/apollo13">Apollo 13</a>
             </div>
