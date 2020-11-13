@@ -2,7 +2,7 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 
-import MomentList, {MomentListItem} from "./index";
+import { MomentList, MomentListItem} from "./index";
 
 describe("MomentList Component", function () {
   it("should display an error message if no moments", function () {

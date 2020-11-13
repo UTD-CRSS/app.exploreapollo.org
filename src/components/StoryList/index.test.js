@@ -2,7 +2,7 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import StoryList, {StoryListItem} from "./index";
+import { StoryList, StoryListItem} from "./index";
 
 describe("StoryList Component", function () {
   it("should display an error message if no stories", function () {

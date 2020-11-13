@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { render } from "enzyme";
 
-import App, {AppHeader} from "./index";
+import { App, AppHeader} from "./index";
 
 class AppWithChild extends Component {
   render () {

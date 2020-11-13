@@ -2,7 +2,7 @@
 import React from "react";
 import { shallow, mount } from "enzyme";
 
-import MomentNote, {MomentNoteItem} from "./index";
+import { MomentNote, MomentNoteItem} from "./index";
 
 describe("MomentNote Component", function() {
   it("shows no notes alert if none", function () {

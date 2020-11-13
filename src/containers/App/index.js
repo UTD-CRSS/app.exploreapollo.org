@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../static/ExploreApolloLogo.gif";
+import { ExploreApolloLogo as logo } from "../../../static/ExploreApolloLogo.gif";
 import { Dashboard } from "../Dashboard";
 
 export class AppHeader extends Component {

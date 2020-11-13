@@ -2,7 +2,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import Dashboard from "./index";
+import { Dashboard } from "./index";
 
 describe("Dashboard Component", function() {
   it("should exist", function() {
