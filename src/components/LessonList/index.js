@@ -97,7 +97,11 @@ export function LessonList() {
         Spacecraft pilots 6-8
       </h3>
       <button className="btn-info btn-lg flex-grow-1 addpadding bolder">
-        <a href=" https://drive.google.com/file/d/1RRJjdASEg_H3fVw0MsC3ENYgdhYLmtkX/view?usp=sharing">
+        <a
+          href=" https://drive.google.com/file/d/1RRJjdASEg_H3fVw0MsC3ENYgdhYLmtkX/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {""}
           <font>History: Lunar Landing! </font>{" "}
         </a>
@@ -127,7 +131,11 @@ export function LessonList() {
         </a>
       </button>
       <button className="btn-primary btn-lg flex-grow-1 addpadding bolder">
-        <a href="https://drive.google.com/file/d/1m4aWDdcCoWHfNRGFJ6vPId-HzG4L-zEF/view?usp=sharing">
+        <a
+          href="https://drive.google.com/file/d/1m4aWDdcCoWHfNRGFJ6vPId-HzG4L-zEF/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {" "}
           <font>Tech: Make your own Lunar Module!</font>{" "}
         </a>
