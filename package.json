@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "test": "karma start test/karma.config.js --single-run",
-    "tdd": "karma start test/karma.config.js",
-    "dev": "node dev-server.js",
+    "test": "jest",
+    "posttest": "npm run lint",
     "lint": "eslint --ext .js *.js src/ test/",
+    "dev": "node dev-server.js",
     "build": "webpack --mode production",
     "webpack-dev": "webpack-dev-server --config=webpack.config.js --mode development --devtool inline-source-map --hot"
   },
@@ -28,13 +28,17 @@
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
+    "amex-jest-preset-react": "^6.1.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "browser-sync": "^2.26.12",
     "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.1",
     "eslint": "^7.9.0",
     "eslint-plugin-react": "^7.20.6",
     "immutable": "^3.8.2",
+    "jest": "^26.6.3",
     "json-loader": "^0.5.7",
     "karma": "^5.2.2",
     "karma-chrome-launcher": "^3.1.0",
@@ -77,6 +81,7 @@
     "node-sass": "^4.14.1",
     "normalizr": "^3.6.0",
     "open-iconic": "^1.1.1",
+    "prop-types": "^15.7.2",
     "qs": "^6.9.4",
     "react": "^16.13.1",
     "react-dimensions": "^1.0.2",
@@ -111,5 +116,16 @@
   },
   "peerDependencies": {
     "@babel/core": "6 | ^7.0.0-0"
+  },
+  "jest": {
+    "preset": "amex-jest-preset-react",
+    "coverageThreshold": {
+      "global": {
+        "statements": 3.85,
+        "branches": 5.45,
+        "functions": 9.13,
+        "lines": 4.03
+      }
+    }
   }
 }
