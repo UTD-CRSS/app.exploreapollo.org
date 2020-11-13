@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.scss";
 
-export function LessonList() {​
+export function LessonList() {
   return (
     <div className="app-container">
       <nav className="navbar navbar-inverse bg-black">
@@ -142,4 +142,4 @@ export function LessonList() {​
       <span className="addpadding"></span>
     </div>
   );
-}​
+}

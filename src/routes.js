@@ -13,6 +13,8 @@ import {
   Search,
   DJ,
   Apollo1Explorer,
+  Apollo5Explorer,
+  Apollo6Explorer, 
   Apollo11Explorer,
   Apollo13Explorer,
   Game,
@@ -43,6 +45,8 @@ export default class Routes extends Component {
         <Route path="/search" component={Search} />
         <Route path="/stories" component={Stories} />
         <Route path="/apollo1" component={Apollo1Explorer} />
+        <Route path="/apollo5" component={Apollo5Explorer} />
+        <Route path="/apollo6" component={Apollo6Explorer} />
         <Route path="/apollo11" component={Apollo11Explorer} />
         <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer} />
         <Route path="/apollo13" component={Apollo13Explorer} />
