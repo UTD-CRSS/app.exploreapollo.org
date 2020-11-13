@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {keys} from "lodash";
 
 export function StoryListItem({id, title, description}) {
@@ -11,7 +10,7 @@ export function StoryListItem({id, title, description}) {
         <p>
           <div style={{ marginTop: "2em" }}>
             <button className="btn btn-primary btn-lg">
-              <Link to={`/stories/story/${id}`}> Launch</Link>
+              <a href={`/stories/story/${id}`}> Launch</a>
             </button>
           </div>
         </p>

@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
 import {keys} from "lodash";
 
 export class MomentListItem extends Component {
@@ -11,7 +10,7 @@ export class MomentListItem extends Component {
         <p>
           <div style={{ marginTop: "2em" }}>
             <button className="btn btn-primary btn-lg">
-              <Link to={`/moments/moment/${id}`}> Launch</Link>
+              <a href={`/moments/moment/${id}`}> Launch</a>
             </button>
           </div>
         </p>

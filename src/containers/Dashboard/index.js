@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 class FeaturedStoryLink extends Component {
   render() {
     return (
-      <Link to={this.props.to} style={{ color: "#fff" }}>
+      <a href={this.props.to} style={{ color: "#fff" }}>
         <i
           className="glyphicon glyphicon-play-circle"
           style={{
@@ -14,7 +13,7 @@ class FeaturedStoryLink extends Component {
           }}
         />
         {this.props.text}
-      </Link>
+      </a>
     );
   }
 }
@@ -76,11 +75,11 @@ export class Dashboard extends Component {
 
                 <div style={{ marginTop: "2em" }}>
                   <button className="btn btn-lg">
-                    <Link to="/apollo11"> Launch!</Link>
+                    <a href="/apollo11"> Launch!</a>
                   </button>
                   <span style={{ padding: "0 1em" }}>or</span>
                   <button className="btn btn-lg">
-                    <Link to="/moments/random"> Surprise Me!</Link>
+                    <a href="/moments/random"> Surprise Me!</a>
                   </button>
                 </div>
               </div>
@@ -144,11 +143,11 @@ export class Dashboard extends Component {
 
                   <div style={{ marginTop: "2em" }}>
                     <button className="btn btn-lg">
-                      <Link to="/apollo11"> Launch!</Link>
+                      <a href="/apollo11"> Launch!</a>
                     </button>
                     <span style={{ padding: "0 1em" }}>or</span>
                     <button className="btn btn-lg">
-                      <Link to="/moments/random"> Surprise Me!</Link>
+                      <a href="/moments/random"> Surprise Me!</a>
                     </button>
                   </div>
                 </div>

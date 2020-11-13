@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Link } from "react-router-dom";
 import { HumanReadableMs } from "../";
 import mediaplay from "../../../node_modules/open-iconic/png/media-play-2x.png";
 
@@ -11,7 +10,7 @@ function PlayAllButton({ storyId, momentId }) {
       <div className="story-timeline-play">
         <div style={{ marginTop: "2em" }}>
           <button className="btn btn-primary btn-lg">
-            <Link to={url}> Play All</Link>
+          <a href={url}> Play All</a>
           </button>
         </div>
       </div>
@@ -67,10 +66,10 @@ export function MomentCard({ id, storyId, title, metStart, content }) {
         <div className="story-timeline-play pull-right">
           <div style={{ marginTop: "1em" }}>
             <button className="btn btn-primary btn-lg">
-              <Link to={url}>
+              <a href={url}>
                 {" "}
                 <img src={mediaplay} />{" "}
-              </Link>
+              </a>
             </button>
           </div>
         </div>
