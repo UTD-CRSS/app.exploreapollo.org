@@ -9,11 +9,11 @@ function PlayAllButton({ storyId, momentId }) {
   return (
     <div>
       <div className="story-timeline-play">
-      <div style={{ marginTop: "2em" }}>
-            <button className="btn btn-primary btn-lg">
-              <Link to={url}> Play All</Link>
-            </button>
-          </div>
+        <div style={{ marginTop: "2em" }}>
+          <button className="btn btn-primary btn-lg">
+            <Link to={url}> Play All</Link>
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -67,7 +67,10 @@ export function MomentCard({ id, storyId, title, metStart, content }) {
         <div className="story-timeline-play pull-right">
           <div style={{ marginTop: "1em" }}>
             <button className="btn btn-primary btn-lg">
-              <Link to={url}> <img src={mediaplay}/> </Link>
+              <Link to={url}>
+                {" "}
+                <img src={mediaplay} />{" "}
+              </Link>
             </button>
           </div>
         </div>

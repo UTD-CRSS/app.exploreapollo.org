@@ -21,13 +21,13 @@ export class Stories extends Component {
     if (this.state.loading) {
       return (
         <div className="app-container">
-        <AppHeader />
+          <AppHeader />
           <div className="text-center lead">
             <p>Loading Stories...</p>
             <Spinner />
           </div>
           <AppFooter />
-      </div>
+        </div>
       );
     }
     const Stories = this.state.stories;

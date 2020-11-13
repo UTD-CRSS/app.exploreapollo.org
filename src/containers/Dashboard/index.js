@@ -143,14 +143,14 @@ export class Dashboard extends Component {
                   </ul>
 
                   <div style={{ marginTop: "2em" }}>
-                  <button className="btn btn-lg">
-                    <Link to="/apollo11"> Launch!</Link>
-                  </button>
-                  <span style={{ padding: "0 1em" }}>or</span>
-                  <button className="btn btn-lg">
-                    <Link to="/moments/random"> Surprise Me!</Link>
-                  </button>
-                </div>
+                    <button className="btn btn-lg">
+                      <Link to="/apollo11"> Launch!</Link>
+                    </button>
+                    <span style={{ padding: "0 1em" }}>or</span>
+                    <button className="btn btn-lg">
+                      <Link to="/moments/random"> Surprise Me!</Link>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

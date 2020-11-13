@@ -45,20 +45,20 @@ export function LessonList() {​
           target="_blank"
           rel="noopener noreferrer"
         >
-          {​" "}​
-          <font>History: Man on the Moon!</font>{​" "}​
+          {" "}
+          <font>History: Man on the Moon!</font>{" "}
         </a>
       </button>
       <button className="btn-primary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Tech: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Tech: Coming Soon</font>{" "}
         </a>
       </button>
       <button className="btn-secondary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Activities: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Activities: Coming Soon</font>{" "}
         </a>
       </button>
 
@@ -74,20 +74,20 @@ export function LessonList() {​
           target="_blank"
           rel="noopener noreferrer"
         >
-          {​" "}​
-          <font>History: Team work makes the dream work!</font>{​" "}​
+          {" "}
+          <font>History: Team work makes the dream work!</font>{" "}
         </a>
       </button>
       <button className="btn-primary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Tech: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Tech: Coming Soon</font>{" "}
         </a>
       </button>
       <button className="btn-secondary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Activities: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Activities: Coming Soon</font>{" "}
         </a>
       </button>
       <span className="addpadding"></span>
@@ -98,20 +98,20 @@ export function LessonList() {​
       </h3>
       <button className="btn-info btn-lg flex-grow-1 addpadding bolder">
         <a href=" https://drive.google.com/file/d/1RRJjdASEg_H3fVw0MsC3ENYgdhYLmtkX/view?usp=sharing">
-          {​""}​
-          <font>History: Lunar Landing! </font>{​" "}​
+          {""}
+          <font>History: Lunar Landing! </font>{" "}
         </a>
       </button>
       <button className="btn-primary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Tech: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Tech: Coming Soon</font>{" "}
         </a>
       </button>
       <button className="btn-secondary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Activities: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Activities: Coming Soon</font>{" "}
         </a>
       </button>
       <span className="addpadding"></span>
@@ -122,20 +122,20 @@ export function LessonList() {​
       </h3>
       <button className="btn-info btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>History: Coming soon</font>{​" "}​
+          {" "}
+          <font>History: Coming soon</font>{" "}
         </a>
       </button>
       <button className="btn-primary btn-lg flex-grow-1 addpadding bolder">
         <a href="https://drive.google.com/file/d/1m4aWDdcCoWHfNRGFJ6vPId-HzG4L-zEF/view?usp=sharing">
-          {​" "}​
-          <font>Tech: Make your own Lunar Module!</font>{​" "}​
+          {" "}
+          <font>Tech: Make your own Lunar Module!</font>{" "}
         </a>
       </button>
       <button className="btn-secondary btn-lg flex-grow-1 addpadding bolder">
         <a href="">
-          {​" "}​
-          <font>Activities: Coming Soon</font>{​" "}​
+          {" "}
+          <font>Activities: Coming Soon</font>{" "}
         </a>
       </button>
       <span className="addpadding"></span>
