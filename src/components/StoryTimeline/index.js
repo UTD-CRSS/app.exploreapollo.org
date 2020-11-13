@@ -10,7 +10,7 @@ function PlayAllButton({ storyId, momentId }) {
       <div className="story-timeline-play">
         <div style={{ marginTop: "2em" }}>
           <button className="btn btn-primary btn-lg">
-          <a href={url}> Play All</a>
+            <a href={url}> Play All</a>
           </button>
         </div>
       </div>

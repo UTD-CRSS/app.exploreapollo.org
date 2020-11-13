@@ -7,13 +7,13 @@ export class MomentListItem extends Component {
     return (
       <div>
         <h2>{title}</h2>
-        <p>
+        <div>
           <div style={{ marginTop: "2em" }}>
             <button className="btn btn-primary btn-lg">
               <a href={`/moments/moment/${id}`}> Launch</a>
             </button>
           </div>
-        </p>
+        </div>
       </div>
     );
   }
