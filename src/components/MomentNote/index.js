@@ -6,13 +6,13 @@ export class MomentNoteItem extends Component {
     const {title, text, image} = this.props;
     return (
       <div>
-        <h1 testref="momentNoteTitle">
+        <h1>
           {title}
         </h1>
         {!!image &&
-          <img testref="momentNoteImage" src={image} />
+          <img src={image} />
         }
-        <p testref="momentNoteText">
+        <p>
           {text}
         </p>
       </div>
@@ -25,7 +25,7 @@ export class MomentNote extends Component {
     const {note} = this.props;
     if (!note || note.length < 1) {
       return (
-        <div testref="errorMessage" className="alert alert-info">No Notes</div>
+        <div className="alert alert-info">No Notes</div>
       );
     }
 
@@ -44,7 +44,7 @@ export class MomentNote extends Component {
   render() {
     const classes = classNames("col-md-6", "moment-note-container");
     return (
-      <div testrefcollection="momentNoteContainer" className={classes}>
+      <div className={classes}>
         {this.renderList()}
       </div>
     );
