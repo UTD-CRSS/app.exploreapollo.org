@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ExploreApolloLogo as logo } from "../../../static/ExploreApolloLogo.gif";
+import logo from "../../../static/ExploreApolloLogo.gif";
 import { Dashboard } from "../Dashboard";
 
 export class AppHeader extends Component {
@@ -38,7 +38,7 @@ export class AppHeader extends Component {
 
           <div className="navitem">
             <button className="navbtn">
-              <a href="/inthenews">In the News</a>
+              <a href="/inthenews" className="inTheNews">In the News</a>
             </button>
           </div>
 

@@ -5,15 +5,15 @@ export function StoryListItem({id, title, description}) {
   return (
     <div className="panel panel-default">
       <div className="panel-body">
-        <h2>{title}</h2>
-        <p className="lead">{description}</p>
-        <p>
-          <div style={{ marginTop: "2em" }}>
+        <h2 style={{ marginTop: "1em"}}>{title}</h2>
+        <div className="lead">{description}</div>
+        <div>
+          <div style={{ marginTop: "1em" }}>
             <button className="btn btn-primary btn-lg">
               <a href={`/stories/story/${id}`}> Launch</a>
             </button>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

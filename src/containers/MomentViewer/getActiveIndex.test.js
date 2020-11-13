@@ -1,6 +1,5 @@
 /*eslint-env jest*/
 import { fromJS } from "immutable";
-
 import getActiveIndex from "./getActiveIndex";
 
 describe("MomentViewer Container", function () {
@@ -14,13 +13,14 @@ describe("MomentViewer Container", function () {
       expect(getActiveIndex([], 1)).toBe(-1);
     });
     it("should find nearest transcript index", function () {
-      const items = fromJS([
+      const items = ([
         {metStart: 100},
         {metStart: 200},
         {metStart: 300},
         {metStart: 400},
         {metStart: 500}
       ]);
+      console.log(items);
       expect(getActiveIndex(items, 250)).toBe(1);
       expect(getActiveIndex(items, 300)).toBe(2);
       expect(getActiveIndex(items, 500)).toBe(4);
