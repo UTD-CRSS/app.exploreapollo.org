@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./index.scss";
-import { Link } from "react-router-dom";
 
 function getCurrentIndex(moments, currentMomentId) {
   for (let i = 0; i < moments.length; i++) {
@@ -54,17 +53,17 @@ export function PlaylistNavBar({
 
   return (
     <div className={styles.playlistNavBar}>
-      <Link
+      <a
         className={styles.storyName}
         style={{ color: "white" }}
         to={`/stories/story/${currentStory.id}`}
       >
         <strong>{currentStory.title}</strong>
-      </Link>
+      </a>
       <div>
-        {prevUrl && <Link to={prevUrl}>Previous</Link>}
+        {prevUrl && <a href={prevUrl}>Previous</a>}
         <h1> </h1>
-        {nextUrl && <Link to={nextUrl}>Next</Link>}
+        {nextUrl && <a href={nextUrl}>Next</a>}
       </div>
     </div>
   );

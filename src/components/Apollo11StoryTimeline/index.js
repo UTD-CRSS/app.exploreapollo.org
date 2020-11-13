@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Link } from "react-router-dom";
 import { HumanReadableMs } from "../";
 
 function PlayAllButton({ storyId, momentId }) {
@@ -8,10 +7,10 @@ function PlayAllButton({ storyId, momentId }) {
   return (
     <div>
       <div className="story-timeline-play">
-        <Link className="btn btn-lg btn-primary" to={url}>
+        <a className="btn btn-lg btn-primary" href={url}>
           Play All
           <i className="glyphicon glyphicon-play" />
-        </Link>
+        </a>
       </div>
     </div>
   );
@@ -61,9 +60,9 @@ export function MomentCard({ id, storyId, title, metStart, content }) {
           <p className="story-timeline-content">{content}</p>
         </div>
         <div className="story-timeline-play pull-right">
-          <Link to={url} className="btn btn-lg btn-primary">
+          <a href={url} className="btn btn-lg btn-primary">
             <i className="glyphicon glyphicon-play" />
-          </Link>
+          </a>
         </div>
       </div>
     </div>
