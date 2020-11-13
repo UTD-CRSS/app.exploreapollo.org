@@ -12,6 +12,7 @@ export { Search } from "./Search";
 export { DJ } from "./DJ";
 export { Game } from "./Game";
 export { Apollo1Explorer } from "./Apollo1Explorer";
+export { Apollo4Explorer } from "./Apollo4Explorer";
 export { Apollo11Explorer } from "./Apollo11Explorer";
 export { Apollo13Explorer } from "./Apollo13Explorer";
 export { LessonPlans } from "./LessonPlans";
