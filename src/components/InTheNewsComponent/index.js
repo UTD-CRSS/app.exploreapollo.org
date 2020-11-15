@@ -6,13 +6,6 @@ export class InTheNewsComponent extends Component {
     return (
       <div className="newsLinks">
         <font></font>
-        {/* <h1>
-          <b>
-            <u>Check out the articles we've been in!</u>
-          </b>
-          <br></br>
-          <br></br>
-        </h1> */}
 
         <h4>
           <b>
