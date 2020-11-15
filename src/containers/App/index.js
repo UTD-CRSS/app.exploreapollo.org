@@ -5,10 +5,10 @@ import { Dashboard } from "../Dashboard";
 export class AppHeader extends Component {
   render() {
     return (
-      <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse" >
+      <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
         <div className="container-fluid">
           <a href="/">
-            <img src={logo} width= "95%" height="95%"/>
+            <img src={logo} width="95%" height="95%" />
           </a>
           <div className="navitem">
             <button className="navbtn">Missions</button>
@@ -36,17 +36,27 @@ export class AppHeader extends Component {
 
           <div className="navitem">
             <button className="navbtn">
-              <a href="/inthenews" className="inTheNews">In the News</a>
+              <a href="/inthenews" className="inTheNews">
+                In the News
+              </a>
             </button>
           </div>
 
           <div className="navitem">
             <button className="navbtn">FSC</button>
             <div className="dropdown-content">
-              <a href="https://exploreapollo-fearless-steps.herokuapp.com/">
+              <a
+                href="https://exploreapollo-fearless-steps.herokuapp.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Fearless Steps Challenge: Phase 1
               </a>
-              <a href="https://fearless-steps.github.io/ChallengePhase2/Data.html">
+              <a
+                href="https://fearless-steps.github.io/ChallengePhase2/Data.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {" "}
                 Fearless Steps Challenge: Phase 2
               </a>
@@ -141,51 +151,53 @@ export class AppFooter extends Component {
   }
 }
 
-export class FloatingFeedbackButton extends Component {
-  constructor() {
-    super();
+// Removed FloatingFeedbackButton because it is a bit spazzy and we aren't sure if we need it 
 
-    this.state = { isVisible: true };
-  }
-  onCloseClicked() {
-    this.setState({ isVisible: false });
-  }
-  render() {
-    const style = {
-      display: this.state.isVisible ? "inline-block" : "none",
-      height: "35px", // fix text blurriness...
-      position: "fixed",
-      top: "50%",
-      right: "-49px",
-      zIndex: 9999,
-      WebkitTransform: "rotate(-90deg)",
-      msTransform: "rotate(-90deg)",
-      transform: "rotate(-90deg)",
-    };
+// export class FloatingFeedbackButton extends Component {
+//   constructor() {
+//     super();
 
-    return (
-      <div className="btn-group" style={style} role="group" aria-label="...">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSedsStMnIh9FFepJ-H_JMW8QOMr3LSUKBfpEIOEzi3p_trk1Q/viewform"
-          target="_blank"
-          className="btn btn-primary"
-        >
-          Feedback
-        </a>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={this.onCloseClicked.bind(this)}
-        >
-          <span
-            className="glyphicon glyphicon-remove"
-            aria-hidden="true"
-          ></span>
-        </button>
-      </div>
-    );
-  }
-}
+//     this.state = { isVisible: true };
+//   }
+//   onCloseClicked() {
+//     this.setState({ isVisible: false });
+//   }
+//   render() {
+//     const style = {
+//       display: this.state.isVisible ? "inline-block" : "none",
+//       height: "35px", // fix text blurriness...
+//       position: "fixed",
+//       top: "50%",
+//       right: "-49px",
+//       zIndex: 9999,
+//       WebkitTransform: "rotate(-90deg)",
+//       msTransform: "rotate(-90deg)",
+//       transform: "rotate(-90deg)",
+//     };
+
+//     return (
+//       <div className="btn-group" style={style} role="group" aria-label="...">
+//         <a
+//           href="https://docs.google.com/forms/d/e/1FAIpQLSfyGpbRXC3J2r3yJp_eBeYVmukkHoqkEx4rsSsiIgUxIaaEKw/viewform?usp=sf_link"
+//           target="_blank"
+//           className="btn btn-primary"
+//         >
+//           Feedback
+//         </a>
+//         <button
+//           type="button"
+//           className="btn btn-danger"
+//           onClick={this.onCloseClicked.bind(this)}
+//         >
+//           <span
+//             className="glyphicon glyphicon-remove"
+//             aria-hidden="true"
+//           ></span>
+//         </button>
+//       </div>
+//     );
+//   }
+// }
 
 export class App extends Component {
   render() {
@@ -193,7 +205,7 @@ export class App extends Component {
       <div className="app-container">
         <AppHeader />
         <Dashboard />
-        <FloatingFeedbackButton />
+        {/* <FloatingFeedbackButton /> */}
         <div className="app-panel">{this.props.children}</div>
         <AppFooter />
       </div>

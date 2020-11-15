@@ -45,7 +45,7 @@ export class LineDiagram extends Component {
     const tickDistance = 0.001 * (rawSingle.value.length - 1);
 
     return (
-      <div style={{ fontFamily: "sans-serif", fontSize: "0.8em" }}>
+      <div style={{ fontFamily: "sans-serif", fontSize: "0.8em"}}>
         <Chart
           width={containerWidth}
           height={containerWidth / 4}
