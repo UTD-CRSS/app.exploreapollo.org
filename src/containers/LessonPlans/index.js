@@ -18,10 +18,8 @@ export class LessonPlans extends Component {
         />
         <LessonList />
         <br />
-        <div className="app-container">
-       </div>
+        <div className="app-container"></div>
       </div>
-      
     );
   }
 }
