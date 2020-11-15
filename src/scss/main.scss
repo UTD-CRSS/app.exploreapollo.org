@@ -184,6 +184,15 @@ footer {
   }
 }
 
+.moment-search-container {
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  align-self: center;
+  padding: 10px 20px 10px 45px;
+}
+
 .story-timeline-container {
   min-height: 100%;
   .story-play-all {
@@ -197,6 +206,7 @@ footer {
       color: darken(rgba(118, 77, 212, 0.801), 30%);
     }
   }
+
   .story-timeline-line {
     z-index: 1;
     position: absolute;
