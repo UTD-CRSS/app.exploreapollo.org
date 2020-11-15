@@ -61,7 +61,7 @@ export class Search extends Component {
         );
 
         return (
-          <div className="story-timeline-container">{searchResultChildren}</div>
+          <div className="moment-search-container">{searchResultChildren}</div>
         );
       }
     };
