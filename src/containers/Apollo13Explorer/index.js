@@ -10,19 +10,24 @@ export class Apollo13Explorer extends Component {
         <AppHeader />
 
         <h4 className="center">
-          <b>"Houston, we've had a problem here."- Apollo 13</b>
+          <div className="titleBanner">
+            <b>"Houston, we've had a problem here." - Apollo 13</b>
+          </div>
         </h4>
 
         <div className="row fastfacts">
           <div className="col-sm-6">
-            <h4>
+            <h3>
               {" "}
               <br></br>
               <b> Fast Facts</b>
               <br></br>
-            </h4>
+              <br></br>
+            </h3>
             <p>
-              <b>Information:</b> <br></br>
+              <h4>
+                <b>Information:</b>
+              </h4>
               1. Astronauts: Jim Lovell, Fred Haise, and Jack Swigert <br></br>
               2. The rocket that carried the astronauts is called the Saturn V.
               This rocket was the heaviest flown rocket by NASA. <br></br>
@@ -31,8 +36,10 @@ export class Apollo13Explorer extends Component {
               is what they were supposed to use when they landed on the moon).{" "}
               <br></br>
               4. This became a very dangerous situation because Aquarius did not
-              have a heat shield. <br></br>
-              <b> Significance: </b> <br></br>
+              have a heat shield. <br></br> <br></br>
+              <h4>
+                <b> Significance: </b>
+              </h4>
               1. This was the most carefully watched mission. <br></br>
               2. The mission was supposed to be the 3rd landing attempt on the
               moon. <br></br>
@@ -42,7 +49,9 @@ export class Apollo13Explorer extends Component {
               created. <br></br>
               5. This mission brought about a very famous quote: "Houston, we
               have a problem." <br></br>
+              <br></br>
             </p>
+
           </div>
           <div className="col-sm-6">
             <img
@@ -53,6 +62,12 @@ export class Apollo13Explorer extends Component {
             />
           </div>
         </div>
+
+        <h4 className="center">
+          <div className="titleBanner">
+            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+          </div>
+        </h4>
 
         <Apollo13StoryTimeline />
         <AppFooter />

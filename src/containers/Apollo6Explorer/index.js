@@ -9,19 +9,24 @@ export class Apollo6Explorer extends Component {
         <AppHeader />
 
         <h4 className="center">
-          <b>Apollo 6</b>
+          <div className="titleBanner">
+            <b>Apollo 6</b>
+          </div>
         </h4>
 
         <div className="row fastfacts">
           <div className="col-sm-6">
-            <h4>
+            <h3>
               {" "}
               <br></br>
               <b> Fast Facts</b>
               <br></br>
-            </h4>
+              <br></br>
+            </h3>
             <p>
-              <b>Information:</b> <br></br>
+              <h4>
+                <b>Information:</b>
+              </h4>
               1. Unmanned space flight<br></br>
               2. This mission wanted to demonstrate structure and thermal
               integrity and compatibility of the launch vehicle and spacecraft.
@@ -29,8 +34,10 @@ export class Apollo6Explorer extends Component {
               3. This mission also wanted to confirm launch loads and dynamic
               characteristics. 4. Lastly, another mission was to evaluate the
               performance of emergency detection systems in closed-loop
-              configuration. <br></br>
-              <b> Significance: </b> <br></br>
+              configuration. <br></br> <br></br>
+              <h4>
+                <b> Significance: </b>
+              </h4>
               This was the second A-type mission of the United States Apollo
               program. <br></br>
               <br></br>
@@ -44,6 +51,13 @@ export class Apollo6Explorer extends Component {
               height="auto"
             />
           </div>
+
+          <h4 className="center">
+          <div className="titleBanner">
+            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+          </div>
+        </h4>
+
         </div>
         <AppFooter />
       </div>

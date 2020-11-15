@@ -119,7 +119,7 @@
       "global": {
         "statements": 3.85,
         "branches": 5.45,
-        "functions": 5.0,
+        "functions": 5,
         "lines": 4.03
       }
     },

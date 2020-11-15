@@ -17,7 +17,6 @@ This project requires Node >=12.8 and npm >=6.X You should install node using [n
 
 1. `npm install` to grab all the goodies
 2. `npm run dev` to start a hot-reloading development server
-3. No step 3
 
 Other useful commands:
 
