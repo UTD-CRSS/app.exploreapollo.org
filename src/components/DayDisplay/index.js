@@ -5,7 +5,6 @@ export class DayDisplay extends Component {
     let imgUrl;
     let label;
     let text;
-    console.log(this.props)
     const url = this.props.url;
     let day = this.props.day;
 
@@ -150,7 +149,7 @@ export class DayDisplay extends Component {
           src={imgUrl}
           style={{ display: "block", width: "100%", margin: "0 auto" }}
         />
-        <h1 style={{marginTop: ".5em"}}>{label}</h1>
+        <h1 style={{ marginTop: ".5em" }}>{label}</h1>
         <p>{text}</p>
       </div>
     );

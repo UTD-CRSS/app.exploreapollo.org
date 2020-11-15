@@ -51,7 +51,6 @@ export class Apollo13Explorer extends Component {
               have a problem." <br></br>
               <br></br>
             </p>
-
           </div>
           <div className="col-sm-6">
             <img
@@ -65,7 +64,9 @@ export class Apollo13Explorer extends Component {
 
         <h4 className="center">
           <div className="titleBanner">
-            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+            <b>
+              <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
+            </b>
           </div>
         </h4>
 

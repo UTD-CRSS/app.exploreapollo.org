@@ -21,8 +21,7 @@ $dj-player-width: ($dj-width - $dj-volume-width) / 2;
 
 .dj-volume-control {
   width: $dj-volume-width;
-  margin-left: 100px;
-  display: flex;
+  display:flex;
   &-sliders {
     display: flex;
   }
