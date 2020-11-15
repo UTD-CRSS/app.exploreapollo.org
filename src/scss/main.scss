@@ -22,7 +22,7 @@ body {
     color: #fff;
 
     &:hover {
-      color: #00abbc;
+      color: rgba(118, 77, 212, 0.801);
     }
   }
 }
@@ -190,11 +190,11 @@ footer {
     font-size: 1.5em;
     font-weight: bold;
     a {
-      color: #25799c;
+      color: rgba(118, 77, 212, 0.801);
     }
     a:hover {
       text-decoration: none;
-      color: darken(#25799c, 30%);
+      color: darken(rgba(118, 77, 212, 0.801), 30%);
     }
   }
   .story-timeline-line {
@@ -281,6 +281,13 @@ footer {
     width: 100%;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
+    background: rgba(118, 77, 212, 0.801);
+    &:hover {
+      background: rgba(137, 103, 216, 0.801);
+    }
+    &:active {
+      background: rgba(137, 103, 216, 0.801);
+    }
   }
 }
 a {
@@ -303,7 +310,7 @@ a:hover {
   border: none;
 }
 .navbtn a:hover {
-  background-color: rgb(55, 90, 127);
+  background-color: rgba(118, 77, 212, 0.801);
 }
 
 /* The container <div> - needed to position the nav button content */
@@ -320,7 +327,7 @@ a:hover {
   background-color: #f1f1f1;
   min-width: 118px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1005;  //To go over dashboards and such
+  z-index: 1005; //To go over dashboards and such
 }
 
 /* Links inside the dropdown */
@@ -343,7 +350,7 @@ a:hover {
 
 /* Change the background color of the nav button when the dropdown content is shown or selected over*/
 .navitem:hover .navbtn {
-  background-color: rgb(55, 90, 127);
+  background-color: rgba(118, 77, 212, 0.801);
 }
 .center {
   display: block;
@@ -371,5 +378,55 @@ a:hover {
 
 .fastfacts {
   margin: 15px;
- font-weight:bolder;
+  font-weight: bolder;
+}
+
+.playlistNavBar {
+  background: rgba(118, 77, 212, 0.801);
+  color: #fff;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  strong {
+    font-size: 1.5em;
+  }
+}
+
+.momentStoryButton {
+  background: rgba(118, 77, 212, 0.801);
+  &:hover {
+    background: rgba(137, 103, 216, 0.801);
+  }
+}
+
+#playlistbutton-prev {
+  border-color: black;
+  border-radius: 1ch;
+  border-width: medium;
+  width: 100px;
+  margin-right: 1em;
+}
+
+#playlistbutton-next {
+  border-color: black;
+  border-radius: 1ch;
+  border-width: medium;
+  width: 100px;
+}
+
+#storylist-itembox {
+  background: rgb(48, 45, 45);
+  padding: 0.25em;
+  margin: 1em;
+  border-radius: 3ch;
+}
+
+#momentlist-itembox {
+  background: rgb(48, 45, 45);
+  padding: 0.25em;
+  margin: 1em;
+  border-radius: 3ch;
 }

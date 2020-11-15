@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 export class DayDisplay extends Component {
   render() {
-    var imgUrl;
-    var label;
-    var text;
+    let imgUrl;
+    let label;
+    let text;
+    console.log(this.props)
     const url = this.props.url;
-    var day = this.props.day;
+    let day = this.props.day;
 
     switch (day) {
       //DT - mstart / mend assume milliseconds from mission start for value.
@@ -85,61 +86,61 @@ export class DayDisplay extends Component {
         <div className="row">
           <div className="col-lg-1 day-btn-col" />
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-info" href={url}>
+            <a className="btn day-btn" href={url}>
               <div className="day-btn-label">Show All</div>
               <div className="day-btn-text">Jul 16-24</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/1")}>
+            <a className="btn day-btn" href={url.concat("day/1")}>
               <div className="day-btn-label">Day 1</div>
               <div className="day-btn-text">Jul 16th</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/2")}>
+            <a className="btn day-btn" href={url.concat("day/2")}>
               <div className="day-btn-label">Day 2</div>
               <div className="day-btn-text">Jul 17th</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/3")}>
+            <a className="btn day-btn" href={url.concat("day/3")}>
               <div className="day-btn-label">Day 3</div>
               <div className="day-btn-text">Jul 18th</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/4")}>
+            <a className="btn day-btn" href={url.concat("day/4")}>
               <div className="day-btn-label">Day 4</div>
               <div className="day-btn-text">Jul 19th</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/5")}>
+            <a className="btn day-btn" href={url.concat("day/5")}>
               <div className="day-btn-label">Day 5</div>
               <div className="day-btn-text">Jul 20th</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/6")}>
+            <a className="btn day-btn" href={url.concat("day/6")}>
               <div className="day-btn-label">Day 6</div>
               <div className="day-btn-text">Jul 21st</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/7")}>
+            <a className="btn day-btn" href={url.concat("day/7")}>
               <div className="day-btn-label">Day 7</div>
               <div className="day-btn-text">Jul 22nd</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/8")}>
+            <a className="btn day-btn" href={url.concat("day/8")}>
               <div className="day-btn-label">Day 8</div>
               <div className="day-btn-text">Jul 23rd</div>
             </a>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn btn-primary" href={url.concat("day/9")}>
+            <a className="btn day-btn" href={url.concat("day/9")}>
               <div className="day-btn-label">Day 9</div>
               <div className="day-btn-text">Jul 24th</div>
             </a>
@@ -149,7 +150,7 @@ export class DayDisplay extends Component {
           src={imgUrl}
           style={{ display: "block", width: "100%", margin: "0 auto" }}
         />
-        <h1>{label}</h1>
+        <h1 style={{marginTop: ".5em"}}>{label}</h1>
         <p>{text}</p>
       </div>
     );

@@ -5,16 +5,18 @@ export class MomentListItem extends Component {
   render() {
     const {id, title} = this.props;
     return (
-      <div>
-        <h2>{title}</h2>
+      <div className="panel panel-default">
+      <div className="panel-body" id="momentlist-itembox">
+        <h2 style={{ marginTop: "1em", marginLeft: "0.5em"}}>{title}</h2>
         <div>
-          <div style={{ marginTop: "2em" }}>
-            <button className="btn btn-primary btn-lg">
+          <div style={{ marginTop: "1em", marginLeft: "1em" }}>
+            <button className="btn btn-lg momentStoryButton" style={{marginBottom: "0.5em"}}>
               <a href={`/moments/moment/${id}`}> Launch</a>
             </button>
           </div>
         </div>
       </div>
+    </div>
     );
   }
 }

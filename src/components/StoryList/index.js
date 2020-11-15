@@ -4,12 +4,12 @@ import {keys} from "lodash";
 export function StoryListItem({id, title, description}) {
   return (
     <div className="panel panel-default">
-      <div className="panel-body">
-        <h2 style={{ marginTop: "1em"}}>{title}</h2>
-        <div className="lead">{description}</div>
+      <div className="panel-body" id="storylist-itembox">
+        <h2 style={{ marginTop: "1em", marginLeft: "0.5em"}}>{title}</h2>
+        <div className="lead" style={{marginLeft: "1em"}}>{description}</div>
         <div>
-          <div style={{ marginTop: "1em" }}>
-            <button className="btn btn-primary btn-lg">
+          <div style={{ marginTop: "1em", marginLeft: "1em" }}>
+            <button className="btn btn-lg momentStoryButton" style={{marginBottom: "0.5em"}}>
               <a href={`/stories/story/${id}`}> Launch</a>
             </button>
           </div>
