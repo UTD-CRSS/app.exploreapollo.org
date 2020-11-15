@@ -10,7 +10,7 @@ export class Apollo5Explorer extends Component {
 
         <h4 className="center">
           <div className="titleBanner">
-            <b>Apollo 5</b>
+            <b>Apollo 5 - Unmanned Space Flight</b>
           </div>
         </h4>
 

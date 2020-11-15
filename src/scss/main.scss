@@ -408,6 +408,9 @@ a:hover {
   border-width: medium;
   width: 100px;
   margin-right: 1em;
+  &:hover {
+    background: rgba(137, 103, 216, 0.801);
+  }
 }
 
 #playlistbutton-next {
@@ -415,6 +418,9 @@ a:hover {
   border-radius: 1ch;
   border-width: medium;
   width: 100px;
+  &:hover {
+    background: rgba(137, 103, 216, 0.801);
+  }
 }
 
 #storylist-itembox {
@@ -435,6 +441,13 @@ a:hover {
 .titleBanner {
   padding: 1em;
   margin: 1.5em;
+  background: rgba(118, 77, 212, 0.801);
+  color: white;
+}
+
+.titleBanner-smaller {
+  padding: 0.5em;
+  margin: 0.5em;
   background: rgba(118, 77, 212, 0.801);
   color: white;
 }
