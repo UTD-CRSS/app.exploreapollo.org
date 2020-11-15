@@ -13,6 +13,10 @@ export class AppHeader extends Component {
           <div className="navitem">
             <button className="navbtn">Missions</button>
             <div className="dropdown-content">
+              <a href="/apollo1">Apollo 1</a>
+              <a href="/apollo4">Apollo 4</a>
+              <a href="/apollo5">Apollo 5</a>
+              <a href="/apollo6">Apollo 6</a>
               <a href="/apollo11">Apollo 11</a>
               <a href="/apollo13">Apollo 13</a>
             </div>
@@ -28,12 +32,6 @@ export class AppHeader extends Component {
             <button className="navbtn">
               <a href="/lessons">Lesson Plans</a>
             </button>
-            <div className="dropdown-content">
-              <a href="#k-2">Cadets (K-2)</a>
-              <a href="#3-5">Astronauts (3-5)</a>
-              <a href="#6-8">Spacecraft Pilots (6-8)</a>
-              <a href="#9-12">Commanders (9-12)</a>
-            </div>
           </div>
 
           <div className="navitem">
@@ -56,14 +54,6 @@ export class AppHeader extends Component {
           </div>
 
           <div className="navitem">
-            <button className="navbtn">&#9733;</button>
-            <div className="dropdown-content">
-              <a href="/game"> Asteroid Strike </a>
-              <a href="/dj"> DJ</a>
-            </div>
-          </div>
-
-          <div className="navitem">
             <button className="navbtn">
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfyGpbRXC3J2r3yJp_eBeYVmukkHoqkEx4rsSsiIgUxIaaEKw/viewform?usp=sf_link"
@@ -72,6 +62,14 @@ export class AppHeader extends Component {
                 Submit Feedback
               </a>
             </button>
+          </div>
+
+          <div className="navitem">
+            <button className="navbtn">&#9733;</button>
+            <div className="dropdown-content">
+              <a href="/game"> Asteroid Strike </a>
+              <a href="/dj"> DJ</a>
+            </div>
           </div>
 
           <div className="navitem">

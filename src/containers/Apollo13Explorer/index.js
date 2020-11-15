@@ -13,7 +13,7 @@ export class Apollo13Explorer extends Component {
           <b>"Houston, we've had a problem here."- Apollo 13</b>
         </h4>
 
-        <div className="row">
+        <div className="row fastfacts">
           <div className="col-sm-6">
             <h4>
               {" "}
