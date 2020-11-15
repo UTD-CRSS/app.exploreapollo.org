@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AppFooter, AppHeader } from "../App";
-import apollo4logo from "../../../static/apollo4logo.jpg";
+//import apollo4logo from "../../../static/apollo4logo.jpg";
 
 export class Apollo4Explorer extends Component {
     render() {
@@ -35,12 +35,12 @@ export class Apollo4Explorer extends Component {
               </p>
             </div>
             <div className="col-sm-6">
-            <img
+            {/* <img
               src={apollo4logo}
               className="apollo4Logo"
               width="auto"
               height="auto"
-            />
+            /> */}
             </div>
           </div>
           <AppFooter/>
