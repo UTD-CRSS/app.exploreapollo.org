@@ -1,17 +1,16 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import _ from "lodash";
-import {Link} from "react-router";
-import {HumanReadableMs} from "../";
+import { HumanReadableMs } from "../";
 
-function PlayAllButton({storyId, momentId}) {
+function PlayAllButton({ storyId, momentId }) {
   const url = `/stories/story/${storyId}/moment/${momentId}`;
   return (
     <div>
       <div className="story-timeline-play">
-        <Link className="btn btn-lg btn-primary" to={url}>
+        <a className="btn btn-lg btn-primary" href={url}>
           Play All
           <i className="glyphicon glyphicon-play" />
-        </Link>
+        </a>
       </div>
     </div>
   );
@@ -30,63 +29,55 @@ export function StoryCard({
   storyId,
   firstMomentId,
   title,
-  description
+  description,
 }) {
   return (
     <div className="jumbotron clearfix">
       <div className="col-sm-6 col-sm-offset-3 story-timeline-item-content">
-        <h2 className="story-timeline-title">
-          {title}
-        </h2>
-        <p className="lead">
-          {description}
-        </p>
-        {showPlayAll && _.isNumber(firstMomentId)
-          ? <PlayAllButton momentId={firstMomentId} storyId={storyId} />
-          : <NoMomentsNotice />}
+        <h2 className="story-timeline-title">{title}</h2>
+        <p className="lead">{description}</p>
+        {showPlayAll && _.isNumber(firstMomentId) ? (
+          <PlayAllButton momentId={firstMomentId} storyId={storyId} />
+        ) : (
+          <NoMomentsNotice />
+        )}
       </div>
     </div>
   );
 }
 
-export function MomentCard({id, storyId, title, metStart, content}) {
+export function MomentCard({ id, storyId, title, metStart, content }) {
   const url = `/stories/story/${storyId}/moment/${id}`;
   return (
     <div className="panel panel-default story-timeline-item story-item">
       <div className="story-timeline-item-node" />
       <div className="panel-body story-timeline-item-content clearfix">
         <div className="pull-left">
-          <div className="story-timeline-title">
-            {title}
-          </div>
+          <div className="story-timeline-title">{title}</div>
           <div className="story-timeline-time">
-            {HumanReadableMs({ms: metStart, date: true})}
+            {HumanReadableMs({ ms: metStart, date: true })}
           </div>
-          <p className="story-timeline-content">
-            {content}
-          </p>
+          <p className="story-timeline-content">{content}</p>
         </div>
         <div className="story-timeline-play pull-right">
-            <Link to={url} className="btn btn-lg btn-primary">
-              <i className="glyphicon glyphicon-play" />
-            </Link>
-          </div>
+          <a href={url} className="btn btn-lg btn-primary">
+            <i className="glyphicon glyphicon-play" />
+          </a>
+        </div>
       </div>
     </div>
   );
 }
 
-export function LandmarkCard({id, title, metStart}) {
+export function LandmarkCard({ id, title, metStart }) {
   return (
-    <div key={title+id}className="story-timeline-item landmark-item">
+    <div key={title + id} className="story-timeline-item landmark-item">
       <div className="story-timeline-item-node"></div>
       <div className="story-timeline-item-content">
         <div>
-          <div className="story-timeline-title">
-            {title}
-          </div>
+          <div className="story-timeline-title">{title}</div>
           <div className="story-timeline-time">
-            {HumanReadableMs({ms: metStart})}
+            {HumanReadableMs({ ms: metStart })}
           </div>
         </div>
       </div>
@@ -94,19 +85,19 @@ export function LandmarkCard({id, title, metStart}) {
   );
 }
 
-export default class Apollo11StoryTimeline extends Component {
+export class Apollo11StoryTimeline extends Component {
   //const {landmarks} = this.props;
-  checkDay(){
+  checkDay() {
     var mstart;
     var mend;
     const day = this.props.missionDay;
 
     let landmarks = []; //TEMPORARY UNTIL WE GET LANDMARKS SORTED OUT :)
     const moments = this.props.story.momentList;
-    const cards = _.sortBy(moments.concat(landmarks), "met_start"); 
+    const cards = _.sortBy(moments.concat(landmarks), "met_start");
 
     var targetcards = [];
-    switch(day){
+    switch (day) {
       case "1":
         mstart = 0;
         mend = 55680000;
@@ -145,31 +136,32 @@ export default class Apollo11StoryTimeline extends Component {
         break;
       default:
         mstart = -746879993;
-        mend = 746879993;    
+        mend = 746879993;
     }
-    
 
     //DT - fills targetcards with moments that start, end or pass through the selected day (e.g. a moment that starts on day 1 then ends on day 4 would register for days 1,2,3, and 4)
-    targetcards = _.filter(
-      cards,function(card){
-        return card == null || (card.met_start != null && ((card.met_start >= mstart && card.met_start <= mend) || (card.met_start < mstart && card.met_end > mstart)));
-      }
-    );  
+    targetcards = _.filter(cards, function (card) {
+      return (
+        card == null ||
+        (card.met_start != null &&
+          ((card.met_start >= mstart && card.met_start <= mend) ||
+            (card.met_start < mstart && card.met_end > mstart)))
+      );
+    });
 
-    if(_.isEmpty(targetcards)){
+    if (_.isEmpty(targetcards)) {
       return (
         <div>
           <div className="panel panel-default story-timeline-item story-item">
-            
             <h3>&nbsp;No moments on this day</h3>
             <h3>&nbsp;</h3>
-          </div> 
+          </div>
           <p>&nbsp;</p>
         </div>
       );
     }
     return targetcards.map((card) => {
-      if(_.has(card, "description")){
+      if (_.has(card, "description")) {
         return (
           <MomentCard
             key={card.id}
@@ -178,7 +170,8 @@ export default class Apollo11StoryTimeline extends Component {
             title={card.title}
             content={card.description}
             metStart={card.met_start}
-            time={card.time} />
+            time={card.time}
+          />
         );
       } else {
         return (
@@ -187,33 +180,35 @@ export default class Apollo11StoryTimeline extends Component {
             id={card.id}
             title={card.title}
             metStart={card.met_start}
-            time={card.time} />
+            time={card.time}
+          />
         );
       }
     });
   }
   render() {
-    const {story} = this.props;
-    const {momentList} = story;
-    
+    const { story } = this.props;
+    const { momentList } = story;
+
     const isMomentListEmpty = _.isEmpty(momentList);
     const showPlayAll = !isMomentListEmpty;
     const firstMomentId = (_.head(momentList) || {}).id;
-    
+
     return (
       <div className="container">
         <div className="story-timeline-container">
           <div>
-            <StoryCard showPlayAll={showPlayAll}
-                   storyId={story.id}
-                   firstMomentId={firstMomentId}
-                   {...story} />  
+            <StoryCard
+              showPlayAll={showPlayAll}
+              storyId={story.id}
+              firstMomentId={firstMomentId}
+              {...story}
+            />
           </div>
-          <h1>&nbsp;</h1>  
+          <h1>&nbsp;</h1>
           {this.checkDay()}
-
-        </div>  
-      </div>  
+        </div>
+      </div>
     );
   }
 }

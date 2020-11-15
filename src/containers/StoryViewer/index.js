@@ -1,54 +1,42 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
 import Spinner from "react-spinner";
-
-import {loadStory} from "../../actions";
-import {StoryTimeline} from "../../components";
-import {dummyLandmarks} from "../../utils/dummyData";
+import { StoryTimeline } from "../../components";
+import { dummyLandmarks } from "../../utils/dummyData";
+import config from "../../../config";
+import { AppHeader, AppFooter } from "../App";
 
 export class StoryViewer extends Component {
-  componentWillMount() {
-    const {loadStory, currentStoryId} = this.props;
-    loadStory({
-      storyId: currentStoryId
-    });
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, story: [] };
+  }
+  async componentDidMount() {
+    let currentStoryId = this.props.match.params.storyId;
+    const response = await fetch(
+      `${config.apiEntry}/api/stories/${currentStoryId}`
+    );
+    const json = await response.json();
+    this.setState({ loading: false, story: json });
   }
   render() {
-    const {loading, currentStory} = this.props;
-    if (loading) {
-      return <div className="text-center lead">
-        <p>Loading Story...</p>
-        <Spinner />
-      </div>;
+    let currentStory = this.state.story;
+    if (this.state.loading) {
+      return (
+        <div className="text-center lead">
+          <p>Loading Story...</p>
+          <Spinner />
+        </div>
+      );
     }
 
     return (
-      <div>
-        <StoryTimeline
-          story={currentStory}
-          landmarks={dummyLandmarks}/>
+      <div className="app-container">
+        <AppHeader />
+        <div>
+          <StoryTimeline story={currentStory} landmarks={dummyLandmarks} />
+        </div>
+        <AppFooter />
       </div>
     );
   }
 }
-
-
-function mapStateToProps(state) {
-  const { storyId } = state.router.params;
-  const story = state.story;
-  if (story.loading) {
-    return {
-      currentStoryId: storyId,
-      loading: story.loading
-    };
-  }
-  return {
-    currentStoryId: storyId,
-    loading: story.loading,
-    currentStory: story
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadStory
-})(StoryViewer);

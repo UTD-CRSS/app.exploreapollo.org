@@ -21,13 +21,16 @@ webpackConfig.entry = [].concat([
   "webpack-hot-middleware/client"
 ], webpackConfig.entry);
 
-webpackConfig.debug = true;
+
 webpackConfig.devtool = "#eval-source-map";
 
 webpackConfig.plugins = [].concat(webpackConfig.plugins, [
-  new webpack.optimize.OccurenceOrderPlugin(),
+  new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoErrorsPlugin()
+  new webpack.NoEmitOnErrorsPlugin(),
+  new webpack.LoaderOptionsPlugin({
+    debug: true
+  })
 ]);
 
 var bundler = webpack(webpackConfig);

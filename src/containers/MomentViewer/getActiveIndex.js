@@ -1,12 +1,17 @@
-import {List} from "immutable";
-
 export default function getActiveIndex(transcripts, currentMissionTime) {
-  if (!List.isList(transcripts) || transcripts.size < 1) {
+  if (transcripts == null || transcripts.length < 1 || currentMissionTime == 0) {
     return -1;
   }
-
-  return transcripts.findLastIndex((value) => {
-    const metStart = value.get("metStart");
-    return currentMissionTime >= metStart;
-  });
+  let i;
+  for(i = 0; i < transcripts.length; i++)
+  {
+    const metStart = transcripts[i].metStart;
+    if(currentMissionTime < metStart)
+    {
+      if(i == 0)
+        return i;
+      return i-1;
+    }
+  }
+  return i-1;
 }

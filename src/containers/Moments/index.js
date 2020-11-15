@@ -1,44 +1,32 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
-
-import {
-  loadMoments
-} from "../../actions";
-
-import {MomentList} from "../../components";
+import React, { Component } from "react";
+import config from "../../../config";
+import { AppHeader, AppFooter } from "../App";
+import { MomentList } from "../../components";
 
 export class Moments extends Component {
-  componentWillMount() {
-    this.props.loadMoments({});
+  constructor(props) {
+    super(props);
+    this.state = { loading: true, moments: [] };
+  }
+
+  async componentDidMount() {
+    const moments = await fetch(`${config.apiEntry}/api/moments`);
+    const momentJson = await moments.json();
+
+    this.setState({ loading: false, moments: momentJson });
   }
   render() {
-    const moments = this.props.moments;
+    const moments = this.state.moments;
 
     return (
-      <div>
-        <h1>Moments</h1>
-        <MomentList moments={moments} />
+      <div className="app-container">
+        <AppHeader />
+        <div className="moments-container">
+          <h1 className="titleBanner-smaller">Moments</h1>
+          <MomentList moments={moments} />
+        </div>
+        <AppFooter />
       </div>
     );
   }
 }
-
-
-function mapStateToProps(state) {
-  const { loading, entities } = state.moments;
-  if (loading) {
-    return {
-      loading
-    };
-  }
-  const { moments } = entities;
-
-  return {
-    loading,
-    moments
-  };
-}
-
-export default connect(mapStateToProps, {
-  loadMoments
-})(Moments);

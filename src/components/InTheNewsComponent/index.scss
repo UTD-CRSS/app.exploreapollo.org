@@ -1,15 +1,14 @@
+.newsLinks {
+  margin-left: 50px;
+  margin-right: 25px;
+  padding-block-start: 5px;
+  position: relative;
+  a {
+    color: #00abbc;
 
-
-.newsLinks{
-    margin-left: 50px;
-    margin-right: 25px;
-    padding-block-start: 5px;
-    a{
-        color:#00abbc; 
-
-        &:hover 
-        {
-            color: #C0C0C0;
-        }
+    &:hover {
+      color: #c0c0c0;
+      position: relative;
     }
+  }
 }

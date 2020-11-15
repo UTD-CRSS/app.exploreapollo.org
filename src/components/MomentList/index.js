@@ -1,32 +1,34 @@
-import React, {Component} from "react";
-import {Link} from "react-router";
-import {keys} from "lodash";
+import React, { Component } from "react";
+import { keys } from "lodash";
 
 export class MomentListItem extends Component {
   render() {
-    const {id, title} = this.props;
+    const { id, title } = this.props;
     return (
-      <div>
-        <h2 testRef="momentTitle">{title}</h2>
-        <p>
-          <Link
-            testRef="momentLink"
-            to={`/moments/moment/${id}`}>
-            Launch
-          </Link>
-        </p>
+      <div className="panel panel-default">
+        <div className="panel-body" id="momentlist-itembox">
+          <h2 style={{ marginTop: "1em", marginLeft: "0.5em" }}>{title}</h2>
+          <div>
+            <div style={{ marginTop: "1em", marginLeft: "1em" }}>
+              <button
+                className="btn btn-lg momentStoryButton"
+                style={{ marginBottom: "0.5em" }}
+              >
+                <a href={`/moments/moment/${id}`}> Launch</a>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-export default class MomentList extends Component {
+export class MomentList extends Component {
   renderList() {
-    const {moments} = this.props;
+    const { moments } = this.props;
     if (!moments || moments.length < 1) {
-      return (
-        <div testRef="errorMessage" className="alert alert-info">No Moments</div>
-      );
+      return <div className="alert alert-info">No Moments</div>;
     }
 
     return keys(moments).map((index) => {
@@ -34,16 +36,13 @@ export default class MomentList extends Component {
         <MomentListItem
           key={moments[index].id}
           id={moments[index].id}
-          title={moments[index].title} />
+          title={moments[index].title}
+        />
       );
     });
   }
 
   render() {
-    return (
-      <div testRefCollection="listContainer">
-        {this.renderList()}
-      </div>
-    );
+    return <div>{this.renderList()}</div>;
   }
 }

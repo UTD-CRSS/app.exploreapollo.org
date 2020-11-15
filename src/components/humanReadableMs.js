@@ -1,7 +1,7 @@
 import React from "react";
 import Moment from "moment";
 
-export default function HumanReadableMs({ms, date, year}) {
+export function HumanReadableMs({ms, date, year}) {
   // this is not correct timezone
   if (typeof ms === "string") {
     ms = parseInt(ms);

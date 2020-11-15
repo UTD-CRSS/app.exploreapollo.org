@@ -14,14 +14,11 @@ rules:
     - 2
     - always
   react/jsx-uses-react: 1
+  react/jsx-uses-vars: 1
 env:
   es6: true
   browser: true
   node: true
 extends: 'eslint:recommended'
-ecmaFeatures:
-  jsx: true
-  experimentalObjectRestSpread: true,
-  modules: true
 plugins:
   - react
