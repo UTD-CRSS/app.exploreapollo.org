@@ -51,6 +51,13 @@ export class Apollo6Explorer extends Component {
               height="auto"
             />
           </div>
+
+          <h4 className="center">
+          <div className="titleBanner">
+            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+          </div>
+        </h4>
+
         </div>
         <AppFooter />
       </div>

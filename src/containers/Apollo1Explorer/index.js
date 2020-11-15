@@ -42,10 +42,9 @@ export class Apollo1Explorer extends Component {
               <h4>
                 <b> Significance: </b>
               </h4>
-              Due to the tragic mission, no mission was ever named Apollo 2 or
-              3. <br></br>
+              Due to the tragic mission, no mission was ever named Apollo 2 or 3. <br></br>
               <br></br>
-            </p>
+              </p>
           </div>
           <div className="col-sm-6">
             <img
@@ -55,6 +54,13 @@ export class Apollo1Explorer extends Component {
               height="auto"
             />
           </div>
+          <h4 className="center">
+          <div className="titleBanner">
+            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+          </div>
+        </h4>
+
+
         </div>
         <AppFooter />
       </div>

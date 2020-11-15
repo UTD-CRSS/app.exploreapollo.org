@@ -49,7 +49,9 @@ export class Apollo13Explorer extends Component {
               created. <br></br>
               5. This mission brought about a very famous quote: "Houston, we
               have a problem." <br></br>
+              <br></br>
             </p>
+
           </div>
           <div className="col-sm-6">
             <img
@@ -60,6 +62,12 @@ export class Apollo13Explorer extends Component {
             />
           </div>
         </div>
+
+        <h4 className="center">
+          <div className="titleBanner">
+            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+          </div>
+        </h4>
 
         <Apollo13StoryTimeline />
         <AppFooter />
