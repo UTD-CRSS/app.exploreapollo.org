@@ -11,9 +11,10 @@ var babelLoader =
   [
     "presets[]=@babel/preset-react",
     "presets[]=@babel/preset-env",
-    "plugins[]=@babel/transform-runtime",
+    "plugins[]=@babel/plugin-transform-runtime",
     "plugins[]=@babel/plugin-syntax-export-default-from",
     "plugins[]=@babel/plugin-proposal-class-properties",
+    "plugins[]=@babel/plugin-syntax-jsx"
   ].join(",");
 
 module.exports = {
@@ -127,6 +128,12 @@ module.exports = {
   },
 
   externals: {
-    ga: "ga",
+    "ga": "ga"
   },
+
+  node: {
+    // nodejs built-in modules used by xmlhttprequest
+    fs: "empty",
+    child_process: "empty"
+  }
 };

@@ -23,7 +23,7 @@ export function TimelineMessage({ name, text, active, startTime, clickEvent }) {
 function TimelineList({ timeline, clickEvent }) {
   if (!timeline || timeline.size < 1) {
     return (
-      <div testref="errorMessage" className="alert alert-info">
+      <div className="alert alert-info">
         No Messages
       </div>
     );
@@ -70,7 +70,7 @@ export class Timeline extends Component {
             }}
           >
             <div className="transcript-panel">
-              <div testrefcollection="timelineContainer" className={classes}>
+              <div className={classes}>
                 <div className="panel-heading">
                   <h3 className="panel-title">Transcript</h3>
                 </div>

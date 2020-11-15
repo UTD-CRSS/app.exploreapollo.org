@@ -42,9 +42,9 @@ export function PlayButton({ isPlaying, play, pause }) {
       onClick={clickFunction}
     >
       {!isPlaying ? (
-        <img src={mediaplay} className="play-pause"></img>
+        <img src={mediaplay} className="play"></img>
       ) : (
-        <img src={mediapause} className="play-pause"></img>
+        <img src={mediapause} className="pause"></img>
       )}
     </div>
   );

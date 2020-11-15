@@ -20,9 +20,5 @@ env:
   browser: true
   node: true
 extends: 'eslint:recommended'
-ecmaFeatures:
-  jsx: true
-  experimentalObjectRestSpread: true,
-  modules: true
 plugins:
   - react

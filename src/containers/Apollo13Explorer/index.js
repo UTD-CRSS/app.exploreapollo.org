@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Apollo13logo from "../../../static/Apollo13logo.jpg";
+import Apollo13logo from "../../../static/Apollo13Logo.jpg";
 import { AppFooter, AppHeader } from "../App";
 import { Apollo13StoryTimeline } from "../../components";
 

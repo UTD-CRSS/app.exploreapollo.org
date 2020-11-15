@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import logo from "../../../static/ExploreApolloLogo.gif";
 import { Dashboard } from "../Dashboard";
 
@@ -25,19 +24,19 @@ export class AppHeader extends Component {
 
           <div className="navitem">
             <button className="navbtn">
-              <Link to="/moments/random">Surprise Me!</Link>
+              <a href="/moments/random">Surprise Me!</a>
             </button>
           </div>
 
           <div className="navitem">
             <button className="navbtn">
-              <Link to="/lessons">Lesson Plans</Link>
+              <a href="/lessons">Lesson Plans</a>
             </button>
           </div>
 
           <div className="navitem">
             <button className="navbtn">
-              <Link to="/inthenews">In the News</Link>
+              <a href="/inthenews" className="inTheNews">In the News</a>
             </button>
           </div>
 
@@ -75,7 +74,7 @@ export class AppHeader extends Component {
 
           <div className="navitem">
             <button className="navbtn">
-              <Link to="/search"> &#x1F50D;</Link>
+              <a href="/search"> &#x1F50D;</a>
             </button>
           </div>
         </div>
@@ -105,13 +104,13 @@ export class AppFooter extends Component {
             <div className="col-sm-4 col-sm-offset-2">
               <ul className="footer-links">
                 <li>
-                  <Link to="/">Home</Link>
+                  <a href="/">Home</a>
                 </li>
                 <li>
-                  <Link to="/apollo11">Apollo 11</Link>
+                  <a href="/apollo11">Apollo 11</a>
                 </li>
                 <li>
-                  <Link to="/moments/random">Surprise Me!</Link>
+                  <a href="/moments/random">Surprise Me!</a>
                 </li>
               </ul>
             </div>
@@ -125,7 +124,7 @@ export class AppFooter extends Component {
                   <a href="https://github.com/UTD-CRSS">GitHub</a>
                 </li>
                 <li>
-                  <Link to="/settings">Settings</Link>
+                  <a href="/settings">Settings</a>
                 </li>
               </ul>
             </div>
