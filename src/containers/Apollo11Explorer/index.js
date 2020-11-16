@@ -8,7 +8,6 @@ import { StoryList } from "../../components";
 import Spinner from "react-spinner";
 
 export class Apollo11Explorer extends Component {
-
   constructor() {
     super();
     this.state = { loading: true, stories: [] };
@@ -105,56 +104,69 @@ export class Apollo11Explorer extends Component {
       <div className="app-container">
         <AppHeader />
         <h4 className="center">
-    <div className="titleBanner">
-      <b>
-        "That's one small step for man, one giant leap for mankind." - Neil Armstrong, Apollo 11
-      </b>
-      </div> 
-  </h4>
-
-  <div className="row fastfacts">
-    <div className="col-sm-6">
-      <h3>
-        {" "}
-        <br></br>
-        <b> Fast Facts</b>
-        <br></br>
-        <br></br>
-      </h3>
-      <p>
-        <h4>
-          <b>Information: </b>
+          <div className="titleBanner">
+            <b>
+              "That's one small step for man, one giant leap for mankind." -
+              Neil Armstrong, Apollo 11
+            </b>
+          </div>
         </h4>
-        1. Astronauts: Neil Armstrong, Buzz Aldrin, and Michael Collins <br></br>
-        2. This was the first manned mission to successfully reach the moon. <br></br>   
-        3. The American flag that was planted on the moon by the astronauts was made by Sears. <br></br>
-        4. Apollo 11 was launched at the same time of the Soviet's Sputnik. <br></br>
-        5. President John F. Kennedy was more interested in the Space Race than he was of what the astronauts would find in space. <br></br>
-        6. When Armstrong, Aldrin, and Collins returned back to Earth, they were placed in quarantine because scientists were inconclusive about space germs entering Earth. <br></br> <br></br>
-        <h4>
-          <b>Significance: </b>
-        </h4>
-        1. Apollo 11 was the first mission to successfully place men on the moon. <br></br>
-        2. Neil Armstrong marked the occasion with his famous quote: "That's one small step for man, 
-        one giant leap for mankind." <br></br> <br></br>
-      </p>
-  </div>
 
-    <div className="col-sm-6">
-      <img
-      src={apollo11logo}
-      className="apollo11logo"
-      width="90%"
-      height="90%"
-      />
-    </div>
-        <div className="container">
-          <DayDisplay day={this.props.location.pathname.split("/")[3]} url={url} />
-          {this.checkDay()}
+        <div className="row fastfacts">
+          <div className="col-sm-6">
+            <h3>
+              {" "}
+              <br></br>
+              <b> Fast Facts</b>
+              <br></br>
+              <br></br>
+            </h3>
+            <p>
+              <h4>
+                <b>Information: </b>
+              </h4>
+              1. Astronauts: Neil Armstrong, Buzz Aldrin, and Michael Collins{" "}
+              <br></br>
+              2. This was the first manned mission to successfully reach the
+              moon. <br></br>
+              3. The American flag that was planted on the moon by the
+              astronauts was made by Sears. <br></br>
+              4. Apollo 11 was launched at the same time of the Soviet's
+              Sputnik. <br></br>
+              5. President John F. Kennedy was more interested in the Space Race
+              than he was of what the astronauts would find in space. <br></br>
+              6. When Armstrong, Aldrin, and Collins returned back to Earth,
+              they were placed in quarantine because scientists were
+              inconclusive about space germs entering Earth. <br></br> <br></br>
+              <h4>
+                <b>Significance: </b>
+              </h4>
+              1. Apollo 11 was the first mission to successfully place men on
+              the moon. <br></br>
+              2. Neil Armstrong marked the occasion with his famous quote:
+              "That's one small step for man, one giant leap for mankind."{" "}
+              <br></br> <br></br>
+            </p>
+          </div>
+
+          <div className="col-sm-6">
+            <img
+              src={apollo11logo}
+              className="apollo11logo"
+              width="90%"
+              height="90%"
+            />
+          </div>
+          <div className="container">
+            <DayDisplay
+              day={this.props.location.pathname.split("/")[3]}
+              url={url}
+            />
+            {this.checkDay()}
+          </div>
+          <AppFooter />
         </div>
-        <AppFooter />
       </div>
-    </div>
     );
   }
 }
