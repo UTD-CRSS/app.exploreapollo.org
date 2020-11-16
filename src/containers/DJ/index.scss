@@ -5,7 +5,8 @@ $dj-player-width: ($dj-width - $dj-volume-width) / 2;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  .moment-viewer-container, .dj-viewer {
+  .moment-viewer-container,
+  .dj-viewer {
     width: $dj-player-width;
     position: relative;
     padding: 0 15px;
@@ -20,6 +21,7 @@ $dj-player-width: ($dj-width - $dj-volume-width) / 2;
 
 .dj-volume-control {
   width: $dj-volume-width;
+  display:flex;
   &-sliders {
     display: flex;
   }

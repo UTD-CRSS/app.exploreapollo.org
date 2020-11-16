@@ -149,7 +149,7 @@ export class Apollo11Explorer extends Component {
       />
     </div>
         <div className="container">
-          <DayDisplay day={1} url={url} />
+          <DayDisplay day={this.props.location.pathname.split("/")[3]} url={url} />
           {this.checkDay()}
         </div>
         <AppFooter />

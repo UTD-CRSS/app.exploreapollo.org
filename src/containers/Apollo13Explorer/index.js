@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Apollo13logo from "../../../static/Apollo13Logo.jpg";
 import { AppFooter, AppHeader } from "../App";
-import { Apollo13StoryTimeline } from "../../components";
+// import { Apollo13StoryTimeline } from "../../components";
 
 export class Apollo13Explorer extends Component {
   render() {
@@ -51,7 +51,6 @@ export class Apollo13Explorer extends Component {
               have a problem." <br></br>
               <br></br>
             </p>
-
           </div>
           <div className="col-sm-6">
             <img
@@ -65,11 +64,13 @@ export class Apollo13Explorer extends Component {
 
         <h4 className="center">
           <div className="titleBanner">
-            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
+            <b>
+              <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
+            </b>
           </div>
         </h4>
 
-        <Apollo13StoryTimeline />
+        {/* <Apollo13StoryTimeline /> */}
         <AppFooter />
       </div>
     );

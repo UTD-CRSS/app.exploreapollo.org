@@ -9,7 +9,7 @@ function PlayAllButton({ storyId, momentId }) {
     <div>
       <div className="story-timeline-play">
         <div style={{ marginTop: "2em" }}>
-          <button className="btn btn-primary btn-lg">
+          <button className="btn btn-lg momentStoryButton">
             <a href={url}> Play All</a>
           </button>
         </div>
@@ -53,19 +53,19 @@ export function MomentCard({ id, storyId, title, metStart, content }) {
     ? `/stories/story/${storyId}/moment/${id}`
     : `/moments/moment/${id}`;
   return (
-    <div className="panel panel-default story-timeline-item story-item">
+    <div className="panel panel-default story-timeline-item story-item" id="momentlist-itembox">
       <div className="story-timeline-item-node" />
       <div className="panel-body story-timeline-item-content clearfix">
-        <div className="pull-left">
+        <div className="float-left" style={{marginLeft:"1em"}}>
           <div className="story-timeline-title">{title}</div>
           <div className="story-timeline-time">
             {HumanReadableMs({ ms: metStart, date: true, year: true })}
           </div>
           <p className="story-timeline-content">{content}</p>
         </div>
-        <div className="story-timeline-play pull-right">
+        <div className="story-timeline-play float-right" style={{marginRight:"1em"}}>
           <div style={{ marginTop: "1em" }}>
-            <button className="btn btn-primary btn-lg">
+            <button className="btn btn-lg momentStoryButton">
               <a href={url}>
                 {" "}
                 <img src={mediaplay} />{" "}

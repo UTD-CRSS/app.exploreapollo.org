@@ -169,7 +169,6 @@ export class DJ extends Component {
   }
 
   render() {
-    //const currentMission = this.state.currentMission;
     const { autoplay, onEnd } = this.state;
     if (this.state.loading) {
       return (
@@ -196,13 +195,7 @@ export class DJ extends Component {
       transcripts[activeIndex].active = true;
     }
 
-    // const timelineClickEvent = function (startTime) {
-    //   const seekTime = (startTime - metStart) / 1000;
-    //   this.state.audio.time = seekTime;
-    // };
-
     const { audioUrl } = this.state;
-    //const missionLength = currentMission ? currentMission.length : 1;
 
     const { scPlaying, scTime, scVolume, apolloVolume, crossFade } = this.state;
 

@@ -22,7 +22,7 @@ export class Moments extends Component {
       <div className="app-container">
         <AppHeader />
         <div className="moments-container">
-          <h1>Moments</h1>
+          <h1 className="titleBanner-smaller">Moments</h1>
           <MomentList moments={moments} />
         </div>
         <AppFooter />

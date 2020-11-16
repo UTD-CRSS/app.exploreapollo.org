@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./index.scss";
+//import styles from "./index.scss";
 
 function getCurrentIndex(moments, currentMomentId) {
   for (let i = 0; i < moments.length; i++) {
@@ -52,18 +52,21 @@ export function PlaylistNavBar({
   const nextUrl = getNext(moments, currentMomentId, currentStory.id);
 
   return (
-    <div className={styles.playlistNavBar}>
-      <a
-        className={styles.storyName}
-        style={{ color: "white" }}
-        to={`/stories/story/${currentStory.id}`}
-      >
+    <div className="playlistNavBar">
+      <a style={{ color: "white" }} href={`/stories/story/${currentStory.id}`}>
         <strong>{currentStory.title}</strong>
       </a>
       <div>
-        {prevUrl && <a href={prevUrl}>Previous</a>}
-        <h1> </h1>
-        {nextUrl && <a href={nextUrl}>Next</a>}
+        {prevUrl && (
+          <button className="btn btn-lg" id="playlistbutton-prev">
+            <a href={prevUrl}>Previous</a>
+          </button>
+        )}
+        {nextUrl && (
+          <button className="btn btn-lg" id="playlistbutton-next">
+            <a href={nextUrl}>Next</a>
+          </button>
+        )}
       </div>
     </div>
   );

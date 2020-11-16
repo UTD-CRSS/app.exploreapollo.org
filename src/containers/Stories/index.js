@@ -35,7 +35,7 @@ export class Stories extends Component {
       <div className="app-container">
         <AppHeader />
         <div className="container">
-          <h1>Stories</h1>
+          <h1 className="titleBanner-smaller">Stories</h1>
           <StoryList stories={Stories} />
         </div>
         <AppFooter />

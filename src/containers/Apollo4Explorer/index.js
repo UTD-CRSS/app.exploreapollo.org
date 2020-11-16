@@ -10,7 +10,7 @@ export class Apollo4Explorer extends Component {
 
         <h4 className="center">
           <div className="titleBanner">
-            <b>Apollo 4</b>
+            <b>Apollo 4 - "All Up" Flight Test</b>
           </div>
         </h4>
 
@@ -44,7 +44,7 @@ export class Apollo4Explorer extends Component {
               This was the first unmanned flight to successfully carry the
               Apollo Command and Service Module into Earth's orbit. <br></br>
               <br></br>
-              </p>
+            </p>
           </div>
           <div className="col-sm-6">
             <img
@@ -54,13 +54,14 @@ export class Apollo4Explorer extends Component {
               height="auto"
             />
           </div>
-          
-          <h4 className="center">
-          <div className="titleBanner">
-            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
-          </div>
-        </h4>
 
+          <h4 className="center">
+            <div className="titleBanner">
+              <b>
+                <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
+              </b>
+            </div>
+          </h4>
         </div>
         <AppFooter />
       </div>

@@ -10,7 +10,7 @@ export class Apollo5Explorer extends Component {
 
         <h4 className="center">
           <div className="titleBanner">
-            <b>Apollo 5</b>
+            <b>Apollo 5 - Unmanned Space Flight</b>
           </div>
         </h4>
 
@@ -49,13 +49,14 @@ export class Apollo5Explorer extends Component {
               height="auto"
             />
           </div>
-          
-          <h4 className="center">
-          <div className="titleBanner">
-            <b><u>AUDIO LAUNCHING INTO ORBIT SOON!</u></b>
-          </div>
-        </h4>
 
+          <h4 className="center">
+            <div className="titleBanner">
+              <b>
+                <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
+              </b>
+            </div>
+          </h4>
         </div>
         <AppFooter />
       </div>

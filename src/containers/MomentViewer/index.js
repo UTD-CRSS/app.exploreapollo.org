@@ -216,7 +216,7 @@ export class MomentViewer extends Component {
     const lineDiagramProps = {
       key: "LineDiagram",
       title: "Line Diagram",
-      containerWidth: 315,
+      containerWidth: 600,
       containerHeight: 315,
     };
     const lineDiagramWidget = metrics.loading ? (
@@ -310,10 +310,12 @@ export class MomentViewer extends Component {
               {slideShowWidget}
               <Tabs>
                 <TabList>
-                  <Tab>LineDiagram</Tab>
-                  <Tab>BarDiagram</Tab>
-                  <Tab>ChordDiagram</Tab>
-                  <Tab>Dashboard</Tab>
+                  <div className="row">
+                    <Tab className="diagramtabs center momentStoryButton">LineDiagram</Tab>
+                    <Tab className="diagramtabs center momentStoryButton">BarDiagram</Tab>
+                    <Tab className="diagramtabs center momentStoryButton">ChordDiagram</Tab>
+                    <Tab className="diagramtabs center momentStoryButton">Dashboard</Tab>
+                  </div>
                 </TabList>
                 <TabPanel>{lineDiagramWidget}</TabPanel>
                 <TabPanel>{barDiagramWidget}</TabPanel>
