@@ -1,6 +1,6 @@
 # app.exploreapollo.org
 
-![NASA](./NASA_logo.png?raw=true)
+![NASA](./static/NASA_logo.png?raw=true)
 
 [![Build Status](https://travis-ci.org/UTD-CRSS/app.exploreapollo.org.svg?branch=master)](https://travis-ci.org/UTD-CRSS/app.exploreapollo.org)
 [![Dependency Status](https://david-dm.org/UTD-CRSS/app.exploreapollo.org.svg)](https://david-dm.org/UTD-CRSS/app.exploreapollo.org)
