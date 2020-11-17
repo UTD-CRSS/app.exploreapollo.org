@@ -1,12 +1,15 @@
-@import '../../node_modules/bootswatch/darkly/bootstrap.css';
-@import '../../node_modules/react-spinner/react-spinner.css';
+@import "../../node_modules/bootswatch/dist/darkly/bootstrap.css";
+@import "../../node_modules/react-spinner/react-spinner.css";
 
-html, body, #houston {
+html,
+body,
+#houston {
   height: 100%;
 }
 
 body {
   background-color: #000 !important;
+  font-family: "Rajdhani", "Orbitron";
 }
 
 .navbar.navbar-default {
@@ -19,9 +22,14 @@ body {
     color: #fff;
 
     &:hover {
-      color: #00abbc;
+      color: rgba(118, 77, 212, 0.801);
     }
   }
+}
+
+.ExploreApollo {
+  font-family: "Orbitron";
+  font-size: 30px;
 }
 
 // App container
@@ -29,7 +37,6 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-
   .app-panel {
     width: 100%;
     flex: 1;
@@ -43,7 +50,7 @@ footer {
   padding: 80px 0 20px 0;
 
   .background {
-    background: url('https://s3.amazonaws.com/exploreapollo-data/static-photos/stars.jpg');
+    background: url("https://s3.amazonaws.com/exploreapollo-data/static-photos/stars.jpg");
     background-position-y: -340px;
     opacity: 0.3;
     position: absolute;
@@ -82,16 +89,22 @@ footer {
 
 .dashboard-container {
   .panel {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(20, 10, 22, 0.5);
     color: #fff;
     z-index: 1000;
+    padding: 25px;
+    font-weight: bold;
+    border-radius: 15px;
+    border-width: 5px;
 
     & .btn {
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(17, 0, 13, 0.199);
       border-color: #fff;
+      border-radius: 25px;
+      border-width: 2px;
 
       &:hover {
-        background-color: #fff;
+        background-color: rgba(0, 0, 0, 0.651);
         color: #000;
       }
     }
@@ -109,13 +122,14 @@ footer {
 
   li {
     margin-bottom: 0.5em;
+    font-size: 20px;
   }
 }
 
 // Viewer cotainer
 .moment-viewer-container {
   padding: 0 15px;
-
+  z-index: 0;
   .moment-player-panel {
     padding: 0 15px;
   }
@@ -123,6 +137,7 @@ footer {
   .timeline-panel {
     margin: 0;
     display: flex;
+    min-height: 500px;
   }
 }
 
@@ -144,7 +159,6 @@ footer {
     overflow-y: auto;
   }
 }
-
 
 .glyphicon.icon-large {
   font-size: 3em;
@@ -170,23 +184,33 @@ footer {
   }
 }
 
+.moment-search-container {
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  align-self: center;
+  padding: 10px 20px 10px 45px;
+}
+
 .story-timeline-container {
   min-height: 100%;
   .story-play-all {
     font-size: 1.5em;
     font-weight: bold;
     a {
-      color: #25799C;
+      color: rgba(118, 77, 212, 0.801);
     }
     a:hover {
       text-decoration: none;
-      color: darken(#25799C, 30%);
+      color: darken(rgba(118, 77, 212, 0.801), 30%);
     }
   }
+
   .story-timeline-line {
     z-index: 1;
     position: absolute;
-    background-color: #A2A2A2;
+    background-color: #a2a2a2;
     top: 0;
     bottom: 0;
     left: 35px;
@@ -196,6 +220,11 @@ footer {
   }
   .story-timeline-item.story-item {
     z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 200px;
+    width: 100%;
+    align-self: center;
   }
   .story-timeline-item {
     position: relative;
@@ -234,32 +263,209 @@ footer {
 
 .fade-to-black {
   &.up {
-    background: linear-gradient(to top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   &.down {
-    background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 }
 
 .day-btn-col {
   padding: 3px 3px 3px 3px;
-  .day-btn-label{
+  .day-btn-label {
     font-size: 1.2em;
   }
-  .day-btn-text{
-    font-size: .8em;
+  .day-btn-text {
+    font-size: 0.8em;
   }
   .day-btn {
     width: 100%;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
+    background: rgba(118, 77, 212, 0.801);
+    &:hover {
+      background: rgba(137, 103, 216, 0.801);
+    }
+    &:active {
+      background: rgba(137, 103, 216, 0.801);
+    }
   }
 }
+a {
+  color: white;
+  text-decoration: none;
+  background-color: transparent;
+}
+a:hover {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+/* Dropdown Button */
+.navbtn {
+  background-color: #000000;
+  color: white;
+  padding: 10px;
+  font-size: 28px;
+  font-weight: bolder;
+  border: none;
+}
+.navbtn a:hover {
+  background-color: rgba(118, 77, 212, 0.801);
+}
 
+/* The container <div> - needed to position the nav button content */
+.navitem {
+  position: relative;
+  padding-top: 20px;
+  display: inline-block;
+}
 
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 118px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1005; //To go over dashboards and such
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: rgb(151, 180, 211);
+}
+
+/* Show the dropdown menu on hover */
+.navitem:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the nav button when the dropdown content is shown or selected over*/
+.navitem:hover .navbtn {
+  background-color: rgba(118, 77, 212, 0.801);
+}
 .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+.round-out {
+  border-radius: 20px;
+  position: relative;
+}
+
+.input-group {
+  z-index: 0;
+}
+
+.search-container {
+  height: 200%;
+  width: 75%;
+  align-self: center;
+}
+
+.moments-container {
+  margin-left: 3em;
+}
+
+.fastfacts {
+  margin: 15px;
+  font-weight: bolder;
+}
+
+.diagramtabs {
+  margin: 15px;
+  margin-left: 40px;
+  font-weight: bolder;
+  padding: 0.5em;
+  border-radius: 1ch;
+}
+
+.playlistNavBar {
+  background: rgba(118, 77, 212, 0.801);
+  color: #fff;
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  strong {
+    font-size: 1.5em;
+  }
+}
+
+.momentStoryButton {
+  background: rgba(118, 77, 212, 0.801);
+  &:hover {
+    background: rgba(137, 103, 216, 0.801);
+  }
+}
+
+#playlistbutton-prev {
+  border-color: black;
+  border-radius: 1ch;
+  border-width: medium;
+  width: 100px;
+  margin-right: 1em;
+  &:hover {
+    background: rgba(137, 103, 216, 0.801);
+  }
+}
+
+#playlistbutton-next {
+  border-color: black;
+  border-radius: 1ch;
+  border-width: medium;
+  width: 100px;
+  &:hover {
+    background: rgba(137, 103, 216, 0.801);
+  }
+}
+
+#storylist-itembox {
+  background: rgb(48, 45, 45);
+  padding: 0.25em;
+  margin: 1em;
+  border-radius: 3ch;
+}
+
+#momentlist-itembox {
+  background: rgb(48, 45, 45);
+  padding: 0.25em;
+  margin: 1em;
+  border-radius: 3ch;
+  font-weight: bolder;
+}
+
+.titleBanner {
+  padding: 1em;
+  margin: 1.5em;
+  background: rgba(118, 77, 212, 0.801);
+  color: white;
+}
+
+.titleBanner-smaller {
+  padding: 0.5em;
+  margin: 0.5em;
+  background: rgba(118, 77, 212, 0.801);
+  color: white;
 }

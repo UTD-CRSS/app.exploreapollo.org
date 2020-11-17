@@ -4,7 +4,7 @@ import Dimensions from "react-dimensions";
 import {Chart, Bars, Ticks, Layer, Animate, Pies, Transform} from "rumble-charts";
 import * as D3 from "d3";
 
-class DashboardDiagram extends Component {
+export class DashboardDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {

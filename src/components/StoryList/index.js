@@ -1,21 +1,19 @@
 import React from "react";
-import {Link} from "react-router";
 import {keys} from "lodash";
 
 export function StoryListItem({id, title, description}) {
   return (
     <div className="panel panel-default">
-      <div className="panel-body">
-        <h2 testRef="storyTitle">{title}</h2>
-        <p className="lead">{description}</p>
-        <p>
-          <Link
-            className="btn btn-primary btn-lg"
-            testRef="storyLink"
-            to={`/stories/story/${id}`}>
-            Launch
-          </Link>
-        </p>
+      <div className="panel-body" id="storylist-itembox">
+        <h2 style={{ marginTop: "1em", marginLeft: "0.5em"}}>{title}</h2>
+        <div className="lead" style={{marginLeft: "1em"}}>{description}</div>
+        <div>
+          <div style={{ marginTop: "1em", marginLeft: "1em" }}>
+            <button className="btn btn-lg momentStoryButton" style={{marginBottom: "0.5em"}}>
+              <a href={`/stories/story/${id}`}> Launch</a>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -24,7 +22,7 @@ export function StoryListItem({id, title, description}) {
 function renderStoryListItems(stories) {
   if (!stories || stories.length < 1) {
     return (
-      <div testRef="errorMessage" className="alert alert-info">
+      <div className="alert alert-info">
         No Stories
       </div>
     );
@@ -38,9 +36,9 @@ function renderStoryListItems(stories) {
   });
 }
 
-export default function StoryList({stories}) {
+export function StoryList({stories}) {
   return (
-    <div testRefCollection="storyListContainer">
+    <div>
       {renderStoryListItems(stories)}
     </div>
   );

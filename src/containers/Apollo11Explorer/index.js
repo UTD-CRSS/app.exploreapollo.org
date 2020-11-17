@@ -1,27 +1,31 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
+import React, { Component } from "react";
 import _ from "lodash";
-import {DayDisplay} from "../../components";
-
-import {
-  loadStories
-} from "../../actions";
-
-import {StoryList} from "../../components";
+import { DayDisplay } from "../../components";
+import { AppFooter, AppHeader } from "../App";
+import config from "../../../config";
+import apollo11logo from "../../../static/apollo11logo.jpg";
+import { StoryList } from "../../components";
 import Spinner from "react-spinner";
 
 export class Apollo11Explorer extends Component {
-  componentWillMount() {
-    this.props.loadStories();
+  constructor() {
+    super();
+    this.state = { loading: true, stories: [] };
   }
-  checkDay(){
+  async componentDidMount() {
+    const response = await fetch(`${config.apiEntry}/api/stories`);
+    const json = await response.json();
+    this.setState({ loading: false, stories: json });
+  }
+
+  checkDay() {
     var mstart;
     var mend;
-    const day = this.props.params.missionDay;
-    const stories = _.sortBy(this.props.stories, "met_start");
-
+    const stories = _.sortBy(this.state.stories, "met_start");
+    let tempUrl = this.props.location.pathname;
+    const day = tempUrl.split("/")[3];
     var targetstories = [];
-    switch(day){
+    switch (day) {
       case "1":
         mstart = 0;
         mend = 55680000;
@@ -63,13 +67,16 @@ export class Apollo11Explorer extends Component {
         mend = 746879993;
     }
 
-    targetstories = _.filter(
-      stories,function(story){
-        return day == null || (story.met_start != null && ((story.met_start >= mstart && story.met_start <= mend) || (story.met_start < mstart && story.met_end > mstart)));
-      }
-    );
+    targetstories = _.filter(stories, function (story) {
+      return (
+        day == null ||
+        (story.met_start != null &&
+          ((story.met_start >= mstart && story.met_start <= mend) ||
+            (story.met_start < mstart && story.met_end > mstart)))
+      );
+    });
 
-    if(_.isEmpty(targetstories)){
+    if (_.isEmpty(targetstories)) {
       return (
         <div>
           <div className="panel panel-default story-timeline-item story-item">
@@ -79,10 +86,8 @@ export class Apollo11Explorer extends Component {
           <p>&nbsp;</p>
         </div>
       );
-    }else{
-      return (
-        <StoryList stories={targetstories}/>
-      );
+    } else {
+      return <StoryList stories={targetstories} />;
     }
   }
   render() {
@@ -94,27 +99,74 @@ export class Apollo11Explorer extends Component {
         </div>
       );
     }
-    const url = `/apollo11/`;
+    const url = "/apollo11/";
     return (
-      <div className="container">
-        <DayDisplay day={this.props.params.missionDay} url={url}/>
-        {this.checkDay()}
+      <div className="app-container">
+        <AppHeader />
+        <h4 className="center">
+          <div className="titleBanner">
+            <b>
+              "That's one small step for man, one giant leap for mankind." -
+              Neil Armstrong, Apollo 11
+            </b>
+          </div>
+        </h4>
+
+        <div className="row fastfacts">
+          <div className="col-sm-6">
+            <h3>
+              {" "}
+              <br></br>
+              <b> Fast Facts</b>
+              <br></br>
+              <br></br>
+            </h3>
+            <p>
+              <h4>
+                <b>Information: </b>
+              </h4>
+              1. Astronauts: Neil Armstrong, Buzz Aldrin, and Michael Collins{" "}
+              <br></br>
+              2. This was the first manned mission to successfully reach the
+              moon. <br></br>
+              3. The American flag that was planted on the moon by the
+              astronauts was made by Sears. <br></br>
+              4. Apollo 11 was launched at the same time of the Soviet's
+              Sputnik. <br></br>
+              5. President John F. Kennedy was more interested in the Space Race
+              than he was of what the astronauts would find in space. <br></br>
+              6. When Armstrong, Aldrin, and Collins returned back to Earth,
+              they were placed in quarantine because scientists were
+              inconclusive about space germs entering Earth. <br></br> <br></br>
+              <h4>
+                <b>Significance: </b>
+              </h4>
+              1. Apollo 11 was the first mission to successfully place men on
+              the moon. <br></br>
+              2. Neil Armstrong marked the occasion with his famous quote:
+              "That's one small step for man, one giant leap for mankind."{" "}
+              <br></br> <br></br>
+            </p>
+          </div>
+
+          <div className="col-sm-6">
+            <img
+              src={apollo11logo}
+              className="apollo11logo"
+              width="90%"
+              height="90%"
+            />
+          </div>
+          <div className="container">
+            <DayDisplay
+              day={this.props.location.pathname.split("/")[3]}
+              url={url}
+            />
+            {this.checkDay()}
+          </div>
+          <AppFooter />
+        </div>
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  const {stories} = state;
-  if (stories.loading) {
-    return {
-      loading: stories.loading
-    };
-  }
-  return {
-    loading: stories.loading,
-    stories: stories.stories
-  };
-}
-
-export default connect(mapStateToProps, {loadStories})(Apollo11Explorer);

@@ -11,19 +11,18 @@
 
 ## Development
 
-This project requires Node >=12.X and npm >=6.X You should install node using [nvm][].
+This project requires Node >=12.8 and npm >=6.X You should install node using [nvm][].
 
 ### Start Hacking
 
 1. `npm install` to grab all the goodies
 2. `npm run dev` to start a hot-reloading development server
-3. No step 3
 
 Other useful commands:
 
-* `npm test` to run the tests
-* `npm run tdd` to continuously run tests as you code
-* `npm run lint` to check your changes against the linting guidelines
+- `npm test` to run the tests
+- `npm run tdd` to continuously run tests as you code
+- `npm run lint` to check your changes against the linting guidelines
 
 **Note about HTTPS and the development server:** the development server uses a
 self-signed SSL certificate. When you open the development server for the first
@@ -65,7 +64,6 @@ Source lives in `src/`. Compiled output goes in `dist/`. Configuration goes in
 
 - `containers/`: [Stateful][dumb-comp] react components. These are usually top-level route handlers.
 - `components/`: [Stateless/Dumb][dumb-comp] react components. These guys determininstically render based on props.
-
 
 ### Configuration Values
 

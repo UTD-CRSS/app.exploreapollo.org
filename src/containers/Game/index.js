@@ -5,8 +5,8 @@ import LunarLander from "../../../static/lunar_lander.png";
 import Asteroid from "../../../static/asteroid.png";
 import Explosion from "../../../static/explosion.gif";
 
-const DOWN = 83;//74;
-const UP =  87;//75;
+const DOWN = 83;
+const UP =  87;
 const INCREMENT = 10;
 const ROCK_INCREMENT = 0.5;
 const ROCK_WIDTH = 20;
@@ -15,8 +15,9 @@ let rockCounter = 0;
 import random from "lodash/random";
 import some from "lodash/some";
 import filter from "lodash/filter";
+import { AppFooter, AppHeader } from "../App";
 
-export default class Game extends Component {
+export class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,6 +104,7 @@ export default class Game extends Component {
   render() {
     const {top, rocks, gameOver} = this.state;
     return <div>
+      <AppHeader/>
       <h4>Controls</h4>
       <p><code>W</code> UP, <code>S</code> DOWN</p>
       <div className="stars-bg" style={{height: "400px", position: "relative"}}>
@@ -116,6 +118,7 @@ export default class Game extends Component {
           return <img src={Asteroid} key={id} style={{position: "absolute", width: `${ROCK_WIDTH}px`, height: `${ROCK_WIDTH}px`, top: `${y}%`, left: `${x}%`}} />;
         })}
       </div>
+      <AppFooter/>
     </div>;
   }
 }

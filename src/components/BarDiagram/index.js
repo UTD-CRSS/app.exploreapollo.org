@@ -4,7 +4,7 @@ import Dimensions from "react-dimensions";
 import {Chart, Layer, Animate, Ticks, Bars} from "rumble-charts";
 import * as D3 from "d3";
 
-class BarDiagram extends Component {
+export class BarDiagram extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
