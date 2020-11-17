@@ -164,8 +164,8 @@ export class Apollo11Explorer extends Component {
             />
             {this.checkDay()}
           </div>
-          <AppFooter />
         </div>
+        <AppFooter />
       </div>
     );
   }
