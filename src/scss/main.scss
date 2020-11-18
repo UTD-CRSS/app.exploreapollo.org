@@ -92,6 +92,7 @@ footer {
     background-color: rgba(20, 10, 22, 0.5);
     color: #fff;
     z-index: 1000;
+    margin-top: 1vw;
     padding: 25px;
     font-weight: bold;
     border-radius: 15px;
@@ -468,4 +469,11 @@ a:hover {
   margin: 0.5em;
   background: rgba(118, 77, 212, 0.801);
   color: white;
+}
+
+@media screen and (max-width: 750px) {
+  //MOBILE STYLINGS
+  .hidden-in-mobile {
+    display:none;
+  }
 }
