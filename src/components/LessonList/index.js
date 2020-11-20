@@ -5,7 +5,7 @@ export function LessonList() {
   return (
     <div className="app-container">
       <nav className="navbar navbar-inverse bg-black">
-        <a className="lessonlinks" href="/lessons#k-2">
+        <a className="lessonlinks " href="/lessons#k-2">
           Cadets (k-2)
         </a>
         <a className="lessonlinks" href="/lessons#3-5">
@@ -20,7 +20,7 @@ export function LessonList() {
       </nav>
       <span className="addpadding"></span>
 
-      <h3 className="center">
+      <h3 className="center feedbacktext">
         We would love more ideas and input on engaging lessons for everyone to
         learn
       </h3>
@@ -36,7 +36,7 @@ export function LessonList() {
       <span className="addpadding"></span>
       <span className="addpadding"></span>
 
-      <h3 id="k-2" className="gradeanchor round out">
+      <h3 id="k-2" className="gradeanchor round out responsive">
         Cadets K-2
       </h3>
       <button className="btn-info btn-lg flex-grow-1 addpadding bolder">

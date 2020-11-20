@@ -13,7 +13,7 @@ export class LessonPlans extends Component {
           src={lessonsbanner}
           className="center round-out"
           width="90%"
-          height="80%"
+          height= "auto"
           border-radius="50px"
         />
         <LessonList />
