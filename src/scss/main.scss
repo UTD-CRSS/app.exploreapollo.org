@@ -388,8 +388,12 @@ a:hover {
 }
 
 .fastfacts {
+  background-color: rgba(147, 8, 182, 0.089);
+  border-radius: 25px;
   margin: 15px;
   font-weight: bolder;
+  font-size: larger;
+  object-fit: cover;
 }
 
 .diagramtabs {

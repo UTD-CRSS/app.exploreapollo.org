@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Apollo13logo from "../../../static/Apollo13Logo.jpg";
+import Apollo13logo from "../../../static/FastFactsimgs/Apollo13Logo.jpg";
+import Crew from "../../../static/FastFactsimgs/apollo13crew.jpg";
 import { AppFooter, AppHeader } from "../App";
 // import { Apollo13StoryTimeline } from "../../components";
 
@@ -16,7 +17,7 @@ export class Apollo13Explorer extends Component {
         </h4>
 
         <div className="row fastfacts">
-          <div className="col-sm-6">
+          <div className="col-sm-6 fastfactstext">
             <h3>
               {" "}
               <br></br>
@@ -24,7 +25,6 @@ export class Apollo13Explorer extends Component {
               <br></br>
               <br></br>
             </h3>
-            <p>
               <h4>
                 <b>Information:</b>
               </h4>
@@ -50,13 +50,25 @@ export class Apollo13Explorer extends Component {
               5. This mission brought about a very famous quote: "Houston, we
               have a problem." <br></br>
               <br></br>
-            </p>
+              <h4>
+                <b> Crew: </b>
+              </h4>
+              Pictured Left to Right <br></br>
+              1. Fred W. Haise (Lunar Module Pilot)<br></br>
+              2. James A. Lovell (Commander) <br></br>
+              3. John L. Swigert (Command Module Pilot) <br></br>
           </div>
           <div className="col-sm-6">
             <img
               src={Apollo13logo}
-              className="Apollo13Logo"
-              width="auto"
+              className="center addpadding"
+              width="70%"
+              height="auto"
+            />
+            <img
+              src={Crew}
+              className="center addpadding"
+              width="80%"
               height="auto"
             />
           </div>

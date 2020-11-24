@@ -3,7 +3,8 @@ import _ from "lodash";
 import { DayDisplay } from "../../components";
 import { AppFooter, AppHeader } from "../App";
 import config from "../../../config";
-import apollo11logo from "../../../static/apollo11logo.jpg";
+import apollo11logo from "../../../static/FastFactsimgs/apollo11logo.jpg";
+import Crew from "../../../static/FastFactsimgs/apollo11crew.jpg";
 import { StoryList } from "../../components";
 import Spinner from "react-spinner";
 
@@ -121,49 +122,57 @@ export class Apollo11Explorer extends Component {
               <br></br>
               <br></br>
             </h3>
-            <p>
-              <h4>
-                <b>Information: </b>
-              </h4>
-              1. Astronauts: Neil Armstrong, Buzz Aldrin, and Michael Collins{" "}
-              <br></br>
-              2. This was the first manned mission to successfully reach the
-              moon. <br></br>
-              3. The American flag that was planted on the moon by the
-              astronauts was made by Sears. <br></br>
-              4. Apollo 11 was launched at the same time of the Soviet's
-              Sputnik. <br></br>
-              5. President John F. Kennedy was more interested in the Space Race
-              than he was of what the astronauts would find in space. <br></br>
-              6. When Armstrong, Aldrin, and Collins returned back to Earth,
-              they were placed in quarantine because scientists were
-              inconclusive about space germs entering Earth. <br></br> <br></br>
-              <h4>
-                <b>Significance: </b>
-              </h4>
-              1. Apollo 11 was the first mission to successfully place men on
-              the moon. <br></br>
-              2. Neil Armstrong marked the occasion with his famous quote:
-              "That's one small step for man, one giant leap for mankind."{" "}
-              <br></br> <br></br>
-            </p>
+            <h4>
+              <b>Information: </b>
+            </h4>
+            1. Astronauts: Neil Armstrong, Buzz Aldrin, and Michael Collins{" "}
+            <br></br>
+            2. This was the first manned mission to successfully reach the moon.{" "}
+            <br></br>
+            3. The American flag that was planted on the moon by the astronauts
+            was made by Sears. <br></br>
+            4. Apollo 11 was launched at the same time of the Soviet's Sputnik.{" "}
+            <br></br>
+            5. President John F. Kennedy was more interested in the Space Race
+            than he was of what the astronauts would find in space. <br></br>
+            6. When Armstrong, Aldrin, and Collins returned back to Earth, they
+            were placed in quarantine because scientists were inconclusive about
+            space germs entering Earth. <br></br> <br></br>
+            <h4>
+              <b>Significance: </b>
+            </h4>
+            1. Apollo 11 was the first mission to successfully place men on the
+            moon. <br></br>
+            2. Neil Armstrong marked the occasion with his famous quote: "That's
+            one small step for man, one giant leap for mankind." <br></br>{" "}
+            <br></br>
+            Pictured Left to Right <br></br>
+            1. Neil Armstrong (Mission Commander)<br></br>
+            2. Michael Collins (Command Module Pilot) <br></br>
+            3. Edwin (Buzz) Aldrin (Lunar Module Pilot) <br></br>
           </div>
 
           <div className="col-sm-6">
             <img
               src={apollo11logo}
-              className="apollo11logo"
-              width="90%"
-              height="90%"
+              className="center addpadding"
+              width="70%"
+              height="auto"
+            />
+            <img
+              src={Crew}
+              className="center addpadding"
+              width="80%"
+              height="auto"
             />
           </div>
-          <div className="container">
-            <DayDisplay
-              day={this.props.location.pathname.split("/")[3]}
-              url={url}
-            />
-            {this.checkDay()}
-          </div>
+        </div>
+        <div className="container">
+          <DayDisplay
+            day={this.props.location.pathname.split("/")[3]}
+            url={url}
+          />
+          {this.checkDay()}
         </div>
         <AppFooter />
       </div>
