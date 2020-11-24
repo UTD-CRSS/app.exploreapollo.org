@@ -147,13 +147,13 @@ export class Apollo11Explorer extends Component {
             one small step for man, one giant leap for mankind." <br></br>{" "}
             <br></br>
             <div>
-            <h4>
+              <h4>
                 <b> Crew: </b>
-            </h4>
-            Pictured Left to Right <br></br>
-            1. Neil Armstrong (Mission Commander)<br></br>
-            2. Michael Collins (Command Module Pilot) <br></br>
-            3. Edwin (Buzz) Aldrin (Lunar Module Pilot) <br></br>
+              </h4>
+              Pictured Left to Right <br></br>
+              1. Neil Armstrong (Mission Commander)<br></br>
+              2. Michael Collins (Command Module Pilot) <br></br>
+              3. Edwin (Buzz) Aldrin (Lunar Module Pilot) <br></br>
             </div>
           </div>
 
