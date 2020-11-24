@@ -475,10 +475,13 @@ a:hover {
   color: white;
 }
 
+.CrewLabel {
+  text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
   //MOBILE STYLINGS
   .hidden-in-mobile {
-    display:none;
+    display: none;
   }
-
 }

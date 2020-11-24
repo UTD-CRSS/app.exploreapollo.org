@@ -55,7 +55,7 @@ export class Apollo1Explorer extends Component {
             />
           </div>
         </div>
-        <h4 className="center titleBanner round-out">
+        <h4 className="center titleBanner round-out CrewLabel">
           <b> Crew: May their memory and story continue to live on </b>
           <br></br>Pictured Left to Right <br></br>
           1. Virgil "Gus" Grissom (Commander)<br></br>
