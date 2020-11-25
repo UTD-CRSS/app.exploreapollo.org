@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AppFooter, AppHeader } from "../App";
-import apollo6logo from "../../../static/apollo6logo.jpg";
+import apollo6logo from "../../../static/FastFactsimgs/apollo6logo.png";
 
 export class Apollo6Explorer extends Component {
   render() {
@@ -23,43 +23,40 @@ export class Apollo6Explorer extends Component {
               <br></br>
               <br></br>
             </h3>
-            <p>
-              <h4>
-                <b>Information:</b>
-              </h4>
-              1. Unmanned space flight<br></br>
-              2. This mission wanted to demonstrate structure and thermal
-              integrity and compatibility of the launch vehicle and spacecraft.
-              <br></br>
-              3. This mission also wanted to confirm launch loads and dynamic
-              characteristics.<br></br> 4. Lastly, another mission was to
-              evaluate the performance of emergency detection systems in
-              closed-loop configuration. <br></br> <br></br>
-              <h4>
-                <b> Significance: </b>
-              </h4>
-              This was the second A-type mission of the United States Apollo
-              program. <br></br>
-              <br></br>
-            </p>
+            <h4>
+              <b>Information:</b>
+            </h4>
+            1. Unmanned space flight<br></br>
+            2. This mission wanted to demonstrate structure and thermal
+            integrity and compatibility of the launch vehicle and spacecraft.
+            <br></br>
+            3. This mission also wanted to confirm launch loads and dynamic
+            characteristics.<br></br> 4. Lastly, another mission was to evaluate
+            the performance of emergency detection systems in closed-loop
+            configuration. <br></br> <br></br>
+            <h4>
+              <b> Significance: </b>
+            </h4>
+            This was the second A-type mission of the United States Apollo
+            program. <br></br>
+            <br></br>
           </div>
           <div className="col-sm-6">
             <img
               src={apollo6logo}
-              className="apollo6Logo"
+              className="center addpadding"
               width="auto"
               height="auto"
             />
           </div>
-
-          <h4 className="center">
-            <div className="titleBanner">
-              <b>
-                <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
-              </b>
-            </div>
-          </h4>
         </div>
+        <h4 className="center">
+          <div className="titleBanner">
+            <b>
+              <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
+            </b>
+          </div>
+        </h4>
         <AppFooter />
       </div>
     );

@@ -17,14 +17,36 @@
 .lessonlinks {
   background-color:rgba(118, 77, 212, 0.801);
   padding: 20px;
-  width: 20%;
+  width: 22vw;
   text-align: center;
   font-weight: bolder;
   border-color: white;
   border-width: 15px;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: inherit;
 }
+@media screen and (max-width: 800px) {
+  //MOBILE STYLINGS
+  .lessonlinks {
+    flex-grow: 1;
+    margin: 2vw;
+    width: auto;
+    height:auto;
+  }
+
+  .gradeanchor {
+    font-size: 15vw;
+    width: 100%;
+    height:auto;
+  }
+  .feedbacktext {
+    font-size: 8vw;
+    padding: 1vw;
+  }
+  
+
+}
+
 
 .bolder {
   font-weight: bolder;

@@ -23,7 +23,7 @@ export class Dashboard extends Component {
     return (
       <div className="dashboard-container">
         <div
-          className="container-fluid hidden-xs"
+          className="container-fluid"
           style={{ padding: 0, marginBottom: "2em" }}
         >
           <div className="mission-selector">
@@ -34,12 +34,12 @@ export class Dashboard extends Component {
             />
 
             <div
-              className="panel panel-default"
+              className="panel panel-default hidden-in-mobile"
               style={{
                 position: "absolute",
                 left: "20px",
                 top: "30%",
-                maxWidth: "35%",
+                maxWidth: "45%",
               }}
             >
               <div className="panel-body">
