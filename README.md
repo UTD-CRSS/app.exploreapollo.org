@@ -31,8 +31,8 @@ invalid or insecure, it is just self-signed.
 
 ### Branches and Versioning
 
-The `master` is considered "hot" and is continuously deployed to a staging
-server. Every tagged version is automatically deployed to production.
+The `master` is considered "hot" and is continously deployed to production.
+**NOTE:** The master branch previously was deployed to a staging server, and tagged versions were deployed. However, in the React upgrade, this added step seems to have been broken. Ideally, this should be reimplemented such that only tagged commits are deployed to the live website.
 
 Day-to-day development is done on the `develop` branch. The `develop` branch is continuously deployed to a development server for evaluation.
 
