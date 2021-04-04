@@ -131,11 +131,14 @@ export class MomentViewer extends Component {
 
   componentDidUpdate() {
     let parent = ReactDOM.findDOMNode(this).children[2].children[1].children[0];
+    console.log(parent);
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
       timeline =
         parent.children[0].children[0].children[0].children[0].children[1];
+        console.log(timeline)
+
       let transcripts = this.state.transcript;
       transcripts.forEach((t) => (t.active = false));
       let activeIndex = getActiveIndex(

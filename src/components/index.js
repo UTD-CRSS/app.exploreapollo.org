@@ -18,3 +18,6 @@ export { LessonList } from "./LessonList";
 export { DashboardDiagram } from "./DashboardDiagram";
 export { InTheNewsComponent } from "./InTheNewsComponent";
 export { PlaylistNavBar } from "./PlaylistNavBar";
+export {ChannelPlayer} from "./ChannelPlayer";
+export {AudioPlayer} from "./AudioPlayer";
+export {ChannelTimeline} from "./ChannelTimeline";

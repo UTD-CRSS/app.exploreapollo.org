@@ -20,3 +20,5 @@ export { Apollo13Explorer } from "./Apollo13Explorer";
 export { LessonPlans } from "./LessonPlans";
 export { InTheNews } from "./InTheNews";
 export { LoadingMoment } from "./LoadingMoment";
+export {ChannelViewer} from "./ChannelViewer";
+export {Channels} from "./Channels";

@@ -1,0 +1,41 @@
+/* yo */
+.playButtonContainer1 {
+  &:hover {
+    cursor: pointer;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 50%;
+  // height: 50%;
+  width: 50px;
+  height: 50px;
+  // text-align: center;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+}
+
+.muteButtonContainer {
+  &:hover {
+    cursor: pointer;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 50%;
+  // height: 50%;
+  width: 50px;
+  height: 50px;
+  // text-align: center;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+}
+.play1 {
+  width: 70%;
+  height: 70%;
+}
+
+.pause1 {
+  width: 70%;
+  height: 70%;
+}

@@ -22,6 +22,8 @@ import {
   LessonPlans,
   InTheNews,
   LoadingMoment,
+  ChannelViewer,
+  Channels
 } from "./containers";
 
 export default class Routes extends Component {
@@ -43,16 +45,24 @@ export default class Routes extends Component {
           path="/stories/story/:storyId/loading/:momentId"
           component={LoadingMoment}
         />
+
+
         <Route path="/search" component={Search} />
         <Route path="/stories" component={Stories} />
         <Route path="/apollo1" component={Apollo1Explorer} />
         <Route path="/apollo4" component={Apollo4Explorer} />
         <Route path="/apollo5" component={Apollo5Explorer} />
         <Route path="/apollo6" component={Apollo6Explorer} />
-        <Route path="/apollo11" component={Apollo11Explorer} />
+
+        <Route exact path="/apollo11" component={Apollo11Explorer} />
         <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer} />
+
         <Route path="/apollo13" component={Apollo13Explorer} />
         <Route path="/moments/random" component={RandomMoment} />
+
+        <Route path="/channels/:storyId/:momentId" component={ChannelViewer}/>
+        <Route path="/:mission/channels" component={Channels}/>
+
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />
         <Route path="/lessons" component={LessonPlans} />
