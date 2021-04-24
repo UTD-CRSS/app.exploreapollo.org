@@ -29,6 +29,7 @@
   // text-align: center;
   background-color: #f1f1f1;
   border-radius: 50%;
+  margin-left: 2px;
 }
 .play1 {
   width: 70%;
@@ -38,4 +39,12 @@
 .pause1 {
   width: 70%;
   height: 70%;
+}
+
+.audio-title{
+  height: 70px;
+  font-size: 2.5rem;
+}
+.audio-filename-text{
+  font-size: 1.2rem;
 }

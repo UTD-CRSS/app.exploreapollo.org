@@ -23,7 +23,8 @@ import {
   InTheNews,
   LoadingMoment,
   ChannelViewer,
-  Channels
+  Channels,
+  ChannelsLoader
 } from "./containers";
 
 export default class Routes extends Component {
@@ -60,8 +61,11 @@ export default class Routes extends Component {
         <Route path="/apollo13" component={Apollo13Explorer} />
         <Route path="/moments/random" component={RandomMoment} />
 
-        <Route path="/channels/:storyId/:momentId" component={ChannelViewer}/>
-        <Route path="/:mission/channels" component={Channels}/>
+        <Route exact path="/:mission/channels" component={Channels}/>
+
+        <Route path="/apollo11/channels/load" component={ChannelsLoader}/>
+
+        <Route path="/apollo11/channels/play" component={ChannelViewer}/>
 
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />

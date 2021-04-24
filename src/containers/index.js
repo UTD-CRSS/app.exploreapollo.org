@@ -22,3 +22,4 @@ export { InTheNews } from "./InTheNews";
 export { LoadingMoment } from "./LoadingMoment";
 export {ChannelViewer} from "./ChannelViewer";
 export {Channels} from "./Channels";
+export {ChannelsLoader} from "./ChannelsLoader";

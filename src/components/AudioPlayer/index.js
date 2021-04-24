@@ -6,36 +6,10 @@ import mediapause from "../../../node_modules/open-iconic/png/media-pause-6x.png
 import volumeHigh from "../../../node_modules/open-iconic/png/volume-high-4x.png";
 import volumeOff from "../../../node_modules/open-iconic/png/volume-off-4x.png";
 // import "open-iconic";
-export function wrapAudioPlayerElements(child) {
-  const PlayButtonName = PlayButton.name;
-  const WavesurferName = Wavesurfer.name;
-  const height = "128px";
-  const styles = {
-    [PlayButtonName]: {
-      position: "absolute",
-      width: height,
-      height: height,
-      padding: 5,
-    },
-    [WavesurferName]: {
-      marginLeft: height,
-    },
-  };
-  return <div style={styles[child.type.name]}>{child}</div>;
-}
 
-// export function AudioPlayer({ children }) {
-//   const containerStyles = {
-//     position: "relative",
-//   };
-//   return (
-//     <div style={containerStyles}>
-//       {React.Children.map(children, wrapAudioPlayerElements)}
-//     </div>
-//   );
-// }
 
-export function MuteButton({volume, mute, unMute}){
+
+function MuteButton({volume, mute, unMute}){
   //volume 100 or 0
   
   // volume = 100 --> show full volume button
@@ -51,20 +25,12 @@ export function MuteButton({volume, mute, unMute}){
       {
         volume? (<img src={volumeHigh} alt="volume-high"></img>):
                 (<img src={volumeOff} alt="volume-off"></img>)
-                // The problem is it cannot find the image I'm reading documentation
-                //will it always show up next to the play button? or can we change its location?
-                // anywhere we want
-                // up to us
-                //ok
-                //kinda work, do you see the 
-                // let me checktext
-                // i see the volume high text??
       }
     </div>
   )
 }
 
-export function PlayButton({ isPlaying, play, pause }) {
+function PlayButton({ isPlaying, play, pause }) {
   const clickFunction = isPlaying ? pause : play;
   return (
     <div
@@ -87,19 +53,27 @@ export class AudioPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      playing: this.props.playing, 
       time: this.props.time, 
       clickEvent: this.props.clickEvent,
-      volume: 1 
+      volume: 1,
+      playAll: this.props.playAll,
+      pauseAll: this.props.pauseAll,
+      playing: this.props.playAll,
+      togglePausePlayEvent: this.props.togglePausePlay,
+      operation: this.props.operation
     };
   }
 
-  playaudio() {
-    this.setState({ playing: true });
+  playAudio=  ()=> {
+
+    this.props.togglePausePlay()
+    this.setState({ playing: true, pauseAll: this.props.pauseAll});
   }
 
-  pauseaudio() {
-    this.setState({ playing: false });
+  pauseAudio =()=> {
+
+    this.props.togglePausePlay()
+    this.setState({ playing: false, playAll: this.props.playAll });
   }
 
   muteAudio(){
@@ -115,41 +89,71 @@ export class AudioPlayer extends Component {
     this.state.clickEvent("player",seekTime);
   }
 
+  onEnd =()=>{
+    this.setState({playing: false})
+  }
+
+
+  getAudioFileName(){
+    // find index of string to get substring,  audio filename has "audio/" following by the actual filename
+    var fileName
+    const url = this.props.url
+    if (url){
+      var startIndex = url.indexOf("audio/")
+      fileName = url.substring(startIndex + 6, url.length - 4)
+    }
+    return fileName
+  }
+
+componentDidUpdate(){
+
+  if (!this.state.playing && this.props.playAll && !this.state.playAll){
+      this.setState({playing: true})
+  }
+
+  if (this.state.playing && this.props.pauseAll && !this.state.pauseAll){
+    this.setState({playing: false})
+}
+
+  }
+
   render() {
     const {
       url,
       time,
-      onEnd,
       autoplay,
-      title,
-      titleEl,
+      operation,
+      channelName
       // volume,
     } = this.props;
     
     const { playing, volume } = this.state;
-
+    const audioFileName = this.getAudioFileName()
+    
     const surferOptions = {
-      normalize: true,
+      normalize: true,    
+
     };
+
+
 
     return (
       <div className="moment-player-panel">
-        {titleEl ? (
-          titleEl(title)
-        ) : (
-          <h1 className="text-center">Now Playing: {title}</h1>
-        )}
+          <h1 className="text-center audio-title">Playing: {channelName}</h1>
+          <h1 className="text-center audio-title">Operation: {operation}</h1>
+
+          <h3 className="audio-filename-text">{audioFileName}</h3>
         <div className='d-flex flex-row align-items-center'>
           <PlayButton
-            isPlaying={playing}
-            play={this.playaudio.bind(this)}
-            pause={this.pauseaudio.bind(this)}
+            isPlaying={(playing || this.props.playAll) && !this.props.pauseAll}
+            play={()=>this.playAudio()}
+            pause={() => this.pauseAudio()}
             className="col-1"
           />
           <MuteButton
             volume={this.state.volume}
-            mute={this.muteAudio.bind(this)}
-            unMute={this.unmuteAudio.bind(this)}
+            mute={() => this.muteAudio()}
+            unMute={() => this.unmuteAudio()}
             className="col-2"
           />
           <div className="col p-0 ml-1">
@@ -158,9 +162,9 @@ export class AudioPlayer extends Component {
             volume={volume}
             pos={time}
             onPosChange={this.seek.bind(this)}
-            playing={playing}
+            playing={(playing || this.props.playAll) && !this.props.pauseAll}
             options={surferOptions}
-            onFinish={onEnd}
+            onFinish={() => this.onEnd()}
             onReady={ 
               autoplay && this.playaudio.bind(this)
             }

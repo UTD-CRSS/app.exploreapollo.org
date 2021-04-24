@@ -21,3 +21,4 @@ export { PlaylistNavBar } from "./PlaylistNavBar";
 export {ChannelPlayer} from "./ChannelPlayer";
 export {AudioPlayer} from "./AudioPlayer";
 export {ChannelTimeline} from "./ChannelTimeline";
+export {ChannelsSelectingInstruction} from "./ChannelsSelectingInstruction"

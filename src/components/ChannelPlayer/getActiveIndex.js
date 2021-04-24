@@ -5,7 +5,7 @@ export default function getActiveIndex(transcripts, currentMissionTime) {
   let i;
   for(i = 0; i < transcripts.length; i++)
   {
-    const metStart = transcripts[i].metStart;
+    const metStart = transcripts[i].startTime;
     if(currentMissionTime < metStart)
     {
       if(i == 0)
