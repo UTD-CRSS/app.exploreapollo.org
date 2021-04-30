@@ -8,7 +8,10 @@ export class ChannelsLoader extends Component {
     super(props);
     this.state = {
       loading: true,
-      // channels: this.props.location.state.channels,
+      channels:
+        this.props.location && this.props.location.state
+          ? this.props.location.state.channels
+          : null,
     };
   }
 
@@ -39,6 +42,12 @@ export class ChannelsLoader extends Component {
   setTapeIdState() {
     var tapeId = this.state.channels.tapeId;
     this.setState({ tapeId: tapeId });
+  }
+
+  setMinAndMaxBlock() {
+    const minBlock = this.state.channels.minBlock;
+    const maxBlock = this.state.channels.maxBlock;
+    this.setState({ minBlock: minBlock, maxBlock: maxBlock });
   }
 
   /**
@@ -150,16 +159,12 @@ export class ChannelsLoader extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location && this.props.location.state)
-    {
-      this.setState({channels: this.props.location.state.channels});
-    }
-
     if (this.channelsExist()) {
       this.setSelectedChannelsState();
       this.setBlockIndexState();
       this.setNuggetIndexState();
       this.setTapeIdState();
+      this.setMinAndMaxBlock();
     }
   }
   render() {
@@ -167,10 +172,14 @@ export class ChannelsLoader extends Component {
     const loading = this.state.loading;
     const data = this.state.data;
     const tapeId = this.state.tapeId;
+    const minBlock = this.state.minBlock;
+    const maxBlock = this.state.maxBlock;
     if (!channels || (data && Object.keys(data).lengh === 0)) {
       return (
         <div className="d-flex flex-column">
-          <div className="error-message">Error loading channels, please select channels to listen</div>
+          <div className="error-message">
+            Error loading channels, please select channels to listen
+          </div>
 
           <Link to="/apollo11/channels">
             <button type="button" className="btn btn-primary">
@@ -180,7 +189,6 @@ export class ChannelsLoader extends Component {
         </div>
       );
     }
-
     return loading ? (
       <div className="loading-text">LOADING DATA...</div>
     ) : (
@@ -190,6 +198,8 @@ export class ChannelsLoader extends Component {
           state: {
             audioData: data,
             tapeId: tapeId,
+            minBlock: minBlock,
+            maxBlock: maxBlock,
           },
         }}
       />

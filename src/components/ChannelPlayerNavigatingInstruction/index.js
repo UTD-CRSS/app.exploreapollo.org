@@ -6,7 +6,7 @@ import "./index.scss";
  *  A simple popup for first time users to help them use our navigation page
  */
 
-export function ChannelsSelectingInstruction(props) {
+export function ChannelPlayerNavigatingInstruction(props) {
   var handleClosePopup = props.handleClosePopup;
   var showInstruction = props.showInstruction;
   return (
@@ -24,24 +24,31 @@ export function ChannelsSelectingInstruction(props) {
             className="message-title"
             id="contained-modal-title-vcenter"
           >
-            How to Select Channelss
+            How to navigate in playback page
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="message-body">
           <p>
-            Thanks for visiting our page. Here are some tips for selecting audios.
+            Thanks for visiting our page. Here are some tips for playing audios.
           </p>
           <ol>
-            <li>First select a tape.</li>
+            <li>To play all, click "Play All" button</li>
+            <li>To play next parts of audio, click "Play Next" button</li>
             <li>
-              Then select up to 3 channels which only appear after a tape is
-              selected.
+              To play previous parts of audio, click "Play Previous" button
             </li>
             <li>
-              Next, select the audio block and nugget. There are 6 nuggets in a
-              block of audio, a block is usally 30-minute long.
+              Note that when one of these two buttons is faded, it means there
+              are no audios in next or previous part
             </li>
-            <li>And finally hit play!</li>
+            <li>
+              Toggle "Display Transcript" or "Hide Transcript" buttons to enable
+              or disable transcripts for desired players
+            </li>
+            <p className="noted-message">
+              Important: if you are experiencing performance issues, please hide
+              some transripts, displaying up to 2 transcripts is ideal
+            </p>
           </ol>
         </Modal.Body>
         <Modal.Footer>

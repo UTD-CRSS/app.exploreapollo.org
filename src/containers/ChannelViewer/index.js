@@ -2,17 +2,33 @@ import React, { Component } from "react";
 import { AppFooter, AppHeader } from "../App";
 import { ChannelPlayer } from "../../components/ChannelPlayer";
 import { Link, Redirect } from "react-router-dom";
+import { ChannelPlayerNavigatingInstruction } from "../../components/ChannelPlayerNavigatingInstruction";
 import "./index.scss";
 
 export class ChannelViewer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: this.props.location.state.audioData,
+      data:
+        this.props.location.state && this.props.location.state.audioData
+          ? this.props.location.state.audioData
+          : null,
       playAll: false,
       pauseAll: false,
       playNext: false,
-      tapeId: this.props.location.state.tapeId,
+      tapeId:
+        this.props.location.state && this.props.location.state.tapeId
+          ? this.props.location.state.tapeId
+          : null,
+      showInstruction: false,
+      minBlock:
+        this.props.location && this.props.location.state
+          ? this.props.location.state.minBlock
+          : null,
+      maxBlock:
+        this.props.location && this.props.location.state
+          ? this.props.location.state.maxBlock
+          : null,
     };
   }
 
@@ -80,6 +96,13 @@ export class ChannelViewer extends Component {
       playNextOrPreviousActivate: true,
     });
   }
+  handleCloseInstruction = () => {
+    this.setState({ showInstruction: false });
+  };
+
+  handleDisplayInstruction = () => {
+    this.setState({ showInstruction: true });
+  };
 
   handlePlayNext() {
     const nextAudioBlockNuggetIndex = this.getNextBlockAndNuggetIndex();
@@ -101,8 +124,23 @@ export class ChannelViewer extends Component {
     this.setState({ playAll: false, pauseAll: false });
   }
 
+  isFirstVisit() {
+    return localStorage.getItem("alreadyVisitedChannelPlayerPage") === "true";
+  }
+
   componentDidMount() {
     this.removeBrowserHistoryState();
+
+    let visited = this.isFirstVisit();
+
+    // Do not view popup if this isn't the first time
+    if (visited) {
+      this.setState({ showInstruction: false });
+    } else {
+      // This is the first time
+      localStorage.setItem("alreadyVisitedChannelPlayerPage", true);
+      this.setState({ showInstruction: true });
+    }
   }
 
   removeBrowserHistoryState() {
@@ -134,6 +172,8 @@ export class ChannelViewer extends Component {
     const currentBlockIndex = this.state.currentBlockIndex;
     const currentNuggetIndex = this.state.currentNuggetIndex;
     const tapeId = this.state.tapeId;
+    const minBlock = this.state.minBlock;
+    const maxBlock = this.state.maxBlock;
     return (
       <>
         <AppHeader />
@@ -149,6 +189,8 @@ export class ChannelViewer extends Component {
                     blockIndex: nextBlockIndex,
                     nuggetIndex: nextNuggetIndex,
                     tapeId: tapeId,
+                    minBlock: minBlock,
+                    maxBlock: maxBlock
                   },
                 },
               }}
@@ -170,10 +212,16 @@ export class ChannelViewer extends Component {
 
         {data && Object.keys(data).length > 0 ? (
           <>
+            <ChannelPlayerNavigatingInstruction
+              handleClosePopup={this.handleCloseInstruction}
+              showInstruction={this.state.showInstruction}
+            />
             <div className="d-flex justify-content-center mb-4">
               <button
                 type="button"
-                disabled={currentBlockIndex == 1 && currentNuggetIndex == 1}
+                disabled={
+                  currentBlockIndex == minBlock && currentNuggetIndex == 1
+                }
                 className="btn btn-warning mr-3 audio-controller-text"
                 onClick={this.handlePlayPrevious.bind(this)}
               >
@@ -195,7 +243,9 @@ export class ChannelViewer extends Component {
               </button>
               <button
                 type="button"
-                disabled={currentBlockIndex == 6 && currentNuggetIndex == 6}
+                disabled={
+                  currentBlockIndex == maxBlock && currentNuggetIndex == 6
+                }
                 className="btn btn-warning audio-controller-text"
                 onClick={this.handlePlayNext.bind(this)}
               >
@@ -217,12 +267,22 @@ export class ChannelViewer extends Component {
                 );
               })}
             </div>
+            <div className="ml-2">
+              <button
+                type="button"
+                className="btn btn-secondary mt-5"
+                onClick={this.handleDisplayInstruction}
+              >
+                Instructions for navigating audio player page
+              </button>
+            </div>
           </>
         ) : (
           <h4 className="container text-center">
             Error loading channels, please select different channels
           </h4>
         )}
+
         <AppFooter />
       </>
     );
