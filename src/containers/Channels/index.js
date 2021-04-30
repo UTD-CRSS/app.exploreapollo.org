@@ -56,7 +56,7 @@ const TapeSelectMenu = ({ tapes, selectedTape, handleTapeSelectEvent }) => {
   return (
     <div className="d-flex flex-column">
       <label className="option-label">Select a tape to play from</label>
-      {Object.keys(tapes).map((tapeTitle, index) => {
+      {Object.keys(tapes).map((tapeTitle) => {
         return (
           <TapeItem
             key={tapeTitle}

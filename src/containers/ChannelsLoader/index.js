@@ -55,7 +55,6 @@ export class ChannelsLoader extends Component {
     const nuggetIndex = this.state.nuggetIndex;
     const tapeId = this.state.tapeId;
     const fetchUrl = `${config.apiEntry}/api/multi_channels?channel=${channelName}&block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`;
-    console.log(fetchUrl);
     await fetch(fetchUrl)
       .then((response) => response.json())
       .then((json) => {
