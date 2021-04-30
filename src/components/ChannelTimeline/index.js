@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import moment from 'moment'
-function HumanReadableSec({sec}) {
+import './index.scss'
+const HumanReadableSec = ({sec}) => {
   let format = "HH:mm:ss";
 
 
@@ -22,7 +23,7 @@ export function TimelineMessage({ name, text, active, startTime, clickEvent }) {
   return (
     <a className={listItemClasses} onClick={clickEvent.bind(this, "viewer", startTime)}>
       <div>
-        {/* <strong>{name}:</strong> */}
+        {name &&<strong>{name}:</strong>}
         <div className="start-time">
           {
           HumanReadableSec({ sec: startTime })
@@ -49,8 +50,8 @@ function TimelineList({ timeline, clickEvent,speakerName }) {
         active={item["active"]}
         clickEvent={clickEvent}
         startTime={item["startTime"]}
-        text={item["text"]}
-        name={speakerName}
+        text={item["text"] ? item["text"] : item["words"]}
+        name={item["speakerID"]}
       />
     );
   });
@@ -67,22 +68,12 @@ export class ChannelTimeline extends Component {
     };
   }
 
-  componentDidUpdate() {}
-
   render() {
     const classes = classNames("timeline-container", "panel", "panel-default");
     return (
       <div className="col">
-        <div style={{ position: "relative", width: "100%", height: "100%" }}>
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              bottom: "21px",
-              left: 0,
-            }}
-          >
+        <div className="timeline-container">
+          <div className="timeline-scroller">
             <div className="transcript-panel">
               <div className={classes}>
                 <div className="panel-heading">
@@ -91,7 +82,6 @@ export class ChannelTimeline extends Component {
                 <TimelineList
                   timeline={this.state.timeline}
                   clickEvent={this.state.clickEvent}
-                  speakerName={this.state.speakerName}
                 />
               </div>
             </div>

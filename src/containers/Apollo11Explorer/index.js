@@ -7,7 +7,6 @@ import apollo11logo from "../../../static/FastFactsimgs/apollo11logo.jpg";
 import Crew from "../../../static/FastFactsimgs/apollo11crew.jpg";
 import { StoryList } from "../../components";
 import Spinner from "react-spinner";
-
 export class Apollo11Explorer extends Component {
   constructor() {
     super();

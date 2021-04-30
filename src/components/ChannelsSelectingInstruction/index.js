@@ -29,14 +29,13 @@ export function ChannelsSelectingInstruction(props){
           </Modal.Header>
           <Modal.Body className="message-body">
             <p>
-              Thanks for visiting our page Here are some tips for navigation.
+              Thanks for visiting our page. Here are some tips for playing audios.
             </p>
             <ol>
-              <li>First select from one to three channels</li>
-              <li>Then select the tape number</li>
-              <li>Then the block which is usually default to 1</li>
-              <li>Then the nugget of that block. </li>
-              <li>Then finally hit play!</li>
+              <li>First select a tape.</li>
+              <li>Then select up to 3 channels which only appear after a tape is selected.</li>
+              <li>Then select the audio block and nugget. There are 6 nuggets in a block of audio, a block is usally 30-minute long.</li>
+              <li>And finally hit play!</li>
             </ol>
           </Modal.Body>
           <Modal.Footer>

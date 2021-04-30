@@ -1,4 +1,3 @@
-/* yo */
 .playButtonContainer1 {
   &:hover {
     cursor: pointer;
@@ -6,11 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // width: 50%;
-  // height: 50%;
   width: 50px;
   height: 50px;
-  // text-align: center;
   background-color: #f1f1f1;
   border-radius: 50%;
 }
@@ -22,11 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // width: 50%;
-  // height: 50%;
   width: 50px;
   height: 50px;
-  // text-align: center;
   background-color: #f1f1f1;
   border-radius: 50%;
   margin-left: 2px;
@@ -42,8 +35,8 @@
 }
 
 .audio-title{
-  height: 70px;
-  font-size: 2.5rem;
+  height: 55px;
+  font-size: 2.2rem;
 }
 .audio-filename-text{
   font-size: 1.2rem;

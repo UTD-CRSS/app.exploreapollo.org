@@ -14,6 +14,7 @@ export class ChannelViewer extends Component {
             playAll: false,
             pauseAll: false,
             playNext: false,
+            tapeId: this.props.location.state.tapeId
           };
 
     }
@@ -65,7 +66,7 @@ export class ChannelViewer extends Component {
 
         Object.keys(data).forEach(index =>{
             if (data[index].channel)
-                playingChannels.push(data[index].channel.channel_name)
+                playingChannels.push(data[index].channel.channelName)
         })
 
         return playingChannels
@@ -138,6 +139,7 @@ export class ChannelViewer extends Component {
         const nextNuggetIndex = this.state.nextNuggetIndex
         const currentBlockIndex = this.state.currentBlockIndex
         const currentNuggetIndex = this.state.currentNuggetIndex
+        const tapeId = this.state.tapeId
         return(
             <>
                 <AppHeader />
@@ -150,7 +152,9 @@ export class ChannelViewer extends Component {
                             channels: {
                                 selectedChannels: playingChannels,
                                 blockIndex: nextBlockIndex,
-                                nuggetIndex: nextNuggetIndex
+                                nuggetIndex: nextNuggetIndex,
+                                tapeId: tapeId
+
                             }
                         }
                         }}> </Redirect>

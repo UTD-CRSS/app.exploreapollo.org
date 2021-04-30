@@ -16,6 +16,7 @@ export class ChannelPlayer extends Component {
       transcripts: [],
       audioUrl: "",
       title: "",
+      operation: "",
       timelineEnable: false,
       channel: "",
       playAll: this.props.playAll,
@@ -67,19 +68,20 @@ export class ChannelPlayer extends Component {
   componentDidMount() {
     const data = this.state.data;
     if (data['channel']){
-      const channelJson = data['channel'];
-      const url = channelJson['audioUrl'];
-      const title = channelJson['title'];
-      const channel = channelJson['channel_name']
+      const channel = data['channel'];
+      const url = channel['audioUrl'];
+      const channelName = channel['channelName']
       const transcripts = data['transcripts']
-
+      const operation = channel['operation']
+      const title = channel['channelTitle']
       this.setState({
         loading: false,
         audio: { time: 0, channelId: this.props.data['channel'].id },
         transcripts: transcripts,
         audioUrl: url,
-        title: title,
-        channel: channel
+        channel: channelName,
+        operation: operation,
+        title: title
       });
   }
   }
@@ -135,7 +137,7 @@ export class ChannelPlayer extends Component {
     let { time } = this.state.audio;
     const currentAudioTime = time;
     var activeIndex
-    if (transcripts){
+    if (transcripts && timelineEnable){
       transcripts.forEach((t) => (t.active = false));
       activeIndex = getActiveIndex(transcripts, currentAudioTime);
     
@@ -156,7 +158,7 @@ export class ChannelPlayer extends Component {
       <div>
         <div className="moment-viewer-container">
           <AudioPlayer
-            operation={this.state.title}
+            operation={this.state.operation}
             url={this.state.audioUrl}
             time={this.state.audio.time}
             autoplay={autoplay}
@@ -165,6 +167,7 @@ export class ChannelPlayer extends Component {
             togglePausePlay={this.props.togglePausePlay}
             clickEvent={this.timelineClickEvent}
             channelName={this.state.channel}
+            title={this.state.title}
           />
           <div className="mt-5 d-flex">
             <button type="button" className="btn btn-secondary mr-2" onClick={this.toggleTimeline}>
@@ -180,7 +183,7 @@ export class ChannelPlayer extends Component {
           { this.state.timelineEnable &&
           <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
             <ChannelTimeline
-              speakerName={this.state.speakerName}
+              // speakerName={this.state.speakerName}
               timeline={transcripts}
               clickEvent={this.timelineClickEvent}
             />

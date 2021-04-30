@@ -36,6 +36,11 @@ export class ChannelsLoader extends Component{
         this.setState({nuggetIndex: nuggetIndex})
     }
 
+    setTapeIdState(){
+        var tapeId = this.state.channels.tapeId
+        this.setState({tapeId: tapeId})
+    }
+
     /**
      * channelsExist checks if there are data in channels state
      * @returns true if channels data can be received from props, otherwise false
@@ -48,14 +53,15 @@ export class ChannelsLoader extends Component{
         var data
         const blockIndex = this.state.blockIndex
         const nuggetIndex = this.state.nuggetIndex
-        const fetchUrl = `${config.apiEntry}/api/multi_channels?channel=${channelName}&block=${blockIndex}&nugget=${nuggetIndex}`
+        const tapeId= this.state.tapeId
+        const fetchUrl = `${config.apiEntry}/api/multi_channels?channel=${channelName}&block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`
+        console.log(fetchUrl)
         await fetch(fetchUrl)
         .then(response => response.json())
         .then(json => {
             data = json[0]
         })
         .catch((error)=>console.log(error))
-        console.log(data)
         return data
     }
 
@@ -65,11 +71,12 @@ export class ChannelsLoader extends Component{
             return null
         }
         channel['audioUrl'] = response.audioUrl
-        channel['channel_name'] = response.channel_name
-        channel['title'] = response.title
+        channel['channelName'] = response.channel_name
+        channel['operation'] = response.operation
         channel['id'] = response.id
         channel['blockIndex'] = response.block_index
         channel['nuggetIndex'] = response.nugget_index
+        channel['channelTitle'] = response.channel.title
         return channel
     }
     async componentDidUpdate(){
@@ -161,15 +168,15 @@ export class ChannelsLoader extends Component{
             this.setSelectedChannelsState()
             this.setBlockIndexState()
             this.setNuggetIndexState()
-            // this.removeBrowserHistoryState()
-
+            this.setTapeIdState()
         }       
 
     }
     render() {
-        var channels = this.state.selectedChannels
-        var loading = this.state.loading
-        var data = this.state.data
+        const channels = this.state.selectedChannels
+        const loading = this.state.loading
+        const data = this.state.data
+        const tapeId = this.state.tapeId
         if (!channels || (data && Object.keys(data).lengh === 0)){
             return(
                 <div className="d-flex flex-column">
@@ -187,7 +194,8 @@ export class ChannelsLoader extends Component{
                 loading ? <div className="loading-text">LOADING DATA...</div> 
                     : <Redirect to={{pathname:'/apollo11/channels/play',
                             state:{
-                                audioData: data
+                                audioData: data,
+                                tapeId: tapeId
                             }}} />
             
         )

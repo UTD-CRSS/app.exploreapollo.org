@@ -1,0 +1,15 @@
+.timeline-container{
+    position: relative;
+    width: 100%; 
+    height: 600px; 
+}
+
+.timeline-scroller{
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 21px;
+    left: 0;
+
+}

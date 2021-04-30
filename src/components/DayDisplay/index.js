@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom'
 
 export class DayDisplay extends Component {
   render() {
@@ -85,64 +86,64 @@ export class DayDisplay extends Component {
         <div className="row">
           <div className="col-lg-1 day-btn-col" />
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url}>
+            <Link className="btn day-btn" to={url}>
               <div className="day-btn-label">Show All</div>
               <div className="day-btn-text">Jul 16-24</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/1")}>
+            <Link className="btn day-btn" to={url.concat("day/1")}>
               <div className="day-btn-label">Day 1</div>
               <div className="day-btn-text">Jul 16th</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/2")}>
+            <Link className="btn day-btn" to={url.concat("day/2")}>
               <div className="day-btn-label">Day 2</div>
               <div className="day-btn-text">Jul 17th</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/3")}>
+            <Link className="btn day-btn" to={url.concat("day/3")}>
               <div className="day-btn-label">Day 3</div>
               <div className="day-btn-text">Jul 18th</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/4")}>
+            <Link className="btn day-btn" to={url.concat("day/4")}>
               <div className="day-btn-label">Day 4</div>
               <div className="day-btn-text">Jul 19th</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/5")}>
+            <Link className="btn day-btn" to={url.concat("day/5")}>
               <div className="day-btn-label">Day 5</div>
               <div className="day-btn-text">Jul 20th</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/6")}>
+            <Link className="btn day-btn" to={url.concat("day/6")}>
               <div className="day-btn-label">Day 6</div>
               <div className="day-btn-text">Jul 21st</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/7")}>
+            <Link className="btn day-btn" to={url.concat("day/7")}>
               <div className="day-btn-label">Day 7</div>
               <div className="day-btn-text">Jul 22nd</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/8")}>
+            <Link className="btn day-btn" to={url.concat("day/8")}>
               <div className="day-btn-label">Day 8</div>
               <div className="day-btn-text">Jul 23rd</div>
-            </a>
+            </Link>
           </div>
           <div className="col-lg-1 day-btn-col">
-            <a className="btn day-btn" href={url.concat("day/9")}>
+            <Link className="btn day-btn" to={url.concat("day/9")}>
               <div className="day-btn-label">Day 9</div>
               <div className="day-btn-text">Jul 24th</div>
-            </a>
+            </Link>
           </div>
         </div>
         <img

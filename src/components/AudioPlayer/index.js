@@ -95,12 +95,14 @@ export class AudioPlayer extends Component {
 
 
   getAudioFileName(){
-    // find index of string to get substring,  audio filename has "audio/" following by the actual filename
+    // geting filename of audio
     var fileName
     const url = this.props.url
     if (url){
       var startIndex = url.indexOf("audio/")
-      fileName = url.substring(startIndex + 6, url.length - 4)
+      let temp= url.substring(startIndex + 6, url.length - 4)
+      let tokens = temp.split('/')
+      fileName=tokens[2]
     }
     return fileName
   }
@@ -123,7 +125,7 @@ componentDidUpdate(){
       time,
       autoplay,
       operation,
-      channelName
+      title
       // volume,
     } = this.props;
     
@@ -139,10 +141,10 @@ componentDidUpdate(){
 
     return (
       <div className="moment-player-panel">
-          <h1 className="text-center audio-title">Playing: {channelName}</h1>
+          <h1 className="text-center audio-title">Channel: {title}</h1>
           <h1 className="text-center audio-title">Operation: {operation}</h1>
 
-          <h3 className="audio-filename-text">{audioFileName}</h3>
+          <h3 className="audio-filename-text">Audio filename: {audioFileName}</h3>
         <div className='d-flex flex-row align-items-center'>
           <PlayButton
             isPlaying={(playing || this.props.playAll) && !this.props.pauseAll}
@@ -156,7 +158,7 @@ componentDidUpdate(){
             unMute={() => this.unmuteAudio()}
             className="col-2"
           />
-          <div className="col p-0 ml-1">
+          <div className="col ml-1">
           <Wavesurfer
             audioFile={url}
             volume={volume}
