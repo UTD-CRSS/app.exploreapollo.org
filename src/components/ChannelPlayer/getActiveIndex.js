@@ -7,7 +7,6 @@ export default function getActiveIndex(transcripts, currentMissionTime) {
     return -1;
   }
   let i;
-  console.log("getActiveIndex");
   for (i = 0; i < transcripts.length; i++) {
     const metStart = transcripts[i].startTime;
     const metEnd = transcripts[i].endTime;
