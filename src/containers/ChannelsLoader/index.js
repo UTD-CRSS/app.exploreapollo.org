@@ -8,7 +8,7 @@ export class ChannelsLoader extends Component {
     super(props);
     this.state = {
       loading: true,
-      channels: this.props.location.state.channels,
+      // channels: this.props.location.state.channels,
     };
   }
 
@@ -150,6 +150,11 @@ export class ChannelsLoader extends Component {
   }
 
   componentDidMount() {
+    if (this.props.location && this.props.location.state)
+    {
+      this.setState({channels: this.props.location.state.channels});
+    }
+
     if (this.channelsExist()) {
       this.setSelectedChannelsState();
       this.setBlockIndexState();
@@ -165,7 +170,7 @@ export class ChannelsLoader extends Component {
     if (!channels || (data && Object.keys(data).lengh === 0)) {
       return (
         <div className="d-flex flex-column">
-          <div>Error loading channels, please select channels to listen </div>
+          <div className="error-message">Error loading channels, please select channels to listen</div>
 
           <Link to="/apollo11/channels">
             <button type="button" className="btn btn-primary">
