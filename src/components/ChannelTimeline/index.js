@@ -33,7 +33,7 @@ export function TimelineMessage({ name, text, active, startTime, clickEvent }) {
   );
 }
 
-function TimelineList({ timeline, clickEvent, speakerName }) {
+function TimelineList({ timeline, clickEvent}) {
   if (!timeline || Object.keys(timeline).length < 1) {
     return (
       <div className="alert alert-info">Transcripts are not available</div>

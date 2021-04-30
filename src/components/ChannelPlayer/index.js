@@ -63,7 +63,7 @@ export class ChannelPlayer extends Component {
 
   componentDidMount() {
     const data = this.state.data;
-    if (data["channel"]) {
+    if (data && data["channel"]) {
       const channel = data["channel"];
       const url = channel["audioUrl"];
       const channelName = channel["channelName"];

@@ -25,7 +25,7 @@ import { /*App, */ AppHeader, AppFooter } from "./index";
 describe("Header", function () {
   it("should display header", function () {
     var app = shallow(<AppHeader />);
-    expect(app.find("a.inTheNews").text()).toBe("In the News");
+    expect(app.find("Link.inTheNews").text()).toBe("In the News");
   });
 });
 describe("Footer", function () {
