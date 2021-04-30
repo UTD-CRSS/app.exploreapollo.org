@@ -137,8 +137,6 @@ export class MomentViewer extends Component {
     if (parent != undefined) {
       timeline =
         parent.children[0].children[0].children[0].children[0].children[1];
-        console.log(timeline)
-
       let transcripts = this.state.transcript;
       transcripts.forEach((t) => (t.active = false));
       let activeIndex = getActiveIndex(
@@ -314,10 +312,18 @@ export class MomentViewer extends Component {
               <Tabs>
                 <TabList>
                   <div className="row">
-                    <Tab className="diagramtabs center momentStoryButton">LineDiagram</Tab>
-                    <Tab className="diagramtabs center momentStoryButton">BarDiagram</Tab>
-                    <Tab className="diagramtabs center momentStoryButton">ChordDiagram</Tab>
-                    <Tab className="diagramtabs center momentStoryButton">Dashboard</Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      LineDiagram
+                    </Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      BarDiagram
+                    </Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      ChordDiagram
+                    </Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      Dashboard
+                    </Tab>
                   </div>
                 </TabList>
                 <TabPanel>{lineDiagramWidget}</TabPanel>

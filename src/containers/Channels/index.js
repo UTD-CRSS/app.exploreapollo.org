@@ -87,7 +87,7 @@ const BlockSelectMenu = (props) => {
         onChange={handleValueChange}
         className="custom-select w-50"
       >
-        {blockIndexArr.map((value, index) => {
+        {blockIndexArr.map((value) => {
           return (
             <option key={value} value={value}>
               {value}
@@ -115,7 +115,7 @@ const NuggetSelectMenu = (props) => {
         onChange={handleValueChange}
         className="custom-select w-50"
       >
-        {nuggetIndexArr.map((value, index) => {
+        {nuggetIndexArr.map((value) => {
           return (
             <option key={value} value={value}>
               {value}
@@ -172,7 +172,7 @@ const ChannelList = ({ channels, clickSelectorEvent, numChannelsSelected }) => {
       <label className="option-label">Select up to 3 channels</label>
 
       <div className="d-flex flex-column align-items-center">
-        {Object.keys(channels).map((channelName, index) => {
+        {Object.keys(channels).map((channelName) => {
           return (
             <ChannelItem
               key={channelName}

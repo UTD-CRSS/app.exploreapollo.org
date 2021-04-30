@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { HumanReadableMs } from "../";
 
-export function TimelineMessage({ name, text, active, startTime, clickEvent }) {
+export function TimelineMessage({ speakerName, text, active, startTime, clickEvent }) {
   const listItemClasses = classNames(
     "list-group-item",
     "transcript-item",
@@ -12,7 +12,7 @@ export function TimelineMessage({ name, text, active, startTime, clickEvent }) {
   return (
     <a className={listItemClasses} onClick={clickEvent.bind(this, "viewer", startTime)}>
       <div>
-        <strong>{name}:</strong>
+        <strong>{speakerName}:</strong>
         <div className="start-time">{HumanReadableMs({ ms: startTime })}</div>
       </div>
       <div>{text}</div>
@@ -33,7 +33,7 @@ function TimelineList({ timeline, clickEvent }) {
       <TimelineMessage
         key={item["id"]}
         id={item["id"]}
-        name={item["speakerName"]}
+        speakerName={item["speakerName"]}
         active={item["active"]}
         clickEvent={clickEvent}
         startTime={item["metStart"]}

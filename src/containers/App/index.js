@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logo from "../../../static/ExploreApolloLogo.gif";
 import { Dashboard } from "../Dashboard";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 export class AppHeader extends Component {
   render() {
     return (
@@ -156,7 +156,7 @@ export class AppFooter extends Component {
   }
 }
 
-// Removed FloatingFeedbackButton because it is a bit spazzy and we aren't sure if we need it 
+// Removed FloatingFeedbackButton because it is a bit spazzy and we aren't sure if we need it
 
 // export class FloatingFeedbackButton extends Component {
 //   constructor() {

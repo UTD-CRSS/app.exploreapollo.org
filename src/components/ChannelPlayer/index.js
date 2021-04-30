@@ -125,7 +125,7 @@ export class ChannelPlayer extends Component {
   }
 
   render() {
-    const { onEnd, autoplay } = this.props;
+    const { autoplay } = this.props;
     var timelineEnable = this.state.timelineEnable;
     var focusOnTranscript = this.state.focusOnActiveTranscript;
 

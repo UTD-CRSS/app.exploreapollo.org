@@ -30,7 +30,7 @@ async function getTranscriptsTrs(url) {
     })
     .catch((error) => console.log(error));
   var xml = "";
-  for (var i in rawTranscriber) {
+  for (let i in rawTranscriber) {
     var trimmed = rawTranscriber[i].trim();
     if (trimmed.length !== 0) {
       xml += trimmed;
@@ -49,7 +49,7 @@ async function getTranscriptsTrs(url) {
     trasncriberJson["elements"][1]["elements"][0]["elements"][0]["elements"][0][
       "elements"
     ];
-  for (var i = 0; i < transcriberContent.length; i += 2) {
+  for (let i = 0; i < transcriberContent.length; i += 2) {
     var newItem = {};
     newItem["startTime"] = transcriberContent[i]["attributes"]["time"];
     if (i / 2 > 0) {
