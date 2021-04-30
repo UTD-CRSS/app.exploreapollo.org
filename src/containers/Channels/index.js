@@ -103,10 +103,6 @@ const NuggetSelectMenu = (props) => {
   const handleValueChange = props.handleValueChange;
   const nuggetIndex = props.nuggetIndex;
 
-  var nuggetIndexArr = [];
-  for (var i = 1; i <= 7; i++) {
-    nuggetIndexArr.push(i);
-  }
   return (
     <div className="channel-select-menu-containner">
       <label className="option-label">Choose Nugget number:</label>
@@ -115,19 +111,12 @@ const NuggetSelectMenu = (props) => {
         onChange={handleValueChange}
         className="custom-select w-50"
       >
-        {nuggetIndexArr.map((value) => {
-          return (
-            <option key={value} value={value}>
-              {value}
-            </option>
-          );
-        })}
-        {/* <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option> */}
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
       </select>
     </div>
   );
@@ -264,8 +253,6 @@ export class Channels extends Component {
   };
 
   addTapeAndSetState = (tapeTitle) => {
-    // var selectedTape = []
-    // selectedTape.push(tapeTitle)
     this.setState({ selectedTape: tapeTitle });
     this.selectTapeAndSetState(tapeTitle);
   };
@@ -303,20 +290,22 @@ export class Channels extends Component {
     this.setState({ nuggetIndex: nuggetIndex });
   };
 
-  handleCloseInstruction() {
+  handleCloseInstruction = () => {
     this.setState({ showInstruction: false });
-  }
+  };
 
-  handleDisplayInstruction() {
+  handleDisplayInstruction = () => {
     this.setState({ showInstruction: true });
-  }
+  };
 
   /**
    *
-   * @returns true if alreadyVisited=true is stored in local storage, false otherwise
+   * @returns true if alreadyVisitedChannelSelectingPage=true is stored in local storage, false otherwise
    */
   isFirstVisit() {
-    return localStorage.getItem("alreadyVisited") === "true";
+    return (
+      localStorage.getItem("alreadyVisitedChannelSelectingPage") === "true"
+    );
   }
 
   async fetchTapes() {
@@ -328,6 +317,9 @@ export class Channels extends Component {
           tapes[tape.title] = tape;
           tapes[tape.title].isSelected = false;
         });
+      })
+      .catch((error) => {
+        console.log(error);
       });
     return tapes;
   }
@@ -355,6 +347,10 @@ export class Channels extends Component {
             channels.push(channel.channel_name);
           }
         });
+      })
+      .catch((error) => {
+        console.log(error);
+        channels = [];
       });
 
     return channels;
@@ -391,117 +387,126 @@ export class Channels extends Component {
       this.setState({ showInstruction: false });
     } else {
       // This is the first time
-      localStorage.setItem("alreadyVisited", true);
+      localStorage.setItem("alreadyVisitedChannelSelectingPage", true);
       this.setState({ showInstruction: true });
     }
   }
 
   render() {
-    var tapeLoaded = this.state.tapesLoaded;
-    var channelsLoaded = this.state.channelsLoaded;
-    var selectedChannels = this.state.selectedChannels;
-    var filteredChannels = this.state.filteredChannels;
-    var blockIndex = this.state.blockIndex;
-    var nuggetIndex = this.state.nuggetIndex;
-    var disabled = selectedChannels.length > 0 ? false : true;
-    var tapes = this.state.tapes;
-    var selectedTape = this.state.selectedTape;
+    const tapeLoaded = this.state.tapesLoaded;
+    const channelsLoaded = this.state.channelsLoaded;
+    const selectedChannels = this.state.selectedChannels;
+    const filteredChannels = this.state.filteredChannels;
+    const blockIndex = this.state.blockIndex;
+    const nuggetIndex = this.state.nuggetIndex;
+    const disabled = selectedChannels.length > 0 ? false : true;
+    const tapes = this.state.tapes;
+    const selectedTape = this.state.selectedTape;
+    const tapeId = selectedTape.length > 0 ? tapes[selectedTape].id : null;
+    const minBlock =
+      selectedTape.length > 0 ? tapes[selectedTape].min_block : null;
+    const maxBlock =
+      selectedTape.length > 0 ? tapes[selectedTape].max_block : null;
+
     return (
       <div>
         <AppHeader />
 
         {!tapeLoaded && <p className="loading-text">LOADING DATA...</p>}
 
-        {tapeLoaded && (
-          <div className="container">
-            <div className="title-banner-container">
-              <span className="title-banner-text">Apollo 11 Channels</span>
+        {tapeLoaded &&
+          (Object.keys(tapes).length === 0 ? (
+            <div className="container">
+              <h3>Sorry, we cannot find any tapes </h3>
             </div>
-            <TapeSelectMenu
-              tapes={tapes}
-              selectedTape={selectedTape}
-              handleTapeSelectEvent={this.handleTapeSelectEvent}
-            />
-            {filteredChannels.length > 0 && (
-              <ChannelList
-                numChannelsSelected={selectedChannels.length}
-                clickSelectorEvent={this.clickSelectorEvent}
-                channels={this.state.channels}
+          ) : (
+            <div className="container">
+              <div className="title-banner-container">
+                <span className="title-banner-text">Apollo 11 Channels</span>
+              </div>
+              <TapeSelectMenu
+                tapes={tapes}
+                selectedTape={selectedTape}
+                handleTapeSelectEvent={this.handleTapeSelectEvent}
               />
-            )}
-            {selectedTape.length > 0 && !channelsLoaded && (
-              <div> Loading channels </div>
-            )}
-            {
-              selectedTape.length > 0 &&
-                filteredChannels.length === 0 &&
-                channelsLoaded && (
-                <p className=""> No audios available for this tape</p>
-              )
+              {filteredChannels.length > 0 && (
+                <ChannelList
+                  numChannelsSelected={selectedChannels.length}
+                  clickSelectorEvent={this.clickSelectorEvent}
+                  channels={this.state.channels}
+                />
+              )}
+              {selectedTape.length > 0 && !channelsLoaded && (
+                <div> Loading channels </div>
+              )}
+              {
+                selectedTape.length > 0 &&
+                  filteredChannels.length === 0 &&
+                  channelsLoaded && (
+                  <p className=""> No audios available for this tape</p>
+                )
 
-              // if a tape is selected by no channels are currently available for this tape
-              // (Object.keys(selectedTape).length > 0 && filteredChannels.length === 0)  &&
-              // <p className=""> No audios available for this tape</p>
-              // : ""
-            }
-            {selectedChannels.length > 0 && (
-              <>
-                <form>
-                  <div className="d-flex">
-                    <div>
-                      <BlockSelectMenu
-                        minBlock={this.state.tapes[selectedTape].min_block}
-                        maxBlock={this.state.tapes[selectedTape].max_block}
-                        blockIndex={this.state.blockIndex}
-                        handleValueChange={this.handleBlockInputChange}
-                      />
+                // if a tape is selected by no channels are currently available for this tape
+                // (Object.keys(selectedTape).length > 0 && filteredChannels.length === 0)  &&
+                // <p className=""> No audios available for this tape</p>
+                // : ""
+              }
+              {selectedChannels.length > 0 && (
+                <>
+                  <form>
+                    <div className="d-flex">
+                      <div>
+                        <BlockSelectMenu
+                          minBlock={this.state.tapes[selectedTape].min_block}
+                          maxBlock={this.state.tapes[selectedTape].max_block}
+                          blockIndex={this.state.blockIndex}
+                          handleValueChange={this.handleBlockInputChange}
+                        />
+                      </div>
+                      <div>
+                        <NuggetSelectMenu
+                          nuggetIndex={this.state.nuggetIndex}
+                          handleValueChange={this.handleNuggetInputChange}
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <NuggetSelectMenu
-                        nuggetIndex={this.state.nuggetIndex}
-                        handleValueChange={this.handleNuggetInputChange}
-                      />
-                    </div>
-                  </div>
-                  <Link
-                    to={{
-                      pathname: "/apollo11/channels/load",
-                      state: {
-                        channels: {
-                          selectedChannels: selectedChannels,
-                          blockIndex: blockIndex,
-                          nuggetIndex: nuggetIndex,
-                          tapeId:
-                            selectedTape.length > 0
-                              ? tapes[selectedTape].id
-                              : 0,
+                    <Link
+                      to={{
+                        pathname: "/apollo11/channels/load",
+                        state: {
+                          channels: {
+                            selectedChannels: selectedChannels,
+                            blockIndex: blockIndex,
+                            nuggetIndex: nuggetIndex,
+                            tapeId: tapeId,
+                            minBlock: minBlock,
+                            maxBlock: maxBlock,
+                          },
                         },
-                      },
-                    }}
-                  >
-                    <button
-                      disabled={disabled}
-                      className="play-channels-button btn btn-lg mt-2"
+                      }}
                     >
-                      Play
-                    </button>
-                  </Link>
-                </form>
-              </>
-            )}
-          </div>
-        )}
-        <div className="container">
-          <button
-            type="button"
-            className="btn btn-secondary mt-5"
-            onClick={this.handleDisplayInstruction.bind(this)}
-          >
-            Instructions for selecting channels
-          </button>
-        </div>
+                      <button
+                        disabled={disabled}
+                        className="play-channels-button btn btn-lg mt-2"
+                      >
+                        Play
+                      </button>
+                    </Link>
+                  </form>
+                </>
+              )}
+              <button
+                type="button"
+                className="btn btn-secondary mt-5"
+                onClick={this.handleDisplayInstruction}
+              >
+                Instructions for selecting channels
+              </button>
+            </div>
+          ))}
+
         <ChannelsSelectingInstruction
-          handleClosePopup={this.handleCloseInstruction.bind(this)}
+          handleClosePopup={this.handleCloseInstruction}
           showInstruction={this.state.showInstruction}
         />
         <AppFooter />
