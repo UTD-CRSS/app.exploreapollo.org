@@ -15,13 +15,16 @@ import {
   Apollo1Explorer,
   Apollo4Explorer,
   Apollo5Explorer,
-  Apollo6Explorer, 
+  Apollo6Explorer,
   Apollo11Explorer,
   Apollo13Explorer,
   Game,
   LessonPlans,
   InTheNews,
   LoadingMoment,
+  ChannelViewer,
+  Channels,
+  ChannelsLoader,
 } from "./containers";
 
 export default class Routes extends Component {
@@ -43,16 +46,26 @@ export default class Routes extends Component {
           path="/stories/story/:storyId/loading/:momentId"
           component={LoadingMoment}
         />
+
         <Route path="/search" component={Search} />
         <Route path="/stories" component={Stories} />
         <Route path="/apollo1" component={Apollo1Explorer} />
         <Route path="/apollo4" component={Apollo4Explorer} />
         <Route path="/apollo5" component={Apollo5Explorer} />
         <Route path="/apollo6" component={Apollo6Explorer} />
-        <Route path="/apollo11" component={Apollo11Explorer} />
+
+        <Route exact path="/apollo11" component={Apollo11Explorer} />
         <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer} />
+
         <Route path="/apollo13" component={Apollo13Explorer} />
         <Route path="/moments/random" component={RandomMoment} />
+
+        <Route exact path="/:mission/channels" component={Channels} />
+
+        <Route path="/apollo11/channels/load" component={ChannelsLoader} />
+
+        <Route path="/apollo11/channels/play" component={ChannelViewer} />
+
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />
         <Route path="/lessons" component={LessonPlans} />

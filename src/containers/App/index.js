@@ -1,44 +1,49 @@
 import React, { Component } from "react";
 import logo from "../../../static/ExploreApolloLogo.gif";
 import { Dashboard } from "../Dashboard";
-
+import { Link } from "react-router-dom";
 export class AppHeader extends Component {
   render() {
     return (
       <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
         <div className="container-fluid">
-          <a href="/">
+          <Link to="/">
             <img src={logo} width="95%" height="95%" />
-          </a>
+          </Link>
           <div className="navitem">
             <button className="navbtn">Missions</button>
             <div className="dropdown-content">
-              <a href="/apollo1">Apollo 1</a>
-              <a href="/apollo4">Apollo 4</a>
-              <a href="/apollo5">Apollo 5</a>
-              <a href="/apollo6">Apollo 6</a>
-              <a href="/apollo11">Apollo 11</a>
-              <a href="/apollo13">Apollo 13</a>
+              <Link to="/apollo1">Apollo 1</Link>
+              <Link to="/apollo4">Apollo 4</Link>
+              <Link to="/apollo5">Apollo 5</Link>
+              <Link to="/apollo6">Apollo 6</Link>
+              <div className=" dropdown-submenu">
+                <Link to="/apollo11">Apollo 11</Link>
+                <div className="dropdown-submenu-content">
+                  <Link to="/apollo11/channels">Mission Audios</Link>
+                </div>
+              </div>
+              <Link to="/apollo13">Apollo 13</Link>
             </div>
           </div>
 
           <div className="navitem">
             <button className="navbtn">
-              <a href="/moments/random">Surprise Me!</a>
+              <Link to="/moments/random">Surprise Me!</Link>
             </button>
           </div>
 
           <div className="navitem">
             <button className="navbtn">
-              <a href="/lessons">Lesson Plans</a>
+              <Link to="/lessons">Lesson Plans</Link>
             </button>
           </div>
 
           <div className="navitem">
             <button className="navbtn">
-              <a href="/inthenews" className="inTheNews">
+              <Link to="/inthenews" className="inTheNews">
                 In the News
-              </a>
+              </Link>
             </button>
           </div>
 
@@ -77,14 +82,14 @@ export class AppHeader extends Component {
           <div className="navitem">
             <button className="navbtn">&#9733;</button>
             <div className="dropdown-content">
-              <a href="/game"> Asteroid Strike </a>
-              <a href="/dj"> DJ</a>
+              <Link to="/game"> Asteroid Strike </Link>
+              <Link to="/dj"> DJ</Link>
             </div>
           </div>
 
           <div className="navitem">
             <button className="navbtn">
-              <a href="/search"> &#x1F50D;</a>
+              <Link to="/search"> &#x1F50D;</Link>
             </button>
           </div>
         </div>
@@ -114,13 +119,13 @@ export class AppFooter extends Component {
             <div className="col-sm-4 col-sm-offset-2">
               <ul className="footer-links">
                 <li>
-                  <a href="/">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="/apollo11">Apollo 11</a>
+                  <Link to="/apollo11">Apollo 11</Link>
                 </li>
                 <li>
-                  <a href="/moments/random">Surprise Me!</a>
+                  <Link to="/moments/random">Surprise Me!</Link>
                 </li>
               </ul>
             </div>
@@ -134,7 +139,7 @@ export class AppFooter extends Component {
                   <a href="https://github.com/UTD-CRSS">GitHub</a>
                 </li>
                 <li>
-                  <a href="/settings">Settings</a>
+                  <Link to="/settings">Settings</Link>
                 </li>
               </ul>
             </div>
@@ -151,7 +156,7 @@ export class AppFooter extends Component {
   }
 }
 
-// Removed FloatingFeedbackButton because it is a bit spazzy and we aren't sure if we need it 
+// Removed FloatingFeedbackButton because it is a bit spazzy and we aren't sure if we need it
 
 // export class FloatingFeedbackButton extends Component {
 //   constructor() {

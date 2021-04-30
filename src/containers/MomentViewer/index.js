@@ -131,6 +131,7 @@ export class MomentViewer extends Component {
 
   componentDidUpdate() {
     let parent = ReactDOM.findDOMNode(this).children[2].children[1].children[0];
+    console.log(parent);
     let timeline;
     let scrollHeight = 0;
     if (parent != undefined) {
@@ -311,10 +312,18 @@ export class MomentViewer extends Component {
               <Tabs>
                 <TabList>
                   <div className="row">
-                    <Tab className="diagramtabs center momentStoryButton">LineDiagram</Tab>
-                    <Tab className="diagramtabs center momentStoryButton">BarDiagram</Tab>
-                    <Tab className="diagramtabs center momentStoryButton">ChordDiagram</Tab>
-                    <Tab className="diagramtabs center momentStoryButton">Dashboard</Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      LineDiagram
+                    </Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      BarDiagram
+                    </Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      ChordDiagram
+                    </Tab>
+                    <Tab className="diagramtabs center momentStoryButton">
+                      Dashboard
+                    </Tab>
                   </div>
                 </TabList>
                 <TabPanel>{lineDiagramWidget}</TabPanel>
