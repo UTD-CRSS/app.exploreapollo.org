@@ -24,7 +24,7 @@ export function ChannelPlayerNavigatingInstruction(props) {
             className="message-title"
             id="contained-modal-title-vcenter"
           >
-            How to navigate in playback page
+            How to Navigate in Playback Page
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="message-body">
