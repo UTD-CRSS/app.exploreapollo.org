@@ -20,7 +20,7 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
   const title = tape.title;
   const met_start = tape.met_start;
   const met_end = tape.met_end;
-  const operation = tape.operation
+  const operation = tape.operation;
   return (
     <div
       className={`row channel-item-container channel-item-text ${
