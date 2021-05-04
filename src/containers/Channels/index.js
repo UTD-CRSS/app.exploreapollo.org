@@ -439,18 +439,11 @@ export class Channels extends Component {
               {selectedTape.length > 0 && !channelsLoaded && (
                 <div> Loading channels </div>
               )}
-              {
-                selectedTape.length > 0 &&
-                  filteredChannels.length === 0 &&
-                  channelsLoaded && (
-                  <p className=""> No audios available for this tape</p>
-                )
-
-                // if a tape is selected by no channels are currently available for this tape
-                // (Object.keys(selectedTape).length > 0 && filteredChannels.length === 0)  &&
-                // <p className=""> No audios available for this tape</p>
-                // : ""
-              }
+              {selectedTape.length > 0 &&
+                filteredChannels.length === 0 &&
+                channelsLoaded && (
+                <p className=""> No audios available for this tape</p>
+              )}
               {selectedChannels.length > 0 && (
                 <>
                   <form>

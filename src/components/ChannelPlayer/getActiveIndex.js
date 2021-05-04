@@ -1,3 +1,12 @@
+/**
+ * Return array of 2 elements [i, k], if the second element is true, the transcript at index i is active,
+ * if the second element is false, no one is talking at  currentMissionTime, the return index is index of the last transcript,
+ * this is used to have smooth transition between each talk and silence
+ * @param {*} transcripts 
+ * @param {*} currentMissionTime 
+ * @returns array of 2 elements, first element indicates transcript item index, second element is either true or false,
+ * indicating if the index should be used to set the transcript to active
+ */
 export default function getActiveIndex(transcripts, currentMissionTime) {
   if (
     transcripts == null ||
@@ -11,9 +20,9 @@ export default function getActiveIndex(transcripts, currentMissionTime) {
     const metStart = transcripts[i].startTime;
     const metEnd = transcripts[i].endTime;
     if (currentMissionTime < metEnd && currentMissionTime > metStart) {
-      return i;
+      return [i, true];
     } else if (currentMissionTime < metStart) {
-      return -1;
+      return [i - 1, false];
     }
   }
 }

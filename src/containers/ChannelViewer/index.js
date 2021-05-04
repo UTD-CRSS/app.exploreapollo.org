@@ -29,6 +29,8 @@ export class ChannelViewer extends Component {
         this.props.location && this.props.location.state
           ? this.props.location.state.maxBlock
           : null,
+      masterPlaybackTime: 0,
+      masterChannelName: "",
     };
   }
 
@@ -104,6 +106,9 @@ export class ChannelViewer extends Component {
     this.setState({ showInstruction: true });
   };
 
+  handleSyncMasterTime(time, channel) {
+    this.setState({ masterPlaybackTime: time, masterChannelName: channel });
+  }
   handlePlayNext() {
     const nextAudioBlockNuggetIndex = this.getNextBlockAndNuggetIndex();
     const blockIndex = nextAudioBlockNuggetIndex[0];
@@ -262,6 +267,9 @@ export class ChannelViewer extends Component {
                       togglePausePlay={this.togglePausePlay.bind(this)}
                       autoplay={false}
                       data={data[key]}
+                      masterChannelName={this.state.masterChannelName}
+                      masterPlaybackTime={this.state.masterPlaybackTime}
+                      onSyncPlaybackTime={this.handleSyncMasterTime.bind(this)}
                     />
                   </div>
                 );
