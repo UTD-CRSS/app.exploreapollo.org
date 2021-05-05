@@ -1,6 +1,6 @@
 {
   "name": "app.exploreapollo.org",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Apollo Project Single Page App (repo name still up in the air)",
   "main": "./build/index.js",
   "private": true,

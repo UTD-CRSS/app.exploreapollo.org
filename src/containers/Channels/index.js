@@ -434,7 +434,7 @@ export class Channels extends Component {
                 selectedTape={selectedTape}
                 handleTapeSelectEvent={this.handleTapeSelectEvent}
               />
-              {filteredChannels.length > 0 && (
+              {selectedTape.length > 0 && filteredChannels.length > 0 && (
                 <ChannelList
                   numChannelsSelected={selectedChannels.length}
                   clickSelectorEvent={this.clickSelectorEvent}
