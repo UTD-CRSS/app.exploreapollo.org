@@ -22,7 +22,7 @@ export function TimelineMessage({ name, text, active, startTime, clickEvent }) {
   return (
     <a
       className={listItemClasses}
-      onClick={clickEvent.bind(this, "viewer", startTime)}
+      onClick={()=> clickEvent(startTime)}
     >
       <div>
         {name && <strong>{name}:</strong>}

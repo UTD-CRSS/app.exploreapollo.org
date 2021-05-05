@@ -16,9 +16,11 @@ export class ChannelPlayer extends Component {
       operation: "",
       timelineEnable: false,
       channel: "",
+      masterPlaybackTime: 0,
       playAll: this.props.playAll,
       pauseAll: this.props.pauseAll,
       focusOnActiveTranscript: true,
+      scrollHeight: 0,
     };
     this.timelineClickEvent = this.timelineClickEvent.bind(this);
   }
@@ -32,7 +34,7 @@ export class ChannelPlayer extends Component {
     this.setState({ timelineEnable: !this.state.timelineEnable });
   };
 
-  timelineClickEvent(comp, startTime) {
+  timelineClickEvent(startTime) {
     //tolerance is to prevent number comparisons from being incorrect due to the very last decimal
     //because if the startTime and this.state.audio.time are not "equal" then the code will
     //create an infinite loop which will crash the momentViewer. We only experienced this issue on
@@ -43,12 +45,16 @@ export class ChannelPlayer extends Component {
       return;
     }
     let seekTime;
-    if (comp == "player") {
-      seekTime = startTime;
+    if (this.props.masterPlaybackTime !== this.state.masterPlaybackTime) {
+      this.setState({ masterPlaybackTime: this.props.masterPlaybackTime });
+      if (this.props.masterChannelName === this.state.channel.channelName) {
+        seekTime = startTime;
+      } else {
+        seekTime = this.props.masterPlaybackTime;
+      }
     } else {
-      seekTime = startTime - 0;
+      seekTime = startTime;
     }
-    // if (momentMetStart) {
     if (this) {
       this.setState({
         audio: {
@@ -58,7 +64,6 @@ export class ChannelPlayer extends Component {
         },
       });
     }
-    // }
   }
 
   componentDidMount() {
@@ -100,10 +105,7 @@ export class ChannelPlayer extends Component {
           parent.children[0].children[0].children[0].children[0].children[1];
         transcripts.forEach((t) => (t.active = false));
         let activeIndex = getActiveIndex(transcripts, this.state.audio.time);
-        if (activeIndex < 0) {
-          activeIndex = 0;
-        }
-        for (var i = activeIndex - 2; i >= 0; i--) {
+        for (var i = activeIndex[0] - 2; i >= 0; i--) {
           var activeItem = timeline.children[i];
           if (activeItem != undefined) {
             scrollHeight += timeline.children[i].offsetHeight - 1;
@@ -137,9 +139,8 @@ export class ChannelPlayer extends Component {
     if (transcripts && timelineEnable) {
       transcripts.forEach((t) => (t.active = false));
       activeIndex = getActiveIndex(transcripts, currentAudioTime);
-
-      if (activeIndex >= 0) {
-        transcripts[activeIndex].active = true;
+      if (activeIndex[1]) {
+        transcripts[activeIndex[0]].active = true;
       }
     }
 
@@ -161,11 +162,14 @@ export class ChannelPlayer extends Component {
             clickEvent={this.timelineClickEvent}
             channelName={this.state.channel}
             title={this.state.title}
+            masterPlaybackTime={this.props.masterPlaybackTime}
+            masterChannelName={this.props.masterChannelName}
+            onSyncPlaybackTime={this.props.onSyncPlaybackTime}
           />
-          <div className="mt-5 d-flex">
+          <div className="mt-5 ml-3 d-flex">
             <button
               type="button"
-              className="btn btn-secondary mr-2"
+              className="btn btn-primary mr-2"
               onClick={this.toggleTimeline}
             >
               {timelineEnable ? "Hide Transcript" : "Display Transcript"}
@@ -186,7 +190,6 @@ export class ChannelPlayer extends Component {
           {this.state.timelineEnable && (
             <div style={{ marginTop: "0.5em" }} className="timeline-panel row">
               <ChannelTimeline
-                // speakerName={this.state.speakerName}
                 timeline={transcripts}
                 clickEvent={this.timelineClickEvent}
               />

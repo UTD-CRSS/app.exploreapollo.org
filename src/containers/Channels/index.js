@@ -20,6 +20,7 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
   const title = tape.title;
   const met_start = tape.met_start;
   const met_end = tape.met_end;
+  const operation = tape.operation;
   return (
     <div
       className={`row channel-item-container channel-item-text ${
@@ -32,18 +33,22 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
           tape.isSelected ? "channel-item-selected" : "channel-item-unselected"
         }`}
       ></div>
-      <div className="channel-item-title d-flex col-2">
+      <div className="channel-item-title d-flex col-1 mr-2">
         <div className="mr-2">Tape: </div>
         <div>{title}</div>
       </div>
-      <div className="col-4 channel-item-description d-flex align-items-center">
-        <div className="mr-4">Tape start time: </div>
+      <div className="channel-item-title d-flex col-2 justify-content-center">
+        <div className="mr-2">Operation: </div>
+        <div>{operation}</div>
+      </div>
+      <div className="col-4 channel-item-description d-flex justify-content-center">
+        <div className="mr-2">Tape start time: </div>
         <div>
           <HumanReadableTime unixTime={met_start} />
         </div>
       </div>
-      <div className="col-4 channel-item-description d-flex align-items-center">
-        <div className="mr-4">Tape end time: </div>
+      <div className="col-4 channel-item-description d-flex justify-content-center">
+        <div className="mr-2">Tape end time: </div>
         <div>
           <HumanReadableTime unixTime={met_end} />
         </div>
@@ -439,18 +444,11 @@ export class Channels extends Component {
               {selectedTape.length > 0 && !channelsLoaded && (
                 <div> Loading channels </div>
               )}
-              {
-                selectedTape.length > 0 &&
-                  filteredChannels.length === 0 &&
-                  channelsLoaded && (
-                  <p className=""> No audios available for this tape</p>
-                )
-
-                // if a tape is selected by no channels are currently available for this tape
-                // (Object.keys(selectedTape).length > 0 && filteredChannels.length === 0)  &&
-                // <p className=""> No audios available for this tape</p>
-                // : ""
-              }
+              {selectedTape.length > 0 &&
+                filteredChannels.length === 0 &&
+                channelsLoaded && (
+                <p className=""> No audios available for this tape</p>
+              )}
               {selectedChannels.length > 0 && (
                 <>
                   <form>

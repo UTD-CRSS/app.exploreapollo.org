@@ -24,7 +24,7 @@ export function ChannelsSelectingInstruction(props) {
             className="message-title"
             id="contained-modal-title-vcenter"
           >
-            How to Select Channelss
+            How to Select Channels
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="message-body">

@@ -79,7 +79,7 @@ export class AudioPlayer extends Component {
 
   seek(e) {
     const seekTime = e.originalArgs[0];
-    this.state.clickEvent("player", seekTime);
+    this.state.clickEvent(seekTime);
   }
 
   onEnd = () => {
@@ -157,6 +157,16 @@ export class AudioPlayer extends Component {
               onReady={autoplay && this.playaudio.bind(this)}
             />
           </div>
+        </div>
+        <div>
+          <button
+            className="btn btn-secondary"
+            onClick={() =>
+              this.props.onSyncPlaybackTime(time, this.props.channelName)
+            }
+          >
+            Sync All Channels To This
+          </button>
         </div>
       </div>
     );
