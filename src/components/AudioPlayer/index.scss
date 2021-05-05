@@ -34,10 +34,20 @@
   height: 70%;
 }
 
-.audio-title{
-  height: 55px;
+.audio-title {
+  height: 50px;
   font-size: 2.4rem;
 }
-.audio-filename-text{
+.audio-filename-text {
   font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+  .audio-title {
+    height: 40px;
+    font-size: 2rem;
+  }
+  .audio-filename-text {
+    font-size: 1rem;
+  }
 }
