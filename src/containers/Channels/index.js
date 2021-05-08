@@ -6,6 +6,17 @@ import { Link } from "react-router-dom";
 import { ChannelsSelectingInstruction } from "../../components/ChannelsSelectingInstruction";
 import moment from "moment";
 
+/**
+ *
+ * @param {Number} a
+ * @param {Number} b
+ * @returns random number ranages from a to b inclusive
+ */
+const getRandomRange = (a, b) => {
+  let range = b - a;
+  return Math.floor(Math.random() * (range + 1)) + a;
+};
+
 const HumanReadableTime = ({ unixTime }) => {
   const format = "MM/DD/YYYY - HH:mm:ss";
 
@@ -23,10 +34,11 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
   const operation = tape.operation;
   return (
     <div
-      className={`channel-item-container channel-item-text ${
-        disabled ? "channel-item-disabled" : ""
+      className={`channel-item-container channel-item-text 
+      ${
+        disabled ? "" : ""
       }`}
-      onClick={() => !disabled && handleTapeSelectEvent(title)}
+      onClick={() => handleTapeSelectEvent(title)}
     >
       <div>
         <div
@@ -210,8 +222,17 @@ export class Channels extends Component {
       allChannels: {},
       selectedTape: "",
       filteredChannels: [],
+      randomOptions: true,
     };
   }
+
+  handleAdvancedOptionsClick = () => {
+    this.setState({ randomOptions: false });
+  };
+
+  handleSeeLessOptionsClick = () => {
+    this.setState({ randomOptions: true });
+  };
 
   isChannelSelected = (channelName) => {
     return this.state.channels[channelName].isSelected;
@@ -274,13 +295,22 @@ export class Channels extends Component {
 
   removeTapeAndSetState = (tapeTitle) => {
     // only allow select one tape, set to empty array
-    this.setState({ selectedTape: "", selectedChannels: [] });
+    this.setState({ selectedTape: "", selectedChannels: [], channels: []});
     this.unselectTapeAndSetState(tapeTitle);
   };
+
+  clearTapeAndChannels() {
+    const selectedTape = this.state.selectedTape;
+    if (selectedTape.length > 0){
+      this.unselectTapeAndSetState(selectedTape);
+    }
+    this.setState({ selectedTape: "", selectedChannels: [], filteredChannels:[], channels: [], channelsLoaded: false });
+  }
 
   handleTapeSelectEvent = async (tapeTitle) => {
     const tapeId = this.state.tapes[tapeTitle].id;
     if (!this.isTapeSelected(tapeTitle)) {
+      this.clearTapeAndChannels();
       this.addTapeAndSetState(tapeTitle);
       await this.fetchAndGetChannelsBelongToTape(tapeId).then((channels) =>
         this.setState({
@@ -457,11 +487,52 @@ export class Channels extends Component {
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                  <p className=""> No audios available for this tape</p>
+                  <p className="loading-text">
+                    No audios available for this tape
+                  </p>
                 )}
-              {selectedChannels.length > 0 && (
+              {selectedChannels.length > 0 && this.state.randomOptions && (
+                <div className="d-flex flex-column">
+                  <div>
+                    <button
+                      className="btn transparent-button "
+                      onClick={this.handleAdvancedOptionsClick}
+                    >
+                      Advanced Options
+                    </button>
+                  </div>
+                  <Link
+                    to={{
+                      pathname: "/apollo11/channels/load",
+                      state: {
+                        channels: {
+                          selectedChannels: selectedChannels,
+                          blockIndex: getRandomRange(minBlock, maxBlock),
+                          nuggetIndex: getRandomRange(1, 6),
+                          tapeId: tapeId,
+                          minBlock: minBlock,
+                          maxBlock: maxBlock,
+                        },
+                      },
+                    }}
+                  >
+                    <button className="play-channels-button btn mt-2">
+                      Play Random
+                    </button>
+                  </Link>
+                </div>
+              )}
+              {selectedChannels.length > 0 && !this.state.randomOptions && (
                 <>
                   <form>
+                    <div>
+                      <button
+                        className="btn transparent-button "
+                        onClick={this.handleSeeLessOptionsClick}
+                      >
+                        See less
+                      </button>
+                    </div>
                     <div className="d-flex">
                       <div>
                         <BlockSelectMenu
