@@ -5,3 +5,9 @@
 .audio-controller-text {
   font-size: 1.2rem;
 }
+
+@media (max-width: 768px) {
+  .audio-controller-text {
+    font-size: 1rem;
+  }
+}

@@ -260,7 +260,7 @@ export class ChannelViewer extends Component {
             <div className="row">
               {Object.keys(data).map((key) => {
                 return (
-                  <div className="col" key={key}>
+                  <div className="col-lg row-md mt-3 mt-lg-0" key={key}>
                     <ChannelPlayer
                       playAll={this.state.playAll}
                       pauseAll={this.state.pauseAll}

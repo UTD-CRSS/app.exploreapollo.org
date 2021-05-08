@@ -7,7 +7,7 @@ import { ChannelsSelectingInstruction } from "../../components/ChannelsSelecting
 import moment from "moment";
 
 const HumanReadableTime = ({ unixTime }) => {
-  const format = "MMM Do YYYY HH:mm:ss";
+  const format = "MM/DD/YYYY - HH:mm:ss";
 
   // displaying seconds as hh:mm:ss format
   var timeStamp = moment.utc(unixTime, "X").format(format);
@@ -23,34 +23,40 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
   const operation = tape.operation;
   return (
     <div
-      className={`row channel-item-container channel-item-text ${
+      className={`channel-item-container channel-item-text ${
         disabled ? "channel-item-disabled" : ""
       }`}
       onClick={() => !disabled && handleTapeSelectEvent(title)}
     >
-      <div
-        className={`${
-          tape.isSelected ? "channel-item-selected" : "channel-item-unselected"
-        }`}
-      ></div>
-      <div className="channel-item-title d-flex col-1 mr-2">
-        <div className="mr-2">Tape: </div>
-        <div>{title}</div>
+      <div>
+        <div
+          className={`${
+            tape.isSelected
+              ? "channel-item-selected"
+              : "channel-item-unselected"
+          }`}
+        ></div>
       </div>
-      <div className="channel-item-title d-flex col-2 justify-content-center">
-        <div className="mr-2">Operation: </div>
-        <div>{operation}</div>
-      </div>
-      <div className="col-4 channel-item-description d-flex justify-content-center">
-        <div className="mr-2">Tape start time: </div>
-        <div>
-          <HumanReadableTime unixTime={met_start} />
+      <div className="options-container col-12 d-flex">
+        <div className="channel-item-title d-flex col-1 align-items-center">
+          <div className="mr-2">Tape: </div>
+          <div>{title}</div>
         </div>
-      </div>
-      <div className="col-4 channel-item-description d-flex justify-content-center">
-        <div className="mr-2">Tape end time: </div>
-        <div>
-          <HumanReadableTime unixTime={met_end} />
+        <div className="channel-item-title d-flex col-3 align-items-center pl-5">
+          <div className="mr-2">Operation: </div>
+          <div>{operation}</div>
+        </div>
+        <div className="col-4 channel-item-description d-flex align-items-center">
+          <div className="mr-2">Start time: </div>
+          <div>
+            <HumanReadableTime unixTime={met_start} />
+          </div>
+        </div>
+        <div className="col-4 channel-item-description d-flex align-items-center">
+          <div className="mr-2">End time: </div>
+          <div>
+            <HumanReadableTime unixTime={met_end} />
+          </div>
         </div>
       </div>
     </div>
@@ -138,23 +144,27 @@ const ChannelItem = ({
   var disabled = numChannelsSelected === 3 && !isSelected;
   return (
     <div
-      className={`row channel-item-container channel-item-text ${
+      className={`channel-item-container channel-item-text ${
         disabled ? "channel-item-disabled" : ""
       }`}
       onClick={() => !disabled && clickSelectorEvent(name)}
     >
-      <div
-        className={`${
-          isSelected ? "channel-item-selected" : "channel-item-unselected"
-        }`}
-      ></div>
-      <div className="channel-item-title d-flex col-3">
-        <div className="mr-2">Channel: </div>
-        <div>{title}</div>
+      <div>
+        <div
+          className={`${
+            isSelected ? "channel-item-selected" : "channel-item-unselected"
+          }`}
+        ></div>
       </div>
-      <div className="col-8 channel-item-description d-flex align-items-center">
-        <div className="mr-4">Description: </div>
-        <div>{description}</div>
+      <div className="options-container col-12 d-flex">
+        <div className="channel-item-title d-flex col-3 align-items-center">
+          <div className="mr-2">Channel: </div>
+          <div>{title}</div>
+        </div>
+        <div className="col-9 channel-item-description d-flex align-items-center">
+          <div className="mr-4">Description: </div>
+          <div>{description}</div>
+        </div>
       </div>
     </div>
   );
@@ -425,7 +435,7 @@ export class Channels extends Component {
               <h3>Sorry, we cannot find any tapes </h3>
             </div>
           ) : (
-            <div className="container">
+            <div className="channel-select-container container-xl">
               <div className="title-banner-container">
                 <span className="title-banner-text">Apollo 11 Channels</span>
               </div>
@@ -447,8 +457,8 @@ export class Channels extends Component {
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                <p className=""> No audios available for this tape</p>
-              )}
+                  <p className=""> No audios available for this tape</p>
+                )}
               {selectedChannels.length > 0 && (
                 <>
                   <form>

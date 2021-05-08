@@ -5,92 +5,102 @@ import { Link } from "react-router-dom";
 export class AppHeader extends Component {
   render() {
     return (
-      <nav className="navbar navbar-brand navbar-expand-xl navbar-inverse">
-        <div className="container-fluid">
-          <Link to="/">
-            <img src={logo} width="95%" height="95%" />
-          </Link>
-          <div className="navitem">
-            <button className="navbtn">Missions</button>
-            <div className="dropdown-content">
-              <Link to="/apollo1">Apollo 1</Link>
-              <Link to="/apollo4">Apollo 4</Link>
-              <Link to="/apollo5">Apollo 5</Link>
-              <Link to="/apollo6">Apollo 6</Link>
-              <div className=" dropdown-submenu">
-                <Link to="/apollo11">Apollo 11</Link>
-                <div className="dropdown-submenu-content">
-                  <Link to="/apollo11/channels">Mission Audios</Link>
+      <nav className="navbar navbar-brand navbar-expand-lg navbar-dark navbar-bg-dark">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="navbar-nav mr-auto">
+            <Link to="/">
+              <img src={logo} width="95%" height="95%" />
+            </Link>
+            <div className="navitem">
+              <button className="navbtn">Missions</button>
+              <div className="dropdown-content">
+                <Link to="/apollo1">Apollo 1</Link>
+                <Link to="/apollo4">Apollo 4</Link>
+                <Link to="/apollo5">Apollo 5</Link>
+                <Link to="/apollo6">Apollo 6</Link>
+                <div className=" dropdown-submenu">
+                  <Link to="/apollo11">Apollo 11</Link>
+                  <div className="dropdown-submenu-content">
+                    <Link to="/apollo11/channels">Mission Audios</Link>
+                  </div>
                 </div>
+                <Link to="/apollo13">Apollo 13</Link>
               </div>
-              <Link to="/apollo13">Apollo 13</Link>
             </div>
-          </div>
 
-          <div className="navitem">
-            <button className="navbtn">
-              <Link to="/moments/random">Surprise Me!</Link>
-            </button>
-          </div>
-
-          <div className="navitem">
-            <button className="navbtn">
-              <Link to="/lessons">Lesson Plans</Link>
-            </button>
-          </div>
-
-          <div className="navitem">
-            <button className="navbtn">
-              <Link to="/inthenews" className="inTheNews">
-                In the News
-              </Link>
-            </button>
-          </div>
-
-          <div className="navitem">
-            <button className="navbtn">FSC</button>
-            <div className="dropdown-content">
-              <a
-                href="https://exploreapollo-fearless-steps.herokuapp.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Fearless Steps Challenge: Phase 1
-              </a>
-              <a
-                href="https://fearless-steps.github.io/ChallengePhase2/Data.html"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {" "}
-                Fearless Steps Challenge: Phase 2
-              </a>
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/moments/random">Surprise Me!</Link>
+              </button>
             </div>
-          </div>
 
-          <div className="navitem">
-            <button className="navbtn">
-              <a
-                href="https://forms.gle/Upq5tVDcRm3zjGYv5"
-                target="_blank"
-              >
-                Submit Feedback
-              </a>
-            </button>
-          </div>
-
-          <div className="navitem">
-            <button className="navbtn">&#9733;</button>
-            <div className="dropdown-content">
-              <Link to="/game"> Asteroid Strike </Link>
-              <Link to="/dj"> DJ</Link>
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/lessons">Lesson Plans</Link>
+              </button>
             </div>
-          </div>
 
-          <div className="navitem">
-            <button className="navbtn">
-              <Link to="/search"> &#x1F50D;</Link>
-            </button>
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/inthenews" className="inTheNews">
+                  In the News
+                </Link>
+              </button>
+            </div>
+
+            <div className="navitem">
+              <button className="navbtn">FSC</button>
+              <div className="dropdown-content">
+                <a
+                  href="https://exploreapollo-fearless-steps.herokuapp.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Fearless Steps Challenge: Phase 1
+                </a>
+                <a
+                  href="https://fearless-steps.github.io/ChallengePhase2/Data.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  Fearless Steps Challenge: Phase 2
+                </a>
+              </div>
+            </div>
+
+            <div className="navitem">
+              <button className="navbtn">
+                <a href="https://forms.gle/Upq5tVDcRm3zjGYv5" target="_blank">
+                  Submit Feedback
+                </a>
+              </button>
+            </div>
+
+            <div className="navitem">
+              <button className="navbtn">&#9733;</button>
+              <div className="dropdown-content">
+                <Link to="/game"> Asteroid Strike </Link>
+                <Link to="/dj"> DJ</Link>
+              </div>
+            </div>
+
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/search"> &#x1F50D;</Link>
+              </button>
+            </div>
           </div>
         </div>
       </nav>
