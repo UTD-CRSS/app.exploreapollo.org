@@ -3,13 +3,15 @@ background-color: #302d2d;
     padding: 0 5px;
     border-radius: 5px;
     width: 100%;
-    height: 60px;
+    height: 80px;
     display: flex;
     align-items: center;
     margin: 10px 0;
-
-// border-color: white;
 }
+
+.channel-item-container.tape {
+        height: 70px;   
+    }
 
 .info-button-container{
     display: inline-block;
@@ -25,8 +27,12 @@ background-color: #302d2d;
     font-size: 0.6em;
 }
 .transparent-button{
-    color: #375a7f;
-    border-color: #375a7f; 
+    color: #fff;
+    border-color: rgba(118, 77, 212, 0.801); 
+    
+}
+.link-btn-play:hover{
+    display: inline-block;
 }
 .loading-channels-container{
     width: 100%;
@@ -80,6 +86,7 @@ background-color: #302d2d;
 
 .play-channels-button{
     background-color: rgba(118, 77, 212, 0.801);
+    margin-top: 0.8em;
 }
 
 .channel-item-disabled{
@@ -101,17 +108,26 @@ background-color: #302d2d;
 }
 
 @media (min-width: 576px) {
-.channel-select-container {
-    font-size: 0.9rem;
-}
+    .channel-select-container {
+        font-size: 0.9rem;
 
+    }
+    .channel-item-container {
+        height: 80px;
+    }
+
+    .channel-item-container.tape {
+        height: 65px;  
+    }
 
 }
 
 @media (min-width: 992px){
     .channel-select-container {
-        font-size: 1.1rem;
+        font-size: 1.08rem;
     }
 
+    .channel-item-container{
+        height: 70px;
+    }
 }
-

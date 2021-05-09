@@ -13,10 +13,11 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 const NuggetPopup = (props) => (
   <Popover {...props} id="nugget-info-popup">
     <Popover.Content style={{ fontSize: "1.2em" }}>
-      30-minute blocks of audios are divided futher into even smaller pieces called <strong>Nuggets. </strong>
-      A nugget is usually 5 minutes long. Nugget 1 contains the first 5-minute audio of a block, nugget 2
-      contains the next 5 minutes (00:05:00-00:10:00), etc...
-      In most cases, a block consists of 6 Nuggets
+      30-minute blocks of audios are divided futher into even smaller pieces
+      called <strong>Nuggets. </strong>A nugget is usually 5 minutes long.
+      Nugget 1 contains the first 5-minute audio of a block, nugget 2 contains
+      the next 5 minutes (00:05:00-00:10:00), etc... In most cases, a block
+      consists of 6 Nuggets
     </Popover.Content>
   </Popover>
 );
@@ -25,9 +26,11 @@ const BlockPopup = (props) => {
   return (
     <Popover id="block-info-popup" {...props}>
       <Popover.Content style={{ fontSize: "1.2em" }}>
-        A tape is usually more than 10 hours long so it is divided into smaller audio files called <strong>Blocks. </strong>
-        A block is typically 30 minutes long. Block 1 of a tape contains the first 30-minute audio, Block 2 contains the
-        next 30 minutes (00:30:00-01:00:00) of that tape, etc...
+        A tape is usually more than 10 hours long so it is divided into smaller
+        audio files called <strong>Blocks. </strong>A block is typically 30
+        minutes long. Block 1 of a tape contains the first 30-minute audio,
+        Block 2 contains the next 30 minutes (00:30:00-01:00:00) of that tape,
+        etc...
       </Popover.Content>
     </Popover>
   );
@@ -42,7 +45,7 @@ const InfoButton = (props) => {
   }
   return (
     <div className="info-button-container" style={{ cursor: "pointer" }}>
-      <OverlayTrigger placement="top" delay={{ show: 200 }} overlay={overlay}>
+      <OverlayTrigger placement="top" delay={{ show: 100 }} overlay={overlay}>
         <FontAwesomeIcon className="info-button" icon={faInfo} />
       </OverlayTrigger>
     </div>
@@ -69,16 +72,14 @@ const HumanReadableTime = ({ unixTime }) => {
   return <>{timeStamp}</>;
 };
 
-const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
-  var disabled = selectedTape.length > 0 && !tape.isSelected;
+const TapeItem = ({ tape, handleTapeSelectEvent }) => {
   const title = tape.title;
   const met_start = tape.met_start;
   const met_end = tape.met_end;
   const operation = tape.operation;
   return (
     <div
-      className={`channel-item-container channel-item-text 
-      ${disabled ? "" : ""}`}
+      className="channel-item-container channel-item-text tape"
       onClick={() => handleTapeSelectEvent(title)}
     >
       <div>
@@ -116,7 +117,7 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
   );
 };
 
-const TapeSelectMenu = ({ tapes, selectedTape, handleTapeSelectEvent }) => {
+const TapeSelectMenu = ({ tapes, handleTapeSelectEvent }) => {
   return (
     <div className="d-flex flex-column">
       <label className="option-label">Select a tape to play from</label>
@@ -125,7 +126,6 @@ const TapeSelectMenu = ({ tapes, selectedTape, handleTapeSelectEvent }) => {
           <TapeItem
             key={tapeTitle}
             tape={tapes[tapeTitle]}
-            selectedTape={selectedTape}
             handleTapeSelectEvent={handleTapeSelectEvent}
           />
         );
@@ -542,39 +542,42 @@ export class Channels extends Component {
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                <p className="loading-text">
+                  <p className="loading-text">
                     No audios available for this tape
-                </p>
-              )}
+                  </p>
+                )}
               {selectedChannels.length > 0 && this.state.randomOptions && (
                 <div className="d-flex flex-column">
                   <div className="my-1">
                     <button
-                      className="btn transparent-button "
+                      className="btn transparent-button"
                       onClick={this.handleAdvancedOptionsClick}
                     >
                       Advanced Options
                     </button>
                   </div>
-                  <Link
-                    to={{
-                      pathname: "/apollo11/channels/load",
-                      state: {
-                        channels: {
-                          selectedChannels: selectedChannels,
-                          blockIndex: getRandomRange(minBlock, maxBlock),
-                          nuggetIndex: getRandomRange(1, 6),
-                          tapeId: tapeId,
-                          minBlock: minBlock,
-                          maxBlock: maxBlock,
+                  <div>
+                    <Link
+                      className="link-btn-play"
+                      to={{
+                        pathname: "/apollo11/channels/load",
+                        state: {
+                          channels: {
+                            selectedChannels: selectedChannels,
+                            blockIndex: getRandomRange(minBlock, maxBlock),
+                            nuggetIndex: getRandomRange(1, 6),
+                            tapeId: tapeId,
+                            minBlock: minBlock,
+                            maxBlock: maxBlock,
+                          },
                         },
-                      },
-                    }}
-                  >
-                    <button className="play-channels-button btn mt-2">
-                      Play Random
-                    </button>
-                  </Link>
+                      }}
+                    >
+                      <button className="play-channels-button btn btn-text">
+                        Play Random
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               )}
               {selectedChannels.length > 0 && !this.state.randomOptions && (
@@ -582,7 +585,7 @@ export class Channels extends Component {
                   <div>
                     <div className="my-1">
                       <button
-                        className="btn transparent-button "
+                        className="btn transparent-button"
                         onClick={this.handleSeeLessOptionsClick}
                       >
                         See less
@@ -604,28 +607,31 @@ export class Channels extends Component {
                         />
                       </div>
                     </div>
-                    <Link
-                      to={{
-                        pathname: "/apollo11/channels/load",
-                        state: {
-                          channels: {
-                            selectedChannels: selectedChannels,
-                            blockIndex: blockIndex,
-                            nuggetIndex: nuggetIndex,
-                            tapeId: tapeId,
-                            minBlock: minBlock,
-                            maxBlock: maxBlock,
+                    <div>
+                      <Link
+                        className="link-btn-play"
+                        to={{
+                          pathname: "/apollo11/channels/load",
+                          state: {
+                            channels: {
+                              selectedChannels: selectedChannels,
+                              blockIndex: blockIndex,
+                              nuggetIndex: nuggetIndex,
+                              tapeId: tapeId,
+                              minBlock: minBlock,
+                              maxBlock: maxBlock,
+                            },
                           },
-                        },
-                      }}
-                    >
-                      <button
-                        disabled={disabled}
-                        className="play-channels-button btn btn-lg mt-2"
+                        }}
                       >
-                        Play
-                      </button>
-                    </Link>
+                        <button
+                          disabled={disabled}
+                          className="play-channels-button btn btn-text"
+                        >
+                          Play
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </>
               )}
@@ -647,5 +653,4 @@ export class Channels extends Component {
       </div>
     );
   }
-
 }
