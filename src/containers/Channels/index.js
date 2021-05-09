@@ -542,10 +542,10 @@ export class Channels extends Component {
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                  <p className="loading-text">
+                <p className="loading-text">
                     No audios available for this tape
-                  </p>
-                )}
+                </p>
+              )}
               {selectedChannels.length > 0 && this.state.randomOptions && (
                 <div className="d-flex flex-column">
                   <div className="my-1">
