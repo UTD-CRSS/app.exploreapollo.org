@@ -5,6 +5,49 @@ import "./index.scss";
 import { Link } from "react-router-dom";
 import { ChannelsSelectingInstruction } from "../../components/ChannelsSelectingInstruction";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+
+const NuggetPopup = (props) => (
+  <Popover {...props} id="nugget-info-popup">
+    <Popover.Content style={{ fontSize: "1.2em" }}>
+      30-minute blocks of audios are divided futher into even smaller pieces called <strong>Nuggets. </strong>
+      A nugget is usually 5 minutes long. Nugget 1 contains the first 5-minute audio of a block, nugget 2
+      contains the next 5 minutes (00:05:00-00:10:00), etc...
+      In most cases, a block consists of 6 Nuggets
+    </Popover.Content>
+  </Popover>
+);
+
+const BlockPopup = (props) => {
+  return (
+    <Popover id="block-info-popup" {...props}>
+      <Popover.Content style={{ fontSize: "1.2em" }}>
+        A tape is usually more than 10 hours long so it is divided into smaller audio files called <strong>Blocks. </strong>
+        A block is typically 30 minutes long. Block 1 of a tape contains the first 30-minute audio, Block 2 contains the
+        next 30 minutes (00:30:00-01:00:00) of that tape, etc...
+      </Popover.Content>
+    </Popover>
+  );
+};
+
+const InfoButton = (props) => {
+  let overlay;
+  if (props.blockInfo) {
+    overlay = BlockPopup;
+  } else if (props.nuggetInfo) {
+    overlay = NuggetPopup;
+  }
+  return (
+    <div className="info-button-container" style={{ cursor: "pointer" }}>
+      <OverlayTrigger placement="top" delay={{ show: 200 }} overlay={overlay}>
+        <FontAwesomeIcon className="info-button" icon={faInfo} />
+      </OverlayTrigger>
+    </div>
+  );
+};
 
 /**
  *
@@ -35,9 +78,7 @@ const TapeItem = ({ tape, handleTapeSelectEvent, selectedTape }) => {
   return (
     <div
       className={`channel-item-container channel-item-text 
-      ${
-        disabled ? "" : ""
-      }`}
+      ${disabled ? "" : ""}`}
       onClick={() => handleTapeSelectEvent(title)}
     >
       <div>
@@ -104,7 +145,11 @@ const BlockSelectMenu = (props) => {
   }
   return (
     <div className="channel-select-menu-containner">
-      <label className="option-label">Choose Block number:</label>
+      <label className="option-label">
+        <span>Choose Block </span>
+        <InfoButton blockInfo />
+        <span> number: </span>
+      </label>
       <select
         value={blockIndex}
         onChange={handleValueChange}
@@ -128,7 +173,11 @@ const NuggetSelectMenu = (props) => {
 
   return (
     <div className="channel-select-menu-containner">
-      <label className="option-label">Choose Nugget number:</label>
+      <label className="option-label">
+        <span>Choose Nugget </span>
+        <InfoButton nuggetInfo />
+        <span> number: </span>
+      </label>
       <select
         value={nuggetIndex}
         onChange={handleValueChange}
@@ -295,16 +344,22 @@ export class Channels extends Component {
 
   removeTapeAndSetState = (tapeTitle) => {
     // only allow select one tape, set to empty array
-    this.setState({ selectedTape: "", selectedChannels: [], channels: []});
+    this.setState({ selectedTape: "", selectedChannels: [], channels: [] });
     this.unselectTapeAndSetState(tapeTitle);
   };
 
   clearTapeAndChannels() {
     const selectedTape = this.state.selectedTape;
-    if (selectedTape.length > 0){
+    if (selectedTape.length > 0) {
       this.unselectTapeAndSetState(selectedTape);
     }
-    this.setState({ selectedTape: "", selectedChannels: [], filteredChannels:[], channels: [], channelsLoaded: false });
+    this.setState({
+      selectedTape: "",
+      selectedChannels: [],
+      filteredChannels: [],
+      channels: [],
+      channelsLoaded: false,
+    });
   }
 
   handleTapeSelectEvent = async (tapeTitle) => {
@@ -487,13 +542,13 @@ export class Channels extends Component {
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                  <p className="loading-text">
+                <p className="loading-text">
                     No audios available for this tape
-                  </p>
-                )}
+                </p>
+              )}
               {selectedChannels.length > 0 && this.state.randomOptions && (
                 <div className="d-flex flex-column">
-                  <div>
+                  <div className="my-1">
                     <button
                       className="btn transparent-button "
                       onClick={this.handleAdvancedOptionsClick}
@@ -524,8 +579,8 @@ export class Channels extends Component {
               )}
               {selectedChannels.length > 0 && !this.state.randomOptions && (
                 <>
-                  <form>
-                    <div>
+                  <div>
+                    <div className="my-1">
                       <button
                         className="btn transparent-button "
                         onClick={this.handleSeeLessOptionsClick}
@@ -571,7 +626,7 @@ export class Channels extends Component {
                         Play
                       </button>
                     </Link>
-                  </form>
+                  </div>
                 </>
               )}
               <button
@@ -592,4 +647,5 @@ export class Channels extends Component {
       </div>
     );
   }
+
 }

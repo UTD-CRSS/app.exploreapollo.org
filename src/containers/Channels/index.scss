@@ -1,5 +1,5 @@
 .channel-item-container {
-  background-color: #302d2d;
+background-color: #302d2d;
     padding: 0 5px;
     border-radius: 5px;
     width: 100%;
@@ -7,10 +7,23 @@
     display: flex;
     align-items: center;
     margin: 10px 0;
-  
-  // border-color: white;
+
+// border-color: white;
 }
 
+.info-button-container{
+    display: inline-block;
+    position: relative;
+    top: -10px;
+    left: -2px;
+    color: #45AD13;
+}
+
+.info-button{
+    color: #45AD13;
+    border-radius: 10px;
+    font-size: 0.6em;
+}
 .transparent-button{
     color: #375a7f;
     border-color: #375a7f; 
@@ -88,9 +101,9 @@
 }
 
 @media (min-width: 576px) {
-  .channel-select-container {
+.channel-select-container {
     font-size: 0.9rem;
-  }
+}
 
 
 }
@@ -98,7 +111,7 @@
 @media (min-width: 992px){
     .channel-select-container {
         font-size: 1.1rem;
-      }
+    }
 
 }
 

@@ -29,7 +29,8 @@ export function ChannelsSelectingInstruction(props) {
         </Modal.Header>
         <Modal.Body className="message-body">
           <p>
-            Thanks for visiting our page. Here are some tips for selecting audios.
+            Thanks for visiting our page. Here are some tips for selecting
+            audios.
           </p>
           <ol>
             <li>First select a tape.</li>
@@ -38,10 +39,19 @@ export function ChannelsSelectingInstruction(props) {
               selected.
             </li>
             <li>
-              Next, select the audio block and nugget. There are 6 nuggets in a
-              block of audio, a block is usally 30-minute long.
+              By default, when clicking Play Random button, the audio player
+              will play audio randomly in selected tape and channels
             </li>
-            <li>And finally hit play!</li>
+            <li>
+              However, if you want more control of what to be played, select
+              Advanced Options button
+            </li>
+            <li>
+              Next, select the audio block and nugget. Block and nugget are
+              explained in details when you hover or click "i" button next to
+              each of them
+            </li>
+            <li>Finally hit play!</li>
           </ol>
         </Modal.Body>
         <Modal.Footer>
