@@ -25,4 +25,5 @@ export default function getActiveIndex(transcripts, currentMissionTime) {
       return [i - 1, false];
     }
   }
+  return [transcripts.length - 1, true];
 }
