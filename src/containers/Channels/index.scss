@@ -15,16 +15,26 @@ background-color: #302d2d;
 
 .info-button-container{
     display: inline-block;
-    position: relative;
-    top: -10px;
-    left: -2px;
     color: #45AD13;
+    margin-right: 0.3em;
 }
 
-.info-button{
+.btn-text{
+    font-size: 1em;    
+}
+
+.info-icon{
     color: #45AD13;
-    border-radius: 10px;
-    font-size: 0.6em;
+    position: relative;
+    top: -10px;
+    left: 2px;
+    font-size: 0.75em;
+
+}
+.info-text{
+    font-weight: bold;
+    margin-left: 0.3em;
+    text-decoration: underline;
 }
 .transparent-button{
     color: #fff;

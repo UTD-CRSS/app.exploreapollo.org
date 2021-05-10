@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { ChannelsSelectingInstruction } from "../../components/ChannelsSelectingInstruction";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle} from "@fortawesome/free-regular-svg-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
@@ -38,15 +38,21 @@ const BlockPopup = (props) => {
 
 const InfoButton = (props) => {
   let overlay;
+  let text="";
   if (props.blockInfo) {
     overlay = BlockPopup;
+    text = "Block";
   } else if (props.nuggetInfo) {
     overlay = NuggetPopup;
+    text = "Nugget";
   }
   return (
     <div className="info-button-container" style={{ cursor: "pointer" }}>
       <OverlayTrigger placement="top" delay={{ show: 100 }} overlay={overlay}>
-        <FontAwesomeIcon className="info-button" icon={faInfo} />
+        <div>
+          <span className="info-text">{text}</span>
+        <FontAwesomeIcon className="info-icon" icon={faQuestionCircle} />
+        </div>
       </OverlayTrigger>
     </div>
   );
@@ -145,10 +151,10 @@ const BlockSelectMenu = (props) => {
   }
   return (
     <div className="channel-select-menu-containner">
-      <label className="option-label">
-        <span>Choose Block </span>
+      <label className="option-label mb-1">
+        <span>Choose</span>
         <InfoButton blockInfo />
-        <span> number: </span>
+        <span>number:</span>
       </label>
       <select
         value={blockIndex}
@@ -173,10 +179,10 @@ const NuggetSelectMenu = (props) => {
 
   return (
     <div className="channel-select-menu-containner">
-      <label className="option-label">
-        <span>Choose Nugget </span>
+      <label className="option-label mb-1">
+        <span>Choose</span>
         <InfoButton nuggetInfo />
-        <span> number: </span>
+        <span>number:</span>
       </label>
       <select
         value={nuggetIndex}
@@ -550,7 +556,7 @@ export class Channels extends Component {
                 <div className="d-flex flex-column">
                   <div className="my-1">
                     <button
-                      className="btn transparent-button"
+                      className="btn transparent-button btn-text"
                       onClick={this.handleAdvancedOptionsClick}
                     >
                       Advanced Options
@@ -585,7 +591,7 @@ export class Channels extends Component {
                   <div>
                     <div className="my-1">
                       <button
-                        className="btn transparent-button"
+                        className="btn transparent-button btn-text"
                         onClick={this.handleSeeLessOptionsClick}
                       >
                         See less

@@ -3,7 +3,7 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import "./index.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo } from "@fortawesome/free-solid-svg-icons";
+import { faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 
 /**
  *  A simple popup for first time users to help them use our navigation page
@@ -52,11 +52,14 @@ export function ChannelsSelectingInstruction(props) {
             </li>
             <li>
               Select the audio block and nugget numbers. Block and nugget are
-              explained in details when you hover or click
-              <span className="mx-2">
-                <FontAwesomeIcon className="info-button" icon={faInfo}/>
-              </span>
-              button next to each of them
+              explained in details when you hover or click text with
+              <div className="mr-1 info-button-container">
+                <span className="info-text">symbol</span>
+                <FontAwesomeIcon
+                  className="info-icon"
+                  icon={faQuestionCircle}
+                />
+              </div>
             </li>
             <li>
               Finally, hit <strong>Play</strong>
