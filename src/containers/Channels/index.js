@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { ChannelsSelectingInstruction } from "../../components/ChannelsSelectingInstruction";
 import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuestionCircle} from "@fortawesome/free-regular-svg-icons";
+import { faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 
@@ -38,7 +38,7 @@ const BlockPopup = (props) => {
 
 const InfoButton = (props) => {
   let overlay;
-  let text="";
+  let text = "";
   if (props.blockInfo) {
     overlay = BlockPopup;
     text = "Block";
@@ -51,7 +51,7 @@ const InfoButton = (props) => {
       <OverlayTrigger placement="top" delay={{ show: 100 }} overlay={overlay}>
         <div>
           <span className="info-text">{text}</span>
-        <FontAwesomeIcon className="info-icon" icon={faQuestionCircle} />
+          <FontAwesomeIcon className="info-icon" icon={faQuestionCircle} />
         </div>
       </OverlayTrigger>
     </div>
@@ -278,6 +278,8 @@ export class Channels extends Component {
       selectedTape: "",
       filteredChannels: [],
       randomOptions: true,
+      loadedChannelsInTape: {},
+      loadedChannels: {},
     };
   }
 
@@ -370,6 +372,7 @@ export class Channels extends Component {
 
   handleTapeSelectEvent = async (tapeTitle) => {
     const tapeId = this.state.tapes[tapeTitle].id;
+    var t0 = performance.now();
     if (!this.isTapeSelected(tapeTitle)) {
       this.clearTapeAndChannels();
       this.addTapeAndSetState(tapeTitle);
@@ -384,6 +387,8 @@ export class Channels extends Component {
       this.removeTapeAndSetState(tapeTitle);
       this.setState({ filteredChannels: [], channelsLoaded: false });
     }
+    var t1 = performance.now();
+    console.log("Loading channels of tape took " + (t1 - t0) + " ms");
   };
 
   handleBlockInputChange = (event) => {
@@ -442,9 +447,20 @@ export class Channels extends Component {
 
     return allChannels;
   }
+
+  channelsOfTapeStoredInLocal(tapeId) {
+    const loadedChannelsInTape = this.state.loadedChannelsInTape;
+
+    return Object.keys(loadedChannelsInTape).includes(tapeId.toString());
+  }
+
   async fetchAndGetChannelsBelongToTape(tapeId) {
-    var channels = [];
     if (!tapeId) return;
+    var channels = [];
+    let loadedChannelsInTape = this.state.loadedChannelsInTape;
+    if (this.channelsOfTapeStoredInLocal(tapeId)) {
+      return loadedChannelsInTape[tapeId];
+    }
     await fetch(`${config.apiEntry}/api/multi_channels?tape=${tapeId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -458,14 +474,44 @@ export class Channels extends Component {
         console.log(error);
         channels = [];
       });
-
-    return channels;
+    loadedChannelsInTape[tapeId] = channels;
+    // save channels belong to this tape for later use
+    this.setState({ loadedChannelsInTape: loadedChannelsInTape });
+    return loadedChannelsInTape[tapeId];
   }
 
   async componentDidUpdate(prevProps, prevData) {
     var channels = {};
     var filteredChannels = this.state.filteredChannels;
+    var loadedChannels = this.state.loadedChannels;
+    var t0 = performance.now();
+
     if (prevData.filteredChannels !== filteredChannels) {
+      // await Promise.all(
+      //   filteredChannels.map(async (channel) => {
+      //     if (Object.keys(loadedChannels).includes(channel)) {
+      //       return loadedChannels[channel];
+      //     }
+      //     let json;
+      //     await fetch(`${config.apiEntry}/api/channels/${channel}`).then(
+      //       (response) => {
+      //         json = response.json();
+      //       }
+      //     );
+      //     return json;
+      //   })
+      // ).then((data) => {
+      //   data.forEach((channel) => {
+      //     if (!Object.keys(loadedChannels).includes(channel.name)) {
+      //       loadedChannels[channel.name] = channel;
+      //     }
+      //     channels[channel.name] = channel;
+      //     channels[channel.name].isSelected = false;
+      //     channels[channel.name].disabled = false;
+      //   });
+      //   this.setState({ channels: channels, loadedChannels });
+      // });
+
       await fetch(`${config.apiEntry}/api/channels`)
         .then((response) => response.json())
         .then((data) => {
@@ -478,7 +524,11 @@ export class Channels extends Component {
           });
           this.setState({ channels: channels });
         });
+      var t1 = performance.now();
+      console.log("Loading channels info took " + (t1 - t0) + " ms");
     }
+
+
   }
 
   async componentDidMount() {
@@ -513,7 +563,7 @@ export class Channels extends Component {
       selectedTape.length > 0 ? tapes[selectedTape].min_block : null;
     const maxBlock =
       selectedTape.length > 0 ? tapes[selectedTape].max_block : null;
-
+    const channels = this.state.channels;
     return (
       <div>
         <AppHeader />
@@ -535,23 +585,24 @@ export class Channels extends Component {
                 selectedTape={selectedTape}
                 handleTapeSelectEvent={this.handleTapeSelectEvent}
               />
-              {selectedTape.length > 0 && filteredChannels.length > 0 && (
+              {selectedTape.length > 0 && Object.keys(channels).length > 0 && (
                 <ChannelList
                   numChannelsSelected={selectedChannels.length}
                   clickSelectorEvent={this.clickSelectorEvent}
                   channels={this.state.channels}
                 />
               )}
-              {selectedTape.length > 0 && !channelsLoaded && (
-                <div> Loading channels </div>
-              )}
+              {selectedTape.length > 0 &&
+                Object.keys(channels).length === 0 && (
+                  <div> Loading channels </div>
+                )}
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                <p className="loading-text">
+                  <p className="loading-text">
                     No audios available for this tape
-                </p>
-              )}
+                  </p>
+                )}
               {selectedChannels.length > 0 && this.state.randomOptions && (
                 <div className="d-flex flex-column">
                   <div className="my-1">
