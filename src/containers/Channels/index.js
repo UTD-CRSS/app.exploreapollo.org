@@ -280,6 +280,7 @@ export class Channels extends Component {
       randomOptions: true,
       loadedChannelsInTape: {},
       loadedChannels: {},
+      allChannelsLoaded: false,
     };
   }
 
@@ -351,7 +352,6 @@ export class Channels extends Component {
   };
 
   removeTapeAndSetState = (tapeTitle) => {
-    // only allow select one tape, set to empty array
     this.setState({ selectedTape: "", selectedChannels: [], channels: [] });
     this.unselectTapeAndSetState(tapeTitle);
   };
@@ -370,9 +370,18 @@ export class Channels extends Component {
     });
   }
 
+  getChannelsDataFromFilteredChannels() {
+    const filteredChannels = this.state.filteredChannels;
+    const allChannels = this.state.allChannels;
+    let channelData = {};
+    filteredChannels.forEach((channel) => {
+      channelData[channel] = allChannels[channel];
+    });
+    return channelData;
+  }
+
   handleTapeSelectEvent = async (tapeTitle) => {
     const tapeId = this.state.tapes[tapeTitle].id;
-    var t0 = performance.now();
     if (!this.isTapeSelected(tapeTitle)) {
       this.clearTapeAndChannels();
       this.addTapeAndSetState(tapeTitle);
@@ -387,8 +396,6 @@ export class Channels extends Component {
       this.removeTapeAndSetState(tapeTitle);
       this.setState({ filteredChannels: [], channelsLoaded: false });
     }
-    var t1 = performance.now();
-    console.log("Loading channels of tape took " + (t1 - t0) + " ms");
   };
 
   handleBlockInputChange = (event) => {
@@ -436,7 +443,7 @@ export class Channels extends Component {
   }
 
   async fetchAndGetAllChannels() {
-    var allChannels;
+    var allChannels = {};
     await fetch(`${config.apiEntry}/api/channels`)
       .then((response) => response.json())
       .then((data) => {
@@ -487,53 +494,18 @@ export class Channels extends Component {
     var t0 = performance.now();
 
     if (prevData.filteredChannels !== filteredChannels) {
-      // await Promise.all(
-      //   filteredChannels.map(async (channel) => {
-      //     if (Object.keys(loadedChannels).includes(channel)) {
-      //       return loadedChannels[channel];
-      //     }
-      //     let json;
-      //     await fetch(`${config.apiEntry}/api/channels/${channel}`).then(
-      //       (response) => {
-      //         json = response.json();
-      //       }
-      //     );
-      //     return json;
-      //   })
-      // ).then((data) => {
-      //   data.forEach((channel) => {
-      //     if (!Object.keys(loadedChannels).includes(channel.name)) {
-      //       loadedChannels[channel.name] = channel;
-      //     }
-      //     channels[channel.name] = channel;
-      //     channels[channel.name].isSelected = false;
-      //     channels[channel.name].disabled = false;
-      //   });
-      //   this.setState({ channels: channels, loadedChannels });
-      // });
-
-      await fetch(`${config.apiEntry}/api/channels`)
-        .then((response) => response.json())
-        .then((data) => {
-          data.forEach((channel) => {
-            if (filteredChannels.includes(channel.name)) {
-              channels[channel.name] = channel;
-              channels[channel.name].isSelected = false;
-              channels[channel.name].disabled = false;
-            }
-          });
-          this.setState({ channels: channels });
-        });
-      var t1 = performance.now();
-      console.log("Loading channels info took " + (t1 - t0) + " ms");
+      channels = this.getChannelsDataFromFilteredChannels();
+      this.setState({ channels: channels, selectedChannels: [] });
     }
-
-
   }
 
   async componentDidMount() {
     await this.fetchTapes().then((data) =>
       this.setState({ tapes: data, tapesLoaded: true })
+    );
+
+    await this.fetchAndGetAllChannels().then((data) =>
+      this.setState({ allChannels: data, allChannelsLoaded: true })
     );
 
     let visited = this.isFirstVisit();
@@ -564,13 +536,17 @@ export class Channels extends Component {
     const maxBlock =
       selectedTape.length > 0 ? tapes[selectedTape].max_block : null;
     const channels = this.state.channels;
+    const allChannelsLoaded = this.state.allChannelsLoaded;
     return (
       <div>
         <AppHeader />
 
-        {!tapeLoaded && <p className="loading-text">LOADING DATA...</p>}
+        {!tapeLoaded && !allChannelsLoaded && (
+          <p className="loading-text">LOADING DATA...</p>
+        )}
 
         {tapeLoaded &&
+          allChannelsLoaded &&
           (Object.keys(tapes).length === 0 ? (
             <div className="container">
               <h3>Sorry, we cannot find any tapes </h3>
