@@ -490,8 +490,6 @@ export class Channels extends Component {
   async componentDidUpdate(prevProps, prevData) {
     var channels = {};
     var filteredChannels = this.state.filteredChannels;
-    var loadedChannels = this.state.loadedChannels;
-    var t0 = performance.now();
 
     if (prevData.filteredChannels !== filteredChannels) {
       channels = this.getChannelsDataFromFilteredChannels();
@@ -570,15 +568,15 @@ export class Channels extends Component {
               )}
               {selectedTape.length > 0 &&
                 Object.keys(channels).length === 0 && (
-                  <div> Loading channels </div>
-                )}
+                <div> Loading channels </div>
+              )}
               {selectedTape.length > 0 &&
                 filteredChannels.length === 0 &&
                 channelsLoaded && (
-                  <p className="loading-text">
+                <p className="loading-text">
                     No audios available for this tape
-                  </p>
-                )}
+                </p>
+              )}
               {selectedChannels.length > 0 && this.state.randomOptions && (
                 <div className="d-flex flex-column">
                   <div className="my-1">
