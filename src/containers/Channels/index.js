@@ -141,10 +141,8 @@ const TapeSelectMenu = ({ tapes, handleTapeSelectEvent }) => {
 };
 
 const BlockSelectMenu = (props) => {
-  const handleValueChange = props.handleValueChange;
-  const blockIndex = props.blockIndex;
-  const minBlock = props.minBlock;
-  const maxBlock = props.maxBlock;
+  const { handleValueChange, blockIndex, minBlock, maxBlock } = props;
+
   var blockIndexArr = [];
   for (var i = minBlock; i <= maxBlock; i++) {
     blockIndexArr.push(i);
@@ -174,8 +172,7 @@ const BlockSelectMenu = (props) => {
 };
 
 const NuggetSelectMenu = (props) => {
-  const handleValueChange = props.handleValueChange;
-  const nuggetIndex = props.nuggetIndex;
+  const {handleValueChange, nuggetIndex} = props;
 
   return (
     <div className="channel-select-menu-containner">
@@ -189,12 +186,7 @@ const NuggetSelectMenu = (props) => {
         onChange={handleValueChange}
         className="custom-select w-50"
       >
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
+        {[1, 2, 3, 4, 5, 6].map(num => <option value={num.toString()}>num</option>)}
       </select>
     </div>
   );
@@ -244,14 +236,15 @@ const ChannelList = ({ channels, clickSelectorEvent, numChannelsSelected }) => {
 
       <div className="d-flex flex-column align-items-center">
         {Object.keys(channels).map((channelName) => {
+          const channel = channels[channelName];
           return (
             <ChannelItem
               key={channelName}
-              channelId={channels[channelName].id}
-              description={channels[channelName].description}
-              name={channels[channelName].name}
-              title={channels[channelName].title}
-              isSelected={channels[channelName].isSelected}
+              channelId={channel.id}
+              description={channel.description}
+              name={channel.name}
+              title={channel.title}
+              isSelected={channel.isSelected}
               clickSelectorEvent={clickSelectorEvent.bind(this)}
               numChannelsSelected={numChannelsSelected}
             />
@@ -296,51 +289,36 @@ export class Channels extends Component {
     return this.state.channels[channelName].isSelected;
   };
 
-  selectChannelAndSetState = (channelName) => {
-    var channels = this.state.channels;
-    channels[channelName].isSelected = true;
+  setChannelSelectionStatus = (channelName, selectionStatus) => {
+    const channels = this.state.channels;
+    channels[channelName].isSelected = selectionStatus;
     this.setState({ channels: channels });
-  };
+  }
 
-  unselectChannelAndSetState = (channelName) => {
-    var channels = this.state.channels;
-    channels[channelName].isSelected = false;
-    this.setState({ channels: channels });
-  };
   addChannelAndSetState = (channelName) => {
-    var selectedChannels = this.state.selectedChannels;
+    const selectedChannels = this.state.selectedChannels;
     selectedChannels.push(channelName);
     this.setState({ selectedChannels: selectedChannels });
-    this.selectChannelAndSetState(channelName);
+    this.setChannelSelectionStatus(channelName, true);
   };
 
   removeChannelAndSetState = (channelName) => {
-    var selectedChannels = this.state.selectedChannels;
-    var channelIndex = selectedChannels.indexOf(channelName);
+    const selectedChannels = this.state.selectedChannels;
+    const channelIndex = selectedChannels.indexOf(channelName);
     selectedChannels.splice(channelIndex, 1);
     this.setState({ selectedChannels: selectedChannels });
-    this.unselectChannelAndSetState(channelName);
+    this.setChannelSelectionStatus(channelName, false);
   };
 
   clickSelectorEvent = (channelName) => {
-    if (!this.isChannelSelected(channelName)) {
-      this.addChannelAndSetState(channelName);
-    } else {
-      this.removeChannelAndSetState(channelName);
-    }
+    this.isChannelSelected(channelName) ? this.removeChannelAndSetState(channelName) : this.addChannelAndSetState(channelName);
   };
 
-  selectTapeAndSetState = (tapeTitle) => {
-    var tapes = this.state.tapes;
-    tapes[tapeTitle].isSelected = true;
+  setTapeSelectionState = (tapeTitle, selectionStatus) => {
+    const tapes = this.state.tapes;
+    tapes[tapeTitle].isSelected = selectionStatus;
     this.setState({ tapes: tapes });
-  };
-
-  unselectTapeAndSetState = (tapeTitle) => {
-    var tapes = this.state.tapes;
-    tapes[tapeTitle].isSelected = false;
-    this.setState({ tapes: tapes });
-  };
+  }
 
   isTapeSelected = (tapeTitle) => {
     return this.state.tapes[tapeTitle].isSelected;
@@ -348,18 +326,18 @@ export class Channels extends Component {
 
   addTapeAndSetState = (tapeTitle) => {
     this.setState({ selectedTape: tapeTitle });
-    this.selectTapeAndSetState(tapeTitle);
+    this.setTapeSelectionState(tapeTitle, true);
   };
 
   removeTapeAndSetState = (tapeTitle) => {
     this.setState({ selectedTape: "", selectedChannels: [], channels: [] });
-    this.unselectTapeAndSetState(tapeTitle);
+    this.setTapeSelectionState(tapeTitle, false);
   };
 
   clearTapeAndChannels() {
     const selectedTape = this.state.selectedTape;
     if (selectedTape.length > 0) {
-      this.unselectTapeAndSetState(selectedTape);
+      this.setTapeSelectionState(selectedTape, false);
     }
     this.setState({
       selectedTape: "",
@@ -427,8 +405,9 @@ export class Channels extends Component {
   }
 
   async fetchTapes() {
+    const mission = this.props.match.params.mission
     var tapes = {};
-    await fetch(`${config.apiEntry}/api/tapes`)
+    await fetch(`${config.apiEntry}/api/${mission}/tapes`)
       .then((response) => response.json())
       .then((data) => {
         data.forEach((tape) => {
@@ -443,8 +422,9 @@ export class Channels extends Component {
   }
 
   async fetchAndGetAllChannels() {
+    const mission = this.props.match.params.mission
     var allChannels = {};
-    await fetch(`${config.apiEntry}/api/channels`)
+    await fetch(`${config.apiEntry}/api/${mission}/channels`)
       .then((response) => response.json())
       .then((data) => {
         data.forEach((channel) => {
@@ -462,13 +442,14 @@ export class Channels extends Component {
   }
 
   async fetchAndGetChannelsBelongToTape(tapeId) {
+    const mission = this.props.match.params.mission;
     if (!tapeId) return;
     var channels = [];
     let loadedChannelsInTape = this.state.loadedChannelsInTape;
     if (this.channelsOfTapeStoredInLocal(tapeId)) {
       return loadedChannelsInTape[tapeId];
     }
-    await fetch(`${config.apiEntry}/api/multi_channels?tape=${tapeId}`)
+    await fetch(`${config.apiEntry}/api/${mission}/multi_channels?tape=${tapeId}`)
       .then((response) => response.json())
       .then((data) => {
         data.forEach((channel) => {
@@ -501,11 +482,9 @@ export class Channels extends Component {
     await this.fetchTapes().then((data) =>
       this.setState({ tapes: data, tapesLoaded: true })
     );
-
     await this.fetchAndGetAllChannels().then((data) =>
       this.setState({ allChannels: data, allChannelsLoaded: true })
     );
-
     let visited = this.isFirstVisit();
 
     // Do not view popup if this isn't the first time
@@ -519,31 +498,25 @@ export class Channels extends Component {
   }
 
   render() {
-    const tapeLoaded = this.state.tapesLoaded;
-    const channelsLoaded = this.state.channelsLoaded;
-    const selectedChannels = this.state.selectedChannels;
-    const filteredChannels = this.state.filteredChannels;
-    const blockIndex = this.state.blockIndex;
-    const nuggetIndex = this.state.nuggetIndex;
+    const mission = this.props.match.params.mission
+    const {tapesLoaded, channelsLoaded, selectedChannels, filteredChannels, blockIndex,
+    nuggetIndex, tapes, selectedTape, channels, allChannelsLoaded} = this.state;
     const disabled = selectedChannels.length > 0 ? false : true;
-    const tapes = this.state.tapes;
-    const selectedTape = this.state.selectedTape;
     const tapeId = selectedTape.length > 0 ? tapes[selectedTape].id : null;
     const minBlock =
       selectedTape.length > 0 ? tapes[selectedTape].min_block : null;
     const maxBlock =
       selectedTape.length > 0 ? tapes[selectedTape].max_block : null;
-    const channels = this.state.channels;
-    const allChannelsLoaded = this.state.allChannelsLoaded;
+
     return (
       <div>
         <AppHeader />
 
-        {!tapeLoaded && !allChannelsLoaded && (
+        {!tapesLoaded && !allChannelsLoaded && (
           <p className="loading-text">LOADING DATA...</p>
         )}
 
-        {tapeLoaded &&
+        {tapesLoaded &&
           allChannelsLoaded &&
           (Object.keys(tapes).length === 0 ? (
             <div className="container">
@@ -552,7 +525,7 @@ export class Channels extends Component {
           ) : (
             <div className="channel-select-container container-xl">
               <div className="title-banner-container">
-                <span className="title-banner-text">Apollo 11 Channels</span>
+                <span className="title-banner-text">{mission} Channels</span>
               </div>
               <TapeSelectMenu
                 tapes={tapes}
@@ -591,7 +564,7 @@ export class Channels extends Component {
                     <Link
                       className="link-btn-play"
                       to={{
-                        pathname: "/apollo11/channels/load",
+                        pathname: `/${mission}/channels/load`,
                         state: {
                           channels: {
                             selectedChannels: selectedChannels,
@@ -642,7 +615,7 @@ export class Channels extends Component {
                       <Link
                         className="link-btn-play"
                         to={{
-                          pathname: "/apollo11/channels/load",
+                          pathname: `/${mission}/channels/load`,
                           state: {
                             channels: {
                               selectedChannels: selectedChannels,

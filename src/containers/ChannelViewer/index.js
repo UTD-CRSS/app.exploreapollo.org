@@ -44,8 +44,8 @@ export class ChannelViewer extends Component {
 
   getNextBlockAndNuggetIndex() {
     var nextBlockIndex, nextNuggetIndex;
-    const currentBlockIndex = this.state.currentBlockIndex;
-    const currentNuggetIndex = this.state.currentNuggetIndex;
+    let {currentBlockIndex, currentNuggetIndex} = this.state;
+    currentNuggetIndex < 6 ? currentNuggetIndex++ : currentBlockIndex++;
     if (currentNuggetIndex < 6) {
       nextNuggetIndex = currentNuggetIndex + 1;
       nextBlockIndex = currentBlockIndex;
@@ -59,8 +59,7 @@ export class ChannelViewer extends Component {
 
   getPreviousBlockAndNuggetIndex() {
     var nextBlockIndex, nextNuggetIndex;
-    const currentBlockIndex = this.state.currentBlockIndex;
-    const currentNuggetIndex = this.state.currentNuggetIndex;
+    const {currentBlockIndex, currentNuggetIndex} = this.state;
     if (currentNuggetIndex > 1) {
       nextNuggetIndex = currentNuggetIndex - 1;
       nextBlockIndex = currentBlockIndex;
@@ -87,9 +86,7 @@ export class ChannelViewer extends Component {
   }
 
   handlePlayPrevious() {
-    const nextAudioBlockNuggetIndex = this.getPreviousBlockAndNuggetIndex();
-    const blockIndex = nextAudioBlockNuggetIndex[0];
-    const nuggetIndex = nextAudioBlockNuggetIndex[1];
+    const [blockIndex, nuggetIndex] = this.getPreviousBlockAndNuggetIndex();
     const playingChannels = this.getPlayingChannels();
     this.setState({
       nextBlockIndex: blockIndex,
@@ -110,9 +107,7 @@ export class ChannelViewer extends Component {
     this.setState({ masterPlaybackTime: time, masterChannelName: channel });
   }
   handlePlayNext() {
-    const nextAudioBlockNuggetIndex = this.getNextBlockAndNuggetIndex();
-    const blockIndex = nextAudioBlockNuggetIndex[0];
-    const nuggetIndex = nextAudioBlockNuggetIndex[1];
+    const [blockIndex, nuggetIndex] = this.getNextBlockAndNuggetIndex();
     const playingChannels = this.getPlayingChannels();
     this.setState({
       nextBlockIndex: blockIndex,
@@ -169,16 +164,9 @@ export class ChannelViewer extends Component {
   }
 
   render() {
-    const data = this.state.data;
-    const playNextOrPreviousActivate = this.state.playNextOrPreviousActivate;
-    const playingChannels = this.state.playingChannels;
-    const nextBlockIndex = this.state.nextBlockIndex;
-    const nextNuggetIndex = this.state.nextNuggetIndex;
-    const currentBlockIndex = this.state.currentBlockIndex;
-    const currentNuggetIndex = this.state.currentNuggetIndex;
-    const tapeId = this.state.tapeId;
-    const minBlock = this.state.minBlock;
-    const maxBlock = this.state.maxBlock;
+    const missionName = this.props.match.params.mission;
+    const {data, playNextOrPreviousActivate, playingChannels, nextBlockIndex, nextNuggetIndex, currentBlockIndex,
+    currentNuggetIndex, tapeId, minBlock, maxBlock} = this.state;
     return (
       <>
         <AppHeader />
@@ -187,7 +175,7 @@ export class ChannelViewer extends Component {
           playNextOrPreviousActivate && (
             <Redirect
               to={{
-                pathname: "/apollo11/channels/load",
+                pathname: `/${missionName}/channels/load`,
                 state: {
                   channels: {
                     selectedChannels: playingChannels,
@@ -205,7 +193,7 @@ export class ChannelViewer extends Component {
           )
         }
         <div className="container justify-content-center d-flex mb-3">
-          <Link to="/apollo11/channels">
+          <Link to={`/${missionName}/channels`}>
             <button
               type="button"
               className="btn btn-primary select-new-channel-btn audio-controller-text"

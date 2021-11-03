@@ -25,29 +25,28 @@ export class ChannelsLoader extends Component {
   }
 
   setSelectedChannelsState() {
-    var selectedChannels = this.state.channels.selectedChannels;
-    this.setState({ selectedChannels: selectedChannels });
+    const selectedChannels = this.state.channels.selectedChannels;
+    this.setState({ selectedChannels });
   }
 
   setBlockIndexState() {
-    var blockIndex = this.state.channels.blockIndex;
-    this.setState({ blockIndex: blockIndex });
+    const blockIndex = this.state.channels.blockIndex;
+    this.setState({ blockIndex });
   }
 
   setNuggetIndexState() {
-    var nuggetIndex = this.state.channels.nuggetIndex;
-    this.setState({ nuggetIndex: nuggetIndex });
+    const nuggetIndex = this.state.channels.nuggetIndex;
+    this.setState({ nuggetIndex });
   }
 
   setTapeIdState() {
-    var tapeId = this.state.channels.tapeId;
-    this.setState({ tapeId: tapeId });
+    const tapeId = this.state.channels.tapeId;
+    this.setState({ tapeId });
   }
 
   setMinAndMaxBlock() {
-    const minBlock = this.state.channels.minBlock;
-    const maxBlock = this.state.channels.maxBlock;
-    this.setState({ minBlock: minBlock, maxBlock: maxBlock });
+    const {minBlock, maxBlock} = this.state;
+    this.setState({ minBlock, maxBlock });
   }
 
   /**
@@ -60,10 +59,9 @@ export class ChannelsLoader extends Component {
 
   async fetchAudioAndTranscripts(channelName) {
     var data;
-    const blockIndex = this.state.blockIndex;
-    const nuggetIndex = this.state.nuggetIndex;
-    const tapeId = this.state.tapeId;
-    const fetchUrl = `${config.apiEntry}/api/multi_channels?channel=${channelName}&block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`;
+    const {blockIndex, nuggetIndex, tapeId} = this.state;
+    const mission = this.props.match.params.mission;
+    const fetchUrl = `${config.apiEntry}/api/${mission}/multi_channels?channel=${channelName}&block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`;
     await fetch(fetchUrl)
       .then((response) => response.json())
       .then((json) => {
@@ -74,83 +72,36 @@ export class ChannelsLoader extends Component {
   }
 
   getDataFromResponse(response) {
-    var channel = {};
     if (!response) {
       return null;
     }
-    channel["audioUrl"] = response.audioUrl;
-    channel["channelName"] = response.channel_name;
-    channel["operation"] = response.operation;
-    channel["id"] = response.id;
-    channel["blockIndex"] = response.block_index;
-    channel["nuggetIndex"] = response.nugget_index;
-    channel["channelTitle"] = response.channel.title;
+    var channel = {...response};
     return channel;
   }
+
   async componentDidUpdate() {
     if (this.state.selectedChannels && this.state.loading) {
-      var data = Object();
+      var data = {};
       var channelNames = this.state.selectedChannels;
       if (this.state.loading && channelNames) {
-        data[0] = {};
-
-        var transcriberUrl;
-
-        await this.fetchAudioAndTranscripts(channelNames[0]).then(
-          (response) => {
-            var channel = this.getDataFromResponse(response);
-            if (channel) {
-              data[0].channel = channel;
-              transcriberUrl = response.transcriber.transcriberUrl;
-            }
-          }
-        );
-        if (transcriberUrl) {
-          await getTranscripts(transcriberUrl).then((transcripts) => {
-            data[0].transcripts = transcripts;
-          });
-        }
-        if (channelNames.length > 1) {
-          data[1] = {};
-
-          let transriberUrl1;
-          await this.fetchAudioAndTranscripts(channelNames[1]).then(
+        await Promise.all(channelNames.map(async (channelName, index) => {
+          data[index] = {};
+          let transcriberUrl;
+          await this.fetchAudioAndTranscripts(channelName).then(
             (response) => {
               var channel = this.getDataFromResponse(response);
               if (channel) {
-                data[1].channel = channel;
-                transriberUrl1 = response.transcriber.transcriberUrl;
+                data[index].channel = channel;
+                transcriberUrl = response.transcriber.transcriberUrl;
               }
             }
           );
-          if (transriberUrl1) {
-            await getTranscripts(transriberUrl1).then((transcripts) => {
-              data[1].transcripts = transcripts;
+          if (transcriberUrl) {
+            await getTranscripts(transcriberUrl).then((transcripts) => {
+              data[index].transcripts = transcripts;
             });
           }
-        }
-
-        if (channelNames.length > 2) {
-          data[2] = {};
-
-          let transriberUrl1;
-
-          await this.fetchAudioAndTranscripts(channelNames[2]).then(
-            (response) => {
-              var channel = this.getDataFromResponse(response);
-              if (channel) {
-                data[2].channel = channel;
-                transriberUrl1 = response.transcriber.transcriberUrl;
-              }
-            }
-          );
-
-          if (transriberUrl1) {
-            await getTranscripts(transriberUrl1).then((transcripts) => {
-              if (transcripts) data[2].transcripts = transcripts;
-            });
-          }
-        }
+        }));
         this.setState({ data: data, loading: false });
       }
     }
@@ -168,12 +119,9 @@ export class ChannelsLoader extends Component {
     }
   }
   render() {
+    const mission = this.props.match.params.mission;
     const channels = this.state.selectedChannels;
-    const loading = this.state.loading;
-    const data = this.state.data;
-    const tapeId = this.state.tapeId;
-    const minBlock = this.state.minBlock;
-    const maxBlock = this.state.maxBlock;
+    const {loading, data, tapeId, minBlock, maxBlock} = this.state;
     if (!channels || (data && Object.keys(data).lengh === 0)) {
       return (
         <div className="d-flex flex-column">
@@ -181,7 +129,7 @@ export class ChannelsLoader extends Component {
             Error loading channels, please select channels to listen
           </div>
 
-          <Link to="/apollo11/channels">
+          <Link to={`/${mission}/channels`}>
             <button type="button" className="btn btn-primary">
               Select New Channels
             </button>
@@ -194,7 +142,7 @@ export class ChannelsLoader extends Component {
     ) : (
       <Redirect
         to={{
-          pathname: "/apollo11/channels/play",
+          pathname: `/${mission}/channels/play`,
           state: {
             audioData: data,
             tapeId: tapeId,
