@@ -71,7 +71,7 @@ export class ChannelPlayer extends Component {
     if (data && data["channel"]) {
       const channel = data["channel"];
       const url = channel["audioUrl"];
-      const channelName = channel["channelName"];
+      const channelName = channel["channel_name"];
       const transcripts = data["transcripts"];
       const operation = channel["operation"];
       const title = channel["channelTitle"];
