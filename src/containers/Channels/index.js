@@ -407,7 +407,7 @@ export class Channels extends Component {
   async fetchTapes() {
     const mission = this.props.match.params.mission
     var tapes = {};
-    await fetch(`${config.apiEntry}/api/${mission}/tapes`)
+    await fetch(`${config.apiEntry}/api/missions/${mission}/tapes`)
       .then((response) => response.json())
       .then((data) => {
         data.forEach((tape) => {
@@ -422,9 +422,8 @@ export class Channels extends Component {
   }
 
   async fetchAndGetAllChannels() {
-    const mission = this.props.match.params.mission
     var allChannels = {};
-    await fetch(`${config.apiEntry}/api/${mission}/channels`)
+    await fetch(`${config.apiEntry}/api/channels/`)
       .then((response) => response.json())
       .then((data) => {
         data.forEach((channel) => {
@@ -449,7 +448,7 @@ export class Channels extends Component {
     if (this.channelsOfTapeStoredInLocal(tapeId)) {
       return loadedChannelsInTape[tapeId];
     }
-    await fetch(`${config.apiEntry}/api/${mission}/multi_channels?tape=${tapeId}`)
+    await fetch(`${config.apiEntry}/api/missions/${mission}/tapes/${tapeId}/multi_channels`)
       .then((response) => response.json())
       .then((data) => {
         data.forEach((channel) => {
@@ -564,7 +563,7 @@ export class Channels extends Component {
                     <Link
                       className="link-btn-play"
                       to={{
-                        pathname: `/${mission}/channels/load`,
+                        pathname: `/channels/load/${mission}`,
                         state: {
                           channels: {
                             selectedChannels: selectedChannels,
@@ -615,7 +614,7 @@ export class Channels extends Component {
                       <Link
                         className="link-btn-play"
                         to={{
-                          pathname: `/${mission}/channels/load`,
+                          pathname: `/channels/load/${mission}`,
                           state: {
                             channels: {
                               selectedChannels: selectedChannels,

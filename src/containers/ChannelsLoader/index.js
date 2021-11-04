@@ -61,7 +61,8 @@ export class ChannelsLoader extends Component {
     var data;
     const {blockIndex, nuggetIndex, tapeId} = this.state;
     const mission = this.props.match.params.mission;
-    const fetchUrl = `${config.apiEntry}/api/${mission}/multi_channels?channel=${channelName}&block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`;
+    //TODO: channelName isn't the right thing to use here
+    const fetchUrl = `${config.apiEntry}/api/mission/${mission}/tape/${tapeId}/multi_channels/${channelName}?block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`;
     await fetch(fetchUrl)
       .then((response) => response.json())
       .then((json) => {
@@ -119,6 +120,7 @@ export class ChannelsLoader extends Component {
     }
   }
   render() {
+    console.log("Props: " + JSON.stringify(this.props));
     const mission = this.props.match.params.mission;
     const channels = this.state.selectedChannels;
     const {loading, data, tapeId, minBlock, maxBlock} = this.state;
@@ -129,7 +131,7 @@ export class ChannelsLoader extends Component {
             Error loading channels, please select channels to listen
           </div>
 
-          <Link to={`/${mission}/channels`}>
+          <Link to={`/channels/${mission}`}>
             <button type="button" className="btn btn-primary">
               Select New Channels
             </button>
@@ -142,7 +144,7 @@ export class ChannelsLoader extends Component {
     ) : (
       <Redirect
         to={{
-          pathname: `/${mission}/channels/play`,
+          pathname: `/channels/play/${mission}`,
           state: {
             audioData: data,
             tapeId: tapeId,

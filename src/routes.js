@@ -58,11 +58,11 @@ export default class Routes extends Component {
         <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer} />
         <Route path="/moments/random" component={RandomMoment} />
 
-        <Route exact path="/:mission/channels" component={Channels} />
+        <Route exact path="/channels/:mission" component={Channels} />
 
-        <Route path="/:mission/channels/load" component={ChannelsLoader} />
+        <Route path="/channels/load/:mission" component={ChannelsLoader} />
 
-        <Route path="/:mission/channels/play" component={ChannelViewer} />
+        <Route path="/channels/play/:mission" component={ChannelViewer} />
 
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />

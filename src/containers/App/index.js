@@ -32,7 +32,7 @@ export class AppHeader extends Component {
                 <div className=" dropdown-submenu">
                   <Link to="/apollo11">Apollo 11</Link>
                   <div className="dropdown-submenu-content">
-                    <Link to="/apollo11/channels">Mission Audios</Link>
+                    <Link to="/channels/1">Mission Audios</Link>
                   </div>
                 </div>
                 <Link to="/apollo13">Apollo 13</Link>

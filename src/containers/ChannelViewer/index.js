@@ -164,7 +164,7 @@ export class ChannelViewer extends Component {
   }
 
   render() {
-    const missionName = this.props.match.params.mission;
+    const mission = this.props.match.params.mission;
     const {data, playNextOrPreviousActivate, playingChannels, nextBlockIndex, nextNuggetIndex, currentBlockIndex,
     currentNuggetIndex, tapeId, minBlock, maxBlock} = this.state;
     return (
@@ -175,7 +175,7 @@ export class ChannelViewer extends Component {
           playNextOrPreviousActivate && (
             <Redirect
               to={{
-                pathname: `/${missionName}/channels/load`,
+                pathname: `/channels/load/${mission}`,
                 state: {
                   channels: {
                     selectedChannels: playingChannels,
@@ -193,7 +193,7 @@ export class ChannelViewer extends Component {
           )
         }
         <div className="container justify-content-center d-flex mb-3">
-          <Link to={`/${missionName}/channels`}>
+          <Link to={`/channels/${mission}`}>
             <button
               type="button"
               className="btn btn-primary select-new-channel-btn audio-controller-text"
