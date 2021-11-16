@@ -15,7 +15,7 @@ export class ExternalReferences extends Component {
           </b>
         </h1>
         <br></br>
-        <div className="row">
+        <div className="row references">
           <div className="col-md-12">
             <br></br>
             <ul>
