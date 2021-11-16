@@ -1,0 +1,9 @@
+a {
+    color: #00abbc;
+
+    &:hover {
+      color: #c0c0c0;
+      position: relative;
+      display: inline;
+    }
+  }

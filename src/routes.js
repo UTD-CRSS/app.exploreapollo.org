@@ -25,18 +25,13 @@ import {
   ChannelViewer,
   Channels,
   ChannelsLoader,
+  ExternalReferences,
 } from "./containers";
 
 export default class Routes extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/apollo1" component={Apollo1Explorer} />
-        <Route exact path="/apollo4" component={Apollo4Explorer} />
-        <Route exact path="/apollo5" component={Apollo5Explorer} />
-        <Route exact path="/apollo6" component={Apollo6Explorer} />
-        <Route exact path="/apollo13" component={Apollo13Explorer} />
-        <Route exact path="/apollo11" component={Apollo11Explorer} />
         <Route name="app" exact path="/" component={App}></Route>
         <Route path="/settings" component={Settings} />
         <Route path="/moments/moment/:momentId" component={MomentViewer} />
@@ -55,19 +50,28 @@ export default class Routes extends Component {
 
         <Route path="/search" component={Search} />
         <Route path="/stories" component={Stories} />
+        <Route path="/apollo1" component={Apollo1Explorer} />
+        <Route path="/apollo4" component={Apollo4Explorer} />
+        <Route path="/apollo5" component={Apollo5Explorer} />
+        <Route path="/apollo6" component={Apollo6Explorer} />
+
+        <Route exact path="/apollo11" component={Apollo11Explorer} />
         <Route path="/apollo11/day/:missionDay" component={Apollo11Explorer} />
+
+        <Route path="/apollo13" component={Apollo13Explorer} />
         <Route path="/moments/random" component={RandomMoment} />
 
-        <Route exact path="/channels/:mission" component={Channels} />
+        <Route exact path="/:mission/channels" component={Channels} />
 
-        <Route path="/channels/load/:mission" component={ChannelsLoader} />
+        <Route path="/apollo11/channels/load" component={ChannelsLoader} />
 
-        <Route path="/channels/play/:mission" component={ChannelViewer} />
+        <Route path="/apollo11/channels/play" component={ChannelViewer} />
 
         <Route path="/dj" component={DJ} />
         <Route path="/game" component={Game} />
         <Route path="/lessons" component={LessonPlans} />
         <Route path="/inthenews" component={InTheNews} />
+        <Route path="/externalreferences" component={ExternalReferences} />
         <Route path="*" component={NoMatch} />
       </Switch>
     );
