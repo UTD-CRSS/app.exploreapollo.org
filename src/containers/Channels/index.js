@@ -172,8 +172,11 @@ const BlockSelectMenu = (props) => {
 };
 
 const NuggetSelectMenu = (props) => {
-  const {handleValueChange, nuggetIndex} = props;
-
+  const {handleValueChange, nuggetIndex, maxNuggetValue} = props;
+  const numArray = [];
+  for (let i = 0; i < maxNuggetValue; i++) {
+    numArray.push(i+1);
+  }
   return (
     <div className="channel-select-menu-containner">
       <label className="option-label mb-1">
@@ -186,7 +189,7 @@ const NuggetSelectMenu = (props) => {
         onChange={handleValueChange}
         className="custom-select w-50"
       >
-        {[1, 2, 3, 4, 5, 6].map(num => <option value={num.toString()}>num</option>)}
+        {numArray.map(num => <option value={num.toString()}>{num}</option>)}
       </select>
     </div>
   );
@@ -506,7 +509,20 @@ export class Channels extends Component {
       selectedTape.length > 0 ? tapes[selectedTape].min_block : null;
     const maxBlock =
       selectedTape.length > 0 ? tapes[selectedTape].max_block : null;
-
+    
+    let missionName
+    let maxNuggetValue
+    switch (mission) {
+      case "1":
+        missionName = "Apollo 11";
+        maxNuggetValue = 6;
+        break;
+      case "2":
+        missionName = "Apollo 8";
+        maxNuggetValue = 2;
+        break;
+      default:
+    }
     return (
       <div>
         <AppHeader />
@@ -524,7 +540,7 @@ export class Channels extends Component {
           ) : (
             <div className="channel-select-container container-xl">
               <div className="title-banner-container">
-                <span className="title-banner-text">{mission} Channels</span>
+                <span className="title-banner-text">{missionName} Channels</span>
               </div>
               <TapeSelectMenu
                 tapes={tapes}
@@ -607,6 +623,7 @@ export class Channels extends Component {
                         <NuggetSelectMenu
                           nuggetIndex={this.state.nuggetIndex}
                           handleValueChange={this.handleNuggetInputChange}
+                          maxNuggetValue={maxNuggetValue}
                         />
                       </div>
                     </div>

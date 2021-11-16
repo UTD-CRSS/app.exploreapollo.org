@@ -61,8 +61,7 @@ export class ChannelsLoader extends Component {
     var data;
     const {blockIndex, nuggetIndex, tapeId} = this.state;
     const mission = this.props.match.params.mission;
-    //TODO: channelName isn't the right thing to use here
-    const fetchUrl = `${config.apiEntry}/api/mission/${mission}/tape/${tapeId}/multi_channels/${channelName}?block=${blockIndex}&nugget=${nuggetIndex}&tape=${tapeId}`;
+    const fetchUrl = `${config.apiEntry}/api/missions/${mission}/tapes/${tapeId}/multi_channels?block=${blockIndex}&nugget=${nuggetIndex}&channel=${channelName}`;
     await fetch(fetchUrl)
       .then((response) => response.json())
       .then((json) => {
@@ -120,7 +119,6 @@ export class ChannelsLoader extends Component {
     }
   }
   render() {
-    console.log("Props: " + JSON.stringify(this.props));
     const mission = this.props.match.params.mission;
     const channels = this.state.selectedChannels;
     const {loading, data, tapeId, minBlock, maxBlock} = this.state;
