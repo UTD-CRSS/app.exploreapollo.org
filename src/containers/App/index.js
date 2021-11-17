@@ -95,6 +95,22 @@ export class AppHeader extends Component {
             </div>
 
             <div className="navitem">
+              <button className="navbtn">
+                <Link to="/instructions" className="instructions">
+                    Instructions
+                </Link>
+              </button>
+            </div>
+
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/externalreferences">
+                    External References
+                </Link>
+              </button>
+            </div>
+              
+            <div className="navitem">
               <button className="navbtn">&#9733;</button>
               <div className="dropdown-content">
                 <Link to="/game"> Asteroid Strike </Link>

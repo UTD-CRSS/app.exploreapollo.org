@@ -16,15 +16,18 @@ import {
   Apollo4Explorer,
   Apollo5Explorer,
   Apollo6Explorer,
+  Apollo8Explorer,
   Apollo11Explorer,
   Apollo13Explorer,
   Game,
   LessonPlans,
+  Instructions,
   InTheNews,
   LoadingMoment,
   ChannelViewer,
   Channels,
   ChannelsLoader,
+  ExternalReferences
 } from "./containers";
 
 export default class Routes extends Component {
@@ -35,6 +38,7 @@ export default class Routes extends Component {
         <Route exact path="/apollo4" component={Apollo4Explorer} />
         <Route exact path="/apollo5" component={Apollo5Explorer} />
         <Route exact path="/apollo6" component={Apollo6Explorer} />
+        <Route path="/apollo8" component={Apollo8Explorer} />
         <Route exact path="/apollo13" component={Apollo13Explorer} />
         <Route exact path="/apollo11" component={Apollo11Explorer} />
         <Route name="app" exact path="/" component={App}></Route>
@@ -68,6 +72,8 @@ export default class Routes extends Component {
         <Route path="/game" component={Game} />
         <Route path="/lessons" component={LessonPlans} />
         <Route path="/inthenews" component={InTheNews} />
+        <Route path="/externalreferences" component={ExternalReferences} />
+        <Route path="/instructions" component={Instructions} />
         <Route path="*" component={NoMatch} />
       </Switch>
     );
