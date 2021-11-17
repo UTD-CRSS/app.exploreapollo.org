@@ -23,3 +23,4 @@ export { LoadingMoment } from "./LoadingMoment";
 export { ChannelViewer } from "./ChannelViewer";
 export { Channels } from "./Channels";
 export { ChannelsLoader } from "./ChannelsLoader";
+export { ExternalReferences } from "./ExternalReferences";
