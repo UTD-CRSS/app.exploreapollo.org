@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestionCircle } from "@fortawesome/free-regular-svg-icons";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import getMissionData from "./getMissionData";
 
 const NuggetPopup = (props) => (
   <Popover {...props} id="nugget-info-popup">
@@ -510,19 +511,7 @@ export class Channels extends Component {
     const maxBlock =
       selectedTape.length > 0 ? tapes[selectedTape].max_block : null;
     
-    let missionName
-    let maxNuggetValue
-    switch (mission) {
-      case "1":
-        missionName = "Apollo 11";
-        maxNuggetValue = 6;
-        break;
-      case "2":
-        missionName = "Apollo 8";
-        maxNuggetValue = 2;
-        break;
-      default:
-    }
+    let {missionName, maxNuggetValue} = getMissionData(mission);
     return (
       <div>
         <AppHeader />

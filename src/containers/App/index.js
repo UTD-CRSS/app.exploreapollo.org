@@ -32,13 +32,13 @@ export class AppHeader extends Component {
                 <div className=" dropdown-submenu">
                   <Link to="/apollo8">Apollo 8</Link>
                   <div className="dropdown-submenu-content">
-                    <Link to="/channels/2">Mission Audios</Link>
+                    <a href="/channels/2">Mission Audios</a>
                   </div>
                 </div>
                 <div className=" dropdown-submenu">
                   <Link to="/apollo11">Apollo 11</Link>
                   <div className="dropdown-submenu-content">
-                    <Link to="/channels/1">Mission Audios</Link>
+                    <a href="/channels/1">Mission Audios</a>
                   </div>
                 </div>
                 <Link to="/apollo13">Apollo 13</Link>
@@ -105,7 +105,7 @@ export class AppHeader extends Component {
             <div className="navitem">
               <button className="navbtn">
                 <Link to="/externalreferences">
-                    External References
+                    References
                 </Link>
               </button>
             </div>
