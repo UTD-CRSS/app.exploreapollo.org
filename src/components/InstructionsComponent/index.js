@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import missionaudiohover from "../../../static/FastFactsimgs/missionaudio-hover.png";  // Need to add
+//import missionaudiohover from "../../../static/FastFactsimgs/missionaudio-hover.png";  // Need to add
 export class InstructionsComponent extends Component {
   render() {
     return (

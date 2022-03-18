@@ -409,7 +409,7 @@ export class Channels extends Component {
   }
 
   async fetchTapes() {
-    const mission = this.props.match.params.mission
+    const mission = this.props.match.params.mission;
     var tapes = {};
     await fetch(`${config.apiEntry}/api/missions/${mission}/tapes`)
       .then((response) => response.json())
@@ -501,7 +501,7 @@ export class Channels extends Component {
   }
 
   render() {
-    const mission = this.props.match.params.mission
+    const mission = this.props.match.params.mission;
     const {tapesLoaded, channelsLoaded, selectedChannels, filteredChannels, blockIndex,
     nuggetIndex, tapes, selectedTape, channels, allChannelsLoaded} = this.state;
     const disabled = selectedChannels.length > 0 ? false : true;
