@@ -30,9 +30,15 @@ export class AppHeader extends Component {
                 <Link to="/apollo5">Apollo 5</Link>
                 <Link to="/apollo6">Apollo 6</Link>
                 <div className=" dropdown-submenu">
+                  <Link to="/apollo8">Apollo 8</Link>
+                  <div className="dropdown-submenu-content">
+                    <a href="/channels/2">Mission Audios</a>
+                  </div>
+                </div>
+                <div className=" dropdown-submenu">
                   <Link to="/apollo11">Apollo 11</Link>
                   <div className="dropdown-submenu-content">
-                    <Link to="/apollo11/channels">Mission Audios</Link>
+                    <a href="/channels/1">Mission Audios</a>
                   </div>
                 </div>
                 <Link to="/apollo13">Apollo 13</Link>
@@ -88,6 +94,22 @@ export class AppHeader extends Component {
               </button>
             </div>
 
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/instructions" className="instructions">
+                    Instructions
+                </Link>
+              </button>
+            </div>
+
+            <div className="navitem">
+              <button className="navbtn">
+                <Link to="/externalreferences">
+                    References
+                </Link>
+              </button>
+            </div>
+              
             <div className="navitem">
               <button className="navbtn">&#9733;</button>
               <div className="dropdown-content">

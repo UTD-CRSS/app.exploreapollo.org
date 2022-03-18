@@ -23,3 +23,4 @@ export { AudioPlayer } from "./AudioPlayer";
 export { ChannelTimeline } from "./ChannelTimeline";
 export { ChannelsSelectingInstruction } from "./ChannelsSelectingInstruction";
 export { ChannelPlayerNavigatingInstruction} from "./ChannelPlayerNavigatingInstruction";
+export { InstructionsComponent } from "./InstructionsComponent";

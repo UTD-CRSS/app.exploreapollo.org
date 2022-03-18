@@ -10,13 +10,11 @@ describe("ChannelsLoader", function () {
     
     var loader = mount(
       <Router>
-        <Switch >
+        <Switch>
           <ChannelsLoader />
-          <Route exact path="/apollo11/channels" component={Channels} />
+          <Route exact path="/channels/1" component={Channels} />
         </Switch>
       </Router>
-      
-      
     );
     expect(loader.find("div.error-message").text()).toBe("Error loading channels, please select channels to listen");
 
