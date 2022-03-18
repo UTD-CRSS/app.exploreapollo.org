@@ -9,14 +9,13 @@ jdk:
   - openjdk8
   - oraclejdk8
 rvm:
-  - 1.9.3
+  - 2.7.1
 before_install:
   - npm install -g npm@latest
-  - rvm install 1.9.3
-  - gem update --system 1.8.24
-  - travis_internal_ruby() { echo "1.9.3"; }
+  - rvm install 2.7.1
+  - gem update --system 3.1.2
+  - travis_internal_ruby() { echo "2.7.1"; }
   - echo $(travis_internal_ruby)
-  - gem install aws-eventstream -v 1.1.1
 script:
   - npm run lint
   - npm test
