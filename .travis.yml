@@ -16,7 +16,7 @@ before_install:
   - gem update --system 1.8.24
   - travis_internal_ruby() { echo "1.9.3"; }
   - echo $(travis_internal_ruby)
-  - echo gem install aws-eventstream -v 1.1.1
+  - gem install aws-eventstream -v 1.1.1
 script:
   - npm run lint
   - npm test
