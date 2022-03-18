@@ -119,7 +119,7 @@ export class ChannelsLoader extends Component {
     }
   }
   render() {
-    const mission = this.props.match.params.mission;
+    const mission = this.props.match?.params?.mission;
     const channels = this.state.selectedChannels;
     const {loading, data, tapeId, minBlock, maxBlock} = this.state;
     if (!channels || (data && Object.keys(data).lengh === 0)) {
