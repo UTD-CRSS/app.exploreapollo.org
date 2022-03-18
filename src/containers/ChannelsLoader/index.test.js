@@ -12,7 +12,7 @@ describe("ChannelsLoader", function () {
       <Router>
         <Switch >
           <ChannelsLoader />
-          <Route exact path="/apollo11/channels" component={Channels} />
+          <Route exact path="/channels/1" component={Channels} />
         </Switch>
       </Router>
       
