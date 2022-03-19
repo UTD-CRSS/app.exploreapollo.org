@@ -1,6 +1,6 @@
 site: dist
-s3_id: <%= ENV['EXP_S3_ACCESS_KEY'] %>
-s3_secret: <%= ENV['EXP_S3_SECRET'] %>
+s3_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+s3_secret: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
 <% if ENV['APP_ENV'] === 'production' %>
 s3_bucket: app.exploreapollo.org
 cloudfront_distribution_id: E1J3P5BUW5Q7L6
