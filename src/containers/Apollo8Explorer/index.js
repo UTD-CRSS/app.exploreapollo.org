@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { AppFooter, AppHeader } from "../App";
+import ReactPlayer from "react-player" //used for temp audio display the professor wanted
 import apollo8logo from "../../../static/FastFactsimgs/apollo8logo.png";  //Need to add
 import Crew from "../../../static/FastFactsimgs/apollo8crew.jpg"; //Need to add
 export class Apollo8Explorer extends Component {
@@ -77,6 +78,11 @@ export class Apollo8Explorer extends Component {
             <b>
               <u>AUDIO LAUNCHING INTO ORBIT SOON!</u>
             </b>
+          </div>
+          <div>
+            <ReactPlayer
+              url="https://www.youtube.com/watch?v=Wfd0oC3eFWw"
+            />
           </div>
         </h4>
         <AppFooter />
