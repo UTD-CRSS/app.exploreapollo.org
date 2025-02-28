@@ -4,7 +4,7 @@ language:
   - node_js
   - java
 node_js:
-  - 12
+  - 18
 jdk:
   - openjdk8
   - oraclejdk8
