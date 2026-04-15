@@ -1,17 +1,17 @@
 sudo: false
-dist: trusty
+dist: focal
 language:
   - node_js
   - java
 node_js:
-  - 18
+  - 14
 jdk:
   - openjdk8
   - oraclejdk8
 rvm:
   - 2.7.1
 before_install:
-  - npm install -g npm@latest
+  - npm install -g npm@8
   - rvm install 2.7.1
   - gem update --system 3.1.2
   - travis_internal_ruby() { echo "2.7.1"; }
