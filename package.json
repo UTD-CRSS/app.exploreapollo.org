@@ -73,7 +73,7 @@
     "html-webpack-plugin": "^4.5.2",
     "imports-loader": "^1.2.0",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.1",
     "node-sass": "^4.14.1",
     "normalizr": "^3.6.1",
