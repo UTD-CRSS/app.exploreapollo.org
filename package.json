@@ -79,7 +79,7 @@
     "normalizr": "^3.6.1",
     "open-iconic": "^1.1.1",
     "prop-types": "^15.7.2",
-    "qs": "^6.10.1",
+    "qs": "^6.10.3",
     "react": "^16.14.0",
     "react-bootstrap": "^1.5.2",
     "react-dimensions": "^1.0.2",
